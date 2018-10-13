@@ -1,0 +1,6 @@
+# Emacs
+emacs/.emacs.d/var
+*.elc
+
+# Fonts
+fonts/.fonts/.uuid

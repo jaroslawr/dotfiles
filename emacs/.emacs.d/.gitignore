@@ -1,0 +1,7 @@
+auto-save-list/
+backups/
+site-lisp/custom.el
+projectile-bookmarks.eld
+projectile.cache
+recentf
+savehist

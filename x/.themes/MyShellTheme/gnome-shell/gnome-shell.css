@@ -1,0 +1,7 @@
+@import url("/usr/share/themes/Arc-Dark/gnome-shell/gnome-shell.css");  
+
+* {
+    font-family: Play !important;
+    font-size: 10pt !important;
+    font-weight: normal !important;
+}

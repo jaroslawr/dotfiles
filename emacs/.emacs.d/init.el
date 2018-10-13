@@ -1,0 +1,322 @@
+;;;; PACKAGE LOADING
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/use-package")
+
+(require 'use-package)
+(require 'bind-key)
+
+;;;; NO LITTERING (of emacs.d and working dir)
+
+(use-package no-littering :load-path "site-lisp/no-littering")
+
+(setq create-lockfiles nil)
+
+(setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+
+;;;; EMACS-LISP ENHANCEMENTS
+
+;;; GC after 64MB
+(setq gc-cons-threshold (* 64 1024 1024))
+
+(use-package s :load-path "site-lisp/s.el")
+
+(use-package dash :load-path "site-lisp/dash.el")
+
+(use-package crux :load-path "site-lisp/crux")
+
+(defun map-thing-at-point (thing func)
+  (let* ((bounds (bounds-of-thing-at-point thing))
+         (start (car bounds))
+         (end (cdr bounds))
+         (thing-value (buffer-substring start end)))
+    (when bounds
+      (save-excursion
+        (delete-region start end)
+        (goto-char start)
+        (insert (apply func (list thing-value)))))))
+
+(defun my-bind-keys (bindings)
+  (if (eq (cdr bindings) nil)
+      t
+    (progn
+      (let ((key (car bindings))
+	    (function (cadr bindings)))
+	(my-bind-key key function)
+	(my-bind-keys (cddr bindings))))))
+
+(defmacro my-bind-key (key function)
+  `(progn
+     (global-set-key (read-kbd-macro ,key) ,function)))
+
+;;;; VISUALS
+
+(setq custom-file "~/.emacs.d/site-lisp/custom.el")
+(when (file-exists-p custom-file)
+  (load custom-file))
+
+(load-theme 'coffee)
+
+(setq-default left-fringe-width 4
+              right-fringe-width 0
+              left-margin-width 1
+              right-margin-width 1
+              truncate-lines t
+              truncate-partial-width-windows nil)
+
+(set-frame-parameter (selected-frame) 'internal-border-width 4)
+
+(blink-cursor-mode 0)
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+
+;;;; FILE FORMATTING
+
+;;; No tabs
+(setq-default indent-tabs-mode nil)
+
+;;; UTF-8 everywhere
+(prefer-coding-system 'utf-8)
+
+;;;; GENERAL BEHAVIOUR
+
+;;; Turn on to debug errors
+(setq debug-on-error nil)
+
+;;; Don't leave backup files all over the place
+(push '(".*" . "~/.emacs.d/backups") backup-directory-alist)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/backups" t)))
+(setq create-lockfiles nil)
+
+;;; No splash screen
+(setq inhibit-startup-message t)
+
+;;; y/n instead of yes/no
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;;; No suspending
+(global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "C-x C-z"))
+
+;;; Highlight current line
+(global-hl-line-mode t)
+
+;;; Navigate between windows easily
+(windmove-default-keybindings 'super)
+
+;;; Connect to a windowed Emacs instance from console via emacsclient
+(server-start)
+
+;;; Preserve minibuffer history
+(use-package savehist
+  :config
+  (setq savehist-autosave-interval 60)
+  (savehist-mode))
+
+;;;; NAVIGATION
+
+;;; Scroll one line at a time near window boundary
+(setq auto-window-vscroll nil
+      scroll-conservatively 10000)
+
+;;; Word by word navigation in CamelCase names
+(global-subword-mode t)
+(my-bind-keys
+ '("<C-left>" subword-backward
+   "<C-right>" subword-forward))
+
+;;; Page-up and page-down behaviour as in more traditional editors
+(require 'pager)
+(my-bind-keys
+ '("<prior>" pager-page-up
+   "<next>" pager-page-down))
+
+;;; Center the screen on specific line, when jumping to compilation error:
+(setq next-error-recenter '(4))
+
+;;; when jumping to a bookmark:
+(add-hook 'bookmark-after-jump-hook #'recenter-top-bottom)
+
+;;; when opening an org mode hyperlink:
+(advice-add 'org-open-file :after
+            (lambda (path &optional in-emacs line search)
+              (if line
+                  (recenter-top-bottom))))
+
+;;;; GENERAL TEXT EDITING
+
+;;; Move lines of text up/down easily
+(require 'move-text)
+(move-text-default-bindings)
+
+;;; Enable useful commands
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
+;;; Typing and pasting with an active selection overwrites the selection
+(delete-selection-mode 1)
+
+;;;; GENERAL MODES
+
+;;;; PROJECTILE
+
+(use-package projectile
+  :load-path "site-lisp/projectile"
+  :diminish projectile-mode
+  :commands projectile-mode
+  :bind-keymap ("M-p" . projectile-command-map)
+  :defer 5
+  :config
+  (setq projectile-completion-system 'ivy
+        projectile-keymap-prefix "M-p"
+        projectile-switch-project-action #'projectile-dired)
+  (projectile-mode 1))
+
+;;;; IVY/COUNSEL/SWIPER/FLX
+
+(use-package flx :load-path "site-lisp/flx")
+
+(use-package ivy
+  :load-path "site-lisp/swiper"
+  :commands ivy-mode
+  :bind
+  ("C-c C-r" . ivy-resume)
+  :init
+  (setq enable-recursive-minibuffers t
+        ;;; case insensitive matching, even when uppercase letter present in input
+        ivy-case-fold-search-default 'always
+        ivy-display-style 'plain
+        ivy-extra-directories '()
+        ivy-initial-inputs-alist nil
+        ivy-magic-slash-non-match-action nil
+        ivy-re-builders-alist '((swiper . ivy--regex-plus)
+                                (t . ivy--regex-fuzzy))
+        ivy-use-virtual-buffers t)
+  (ivy-mode t))
+
+(use-package counsel
+  :bind
+  ("C-x r b" . counsel-bookmark))
+
+;;;; AG
+
+(use-package wgrep
+  :load-path "site-lisp/Emacs-wgrep"
+  :config
+  (setq wgrep-auto-save-buffer t))
+
+(use-package wgrep-ag)
+
+(use-package ag
+  :load-path "site-lisp/ag.el"
+  :config
+    ;;; Do not clash with projectile
+  (unbind-key "M-p" ag-mode-map)
+  (add-hook 'ag-mode-hook 'wgrep-ag-setup)
+  (setq ag-highlight-search t))
+
+;;;; DIRED
+
+(use-package dired
+  :config
+
+  ;;; Extended display
+  (use-package dired-x)
+
+  ;;; Do not clash with compile mode
+  (unbind-key "M-g" dired-mode-map)
+
+  ;;; Do not clash with projectile
+  (unbind-key "M-p" dired-mode-map)
+
+  ;;; C-j opens directory just like RET
+  (bind-key "C-j" 'dired-find-file dired-mode-map)
+
+  ;;; Hidden files hidden by default
+  (setq dired-omit-files "^\\.[^\\.].+$")
+  (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
+
+  ;; Auto refresh
+  (add-hook 'dired-mode-hook 'auto-revert-mode)
+
+  ;;; Directories first
+  (setq dired-listing-switches "-alh --group-directories-first"))
+
+;;;; MAGIT
+
+(use-package graphql :load-path ("site-lisp/graphql.el"))
+
+(use-package treepy :load-path ("site-lisp/treepy.el"))
+
+(use-package ghub :load-path ("site-lisp/ghub"))
+
+(use-package magit-popup :load-path ("site-lisp/magit-popup"))
+
+(use-package magit
+  :load-path ("site-lisp/magit/lisp" "site-lisp/with-editor")
+  :config
+  ;;; Do not clash with projectile mode
+  (unbind-key "M-p" magit-mode-map))
+
+;;;; GENERAL CODE EDITING
+
+;;; Highlight parens, even off-screen (minibuffer shows matching line)
+(require 'mic-paren)
+(setq paren-highlight-offscreen t)
+(paren-activate)
+
+;;; Auto-indent
+(electric-indent-mode t)
+(setq electric-indent-functions
+      (list
+	(lambda (arg)
+          (if (eq major-mode 'org-mode)
+              'no-indent
+            nil))))
+(define-key global-map (kbd "C-j") 'newline-and-indent)
+
+;;;; LANGUAGE MODES
+
+;;;; HTML/CSS/JAVASCRIPT/JSX
+
+(use-package web-mode
+  :mode "\\.\\(js\\|jsx\\|html\\)\\'"
+  :load-path "site-lisp/web-mode"
+  :config
+  ;;; Do not clash with ivy-resume
+  (unbind-key "C-c C-r" web-mode-map)
+  (setq js-indent-level 2
+        css-indent-offset 2
+        web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))
+        web-mode-attr-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-markup-indent-offset 2
+        web-mode-enable-auto-quoting nil))
+
+;;;; YAML
+
+(use-package yaml-mode
+  :mode "\\.yml\\'"
+  :load-path "site-lisp/yaml-mode")
+
+;;;; KEY BINDINGS
+
+(defun notes ()
+  "Opens up the notebook file."
+  (interactive)
+  (find-file "~/txt/notes.txt"))
+
+(my-bind-keys
+ '(;;; rebindings
+   "C-a" crux-move-beginning-of-line
+   "<home>" crux-move-beginning-of-line
+   ;;; function keys
+   "<f5>" dired-jump
+   ;;; C-c prefix
+   "C-c k" kill-this-buffer
+   "C-c n" notes))
+
+;;;; STARTUP
+
+(find-file "~/txt/notes.txt")
