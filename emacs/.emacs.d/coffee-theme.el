@@ -167,6 +167,5 @@
     `(show-paren-match ((t ,@parens)))
 
     ;;; Mic-paren mode
-    `(paren-face-match ((t ,@parens)))
-    `(paren-face-mismatch ((t (,@highlight-error ,@(coffee-bold)))))
-    `(paren-face-no-match ((t (,@highlight-error ,@(coffee-bold)))))))
+    `(show-paren-match ((t ,@parens)))
+    `(show-paren-mismatch ((t (,@highlight-error ,@(coffee-bold)))))))

@@ -147,8 +147,10 @@
 ;;;; GENERAL TEXT EDITING
 
 ;;; Move lines of text up/down easily
-(require 'move-text)
-(move-text-default-bindings)
+(use-package move-text
+  :load-path "site-lisp/move-text"
+  :config
+  (move-text-default-bindings))
 
 ;;; Enable useful commands
 (put 'upcase-region 'disabled nil)
@@ -262,9 +264,9 @@
 ;;;; GENERAL CODE EDITING
 
 ;;; Highlight parens, even off-screen (minibuffer shows matching line)
-(require 'mic-paren)
-(setq paren-highlight-offscreen t)
-(paren-activate)
+
+(setq show-paren-style 'mixed)
+(show-paren-mode)
 
 ;;; Auto-indent
 (electric-indent-mode t)
