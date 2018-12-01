@@ -48,8 +48,9 @@ setopt auto_pushd
 autoload -U compinit
 compinit
 
-# Automatically list choices on an ambiguous completion
-setopt menu_complete
+# On ambiguous completion, expand to the unambiguous part and show
+# list of matches On second tab, present menu
+unsetopt list_ambiguous
 
 # Case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
