@@ -1,15 +1,15 @@
 ## Usage
 
+Clone with submodules:
+
+```
+git clone --recurse-submodules git@github.com:jaroslawr/dotfiles.git
+```
+
 Install dotfiles:
 
 ```
 ./install.sh
-```
-
-Manage git subtrees:
-
-```
-python3 subtree.py
 ```
 
 ## Manual configuration
