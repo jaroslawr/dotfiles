@@ -52,11 +52,14 @@ compinit
 # list of matches On second tab, present menu
 unsetopt list_ambiguous
 
+# Show as many suggestions as fit on the screen
+LISTMAX=0
+
+# Highlight active suggestion in the menu
+zstyle ':completion:*' menu select
+
 # Case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-
-# Highlight active completion in the menu
-zstyle ':completion:*' menu select
 
 # Suggest cdpath subdirectories only if no local subdirectories match
 zstyle ':completion:*:complete:(cd|pushd):*' tag-order 'local-directories named-directories'
