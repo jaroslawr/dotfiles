@@ -15,8 +15,11 @@ HISTSIZE=100000
 # Share history between sessions
 setopt sharehistory
 
-# Do not save duplicates in history
-setopt hist_save_no_dups hist_ignore_all_dups
+# Use extended history format
+setopt extendedhistory
+
+# Do not find duplicates in history
+setopt hist_find_no_dups
 
 # EDITING
 
