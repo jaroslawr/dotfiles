@@ -58,8 +58,11 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # Highlight active completion in the menu
 zstyle ':completion:*' menu select
 
-# Complete with cdpath subdirectories only if no local subdirectories match
+# Suggest cdpath subdirectories only if no local subdirectories match
 zstyle ':completion:*:complete:(cd|pushd):*' tag-order 'local-directories named-directories'
+
+# Suggest short options unless input is start of a long option
+zstyle ':completion:*:*:*:*:options' ignored-patterns '???*'
 
 # PROMPT
 
