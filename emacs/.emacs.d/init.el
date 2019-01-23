@@ -103,7 +103,8 @@
 ;;; Preserve minibuffer history
 (use-package savehist
   :config
-  (setq savehist-autosave-interval 60)
+  (setq savehist-autosave-interval 60
+        savehist-additional-variables '(compile-command))
   (savehist-mode))
 
 ;;;; NAVIGATION
@@ -307,6 +308,8 @@
    ;;; function keys
    "<f5>" dired-jump
    ;;; C-c prefix
+   "C-c c" compile
+   "C-c r" recompile
    "C-c k" kill-this-buffer
    "C-c n" notes))
 
