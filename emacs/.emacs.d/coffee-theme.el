@@ -19,7 +19,7 @@
 (setq compilation-message-face 'default)
 
 (let* (;;; Basic colors
-       (bgcolor "#171612")
+       (bgcolor "#121212")
        (fgcolor "#ffffff")
        (prio-a-color "#fff590")
        (prio-b-color "#ffc890")
@@ -78,6 +78,7 @@
     ;;; Font lock
     `(font-lock-function-name-face ((t ,prio-a)))
     `(font-lock-comment-face ((t ,prio-b)))
+    `(font-lock-doc-face ((t ,prio-b)))
     `(font-lock-keyword-face ((t ,prio-c)))
     `(font-lock-variable-name-face ((t ,prio-d)))
     `(font-lock-string-face ((t ,prio-e)))
