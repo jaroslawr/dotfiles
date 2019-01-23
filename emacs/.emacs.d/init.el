@@ -182,8 +182,7 @@
   :bind
   ("C-c C-r" . ivy-resume)
   :init
-  (setq enable-recursive-minibuffers t
-        ;;; case insensitive matching, even when uppercase letter present in input
+  (setq ;;; case insensitive matching, even when uppercase letter present in input
         ivy-case-fold-search-default 'always
         ivy-display-style 'plain
         ivy-extra-directories '()
