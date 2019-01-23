@@ -105,9 +105,6 @@
 ;;; Navigate between windows easily
 (windmove-default-keybindings 'super)
 
-;;; Connect to a windowed Emacs instance from console via emacsclient
-(server-start)
-
 ;;; Preserve minibuffer history
 (use-package savehist
   :config
