@@ -84,11 +84,6 @@
 ;;; Turn on to debug errors
 (setq debug-on-error nil)
 
-;;; Don't leave backup files all over the place
-(push '(".*" . "~/.emacs.d/backups") backup-directory-alist)
-(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/backups" t)))
-(setq create-lockfiles nil)
-
 ;;; No splash screen
 (setq inhibit-startup-message t)
 
