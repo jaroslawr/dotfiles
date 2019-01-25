@@ -166,6 +166,13 @@
   (setq projectile-completion-system 'ivy
         projectile-keymap-prefix "M-p"
         projectile-switch-project-action #'projectile-dired)
+  ;;; Recognize every subdir of ~/[Pp]rojects/ as a project
+  (setq my-projectile-project-dir-re
+        (concat "\\(" (expand-file-name "~/[Pp]rojects/") "[^/]+\\)[/]?.*"))
+  (defun my-projectile-project-root (dir)
+      (when (string-match my-projectile-project-dir-re dir)
+        (match-string 1 dir)))
+  (add-to-list 'projectile-project-root-files-functions 'my-projectile-project-root)
   (projectile-mode 1))
 
 ;;;; IVY/COUNSEL/SWIPER/FLX
