@@ -200,22 +200,21 @@
   :bind
   ("C-x r b" . counsel-bookmark))
 
-;;;; AG
+;;;; GREP
+
+(use-package grep
+  :config
+  (grep-apply-setting 'grep-find-command '("fdfind . -t f -exec rg -n -H  \{\}" . 30)))
+
+(defun my-projectile-find-grep-in-project ()
+  (interactive)
+  (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
+    (call-interactively 'find-grep)))
 
 (use-package wgrep
   :load-path "site-lisp/Emacs-wgrep"
   :config
   (setq wgrep-auto-save-buffer t))
-
-(use-package wgrep-ag)
-
-(use-package ag
-  :load-path "site-lisp/ag.el"
-  :config
-    ;;; Do not clash with projectile
-  (unbind-key "M-p" ag-mode-map)
-  (add-hook 'ag-mode-hook 'wgrep-ag-setup)
-  (setq ag-highlight-search t))
 
 ;;;; DIRED
 
@@ -314,9 +313,13 @@
    "<home>" crux-move-beginning-of-line
    ;;; function keys
    "<f5>" dired-jump
-   ;;; C-c prefix
+   ;;; C-c - compilation
    "C-c c" compile
    "C-c r" recompile
+   ;;; C-c - grep
+   "C-c g" my-projectile-find-grep-in-project
+   "C-c G" find-grep
+   ;;; C-c - rest
    "C-c k" kill-this-buffer
    "C-c n" notes))
 

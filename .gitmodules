@@ -1,9 +1,6 @@
 [submodule "emacs/.emacs.d/site-lisp/use-package"]
 	path = dotfiles/emacs.d/site-lisp/use-package
 	url = git@github.com:jwiegley/use-package.git
-[submodule "emacs/.emacs.d/site-lisp/ag.el"]
-	path = dotfiles/emacs.d/site-lisp/ag.el
-	url = git@github.com:Wilfred/ag.el
 [submodule "emacs/.emacs.d/site-lisp/crux"]
 	path = dotfiles/emacs.d/site-lisp/crux
 	url = git@github.com:bbatsov/crux.git
