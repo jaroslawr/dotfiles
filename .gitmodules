@@ -1,57 +1,57 @@
 [submodule "emacs/.emacs.d/site-lisp/use-package"]
-	path = emacs/.emacs.d/site-lisp/use-package
+	path = dotfiles/emacs.d/site-lisp/use-package
 	url = git@github.com:jwiegley/use-package.git
 [submodule "emacs/.emacs.d/site-lisp/ag.el"]
-	path = emacs/.emacs.d/site-lisp/ag.el
+	path = dotfiles/emacs.d/site-lisp/ag.el
 	url = git@github.com:Wilfred/ag.el
 [submodule "emacs/.emacs.d/site-lisp/crux"]
-	path = emacs/.emacs.d/site-lisp/crux
+	path = dotfiles/emacs.d/site-lisp/crux
 	url = git@github.com:bbatsov/crux.git
 [submodule "emacs/.emacs.d/site-lisp/flx"]
-	path = emacs/.emacs.d/site-lisp/flx
+	path = dotfiles/emacs.d/site-lisp/flx
 	url = git@github.com:lewang/flx.git
 [submodule "emacs/.emacs.d/site-lisp/ghub"]
-	path = emacs/.emacs.d/site-lisp/ghub
+	path = dotfiles/emacs.d/site-lisp/ghub
 	url = git@github.com:magit/ghub.git
 [submodule "emacs/.emacs.d/site-lisp/magit"]
-	path = emacs/.emacs.d/site-lisp/magit
+	path = dotfiles/emacs.d/site-lisp/magit
 	url = git@github.com:magit/magit.git
 [submodule "emacs/.emacs.d/site-lisp/magit-popup"]
-	path = emacs/.emacs.d/site-lisp/magit-popup
+	path = dotfiles/emacs.d/site-lisp/magit-popup
 	url = git@github.com:magit/magit-popup.git
 [submodule "emacs/.emacs.d/site-lisp/no-littering"]
-	path = emacs/.emacs.d/site-lisp/no-littering
+	path = dotfiles/emacs.d/site-lisp/no-littering
 	url = git@github.com:emacscollective/no-littering.git
 [submodule "emacs/.emacs.d/site-lisp/projectile"]
-	path = emacs/.emacs.d/site-lisp/projectile
+	path = dotfiles/emacs.d/site-lisp/projectile
 	url = git@github.com:bbatsov/projectile.git
 [submodule "emacs/.emacs.d/site-lisp/s.el"]
-	path = emacs/.emacs.d/site-lisp/s.el
+	path = dotfiles/emacs.d/site-lisp/s.el
 	url = git@github.com:magnars/s.el
 [submodule "emacs/.emacs.d/site-lisp/swiper"]
-	path = emacs/.emacs.d/site-lisp/swiper
+	path = dotfiles/emacs.d/site-lisp/swiper
 	url = git@github.com:abo-abo/swiper.git
 [submodule "emacs/.emacs.d/site-lisp/web-mode"]
-	path = emacs/.emacs.d/site-lisp/web-mode
+	path = dotfiles/emacs.d/site-lisp/web-mode
 	url = git@github.com:fxbois/web-mode.git
 [submodule "emacs/.emacs.d/site-lisp/Emacs-wgrep"]
-	path = emacs/.emacs.d/site-lisp/Emacs-wgrep
+	path = dotfiles/emacs.d/site-lisp/Emacs-wgrep
 	url = git@github.com:mhayashi1120/Emacs-wgrep.git
 [submodule "emacs/.emacs.d/site-lisp/with-editor"]
-	path = emacs/.emacs.d/site-lisp/with-editor
+	path = dotfiles/emacs.d/site-lisp/with-editor
 	url = git@github.com:magit/with-editor.git
 [submodule "emacs/.emacs.d/site-lisp/yaml-mode"]
-	path = emacs/.emacs.d/site-lisp/yaml-mode
+	path = dotfiles/emacs.d/site-lisp/yaml-mode
 	url = git@github.com:yoshiki/yaml-mode.git
 [submodule "emacs/.emacs.d/site-lisp/move-text"]
-	path = emacs/.emacs.d/site-lisp/move-text
+	path = dotfiles/emacs.d/site-lisp/move-text
 	url = git@github.com:emacsfodder/move-text.git
 [submodule "emacs/.emacs.d/site-lisp/dash.el"]
-	path = emacs/.emacs.d/site-lisp/dash.el
+	path = dotfiles/emacs.d/site-lisp/dash.el
 	url = git@github.com:magnars/dash.el.git
 [submodule "emacs/.emacs.d/site-lisp/graphql.el"]
-	path = emacs/.emacs.d/site-lisp/graphql.el
+	path = dotfiles/emacs.d/site-lisp/graphql.el
 	url = git@github.com:vermiculus/graphql.el.git
 [submodule "emacs/.emacs.d/site-lisp/treepy.el"]
-	path = emacs/.emacs.d/site-lisp/treepy.el
+	path = dotfiles/emacs.d/site-lisp/treepy.el
 	url = git@github.com:volrath/treepy.el.git
