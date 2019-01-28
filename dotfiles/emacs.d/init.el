@@ -97,6 +97,12 @@
 ;;; Highlight current line
 (global-hl-line-mode t)
 
+;;; Open new windows below current one
+(setq split-width-threshold 9999)
+
+;;; Do not resize windows automatically
+(setq even-window-sizes nil)
+
 ;;; Navigate between windows easily
 (windmove-default-keybindings 'super)
 
