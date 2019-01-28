@@ -113,6 +113,9 @@
         savehist-additional-variables '(compile-command))
   (savehist-mode))
 
+;;; Yank where the point is, not where clicked
+(setq mouse-yank-at-point t)
+
 ;;;; NAVIGATION
 
 ;;; Scroll one line at a time near window boundary
