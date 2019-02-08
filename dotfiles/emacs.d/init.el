@@ -272,7 +272,6 @@
 
 ;;; Highlight parens, even off-screen (minibuffer shows matching line)
 
-(setq show-paren-style 'mixed)
 (show-paren-mode)
 
 ;;; Auto-indent

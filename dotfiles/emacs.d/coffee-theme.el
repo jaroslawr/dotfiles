@@ -18,18 +18,32 @@
 
 (setq compilation-message-face 'default)
 
+;;; Reference for default terminal 256 colors:
+;;; https://jonasjacek.github.io/colors/
+
 (let* (;;; Basic colors
-       (bgcolor "#121212")
-       (fgcolor "#ffffff")
-       (prio-a-color "#fff590")
-       (prio-b-color "#ffc890")
-       (prio-c-color "#7cc2d6")
-       (prio-d-color "#ffe4c8")
-       (prio-e-color "#c5e5ee")
-       (prio-f-color "#fffac8")
-       (green "#90ffb5")
-       (red "#ff9090")
-       (highlight "#000000")
+       (bgcolor      "#121212") ; #233
+       (fgcolor      "#ffffff") ; #15
+       (prio-a-color "#ffffaf") ; #229 - hsl(60,100%,84%)
+       (prio-b-color "#ff875f") ; #209 - hsl(15,100%,68%)
+       (prio-c-color "#ffd7af") ; #223 - hsl(30,100%,84%)
+       (prio-d-color "#ffffd7") ; #230 - hsl(60,100%,92%)
+       (prio-e-color "#ffd7d7") ; #224 - hsl(0,100%,92%)
+       (prio-f-color "#dadada") ; #253 - hsl(0,0%,85%)
+       (red          "#ff8787") ; #210 - hsl(0,100%,76%)
+       (green        "#87ffd7") ; #122 - hsl(160,100%,76%)
+       (blue         "#87d7ff") ; #117 - hsl(200,100%,76%)
+       (grey1        "#262626") ; #235
+       (grey2        "#303030") ; #236
+       (grey3        "#444444") ; #238
+       (grey4        "#585858") ; #240
+       (grey5        "#6c6c6c") ; #242
+       (grey6        "#808080") ; #244
+       (grey7        "#949494") ; #246
+       (grey8        "#a8a8a8") ; #248
+       (grey9        "#bcbcbc") ; #250
+       (grey10       "#d0d0d0") ; #252
+       (grey11       "#e4e4e4") ; #254
        ;;; Basic faces
        (prio-a `(:foreground ,prio-a-color))
        (prio-b `(:foreground ,prio-b-color))
@@ -37,24 +51,24 @@
        (prio-d `(:foreground ,prio-d-color))
        (prio-e `(:foreground ,prio-e-color))
        (prio-f `(:foreground ,prio-f-color))
-       (error `(:foreground "#fc5161" ,@(coffee-bold)))
+       (error `(:foreground ,red ,@(coffee-bold)))
        (highlight-error `(:background "#ff2244" :foreground "#ffffff"))
        (warning `(:foreground "#ff8866" ,@(coffee-bold)))
-       (hyperlink `(:foreground "#88ccff" :underline nil))
+       (hyperlink `(:foreground ,blue :underline nil))
        (directory `(:background unspecified ,@prio-b :weight normal))
        ;;; Highlights
-       (parens `(:background "#ffffff" :foreground ,bgcolor))
-       (region `(:background ,prio-b-color :foreground ,bgcolor))
-       (search-primary `(:background ,prio-b-color :foreground ,bgcolor))
-       (search-secondary `(:background ,prio-c-color :foreground ,bgcolor))
-       (current-line `(:background "#213b43"))
-       (codalog-project `(:foreground ,prio-a-color))
+       (parens `(:foreground ,prio-b-color))
+       (region `(:background ,prio-a-color :foreground ,bgcolor))
+       (search-primary `(:background ,prio-a-color :foreground ,bgcolor))
+       (search-secondary `(:background ,prio-b-color :foreground ,bgcolor))
+       (current-line `(:background ,grey1))
+       (highlight `(:background ,grey1 :foreground ,prio-a-color))
        ;;; Interface faces
        (interface `(:background ,bgcolor))
        (text `(:background ,bgcolor :foreground ,fgcolor))
-       (cursor `(:background ,prio-a-color))
-       (widget `(:background "#4d4e4f" :foreground ,fgcolor :weight normal :box (:line-width 1 :color "#5d5e5f")))
-       (widget-inactive `(:background "#3a3c3d" :foreground "#adaaa0" ,@(coffee-extralight) :box (:line-width 1 :color "#4a4c4d")))
+       (cursor `(:background ,prio-a-color :foreground ,fgcolor))
+       (widget `(:background ,grey2 :foreground ,fgcolor :weight normal :box (:line-width 1 :color ,grey2)))
+       (widget-inactive `(:background ,grey3 :foreground ,grey10 ,@(coffee-extralight) :box (:line-width 1 :color ,grey3)))
        (header `(:background "#202020" :foreground ,prio-a-color :box (:color "#202020" :line-width 8)))
        (subheader `(:background "#202020" :foreground ,prio-b-color :box (:color "#202020" :line-width 8))))
 
@@ -63,6 +77,7 @@
     `(default ((t ,text)))
     `(cursor ((t ,cursor)))
     `(bold ((t ,@(coffee-bold))))
+    `(hl-line ((t ,current-line)))
     `(highlight ((t ,current-line)))
     `(region ((t ,region)))
     `(fringe ((t ,interface)))
@@ -77,15 +92,18 @@
 
     ;;; Font lock
     `(font-lock-function-name-face ((t ,prio-a)))
-    `(font-lock-comment-face ((t ,prio-b)))
-    `(font-lock-doc-face ((t ,prio-b)))
-    `(font-lock-keyword-face ((t ,prio-c)))
-    `(font-lock-variable-name-face ((t ,prio-d)))
+    `(font-lock-keyword-face ((t ,prio-b)))
+    `(font-lock-type-face ((t ,prio-c)))
+    `(font-lock-comment-face ((t ,prio-d)))
+    `(font-lock-doc-face ((t ,prio-d)))
     `(font-lock-string-face ((t ,prio-e)))
     `(font-lock-builtin-face ((t ,prio-f)))
     `(font-lock-constant-face ((t ,prio-f)))
+    `(font-lock-variable-name-face ((t ,prio-f)))
     `(font-lock-warning-face ((t ,error)))
-    `(font-lock-type-face ((t ,text)))
+
+    ;;; Ivy
+    `(ivy-current-match ((t ,highlight)))
 
     ;;; Web mode
     `(web-mode-html-tag-face ((t ,prio-a)))
@@ -100,13 +118,17 @@
 
     ;;; Shell scripts
     `(sh-heredoc ((t ,prio-e)))
-    
+
     ;;; Search & replace
     `(isearch ((t ,search-primary)))
     `(match ((t ,search-primary)))
     `(lazy-highlight ((t ,search-secondary)))
     ;;; so that isearch match is visible "on top" of ag-match-face
     `(ag-match-face ((t ,search-secondary)))
+
+    ;;; Diff
+    `(diff-added ((t (:foreground ,green))))
+    `(diff-removed ((t (:foreground ,red))))
 
     ;;; Magit
     `(magit-section-heading ((t ,prio-a)))
@@ -133,6 +155,8 @@
     `(org-level-2 ((t (,@prio-b :height 1.10))))
     `(org-level-3 ((t (,@prio-c :height 1.05))))
     `(org-level-4 ((t ,prio-d)))
+    `(org-level-5 ((t ,prio-e)))
+    `(org-level-6 ((t ,prio-f)))
     `(org-date ((t ,prio-c)))
     `(org-link ((t ,hyperlink)))
 
@@ -141,7 +165,7 @@
     `(dired-directory ((t ,directory)))
     `(dired-symlink ((t ,prio-c)))
     `(dired-perm-write ((t ,text)))
-    
+
     ;;; Eshell
     `(eshell-prompt ((t (,@prio-a :weight normal :underline nil))))
     `(eshell-ls-directory ((t ,directory)))
@@ -160,9 +184,6 @@
     `(compilation-info ((t (,@prio-a ,@(coffee-demibold)))))
     `(compilation-line-number ((t ,text)))
     `(compilation-column-number ((t ,text)))
-
-    ;;; Codalog.el
-    `(codalog-mode-line-project-name ((t ,@codalog-project)))
 
     ;;; Show paren mode
     `(show-paren-match ((t ,@parens)))

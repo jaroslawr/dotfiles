@@ -1,9 +1,12 @@
 # -*- mode: shell-script -*-
 
-# PATHS
+# ENVIRONMENT
 
 # cd-s
 cdpath=(~ ~/projects)
+
+# set LS_COLORS
+eval $(dircolors ~/.dircolors)
 
 # HISTORY
 
@@ -60,6 +63,9 @@ unsetopt list_ambiguous
 # Show as many suggestions as fit on the screen
 LISTMAX=0
 
+# Use colors
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+
 # Highlight active suggestion in the menu
 zstyle ':completion:*' menu select
 
@@ -96,8 +102,8 @@ precmd() {
 }
 
 # Set prompt
-PROMPT='%F{yellow}%~%E %F{blue}${vcs_info_msg_0_}
-%F{green}> %f'
+PROMPT='%F{229}%~%E %F{209}${vcs_info_msg_0_}
+%F{223}> %f'
 
 # ALIASES
 

@@ -1,6 +1,30 @@
+# Good reference for syntax:
+# https://gist.github.com/rab/4067067
+
 [user]
         email = jrzeszotko@gmail.com
         name = Jarosław Rzeszótko
 
 [core]
         editor = nano -r 72
+
+[color "diff"]
+        commit = 223
+        meta = 15
+        frag = 223
+        old = 210
+        new = 122
+
+[color "status"]
+        branch = 209
+        added = 223
+        changed = 223
+        untracked = 253
+
+# git log
+[color "decorate"]
+        branch = 209
+        remoteBranch = 209
+        tags = 209
+        stash = 209
+        HEAD = 209
