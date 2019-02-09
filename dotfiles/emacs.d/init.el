@@ -101,13 +101,16 @@
 (setq next-error-recenter '(4))
 
 ;;; when jumping to a bookmark:
-(add-hook 'bookmark-after-jump-hook #'recenter-top-bottom)
+(add-hook 'bookmark-after-jump-hook #'recenter)
 
 ;;; when opening an org mode hyperlink:
 (advice-add 'org-open-file :after
             (lambda (path &optional in-emacs line search)
               (if line
-                  (recenter-top-bottom))))
+                  (recenter))))
+
+;;; when isearching:
+(advice-add 'isearch-update :after #'recenter)
 
 ;;; Word by word navigation in CamelCase names
 (global-subword-mode t)
