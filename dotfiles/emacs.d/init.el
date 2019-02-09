@@ -93,15 +93,6 @@
 ;;; Highlight current line
 (global-hl-line-mode t)
 
-;;; Open new windows below current one
-(setq split-width-threshold 9999)
-
-;;; Do not resize windows automatically
-(setq even-window-sizes nil)
-
-;;; Navigate between windows easily
-(windmove-default-keybindings 'super)
-
 ;;; Preserve minibuffer history
 (use-package savehist
   :config
@@ -111,6 +102,20 @@
 
 ;;; Yank where the point is, not where clicked
 (setq mouse-yank-at-point t)
+
+;;;; WINDOWS
+
+;;; No popups unless explictly permitted/requested, by default use current window
+(setq display-buffer-alist `((".*" . (display-buffer-same-window . ((inhibit-same-window . nil))))))
+
+;;; Open new windows below current one
+(setq split-width-threshold 9999)
+
+;;; Do not resize windows automatically
+(setq even-window-sizes nil)
+
+;;; Navigate between windows easily
+(windmove-default-keybindings 'super)
 
 ;;;; NAVIGATION
 
