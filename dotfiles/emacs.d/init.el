@@ -90,10 +90,6 @@
 ;;; y/n instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;;; No suspending
-(global-unset-key (kbd "C-z"))
-(global-unset-key (kbd "C-x C-z"))
-
 ;;; Highlight current line
 (global-hl-line-mode t)
 
@@ -317,10 +313,15 @@
   (interactive)
   (find-file "~/txt/notes.txt"))
 
+;;; No suspending
+(global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "C-x C-z"))
+
 (my-bind-keys
- '(;;; rebindings
+ '(;;; overrides
    "C-a" crux-move-beginning-of-line
    "<home>" crux-move-beginning-of-line
+   "C-o" crux-smart-open-line-above
    ;;; function keys
    "<f5>" dired-jump
    ;;; C-c - compilation
