@@ -111,9 +111,6 @@
 ;;; Do not resize windows automatically
 (setq even-window-sizes nil)
 
-;;; Navigate between windows easily
-(windmove-default-keybindings 'super)
-
 ;;;; SESSIONS
 
 ;;; Preserve minibuffer history
@@ -343,6 +340,11 @@
    "C-o" crux-smart-open-line-above
    ;;; function keys
    "<f5>" dired-jump
+   ;;; C-c - windmove
+   "C-c <left>" windmove-left
+   "C-c <right>" windmove-right
+   "C-c <up>" windmove-up
+   "C-c <down>" windmove-down
    ;;; C-c - compilation
    "C-c c" compile
    "C-c r" recompile
