@@ -329,6 +329,15 @@
   (interactive)
   (find-file "~/txt/notes.txt"))
 
+(defun my-kill-region-or-backward-delete-word ()
+  (interactive)
+  (if (region-active-p)
+      (call-interactively 'kill-region)
+    (save-mark-and-excursion
+      (let ((here (point)))
+        (backward-word)
+        (delete-region (point) here)))))
+
 ;;; No suspending
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-z"))
@@ -338,6 +347,7 @@
    "C-a" crux-move-beginning-of-line
    "<home>" crux-move-beginning-of-line
    "C-o" crux-smart-open-line-above
+   "C-w" my-kill-region-or-backward-delete-word
    ;;; function keys
    "<f5>" dired-jump
    ;;; C-c - windmove
