@@ -90,6 +90,10 @@
 ;;; y/n instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; Do not ask when killing buffers with an active process
+(setq kill-buffer-query-functions
+      (remq 'process-kill-buffer-query-function kill-buffer-query-functions))
+
 ;;; Highlight current line
 (global-hl-line-mode t)
 
@@ -276,10 +280,18 @@
   ;;; Do not clash with projectile mode
   (unbind-key "M-p" magit-mode-map))
 
-;;;; GENERAL CODE EDITING
+;;;; PROGRAMMING
 
-;;; Highlight parens, even off-screen (minibuffer shows matching line)
+;; Do not ask about saving unsaved buffers when running compile
+(setq compilation-save-buffers-predicate 'ignore)
 
+;; Do not ask whether to kill existing compilation process when running a new one
+;; Also takes care of the same for grep
+(add-hook 'compilation-start-hook
+          (lambda (proc)
+            (set-process-query-on-exit-flag proc nil)))
+
+;;; Highlight matching parens
 (show-paren-mode)
 
 ;;; Auto-indent
@@ -290,11 +302,8 @@
           (if (eq major-mode 'org-mode)
               'no-indent
             nil))))
-(define-key global-map (kbd "C-j") 'newline-and-indent)
 
-;;;; LANGUAGE MODES
-
-;;;; HTML/CSS/JAVASCRIPT/JSX
+;;;; PROGRAMMING - HTML/CSS/JAVASCRIPT/JSX
 
 (use-package web-mode
   :mode "\\.\\(js\\|jsx\\|html\\)\\'"
@@ -310,7 +319,7 @@
         web-mode-markup-indent-offset 2
         web-mode-enable-auto-quoting nil))
 
-;;;; YAML
+;;;; PROGRAMMING - YAML
 
 (use-package yaml-mode
   :mode "\\.yml\\'"
