@@ -118,21 +118,20 @@
 
 ;;;; NAVIGATION
 
+;;; Scroll to top/bottom before signaling error from PageUp/PageDown etc.
+(setq scroll-error-top-bottom t)
+
+;;; Preserve point position relatively to the screen when scrolling
+(setq scroll-preserve-screen-position 'always)
+
 ;;; Scroll one line at a time near window boundary
-(setq auto-window-vscroll nil
-      scroll-conservatively 10000)
+(setq scroll-conservatively 10000)
 
 ;;; Word by word navigation in CamelCase names
 (global-subword-mode t)
 (my-bind-keys
  '("<C-left>" subword-backward
    "<C-right>" subword-forward))
-
-;;; Page-up and page-down behaviour as in more traditional editors
-(require 'pager)
-(my-bind-keys
- '("<prior>" pager-page-up
-   "<next>" pager-page-down))
 
 ;;; Center the screen on specific line, when jumping to compilation error:
 (setq next-error-recenter '(4))
