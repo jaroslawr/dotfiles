@@ -8,6 +8,9 @@ cdpath=(~ ~/projects)
 # set LS_COLORS
 eval $(dircolors ~/.dircolors)
 
+# ripgrep
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
 # HISTORY
 
 # Set history file
