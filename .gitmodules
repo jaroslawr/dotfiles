@@ -4,9 +4,6 @@
 [submodule "emacs/.emacs.d/site-lisp/crux"]
 	path = dotfiles/emacs.d/site-lisp/crux
 	url = git@github.com:bbatsov/crux.git
-[submodule "emacs/.emacs.d/site-lisp/flx"]
-	path = dotfiles/emacs.d/site-lisp/flx
-	url = git@github.com:lewang/flx.git
 [submodule "emacs/.emacs.d/site-lisp/ghub"]
 	path = dotfiles/emacs.d/site-lisp/ghub
 	url = git@github.com:magit/ghub.git

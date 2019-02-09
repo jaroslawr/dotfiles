@@ -17,8 +17,8 @@
 
 ;;;; EMACS-LISP ENHANCEMENTS
 
-;;; GC after 64MB
-(setq gc-cons-threshold (* 64 1024 1024))
+;;; GC after 8MB
+(setq gc-cons-threshold (* 8 1024 1024))
 
 (use-package s :load-path "site-lisp/s.el")
 
@@ -186,23 +186,26 @@
 
 ;;;; IVY/COUNSEL/SWIPER/FLX
 
-(use-package flx :load-path "site-lisp/flx")
-
 (use-package ivy
   :load-path "site-lisp/swiper"
   :commands ivy-mode
   :bind
   ("C-c C-r" . ivy-resume)
   :init
-  (setq ;;; case insensitive matching, even when uppercase letter present in input
-        ivy-case-fold-search-default 'always
-        ivy-display-style 'plain
-        ivy-extra-directories '()
-        ivy-initial-inputs-alist nil
-        ivy-magic-slash-non-match-action nil
-        ivy-re-builders-alist '((swiper . ivy--regex-plus)
-                                (t . ivy--regex-fuzzy))
-        ivy-use-virtual-buffers t)
+  ;; do not show candidate count as part of the prompt
+  (setq ivy-count-format "")
+  ;; highlight whole line of the selected candidate
+  (setq ivy-format-function 'ivy-format-function-line)
+  ;; do not separately highlight the matching part of the candidate
+  (setq ivy-display-style 'plain)
+  ;; case insensitive matching, even when uppercase letter present in input
+  (setq ivy-case-fold-search-default 'always)
+  ;; show non-buffers as candidates, e.g. recently closed buffers
+  (setq ivy-use-virtual-buffers t)
+  ;; no . and .. candidates when selecting files
+  (setq ivy-extra-directories '())
+  ;; do not do anything special when typing / at the end of non-directory-name
+  (setq ivy-magic-slash-non-match-action nil)
   (ivy-mode t))
 
 (use-package counsel
