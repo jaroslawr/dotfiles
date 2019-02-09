@@ -1,54 +1,22 @@
-;;;; PACKAGE LOADING
+;;;; EMACS-LISP
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/use-package")
-
-(require 'use-package)
-(require 'bind-key)
-
-;;;; NO LITTERING (of emacs.d and working dir)
-
-(use-package no-littering :load-path "site-lisp/no-littering")
-
-(setq create-lockfiles nil)
-
-(setq auto-save-file-name-transforms
-      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
-
-;;;; EMACS-LISP ENHANCEMENTS
+;;; Turn on to debug errors
+(setq debug-on-error nil)
 
 ;;; GC after 8MB
 (setq gc-cons-threshold (* 8 1024 1024))
 
+;;; Use-package
+(add-to-list 'load-path "~/.emacs.d/site-lisp/use-package")
+(require 'use-package)
+
+;;; Utility libraries
+(use-package crux :load-path "site-lisp/crux")
+(use-package dash :load-path "site-lisp/dash.el")
 (use-package s :load-path "site-lisp/s.el")
 
-(use-package dash :load-path "site-lisp/dash.el")
-
-(use-package crux :load-path "site-lisp/crux")
-
-(defun map-thing-at-point (thing func)
-  (let* ((bounds (bounds-of-thing-at-point thing))
-         (start (car bounds))
-         (end (cdr bounds))
-         (thing-value (buffer-substring start end)))
-    (when bounds
-      (save-excursion
-        (delete-region start end)
-        (goto-char start)
-        (insert (apply func (list thing-value)))))))
-
-(defun my-bind-keys (bindings)
-  (if (eq (cdr bindings) nil)
-      t
-    (progn
-      (let ((key (car bindings))
-	    (function (cadr bindings)))
-	(my-bind-key key function)
-	(my-bind-keys (cddr bindings))))))
-
-(defmacro my-bind-key (key function)
-  `(progn
-     (global-set-key (read-kbd-macro ,key) ,function)))
+;;; My own utilities
+(use-package jr-bind-keys :load-path "my-lisp/" :commands 'jr/bind-keys)
 
 ;;;; VISUALS
 
@@ -71,18 +39,16 @@
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 
-;;;; FILE FORMATTING
+;;; Highlight current line
+(global-hl-line-mode t)
 
-;;; No tabs
-(setq-default indent-tabs-mode nil)
+;;;; GENERAL SETUP
 
-;;; UTF-8 everywhere
-(prefer-coding-system 'utf-8)
-
-;;;; GENERAL BEHAVIOUR
-
-;;; Turn on to debug errors
-(setq debug-on-error nil)
+;;;; Do not litter the fs with temporary files
+(use-package no-littering :load-path "site-lisp/no-littering")
+(setq create-lockfiles nil)
+(setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
 ;;; No splash screen
 (setq inhibit-startup-message t)
@@ -93,9 +59,6 @@
 ;; Do not ask when killing buffers with an active process
 (setq kill-buffer-query-functions
       (remq 'process-kill-buffer-query-function kill-buffer-query-functions))
-
-;;; Highlight current line
-(global-hl-line-mode t)
 
 ;;; Yank where the point is, not where clicked
 (setq mouse-yank-at-point t)
@@ -134,12 +97,6 @@
 ;;; Scroll one line at a time near window boundary
 (setq scroll-conservatively 10000)
 
-;;; Word by word navigation in CamelCase names
-(global-subword-mode t)
-(my-bind-keys
- '("<C-left>" subword-backward
-   "<C-right>" subword-forward))
-
 ;;; Center the screen on specific line, when jumping to compilation error:
 (setq next-error-recenter '(4))
 
@@ -152,7 +109,16 @@
               (if line
                   (recenter-top-bottom))))
 
+;;; Word by word navigation in CamelCase names
+(global-subword-mode t)
+
 ;;;; GENERAL TEXT EDITING
+
+;;; No tabs
+(setq-default indent-tabs-mode nil)
+
+;;; UTF-8 everywhere
+(prefer-coding-system 'utf-8)
 
 ;;; Move lines of text up/down easily
 (use-package move-text
@@ -167,28 +133,16 @@
 ;;; Typing and pasting with an active selection overwrites the selection
 (delete-selection-mode 1)
 
+(defun jr/kill-region-or-backward-delete-word ()
+  (interactive)
+  (if (region-active-p)
+      (call-interactively 'kill-region)
+    (save-mark-and-excursion
+      (let ((here (point)))
+        (backward-word)
+        (delete-region (point) here)))))
+
 ;;;; GENERAL MODES
-
-;;;; PROJECTILE
-
-(use-package projectile
-  :load-path "site-lisp/projectile"
-  :diminish projectile-mode
-  :commands projectile-mode
-  :bind-keymap ("M-p" . projectile-command-map)
-  :defer 5
-  :config
-  (setq projectile-completion-system 'ivy
-        projectile-keymap-prefix "M-p"
-        projectile-switch-project-action #'projectile-dired)
-  ;;; Recognize every subdir of ~/[Pp]rojects/ as a project
-  (setq my-projectile-project-dir-re
-        (concat "\\(" (expand-file-name "~/[Pp]rojects/") "[^/]+\\)[/]?.*"))
-  (defun my-projectile-project-root (dir)
-      (when (string-match my-projectile-project-dir-re dir)
-        (match-string 1 dir)))
-  (add-to-list 'projectile-project-root-files-functions 'my-projectile-project-root)
-  (projectile-mode 1))
 
 ;;;; IVY/COUNSEL/SWIPER/FLX
 
@@ -218,48 +172,65 @@
   :bind
   ("C-x r b" . counsel-bookmark))
 
+;;;; DIRED
+
+(use-package dired
+  :config
+  ;;; Extended display
+  (use-package dired-x)
+  ;;; Do not clash with compile mode
+  (unbind-key "M-g" dired-mode-map)
+  ;;; Do not clash with projectile
+  (unbind-key "M-p" dired-mode-map)
+  ;;; C-j opens directory just like RET
+  (bind-key "C-j" 'dired-find-file dired-mode-map)
+  ;;; Hidden files hidden by default
+  (setq dired-omit-files "^\\.[^\\.].+$")
+  (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
+  ;; Auto refresh
+  (add-hook 'dired-mode-hook 'auto-revert-mode)
+  ;;; Directories first
+  (setq dired-listing-switches "-alh --group-directories-first"))
+
 ;;;; GREP
 
 (use-package grep
   :config
+  ;;; Do not prompt about saving unsaved buffers
+  (setq grep-save-buffers nil)
+  ;;; Use fd and ripgrep for grep-find
   (grep-apply-setting 'grep-find-command '("fdfind . -t f -exec rg -n -H '' \{\}" . 31)))
 
-(defun my-projectile-find-grep-in-project ()
+(defun jr/projectile-grep-find-in-project ()
   (interactive)
   (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
-    (call-interactively 'find-grep)))
+    (call-interactively 'grep-find)))
 
 (use-package wgrep
   :load-path "site-lisp/Emacs-wgrep"
   :config
   (setq wgrep-auto-save-buffer t))
 
-;;;; DIRED
+;;;; PROJECTILE
 
-(use-package dired
+(use-package projectile
+  :load-path "site-lisp/projectile"
+  :diminish projectile-mode
+  :commands projectile-mode
+  :bind-keymap ("M-p" . projectile-command-map)
+  :defer 5
   :config
-
-  ;;; Extended display
-  (use-package dired-x)
-
-  ;;; Do not clash with compile mode
-  (unbind-key "M-g" dired-mode-map)
-
-  ;;; Do not clash with projectile
-  (unbind-key "M-p" dired-mode-map)
-
-  ;;; C-j opens directory just like RET
-  (bind-key "C-j" 'dired-find-file dired-mode-map)
-
-  ;;; Hidden files hidden by default
-  (setq dired-omit-files "^\\.[^\\.].+$")
-  (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
-
-  ;; Auto refresh
-  (add-hook 'dired-mode-hook 'auto-revert-mode)
-
-  ;;; Directories first
-  (setq dired-listing-switches "-alh --group-directories-first"))
+  (setq projectile-completion-system 'ivy
+        projectile-keymap-prefix "M-p"
+        projectile-switch-project-action #'projectile-dired)
+  ;;; Recognize every subdir of ~/[Pp]rojects/ as a project
+  (setq jr/projectile-project-dir-re
+        (concat "\\(" (expand-file-name "~/[Pp]rojects/") "[^/]+\\)[/]?.*"))
+  (defun jr/projectile-project-root (dir)
+      (when (string-match jr/projectile-project-dir-re dir)
+        (match-string 1 dir)))
+  (add-to-list 'projectile-project-root-files-functions 'jr/projectile-project-root)
+  (projectile-mode 1))
 
 ;;;; MAGIT
 
@@ -324,30 +295,21 @@
 
 ;;;; KEY BINDINGS
 
-(defun notes ()
+(defun jr/notes ()
   "Opens up the notebook file."
   (interactive)
   (find-file "~/txt/notes.txt"))
-
-(defun my-kill-region-or-backward-delete-word ()
-  (interactive)
-  (if (region-active-p)
-      (call-interactively 'kill-region)
-    (save-mark-and-excursion
-      (let ((here (point)))
-        (backward-word)
-        (delete-region (point) here)))))
 
 ;;; No suspending
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-z"))
 
-(my-bind-keys
+(jr/bind-keys
  '(;;; overrides
    "C-a" crux-move-beginning-of-line
    "<home>" crux-move-beginning-of-line
    "C-o" crux-smart-open-line-above
-   "C-w" my-kill-region-or-backward-delete-word
+   "C-w" jr/kill-region-or-backward-delete-word
    ;;; function keys
    "<f5>" dired-jump
    ;;; C-c - windmove
@@ -359,11 +321,11 @@
    "C-c c" compile
    "C-c r" recompile
    ;;; C-c - grep
-   "C-c g" my-projectile-find-grep-in-project
+   "C-c g" jr/projectile-grep-find-in-project
    "C-c G" find-grep
    ;;; C-c - rest
    "C-c k" kill-this-buffer
-   "C-c n" notes))
+   "C-c n" jr/notes))
 
 ;;;; STARTUP
 
