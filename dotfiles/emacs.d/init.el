@@ -93,13 +93,6 @@
 ;;; Highlight current line
 (global-hl-line-mode t)
 
-;;; Preserve minibuffer history
-(use-package savehist
-  :config
-  (setq savehist-autosave-interval 60
-        savehist-additional-variables '(compile-command))
-  (savehist-mode))
-
 ;;; Yank where the point is, not where clicked
 (setq mouse-yank-at-point t)
 
@@ -116,6 +109,18 @@
 
 ;;; Navigate between windows easily
 (windmove-default-keybindings 'super)
+
+;;;; SESSIONS
+
+;;; Preserve minibuffer history
+(use-package savehist
+  :config
+  (setq savehist-autosave-interval 60
+        savehist-additional-variables '(compile-command))
+  (savehist-mode))
+
+;;; Preserve position in buffers
+(save-place-mode 1)
 
 ;;;; NAVIGATION
 
