@@ -225,7 +225,7 @@
 
 (use-package grep
   :config
-  (grep-apply-setting 'grep-find-command '("fdfind . -t f -exec rg -n -H  \{\}" . 30)))
+  (grep-apply-setting 'grep-find-command '("fdfind . -t f -exec rg -n -H '' \{\}" . 31)))
 
 (defun my-projectile-find-grep-in-project ()
   (interactive)
