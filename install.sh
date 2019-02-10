@@ -14,4 +14,4 @@ fi
 touch ~/.history
 
 # Install dotfiles
-rcup -d dotfiles
+rcup -S emacs.d -d dotfiles
