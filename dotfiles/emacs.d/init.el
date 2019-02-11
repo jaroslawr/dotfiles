@@ -263,14 +263,17 @@
 
 ;;;; PROGRAMMING
 
-;; Do not ask about saving unsaved buffers when running compile
-(setq compilation-save-buffers-predicate 'ignore)
-
-;; Do not ask whether to kill existing compilation process when running a new one
-;; Also takes care of the same for grep
-(add-hook 'compilation-start-hook
-          (lambda (proc)
-            (set-process-query-on-exit-flag proc nil)))
+(use-package compile
+  :config
+  ;;; Do not clash with projectile
+  (unbind-key "M-p" compilation-mode-map)
+  ;; Do not ask about saving unsaved buffers when running compile
+  (setq compilation-save-buffers-predicate 'ignore)
+  ;; Do not ask whether to kill existing compilation process when running a new one
+  ;; Also takes care of the same for grep
+  (add-hook 'compilation-start-hook
+            (lambda (proc)
+              (set-process-query-on-exit-flag proc nil))))
 
 ;;; Highlight matching parens
 (show-paren-mode)
