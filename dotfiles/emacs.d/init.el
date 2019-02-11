@@ -68,7 +68,10 @@
 ;;; No popups unless explictly permitted/requested, by default use current window
 (setq display-buffer-alist
       `((".*" . ((display-buffer-reuse-window display-buffer-same-window) .
-                 (;; consider windows on all frames for reuse
+                 (;; permit using the current window instead of popup
+                  ;; (needed even with display-buffer-same-window)
+                  (inhibit-same-window . nil)
+                  ;; consider windows on all frames for reuse
                   (reusable-frames . t)
                   ;; do not raise the other frame if a window there was chosen
                   (inhibit-switch-frame . t))))))
