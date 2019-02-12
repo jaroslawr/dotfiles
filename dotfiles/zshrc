@@ -38,6 +38,14 @@ select-word-style normal
 
 # KEYBINDINGS
 
+# Up and Down keys do history search when input is present
+autoload -U up-line-or-beginning-search
+zle -N up-line-or-beginning-search
+bindkey 'OA' up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey 'OB' down-line-or-beginning-search
+
 # Prevent Ctrl-S from freezing the terminal, make it accessible as a key binding
 stty -ixon
 
