@@ -232,8 +232,8 @@
   :defer 5
   :config
   (setq projectile-completion-system 'ivy
-        projectile-git-command "fdfind . -0"
-        projectile-generic-command "fdfind . -0"
+        projectile-git-command "fdfind . -tf -0"
+        projectile-generic-command "fdfind . -tf -0"
         projectile-keymap-prefix "M-p"
         projectile-switch-project-action #'projectile-dired)
   ;;; Recognize every subdir of ~/[Pp]rojects/ as a project
