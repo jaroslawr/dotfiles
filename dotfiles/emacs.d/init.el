@@ -221,6 +221,12 @@
   :init
   (counsel-mode t))
 
+(use-package counsel-projectile
+  :load-path "site-lisp/counsel-projectile"
+  :commands counsel-projectile-mode
+  :init
+  (counsel-projectile-mode t))
+
 ;;;; DIRED
 
 (use-package dired

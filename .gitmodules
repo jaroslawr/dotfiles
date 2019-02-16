@@ -49,3 +49,6 @@
 [submodule "emacs/.emacs.d/site-lisp/treepy.el"]
 	path = dotfiles/emacs.d/site-lisp/treepy.el
 	url = git@github.com:volrath/treepy.el.git
+[submodule "dotfiles/emacs.d/site-lisp/counsel-projectile"]
+	path = dotfiles/emacs.d/site-lisp/counsel-projectile
+	url = git@github.com:ericdanan/counsel-projectile.git
