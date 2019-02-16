@@ -65,16 +65,53 @@
 
 ;;;; WINDOWS
 
-;;; No popups unless explictly permitted/requested, by default use current window
+(setq jr/utility-buffers-list '("*grep*" "*compilation*"))
+
+(setq jr/utility-window-height 16)
+
+(defun jr/utility-buffer-p (buffer-or-buffer-name &optional props)
+  (let ((buffer-name
+         (if (bufferp buffer-or-buffer-name)
+             (buffer-name buffer-or-buffer-name)
+           buffer-or-buffer-name)))
+    (member buffer-name jr/utility-buffers-list)))
+
+(defun jr/utility-window-p (window)
+  (jr/utility-buffer-p (window-buffer window)))
+
+(defun jr/in-utility-window-p ()
+  (jr/utility-buffer-p (current-buffer)))
+
+(defun jr/window-list ()
+  (mapcan #'window-list (frame-list)))
+
+(defun jr/display-utility-buffer (buffer props)
+  (if (jr/utility-buffer-p buffer)
+      (let ((window (or (find-if #'jr/utility-window-p (jr/window-list))
+                        (split-window (frame-root-window) (- jr/utility-window-height) 'below))))
+        (set-window-buffer window buffer)
+        window)
+    nil))
+
 (setq display-buffer-alist
-      `((".*" . ((display-buffer-reuse-window display-buffer-same-window) .
-                 (;; permit using the current window instead of popup
-                  ;; (needed even with display-buffer-same-window)
-                  (inhibit-same-window . nil)
-                  ;; consider windows on all frames for reuse
-                  (reusable-frames . t)
-                  ;; do not raise the other frame if a window there was chosen
-                  (inhibit-switch-frame . t))))))
+      `(;;; Display utility buffers in the utility window, popping one
+        ;;; up if not already present
+        (jr/utility-buffer-p . (jr/display-utility-buffer . ()))
+        ;;; Do not display non-utility buffers in the utility window
+        ((lambda (w p) (and (jr/in-utility-window-p) (not (jr/utility-buffer-p w p))))
+         . (display-buffer-use-some-window . ((inhibit-same-window . t))))
+        ;;; No popups unless explictly permitted/requested, by default
+        ;;; reuse the existing window displaying the buffer or use the
+        ;;; current window
+        (".*"
+         . ((display-buffer-reuse-window display-buffer-same-window)
+            . (;; permit using the current window instead of popup
+               ;; (needed even with display-buffer-same-window)
+               (inhibit-same-window . nil)
+               ;; consider windows on all frames for reuse
+               (reusable-frames . t)
+               ;; do not raise the other frame if a window there was chosen
+               (inhibit-switch-frame . t))))))
 
 ;;; Open new windows below current one
 (setq split-width-threshold 9999)
