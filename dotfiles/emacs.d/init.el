@@ -217,8 +217,9 @@
   (ivy-mode t))
 
 (use-package counsel
-  :bind
-  ("C-x r b" . counsel-bookmark))
+  :commands counsel-mode
+  :init
+  (counsel-mode t))
 
 ;;;; DIRED
 
