@@ -225,7 +225,9 @@
   :load-path "site-lisp/counsel-projectile"
   :commands counsel-projectile-mode
   :init
-  (counsel-projectile-mode t))
+  (counsel-projectile-mode t)
+  ;; sort projects list by name
+  (setq counsel-projectile-sort-projects 'string-lessp))
 
 ;;;; DIRED
 
