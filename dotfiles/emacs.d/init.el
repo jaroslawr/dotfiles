@@ -221,14 +221,6 @@
   :init
   (counsel-mode t))
 
-(use-package counsel-projectile
-  :load-path "site-lisp/counsel-projectile"
-  :commands counsel-projectile-mode
-  :init
-  (counsel-projectile-mode t)
-  ;; sort projects list by name
-  (setq counsel-projectile-sort-projects 'string-lessp))
-
 ;;;; DIRED
 
 (use-package dired
@@ -290,6 +282,16 @@
         (match-string 1 dir)))
   (add-to-list 'projectile-project-root-files-functions 'jr/projectile-project-root)
   (projectile-mode 1))
+
+(use-package counsel-projectile
+  :load-path "site-lisp/counsel-projectile"
+  :commands counsel-projectile-mode
+  :init
+  (counsel-projectile-mode t)
+  ;; sort projects list by name
+  (setq counsel-projectile-sort-projects 'string-lessp)
+  ;; by default open dired when opening project
+  (setq counsel-projectile-switch-project-action #'counsel-projectile-switch-project-action-dired))
 
 ;;;; MAGIT
 
