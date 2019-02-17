@@ -337,6 +337,13 @@
               'no-indent
             nil))))
 
+;;;; PROGRAMMING - PYTHON
+
+(use-package python
+  :config
+  (setq python-shell-interpreter "ipython3"
+        python-shell-interpreter-args "--simple-prompt -i"))
+
 ;;;; PROGRAMMING - HTML/CSS/JAVASCRIPT/JSX
 
 (use-package web-mode
