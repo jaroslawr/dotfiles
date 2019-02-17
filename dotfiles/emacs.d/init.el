@@ -267,6 +267,8 @@
   :diminish projectile-mode
   :commands projectile-mode
   :bind-keymap ("M-p" . projectile-command-map)
+  :bind (:map projectile-command-map
+         ("x" . projectile-run-command-in-root))
   :defer 5
   :config
   (setq projectile-completion-system 'ivy
