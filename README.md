@@ -12,7 +12,14 @@ Install:
 ./install.sh
 ```
 
-Update submodules:
+Sync submodules:
+
+```
+git submodule init
+git submodule update --recursive
+```
+
+Update submodules to newest remote revisions:
 
 ```
 git submodule update --recursive --remote

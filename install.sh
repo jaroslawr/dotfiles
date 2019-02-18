@@ -13,5 +13,9 @@ fi
 # Init the history file
 touch ~/.history
 
+# Make sure submodules are checked out and up to date
+git submodule init
+git submodule update --recursive
+
 # Install dotfiles
 rcup -S emacs.d -d dotfiles
