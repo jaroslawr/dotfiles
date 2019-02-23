@@ -32,26 +32,29 @@
               truncate-lines t
               truncate-partial-width-windows nil)
 
-(defun jr/modeline-project-prefix ()
-  (when (featurep 'projectile)
+(defun jr/theme-modeline-project-prefix ()
+  (if (featurep 'projectile)
     (let* ((project (projectile-project-root))
            (project-name-prefix (projectile-project-name)))
-      (when project
-        (concat
-         (propertize
-          (concat " " project-name-prefix " ")
-          'face 'jr/theme-modeline-project-name)
-         " ")))))
+      (if project
+          (concat (propertize (concat " " project-name-prefix " ") 'face 'jr/theme-modeline-project-name) " ")
+        ""))
+    ""))
 
-(setq-default mode-line-format
-              '(" %+ "
-                (:eval (let ((project-prefix (jr/modeline-project-prefix)))
-                         (concat
-                          (if project-prefix project-prefix "")
-                          (buffer-name))))
-                " %I (%l,%c)"))
+(defun jr/theme-modeline-buffer-id ()
+   (concat (jr/theme-modeline-project-prefix) (buffer-name)))
 
-(setq frame-title-format "%b")
+(defun jr/theme-frame-title-buffer-id ()
+  (let ((buf-file-name (buffer-file-name (current-buffer))))
+           (cond
+            (buf-file-name (abbreviate-file-name buf-file-name))
+            ((equal major-mode 'dired-mode)
+             default-directory)
+            (t (buffer-name)))))
+
+(setq-default mode-line-format '(" %+ " (:eval (jr/theme-modeline-buffer-id)) " %I (%l,%c)"))
+
+(setq frame-title-format '((:eval (jr/theme-frame-title-buffer-id))))
 
 (setq compilation-message-face 'default)
 
@@ -91,7 +94,7 @@
        (hyperlink `(:foreground ,blue :underline nil))
        (directory `(:background unspecified ,@prio-b :weight normal))
        ;;; Highlights
-       (parens `(:foreground ,prio-b-color))
+       (parens `(:foreground ,prio-a-color :weight bold :underline t))
        (region `(:background ,prio-a-color :foreground ,bgcolor))
        (search-primary `(:background ,prio-a-color :foreground ,bgcolor))
        (search-secondary `(:background ,prio-b-color :foreground ,bgcolor))
