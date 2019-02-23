@@ -18,4 +18,5 @@ git submodule init
 git submodule update --recursive
 
 # Install dotfiles
-rcup -S emacs.d -d dotfiles
+rcup -d . \
+     -S emacs.d # Symlink whole emacs.d directory

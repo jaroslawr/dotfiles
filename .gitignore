@@ -1,5 +1,5 @@
 # Emacs
-dotfiles/emacs.d/var
+emacs.d/var
 *.elc
 
 # Fonts
