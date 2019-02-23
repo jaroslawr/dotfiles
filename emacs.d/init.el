@@ -297,11 +297,15 @@
 
 ;;;; MAGIT
 
+(use-package hydra :load-path ("site-lisp/hydra"))
+
 (use-package graphql :load-path ("site-lisp/graphql.el"))
 
 (use-package treepy :load-path ("site-lisp/treepy.el"))
 
 (use-package ghub :load-path ("site-lisp/ghub"))
+
+(use-package transient :load-path ("site-lisp/transient/lisp"))
 
 (use-package magit-popup :load-path ("site-lisp/magit-popup"))
 

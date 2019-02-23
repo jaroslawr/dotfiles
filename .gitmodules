@@ -52,3 +52,9 @@
 [submodule "dotfiles/emacs.d/site-lisp/counsel-projectile"]
 	path = emacs.d/site-lisp/counsel-projectile
 	url = git@github.com:ericdanan/counsel-projectile.git
+[submodule "emacs.d/site-lisp/transient"]
+	path = emacs.d/site-lisp/transient
+	url = git@github.com:magit/transient.git
+[submodule "emacs.d/site-lisp/hydra"]
+	path = emacs.d/site-lisp/hydra
+	url = git@github.com:abo-abo/hydra.git
