@@ -6,8 +6,11 @@
 ;;; GC after 8MB
 (setq gc-cons-threshold (* 8 1024 1024))
 
+;;; Load paths
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp/use-package"))
+(add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/my-lisp"))
+
 ;;; Use-package
-(add-to-list 'load-path "~/.emacs.d/site-lisp/use-package")
 (require 'use-package)
 
 ;;; Utility libraries
@@ -24,16 +27,7 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
-(load-theme 'coffee)
-
-(setq-default left-fringe-width 4
-              right-fringe-width 0
-              left-margin-width 1
-              right-margin-width 1
-              truncate-lines t
-              truncate-partial-width-windows nil)
-
-(set-frame-parameter (selected-frame) 'internal-border-width 4)
+(load-theme 'jr)
 
 (blink-cursor-mode 0)
 (menu-bar-mode 0)

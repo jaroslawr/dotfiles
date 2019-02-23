@@ -1,25 +1,59 @@
-(deftheme coffee "Coffee color theme")
+;;; References:
+;;; List of default 256 colors in the terminal:
+;;; https://jonasjacek.github.io/colors/
 
-(defgroup coffee nil "Coffee color theme" :prefix "coffee-")
+(deftheme jr "My color theme")
 
-(defcustom coffee-vary-weights nil
+(defgroup jr-theme nil "My color theme" :prefix "jr/theme-")
+
+(defface jr/theme-modeline-project-name '((t ()))
+  "Face for displaying the name of the current project in the modeline")
+
+(defcustom jr/theme-vary-weights nil
   "Whether to use different font weights in some faces to indicate importance"
-  :group 'coffee
+  :group 'jr-theme
   :type 'boolean)
 
-(defun coffee-bold ()
-  (if coffee-vary-weights '(:weight bold) '(:weight normal)))
+(defun jr/theme-bold ()
+  (if jr/theme-vary-weights '(:weight bold) '(:weight normal)))
 
-(defun coffee-demibold ()
-  (if coffee-vary-weights '(:weight demibold) '(:weight normal)))
+(defun jr/theme-demibold ()
+  (if jr/theme-vary-weights '(:weight demibold) '(:weight normal)))
 
-(defun coffee-extralight ()
-  (if coffee-vary-weights '(:weight extralight) '(:weight normal)))
+(defun jr/theme-extralight ()
+  (if jr/theme-vary-weights '(:weight extralight) '(:weight normal)))
+
+(set-frame-parameter (selected-frame) 'internal-border-width 4)
+
+(setq-default left-fringe-width 0
+              right-fringe-width 0
+              left-margin-width 2
+              right-margin-width 2
+              truncate-lines t
+              truncate-partial-width-windows nil)
+
+(defun jr/modeline-project-prefix ()
+  (when (featurep 'projectile)
+    (let* ((project (projectile-project-root))
+           (project-name-prefix (projectile-project-name)))
+      (when project
+        (concat
+         (propertize
+          (concat " " project-name-prefix " ")
+          'face 'jr/theme-modeline-project-name)
+         " ")))))
+
+(setq-default mode-line-format
+              '(" %+ "
+                (:eval (let ((project-prefix (jr/modeline-project-prefix)))
+                         (concat
+                          (if project-prefix project-prefix "")
+                          (buffer-name))))
+                " %I (%l,%c)"))
+
+(setq frame-title-format "%b")
 
 (setq compilation-message-face 'default)
-
-;;; Reference for default terminal 256 colors:
-;;; https://jonasjacek.github.io/colors/
 
 (let* (;;; Basic colors
        (bgcolor      "#121212") ; #233
@@ -51,9 +85,9 @@
        (prio-d `(:foreground ,prio-d-color))
        (prio-e `(:foreground ,prio-e-color))
        (prio-f `(:foreground ,prio-f-color))
-       (error `(:foreground ,red ,@(coffee-bold)))
+       (error `(:foreground ,red ,@(jr/theme-bold)))
        (highlight-error `(:background "#ff2244" :foreground "#ffffff"))
-       (warning `(:foreground "#ff8866" ,@(coffee-bold)))
+       (warning `(:foreground "#ff8866" ,@(jr/theme-bold)))
        (hyperlink `(:foreground ,blue :underline nil))
        (directory `(:background unspecified ,@prio-b :weight normal))
        ;;; Highlights
@@ -65,29 +99,31 @@
        (highlight `(:background ,grey1 :foreground ,prio-a-color))
        ;;; Interface faces
        (interface `(:background ,bgcolor))
+       (border `(:background ,grey1 :foreground ,grey1))
        (text `(:background ,bgcolor :foreground ,fgcolor))
        (cursor `(:background ,prio-a-color :foreground ,fgcolor))
        (widget `(:background ,grey2 :foreground ,fgcolor :weight normal :box (:line-width 1 :color ,grey2)))
-       (widget-inactive `(:background ,grey3 :foreground ,grey10 ,@(coffee-extralight) :box (:line-width 1 :color ,grey3)))
+       (widget-inactive `(:background ,grey3 :foreground ,grey10 ,@(jr/theme-extralight) :box (:line-width 1 :color ,grey3)))
        (header `(:background "#202020" :foreground ,prio-a-color :box (:color "#202020" :line-width 8)))
        (subheader `(:background "#202020" :foreground ,prio-b-color :box (:color "#202020" :line-width 8))))
 
-  (custom-theme-set-faces 'coffee
+  (custom-theme-set-faces 'jr
     ;;; Basic faces
     `(default ((t ,text)))
     `(cursor ((t ,cursor)))
-    `(bold ((t ,@(coffee-bold))))
+    `(bold ((t ,@(jr/theme-bold))))
     `(hl-line ((t ,current-line)))
     `(highlight ((t ,current-line)))
     `(region ((t ,region)))
     `(fringe ((t ,interface)))
     `(minibuffer-prompt ((t ,text)))
+    `(vertical-border ((t ,border)))
     `(mode-line ((t ,widget)))
     `(mode-line-inactive ((t ,widget-inactive)))
     `(mode-line-buffer-id ((t (:foreground unspecified :weight unspecified))))
     `(link ((t ,hyperlink)))
     `(warning ((t ,warning)))
-    `(success ((t ,@(coffee-demibold))))
+    `(success ((t ,@(jr/theme-demibold))))
     `(header-line ((t ,header)))
 
     ;;; Font lock
@@ -161,7 +197,7 @@
     `(org-link ((t ,hyperlink)))
 
     ;;; Dired
-    `(dired-marked ((t (,@prio-a ,@(coffee-bold)))))
+    `(dired-marked ((t (,@prio-a ,@(jr/theme-bold)))))
     `(dired-directory ((t ,directory)))
     `(dired-symlink ((t ,prio-c)))
     `(dired-perm-write ((t ,text)))
@@ -169,7 +205,7 @@
     ;;; Eshell
     `(eshell-prompt ((t (,@prio-a :weight normal :underline nil))))
     `(eshell-ls-directory ((t ,directory)))
-    `(eshell-ls-executable ((t (,@prio-a ,@(coffee-demibold)))))
+    `(eshell-ls-executable ((t (,@prio-a ,@(jr/theme-demibold)))))
 
     ;;; Comint
     `(comint-highlight-input ((t ,text)))
@@ -181,7 +217,7 @@
 
     ;;; Compilation mode
     `(compilation-error ((t (,@error :weight normal))))
-    `(compilation-info ((t (,@prio-a ,@(coffee-demibold)))))
+    `(compilation-info ((t (,@prio-a ,@(jr/theme-demibold)))))
     `(compilation-line-number ((t ,text)))
     `(compilation-column-number ((t ,text)))
 
@@ -190,4 +226,7 @@
 
     ;;; Mic-paren mode
     `(show-paren-match ((t ,@parens)))
-    `(show-paren-mismatch ((t (,@highlight-error ,@(coffee-bold)))))))
+    `(show-paren-mismatch ((t (,@highlight-error ,@(jr/theme-bold)))))
+
+    ;;; Own faces
+    `(jr/theme-modeline-project-name ((t (:background ,grey1 :foreground ,prio-a-color :box (:color ,grey1 :line-width 1)))))))
