@@ -162,6 +162,10 @@
 ;;; UTF-8 everywhere
 (prefer-coding-system 'utf-8)
 
+;;; Reload externally changed files automatically (unless unsaved
+;;; changes are present)
+(global-auto-revert-mode t)
+
 ;;; Move lines of text up/down easily
 (use-package move-text
   :load-path "site-lisp/move-text"
