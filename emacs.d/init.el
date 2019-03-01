@@ -244,10 +244,38 @@
   ;;; Use fd and ripgrep for grep-find
   (grep-apply-setting 'grep-find-command '("fdfind . -t f -exec rg -n -H '' \{\}" . 31)))
 
-(defun jr/projectile-grep-find-in-project ()
-  (interactive)
-  (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
-    (call-interactively 'grep-find)))
+(defvar jr/grep-command "rg --no-heading -n -H -F '%s'"
+  "Command to use for searching for text queries")
+
+(defun jr/projectile-dir ()
+  (projectile-ensure-project (projectile-project-root)))
+
+(defun jr/abbrev-projectile-dir ()
+  (abbreviate-file-name (jr/projectile-dir)))
+
+(defun jr/grep-sym-at-point ()
+  (thing-at-point 'symbol))
+
+(defun jr/grep-prompt (dir)
+  (let ((sym (jr/grep-sym-at-point)))
+    (list (read-from-minibuffer (format "Searching %s, enter query%s: "
+                                        dir
+                                        (if sym
+                                          (format " (default: %s)" sym)
+                                          ""))))))
+
+(defun jr/grep (provided-query)
+  (let ((query (if (equal provided-query "") (jr/grep-sym-at-point) provided-query)))
+    (grep (format jr/grep-command query))))
+
+(defun jr/grep-in-project-dir (query)
+  (interactive (jr/grep-prompt (jr/abbrev-projectile-dir)))
+  (projectile-with-default-dir (jr/projectile-dir)
+    (jr/grep query)))
+
+(defun jr/grep-in-current-dir (query)
+  (interactive (jr/grep-prompt default-directory))
+  (jr/grep query))
 
 (use-package wgrep
   :load-path "site-lisp/Emacs-wgrep"
@@ -383,6 +411,9 @@
    "C-w" jr/kill-region-or-backward-delete-word
    ;;; function keys
    "<f5>" dired-jump
+   "<f6>" ibuffer
+   "<f7>" previous-error
+   "<f8>" next-error
    ;;; C-c - windmove
    "C-c <left>" windmove-left
    "C-c <right>" windmove-right
@@ -392,8 +423,8 @@
    "C-c c" compile
    "C-c r" recompile
    ;;; C-c - grep
-   "C-c g" jr/projectile-grep-find-in-project
-   "C-c G" find-grep
+   "C-c g" jr/grep-in-project-dir
+   "C-c C-g" jr/grep-in-current-dir
    ;;; C-c - rest
    "C-c k" kill-this-buffer
    "C-c n" jr/notes))
