@@ -1,13 +1,5 @@
 Xcursor.theme: Vanilla-DMZ
 
-Xft.antialias: 1
-Xft.autohint: 0
-Xft.dpi: 96
-Xft.hinting: 1
-Xft.hintstyle: hintslight
-Xft.lcdfilter: lcddefault
-Xft.rgba: rgb
-
 emacs*.font: Ubuntu Mono:pixelsize=16
 emacs*.menuBar: 0
 emacs*.toolBar: 0
