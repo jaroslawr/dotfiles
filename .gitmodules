@@ -58,3 +58,6 @@
 [submodule "emacs.d/site-lisp/hydra"]
 	path = emacs.d/site-lisp/hydra
 	url = git@github.com:abo-abo/hydra.git
+[submodule "emacs.d/site-lisp/markdown-mode"]
+	path = emacs.d/site-lisp/markdown-mode
+	url = git@github.com:jrblevin/markdown-mode.git
