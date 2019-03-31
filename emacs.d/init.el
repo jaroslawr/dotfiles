@@ -347,7 +347,10 @@
   :load-path "site-lisp/markdown-mode"
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode)))
+         ("\\.markdown\\'" . markdown-mode))
+  :config
+  ;;; Do not clash with projectile
+  (unbind-key "M-p" markdown-mode-map))
 
 ;;;; PROGRAMMING
 
