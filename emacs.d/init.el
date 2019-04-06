@@ -245,6 +245,8 @@
   :config
   ;;; Do not prompt about saving unsaved buffers
   (setq grep-save-buffers nil)
+  ;;; Do not append /dev/null to grep commands
+  (setq grep-use-null-device nil)
   ;;; Use fd and ripgrep for grep-find
   (grep-apply-setting 'grep-find-command '("fdfind . -t f -exec rg -n -H '' \{\}" . 31)))
 
