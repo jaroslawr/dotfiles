@@ -67,9 +67,8 @@ setopt auto_pushd
 autoload -U compinit
 compinit
 
-# On ambiguous completion, expand to the unambiguous part and show
-# list of matches On second tab, present menu
-unsetopt list_ambiguous
+# Automatically list choices on an ambiguous completion
+setopt menu_complete
 
 # Show as many suggestions as fit on the screen
 LISTMAX=0
