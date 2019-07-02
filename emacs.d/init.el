@@ -248,9 +248,9 @@
   ;;; Do not append /dev/null to grep commands
   (setq grep-use-null-device nil)
   ;;; Use fd and ripgrep for grep-find
-  (grep-apply-setting 'grep-find-command '("fdfind . -t f -exec rg -n -H '' \{\}" . 31)))
+  (grep-apply-setting 'grep-find-command '("fdfind . -t f -exec rg -n -H -- '' \{\}" . 34)))
 
-(defvar jr/grep-command "rg --no-heading -n -H -F '%s'"
+(defvar jr/grep-command "rg --no-heading -n -H -F -- '%s'"
   "Command to use for searching for text queries")
 
 (defun jr/projectile-dir ()
