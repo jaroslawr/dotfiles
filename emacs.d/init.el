@@ -84,6 +84,8 @@
       (let ((window (or (find-if #'jr/utility-window-p (jr/window-list))
                         (split-window (frame-root-window) (- jr/utility-window-height) 'below))))
         (set-window-buffer window buffer)
+        (set-window-prev-buffers window nil)
+        (set-window-parameter window 'quit-restore (list 'window 'window (selected-window) buffer))
         window)
     nil))
 
