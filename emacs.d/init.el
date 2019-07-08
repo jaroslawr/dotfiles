@@ -190,6 +190,11 @@
         (backward-word)
         (delete-region (point) here)))))
 
+;;;; LOCAL VARIABLES
+
+(put 'c-indent-level 'safe-local-variable 'integerp)
+(put 'c-basic-offset 'safe-local-variable 'integerp)
+
 ;;;; GENERAL MODES
 
 ;;;; IVY/COUNSEL/SWIPER/FLX
