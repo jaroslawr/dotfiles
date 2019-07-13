@@ -399,6 +399,10 @@
       (comment-or-uncomment-region (region-beginning) (region-end))
     (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
 
+;;; Commands for increasing/decreasing indention using major mode
+;;; offset
+(use-package jr-indent)
+
 ;;; Highlight matching parens
 (show-paren-mode)
 
@@ -410,6 +414,10 @@
           (if (eq major-mode 'org-mode)
               'no-indent
             nil))))
+
+(use-package cc-mode
+  :config
+  (unbind-key "C-c ." c-mode-map))
 
 ;;;; PROGRAMMING - PYTHON
 
@@ -463,6 +471,8 @@
    "<f7>" previous-error
    "<f8>" next-error
    ;;; C-c - editing
+   "C-c ," jr/indent-decrease
+   "C-c ." jr/indent-increase
    "C-c /" jr/comment-dwim
    ;;; C-c - windmove
    "C-c <left>" windmove-left
