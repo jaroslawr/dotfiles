@@ -443,8 +443,11 @@
               'no-indent
             nil))))
 
+;;; PROGRAMMING - C
+
 (use-package cc-mode
   :config
+  ;;; Do not clash with custom decrease indentation binding
   (unbind-key "C-c ." c-mode-map))
 
 ;;;; PROGRAMMING - PYTHON
