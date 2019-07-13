@@ -458,8 +458,14 @@
 
 (use-package cc-mode
   :config
-  ;;; Do not clash with custom decrease indentation binding
-  (unbind-key "C-c ." c-mode-map))
+  ;; Do not clash with custom decrease indentation binding
+  (unbind-key "C-c ." c-mode-map)
+  ;; Default coding style: modern K&R with offset 4
+  (setq c-default-style
+        `((java-mode . "java")
+          (awk-mode . "awk")
+          (other . "k&r")))
+  (setq c-basic-offset 4))
 
 ;;;; PROGRAMMING - PYTHON
 
