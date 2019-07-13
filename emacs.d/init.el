@@ -59,7 +59,7 @@
 
 ;;;; WINDOWS
 
-(setq jr/utility-buffers-list '("*grep*" "*compilation*" "*Python*"))
+(setq jr/utility-buffers-list '("*compilation*" "*grep*" "*xref*" "*Python*"))
 
 (setq jr/utility-window-height 16)
 
