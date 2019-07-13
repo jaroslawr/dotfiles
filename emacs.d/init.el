@@ -63,6 +63,17 @@
 
 (setq jr/utility-window-height 16)
 
+(make-variable-buffer-local 'utility-buffer-last-active-time)
+
+(defun jr/utility-buffer-last-active-time (buffer)
+  (assert (jr/utility-buffer-p buffer))
+  (buffer-local-value 'utility-buffer-last-active-time buffer))
+
+(defun jr/utility-buffer-touch (buffer)
+  (assert (jr/utility-buffer-p buffer))
+  (with-current-buffer buffer
+    (setq utility-buffer-last-active-time (time-to-seconds (current-time)))))
+
 (defun jr/utility-buffer-p (buffer-or-buffer-name &optional props)
   (let ((buffer-name
          (if (bufferp buffer-or-buffer-name)
@@ -70,8 +81,16 @@
            buffer-or-buffer-name)))
     (member buffer-name jr/utility-buffers-list)))
 
+(defun jr/most-recent-utility-buffer ()
+  (if-let ((utility-buffers (seq-filter #'jr/utility-buffer-p (buffer-list))))
+      (car (seq-sort-by #'jr/utility-buffer-last-active-time #'> utility-buffers))
+    nil))
+
 (defun jr/utility-window-p (window)
   (jr/utility-buffer-p (window-buffer window)))
+
+(defun jr/utility-window ()
+  (find-if #'jr/utility-window-p (jr/window-list)))
 
 (defun jr/in-utility-window-p ()
   (jr/utility-buffer-p (current-buffer)))
@@ -79,15 +98,24 @@
 (defun jr/window-list ()
   (mapcan #'window-list (frame-list)))
 
-(defun jr/display-utility-buffer (buffer props)
+(defun jr/display-utility-buffer (buffer &optional props)
   (if (jr/utility-buffer-p buffer)
-      (let ((window (or (find-if #'jr/utility-window-p (jr/window-list))
+      (let ((window (or (jr/utility-window)
                         (split-window (frame-root-window) (- jr/utility-window-height) 'below))))
         (set-window-buffer window buffer)
         (set-window-prev-buffers window nil)
         (set-window-parameter window 'quit-restore (list 'window 'window (selected-window) buffer))
+        (jr/utility-buffer-touch buffer)
         window)
     nil))
+
+(defun jr/toggle-utility-window ()
+  (interactive)
+  (if-let ((window (jr/utility-window)))
+      (delete-window window)
+    (if-let ((buffer (jr/most-recent-utility-buffer)))
+        (jr/display-utility-buffer buffer)
+      nil)))
 
 (setq display-buffer-alist
       `(;;; Display utility buffers in the utility window, popping one
@@ -479,6 +507,8 @@
    "C-c <right>" windmove-right
    "C-c <up>" windmove-up
    "C-c <down>" windmove-down
+   ;;; C-c - utility window
+   "C-c u" jr/toggle-utility-window
    ;;; C-c - compilation
    "C-c c" compile
    "C-c r" recompile
