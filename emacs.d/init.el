@@ -295,6 +295,18 @@
   :config
   (setq wgrep-auto-save-buffer t))
 
+;;;; VC
+
+(use-package log-view
+  :config
+  ;;; Do not clash with projectile
+  (unbind-key "M-p" log-view-mode-map))
+
+(use-package diff-mode
+  :config
+  ;;; Do not clash with projectile
+  (unbind-key "M-p" diff-mode-map))
+
 ;;;; PROJECTILE
 
 (use-package projectile
