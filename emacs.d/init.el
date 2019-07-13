@@ -389,6 +389,16 @@
             (lambda (proc)
               (set-process-query-on-exit-flag proc nil))))
 
+;;; Set comment style
+(setq comment-style 'multi-line)
+
+;;; Better comment-dwim
+(defun jr/comment-dwim ()
+  (interactive)
+  (if (region-active-p)
+      (comment-or-uncomment-region (region-beginning) (region-end))
+    (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
+
 ;;; Highlight matching parens
 (show-paren-mode)
 
@@ -452,6 +462,8 @@
    "<f6>" ibuffer
    "<f7>" previous-error
    "<f8>" next-error
+   ;;; C-c - editing
+   "C-c /" jr/comment-dwim
    ;;; C-c - windmove
    "C-c <left>" windmove-left
    "C-c <right>" windmove-right
