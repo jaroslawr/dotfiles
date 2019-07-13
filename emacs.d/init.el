@@ -379,6 +379,8 @@
   :config
   ;;; Do not clash with projectile
   (unbind-key "M-p" compilation-mode-map)
+  ;; Follow compilation output until first error
+  (setq compilation-scroll-output 'first-error)
   ;; Do not ask about saving unsaved buffers when running compile
   (setq compilation-save-buffers-predicate 'ignore)
   ;; Do not ask whether to kill existing compilation process when running a new one
