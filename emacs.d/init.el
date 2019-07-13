@@ -403,20 +403,6 @@
 
 ;;;; PROGRAMMING
 
-(use-package compile
-  :config
-  ;;; Do not clash with projectile
-  (unbind-key "M-p" compilation-mode-map)
-  ;; Follow compilation output until first error
-  (setq compilation-scroll-output 'first-error)
-  ;; Do not ask about saving unsaved buffers when running compile
-  (setq compilation-save-buffers-predicate 'ignore)
-  ;; Do not ask whether to kill existing compilation process when running a new one
-  ;; Also takes care of the same for grep
-  (add-hook 'compilation-start-hook
-            (lambda (proc)
-              (set-process-query-on-exit-flag proc nil))))
-
 ;;; Set comment style
 (setq comment-style 'multi-line)
 
@@ -431,9 +417,6 @@
 ;;; offset
 (use-package jr-indent)
 
-;;; Highlight matching parens
-(show-paren-mode)
-
 ;;; Auto-indent
 (electric-indent-mode t)
 (setq electric-indent-functions
@@ -442,6 +425,34 @@
           (if (eq major-mode 'org-mode)
               'no-indent
             nil))))
+
+;;; Highlight matching parens
+(show-paren-mode)
+
+;;; PROGRAMMING - COMPILATION
+
+(use-package ansi-color)
+
+(use-package compile
+  :config
+  ;;; Do not clash with projectile
+  (unbind-key "M-p" compilation-mode-map)
+  ;; Follow compilation output until first error
+  (setq compilation-scroll-output 'first-error)
+  ;; Do not ask about saving unsaved buffers when running compile
+  (setq compilation-save-buffers-predicate 'ignore)
+  ;; Do not ask whether to kill existing compilation process when running a new one
+  ;; Also takes care of the same for grep
+  (add-hook 'compilation-start-hook
+            (lambda (proc)
+              (set-process-query-on-exit-flag proc nil)))
+  ;; Interpret ANSI escape sequences and colorize output
+  (add-hook 'compilation-filter-hook
+            (lambda ()
+              ;; Do not colorize in derived modes, like grep mode etc.
+              (when (eq major-mode 'compilation-mode)
+                (let ((inhibit-read-only t))
+                  (ansi-color-apply-on-region (point-min) (point-max)))))))
 
 ;;; PROGRAMMING - C
 
