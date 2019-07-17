@@ -274,7 +274,92 @@
   ;;; Directories first
   (setq dired-listing-switches "-alh --group-directories-first"))
 
-;;;; GREP
+;;;; MARKDOWN
+
+(use-package markdown-mode
+  :load-path "site-lisp/markdown-mode"
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :config
+  ;;; Do not clash with projectile
+  (unbind-key "M-p" markdown-mode-map))
+
+;;;; PROGRAMMING - PROJECTILE
+
+(use-package projectile
+  :load-path "site-lisp/projectile"
+  :diminish projectile-mode
+  :commands projectile-mode
+  :bind-keymap ("M-p" . projectile-command-map)
+  :bind (:map projectile-command-map
+         ("x" . projectile-run-command-in-root))
+  :defer 5
+  :config
+  (setq projectile-completion-system 'ivy
+        projectile-git-command "fdfind . -tf -0"
+        projectile-generic-command "fdfind . -tf -0"
+        projectile-keymap-prefix "M-p"
+        projectile-switch-project-action #'projectile-dired)
+  ;;; Recognize every subdir of ~/[Pp]rojects/ as a project
+  (setq jr/projectile-project-dir-re
+        (concat "\\(" (expand-file-name "~/[Pp]rojects/") "[^/]+\\)[/]?.*"))
+  (defun jr/projectile-project-root (dir)
+      (when (string-match jr/projectile-project-dir-re dir)
+        (match-string 1 dir)))
+  (add-to-list 'projectile-project-root-files-functions 'jr/projectile-project-root)
+  (projectile-mode 1))
+
+(use-package counsel-projectile
+  :load-path "site-lisp/counsel-projectile"
+  :commands counsel-projectile-mode
+  :init
+  (counsel-projectile-mode t)
+  ;; sort projects list by name
+  (setq counsel-projectile-sort-projects 'string-lessp)
+  ;; by default open dired when opening project
+  (setq counsel-projectile-switch-project-action #'counsel-projectile-switch-project-action-dired))
+
+;;; PROGRAMMING - COMPILATION
+
+(use-package ansi-color)
+
+(use-package compile
+  :config
+  ;;; Do not clash with projectile
+  (unbind-key "M-p" compilation-mode-map)
+  ;; Follow compilation output until first error
+  (setq compilation-scroll-output 'first-error)
+  ;; Do not ask about saving unsaved buffers when running compile
+  (setq compilation-save-buffers-predicate 'ignore)
+  ;; Do not ask whether to kill existing compilation process when running a new one
+  ;; Also takes care of the same for grep
+  (add-hook 'compilation-start-hook
+            (lambda (proc)
+              (set-process-query-on-exit-flag proc nil)))
+  ;; Interpret ANSI escape sequences and colorize output
+  (add-hook 'compilation-filter-hook
+            (lambda ()
+              ;; Do not colorize in derived modes, like grep mode etc.
+              (when (eq major-mode 'compilation-mode)
+                (let ((inhibit-read-only t))
+                  (ansi-color-apply-on-region (point-min) (point-max)))))))
+
+(defun jr/compile-in-project-dir ()
+  (interactive)
+  (projectile-with-default-dir (jr/projectile-dir)
+    (compile (jr/read-compile-command))))
+
+(defun jr/compile-in-current-dir ()
+  (interactive)
+  (compile (jr/read-compile-command)))
+
+(defun jr/read-compile-command ()
+  (let* ((history 'compile-history)
+         (initial (car compile-history)))
+    (read-from-minibuffer "Compile command: " initial nil nil history)))
+
+;;;; PROGRAMMING - GREP
 
 (use-package grep
   :config
@@ -323,54 +408,7 @@
   :config
   (setq wgrep-auto-save-buffer t))
 
-;;;; VC
-
-(use-package log-view
-  :config
-  ;;; Do not clash with projectile
-  (unbind-key "M-p" log-view-mode-map))
-
-(use-package diff-mode
-  :config
-  ;;; Do not clash with projectile
-  (unbind-key "M-p" diff-mode-map))
-
-;;;; PROJECTILE
-
-(use-package projectile
-  :load-path "site-lisp/projectile"
-  :diminish projectile-mode
-  :commands projectile-mode
-  :bind-keymap ("M-p" . projectile-command-map)
-  :bind (:map projectile-command-map
-         ("x" . projectile-run-command-in-root))
-  :defer 5
-  :config
-  (setq projectile-completion-system 'ivy
-        projectile-git-command "fdfind . -tf -0"
-        projectile-generic-command "fdfind . -tf -0"
-        projectile-keymap-prefix "M-p"
-        projectile-switch-project-action #'projectile-dired)
-  ;;; Recognize every subdir of ~/[Pp]rojects/ as a project
-  (setq jr/projectile-project-dir-re
-        (concat "\\(" (expand-file-name "~/[Pp]rojects/") "[^/]+\\)[/]?.*"))
-  (defun jr/projectile-project-root (dir)
-      (when (string-match jr/projectile-project-dir-re dir)
-        (match-string 1 dir)))
-  (add-to-list 'projectile-project-root-files-functions 'jr/projectile-project-root)
-  (projectile-mode 1))
-
-(use-package counsel-projectile
-  :load-path "site-lisp/counsel-projectile"
-  :commands counsel-projectile-mode
-  :init
-  (counsel-projectile-mode t)
-  ;; sort projects list by name
-  (setq counsel-projectile-sort-projects 'string-lessp)
-  ;; by default open dired when opening project
-  (setq counsel-projectile-switch-project-action #'counsel-projectile-switch-project-action-dired))
-
-;;;; MAGIT
+;;;; PROGRAMMING - VERSION CONTROL
 
 (use-package hydra :load-path ("site-lisp/hydra"))
 
@@ -390,18 +428,17 @@
   ;;; Do not clash with projectile mode
   (unbind-key "M-p" magit-mode-map))
 
-;;;; MARKDOWN
-
-(use-package markdown-mode
-  :load-path "site-lisp/markdown-mode"
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
+(use-package log-view
   :config
   ;;; Do not clash with projectile
-  (unbind-key "M-p" markdown-mode-map))
+  (unbind-key "M-p" log-view-mode-map))
 
-;;;; PROGRAMMING
+(use-package diff-mode
+  :config
+  ;;; Do not clash with projectile
+  (unbind-key "M-p" diff-mode-map))
+
+;;;; PROGRAMMING - EDITING
 
 ;;; Set comment style
 (setq comment-style 'multi-line)
@@ -420,53 +457,12 @@
 ;;; Auto-indent
 (electric-indent-mode t)
 (setq electric-indent-functions
-      (list
-	(lambda (arg)
-          (if (eq major-mode 'org-mode)
-              'no-indent
-            nil))))
+      '((lambda (arg)
+          (when (eq major-mode 'org-mode)
+            'no-indent))))
 
 ;;; Highlight matching parens
 (show-paren-mode)
-
-;;; PROGRAMMING - COMPILATION
-
-(use-package ansi-color)
-
-(use-package compile
-  :config
-  ;;; Do not clash with projectile
-  (unbind-key "M-p" compilation-mode-map)
-  ;; Follow compilation output until first error
-  (setq compilation-scroll-output 'first-error)
-  ;; Do not ask about saving unsaved buffers when running compile
-  (setq compilation-save-buffers-predicate 'ignore)
-  ;; Do not ask whether to kill existing compilation process when running a new one
-  ;; Also takes care of the same for grep
-  (add-hook 'compilation-start-hook
-            (lambda (proc)
-              (set-process-query-on-exit-flag proc nil)))
-  ;; Interpret ANSI escape sequences and colorize output
-  (add-hook 'compilation-filter-hook
-            (lambda ()
-              ;; Do not colorize in derived modes, like grep mode etc.
-              (when (eq major-mode 'compilation-mode)
-                (let ((inhibit-read-only t))
-                  (ansi-color-apply-on-region (point-min) (point-max)))))))
-
-(defun jr/compile-in-project-dir ()
-  (interactive)
-  (projectile-with-default-dir (jr/projectile-dir)
-    (compile (jr/read-compile-command))))
-
-(defun jr/compile-in-current-dir ()
-  (interactive)
-  (compile (jr/read-compile-command)))
-
-(defun jr/read-compile-command ()
-  (let* ((history 'compile-history)
-         (initial (car compile-history)))
-    (read-from-minibuffer "Compile command: " initial nil nil history)))
 
 ;;; PROGRAMMING - C
 
