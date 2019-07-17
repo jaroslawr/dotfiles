@@ -454,12 +454,28 @@
                 (let ((inhibit-read-only t))
                   (ansi-color-apply-on-region (point-min) (point-max)))))))
 
+(defun jr/compile-in-project-dir ()
+  (interactive)
+  (projectile-with-default-dir (jr/projectile-dir)
+    (compile (jr/read-compile-command))))
+
+(defun jr/compile-in-current-dir ()
+  (interactive)
+  (compile (jr/read-compile-command)))
+
+(defun jr/read-compile-command ()
+  (let* ((history 'compile-history)
+         (initial (car compile-history)))
+    (read-from-minibuffer "Compile command: " initial nil nil history)))
+
 ;;; PROGRAMMING - C
 
 (use-package cc-mode
   :config
   ;; Do not clash with custom decrease indentation binding
   (unbind-key "C-c ." c-mode-map)
+  ;; Do not clash with custom compile binding
+  (unbind-key "C-c C-c" c-mode-map)
   ;; Default coding style: modern K&R with offset 4
   (setq c-default-style
         `((java-mode . "java")
@@ -529,12 +545,13 @@
    "C-c <down>" windmove-down
    ;;; C-c - utility window
    "C-c u" jr/toggle-utility-window
-   ;;; C-c - compilation
-   "C-c c" compile
-   "C-c r" recompile
    ;;; C-c - grep
    "C-c g" jr/grep-in-project-dir
    "C-c C-g" jr/grep-in-current-dir
+   ;;; C-c - compilation
+   "C-c c" jr/compile-in-project-dir
+   "C-c C-c" jr/compile-in-current-dir
+   "C-c r" recompile
    ;;; C-c - rest
    "C-c k" kill-this-buffer
    "C-c n" jr/notes))
