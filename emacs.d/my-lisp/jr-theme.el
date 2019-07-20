@@ -4,24 +4,24 @@
 
 (deftheme jr "My color theme")
 
-(defgroup jr-theme nil "My color theme" :prefix "jr/theme-")
+(defgroup jr-theme nil "My color theme" :prefix "jr-theme-")
 
-(defface jr/theme-modeline-project-name '((t ()))
+(defface jr-theme-modeline-project-name '((t ()))
   "Face for displaying the name of the current project in the modeline")
 
-(defcustom jr/theme-vary-weights nil
+(defcustom jr-theme-vary-weights nil
   "Whether to use different font weights in some faces to indicate importance"
   :group 'jr-theme
   :type 'boolean)
 
-(defun jr/theme-bold ()
-  (if jr/theme-vary-weights '(:weight bold) '(:weight normal)))
+(defun jr-theme-bold ()
+  (if jr-theme-vary-weights '(:weight bold) '(:weight normal)))
 
-(defun jr/theme-demibold ()
-  (if jr/theme-vary-weights '(:weight demibold) '(:weight normal)))
+(defun jr-theme-demibold ()
+  (if jr-theme-vary-weights '(:weight demibold) '(:weight normal)))
 
-(defun jr/theme-extralight ()
-  (if jr/theme-vary-weights '(:weight extralight) '(:weight normal)))
+(defun jr-theme-extralight ()
+  (if jr-theme-vary-weights '(:weight extralight) '(:weight normal)))
 
 (set-frame-parameter (selected-frame) 'internal-border-width 4)
 
@@ -32,19 +32,19 @@
               truncate-lines t
               truncate-partial-width-windows nil)
 
-(defun jr/theme-modeline-project-prefix ()
+(defun jr-theme-modeline-project-prefix ()
   (if (featurep 'projectile)
     (let* ((project (projectile-project-root))
            (project-name-prefix (projectile-project-name)))
       (if project
-          (concat (propertize (concat " " project-name-prefix " ") 'face 'jr/theme-modeline-project-name) " ")
+          (concat (propertize (concat " " project-name-prefix " ") 'face 'jr-theme-modeline-project-name) " ")
         ""))
     ""))
 
-(defun jr/theme-modeline-buffer-id ()
-   (concat (jr/theme-modeline-project-prefix) (buffer-name)))
+(defun jr-theme-modeline-buffer-id ()
+   (concat (jr-theme-modeline-project-prefix) (buffer-name)))
 
-(defun jr/theme-frame-title-buffer-id ()
+(defun jr-theme-frame-title-buffer-id ()
   (let ((buf-file-name (buffer-file-name (current-buffer))))
            (cond
             (buf-file-name (abbreviate-file-name buf-file-name))
@@ -52,9 +52,9 @@
              default-directory)
             (t (buffer-name)))))
 
-(setq-default mode-line-format '(" %+ " (:eval (jr/theme-modeline-buffer-id)) " %I (%l,%c)"))
+(setq-default mode-line-format '(" %+ " (:eval (jr-theme-modeline-buffer-id)) " %I (%l,%c)"))
 
-(setq frame-title-format '((:eval (jr/theme-frame-title-buffer-id))))
+(setq frame-title-format '((:eval (jr-theme-frame-title-buffer-id))))
 
 (setq compilation-message-face 'default)
 
@@ -88,9 +88,9 @@
        (prio-d `(:foreground ,prio-d-color))
        (prio-e `(:foreground ,prio-e-color))
        (prio-f `(:foreground ,prio-f-color))
-       (error `(:foreground ,red ,@(jr/theme-bold)))
+       (error `(:foreground ,red ,@(jr-theme-bold)))
        (highlight-error `(:background "#ff2244" :foreground "#ffffff"))
-       (warning `(:foreground "#ff8866" ,@(jr/theme-bold)))
+       (warning `(:foreground "#ff8866" ,@(jr-theme-bold)))
        (hyperlink `(:foreground ,blue :underline nil))
        (directory `(:background unspecified ,@prio-b :weight normal))
        ;;; Highlights
@@ -106,7 +106,7 @@
        (text `(:background ,bgcolor :foreground ,fgcolor))
        (cursor `(:background ,prio-a-color :foreground ,fgcolor))
        (widget `(:background ,grey2 :foreground ,fgcolor :weight normal :box (:line-width 1 :color ,grey2)))
-       (widget-inactive `(:background ,grey3 :foreground ,grey10 ,@(jr/theme-extralight) :box (:line-width 1 :color ,grey3)))
+       (widget-inactive `(:background ,grey3 :foreground ,grey10 ,@(jr-theme-extralight) :box (:line-width 1 :color ,grey3)))
        (header `(:background "#202020" :foreground ,prio-a-color :box (:color "#202020" :line-width 8)))
        (subheader `(:background "#202020" :foreground ,prio-b-color :box (:color "#202020" :line-width 8))))
 
@@ -114,7 +114,7 @@
     ;;; Basic faces
     `(default ((t ,text)))
     `(cursor ((t ,cursor)))
-    `(bold ((t ,@(jr/theme-bold))))
+    `(bold ((t ,@(jr-theme-bold))))
     `(hl-line ((t ,current-line)))
     `(highlight ((t ,current-line)))
     `(region ((t ,region)))
@@ -126,7 +126,7 @@
     `(mode-line-buffer-id ((t (:foreground unspecified :weight unspecified))))
     `(link ((t ,hyperlink)))
     `(warning ((t ,warning)))
-    `(success ((t ,@(jr/theme-demibold))))
+    `(success ((t ,@(jr-theme-demibold))))
     `(header-line ((t ,header)))
 
     ;;; Font lock
@@ -200,7 +200,7 @@
     `(org-link ((t ,hyperlink)))
 
     ;;; Dired
-    `(dired-marked ((t (,@prio-a ,@(jr/theme-bold)))))
+    `(dired-marked ((t (,@prio-a ,@(jr-theme-bold)))))
     `(dired-directory ((t ,directory)))
     `(dired-symlink ((t ,prio-c)))
     `(dired-perm-write ((t ,text)))
@@ -208,7 +208,7 @@
     ;;; Eshell
     `(eshell-prompt ((t (,@prio-a :weight normal :underline nil))))
     `(eshell-ls-directory ((t ,directory)))
-    `(eshell-ls-executable ((t (,@prio-a ,@(jr/theme-demibold)))))
+    `(eshell-ls-executable ((t (,@prio-a ,@(jr-theme-demibold)))))
 
     ;;; Comint
     `(comint-highlight-input ((t ,text)))
@@ -220,7 +220,7 @@
 
     ;;; Compilation mode
     `(compilation-error ((t (,@error :weight normal))))
-    `(compilation-info ((t (,@prio-a ,@(jr/theme-demibold)))))
+    `(compilation-info ((t (,@prio-a ,@(jr-theme-demibold)))))
     `(compilation-line-number ((t ,text)))
     `(compilation-column-number ((t ,text)))
 
@@ -229,7 +229,7 @@
 
     ;;; Mic-paren mode
     `(show-paren-match ((t ,@parens)))
-    `(show-paren-mismatch ((t (,@highlight-error ,@(jr/theme-bold)))))
+    `(show-paren-mismatch ((t (,@highlight-error ,@(jr-theme-bold)))))
 
     ;;; Own faces
-    `(jr/theme-modeline-project-name ((t (:background ,grey1 :foreground ,prio-a-color :box (:color ,grey1 :line-width 1)))))))
+    `(jr-theme-modeline-project-name ((t (:background ,grey1 :foreground ,prio-a-color :box (:color ,grey1 :line-width 1)))))))

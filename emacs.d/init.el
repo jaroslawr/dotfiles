@@ -19,7 +19,7 @@
 (use-package s :load-path "site-lisp/s.el")
 
 ;;; My own utilities
-(use-package jr-bind-keys :load-path "my-lisp/" :commands 'jr/bind-keys)
+(use-package jr-bind-keys :load-path "my-lisp/" :commands 'jr-bind-keys)
 
 ;;;; VISUALS
 
@@ -59,70 +59,70 @@
 
 ;;;; WINDOWS
 
-(setq jr/utility-buffers-list '("*compilation*" "*grep*" "*xref*" "*Python*"))
+(setq jr-utility-buffers-list '("*compilation*" "*grep*" "*xref*" "*Python*"))
 
-(setq jr/utility-window-height 16)
+(setq jr-utility-window-height 16)
 
 (make-variable-buffer-local 'utility-buffer-last-active-time)
 
-(defun jr/utility-buffer-last-active-time (buffer)
-  (assert (jr/utility-buffer-p buffer))
+(defun jr-utility-buffer-last-active-time (buffer)
+  (assert (jr-utility-buffer-p buffer))
   (buffer-local-value 'utility-buffer-last-active-time buffer))
 
-(defun jr/utility-buffer-touch (buffer)
-  (assert (jr/utility-buffer-p buffer))
+(defun jr-utility-buffer-touch (buffer)
+  (assert (jr-utility-buffer-p buffer))
   (with-current-buffer buffer
     (setq utility-buffer-last-active-time (time-to-seconds (current-time)))))
 
-(defun jr/utility-buffer-p (buffer-or-buffer-name &optional props)
+(defun jr-utility-buffer-p (buffer-or-buffer-name &optional props)
   (let ((buffer-name
          (if (bufferp buffer-or-buffer-name)
              (buffer-name buffer-or-buffer-name)
            buffer-or-buffer-name)))
-    (member buffer-name jr/utility-buffers-list)))
+    (member buffer-name jr-utility-buffers-list)))
 
-(defun jr/most-recent-utility-buffer ()
-  (if-let ((utility-buffers (seq-filter #'jr/utility-buffer-p (buffer-list))))
-      (car (seq-sort-by #'jr/utility-buffer-last-active-time #'> utility-buffers))
+(defun jr-most-recent-utility-buffer ()
+  (if-let ((utility-buffers (seq-filter #'jr-utility-buffer-p (buffer-list))))
+      (car (seq-sort-by #'jr-utility-buffer-last-active-time #'> utility-buffers))
     nil))
 
-(defun jr/utility-window-p (window)
-  (jr/utility-buffer-p (window-buffer window)))
+(defun jr-utility-window-p (window)
+  (jr-utility-buffer-p (window-buffer window)))
 
-(defun jr/utility-window ()
-  (find-if #'jr/utility-window-p (jr/window-list)))
+(defun jr-utility-window ()
+  (find-if #'jr-utility-window-p (jr-window-list)))
 
-(defun jr/in-utility-window-p ()
-  (jr/utility-buffer-p (current-buffer)))
+(defun jr-in-utility-window-p ()
+  (jr-utility-buffer-p (current-buffer)))
 
-(defun jr/window-list ()
+(defun jr-window-list ()
   (mapcan #'window-list (frame-list)))
 
-(defun jr/display-utility-buffer (buffer &optional props)
-  (if (jr/utility-buffer-p buffer)
-      (let ((window (or (jr/utility-window)
-                        (split-window (frame-root-window) (- jr/utility-window-height) 'below))))
+(defun jr-display-utility-buffer (buffer &optional props)
+  (if (jr-utility-buffer-p buffer)
+      (let ((window (or (jr-utility-window)
+                        (split-window (frame-root-window) (- jr-utility-window-height) 'below))))
         (set-window-buffer window buffer)
         (set-window-prev-buffers window nil)
         (set-window-parameter window 'quit-restore (list 'window 'window (selected-window) buffer))
-        (jr/utility-buffer-touch buffer)
+        (jr-utility-buffer-touch buffer)
         window)
     nil))
 
-(defun jr/toggle-utility-window ()
+(defun jr-toggle-utility-window ()
   (interactive)
-  (if-let ((window (jr/utility-window)))
+  (if-let ((window (jr-utility-window)))
       (delete-window window)
-    (if-let ((buffer (jr/most-recent-utility-buffer)))
-        (jr/display-utility-buffer buffer)
+    (if-let ((buffer (jr-most-recent-utility-buffer)))
+        (jr-display-utility-buffer buffer)
       nil)))
 
 (setq display-buffer-alist
       `(;;; Display utility buffers in the utility window, popping one
         ;;; up if not already present
-        (jr/utility-buffer-p . (jr/display-utility-buffer . ()))
+        (jr-utility-buffer-p . (jr-display-utility-buffer . ()))
         ;;; Do not display non-utility buffers in the utility window
-        ((lambda (w p) (and (jr/in-utility-window-p) (not (jr/utility-buffer-p w p))))
+        ((lambda (w p) (and (jr-in-utility-window-p) (not (jr-utility-buffer-p w p))))
          . (display-buffer-use-some-window . ((inhibit-same-window . t))))
         ;;; No popups unless explictly permitted/requested, by default
         ;;; reuse the existing window displaying the buffer or use the
@@ -209,7 +209,7 @@
 ;;; Typing and pasting with an active selection overwrites the selection
 (delete-selection-mode 1)
 
-(defun jr/kill-region-or-backward-delete-word ()
+(defun jr-kill-region-or-backward-delete-word ()
   (interactive)
   (if (region-active-p)
       (call-interactively 'kill-region)
@@ -302,12 +302,12 @@
         projectile-keymap-prefix "M-p"
         projectile-switch-project-action #'projectile-dired)
   ;;; Recognize every subdir of ~/[Pp]rojects/ as a project
-  (setq jr/projectile-project-dir-re
+  (setq jr-projectile-project-dir-re
         (concat "\\(" (expand-file-name "~/[Pp]rojects/") "[^/]+\\)[/]?.*"))
-  (defun jr/projectile-project-root (dir)
-      (when (string-match jr/projectile-project-dir-re dir)
+  (defun jr-projectile-project-root (dir)
+      (when (string-match jr-projectile-project-dir-re dir)
         (match-string 1 dir)))
-  (add-to-list 'projectile-project-root-files-functions 'jr/projectile-project-root)
+  (add-to-list 'projectile-project-root-files-functions 'jr-projectile-project-root)
   (projectile-mode 1))
 
 (use-package counsel-projectile
@@ -345,16 +345,16 @@
                 (let ((inhibit-read-only t))
                   (ansi-color-apply-on-region (point-min) (point-max)))))))
 
-(defun jr/compile-in-project-dir ()
+(defun jr-compile-in-project-dir ()
   (interactive)
-  (projectile-with-default-dir (jr/project-dir)
-    (compile (jr/read-compile-command))))
+  (projectile-with-default-dir (jr-project-dir)
+    (compile (jr-read-compile-command))))
 
-(defun jr/compile-in-current-dir ()
+(defun jr-compile-in-current-dir ()
   (interactive)
-  (compile (jr/read-compile-command)))
+  (compile (jr-read-compile-command)))
 
-(defun jr/read-compile-command ()
+(defun jr-read-compile-command ()
   (let* ((history 'compile-history)
          (initial (car compile-history)))
     (read-from-minibuffer "Compile command: " initial nil nil history)))
@@ -370,39 +370,39 @@
   ;;; Use fd and ripgrep for grep-find
   (grep-apply-setting 'grep-find-command '("fdfind . -t f -exec rg -n -H -- '' \{\}" . 34)))
 
-(defvar jr/grep-command "rg --no-heading -n -H -F -- '%s'"
+(defvar jr-grep-command "rg --no-heading -n -H -F -- '%s'"
   "Command to use for searching for text queries")
 
-(defun jr/project-dir ()
+(defun jr-project-dir ()
   (or (projectile-project-root)
       (error "No project is active")))
 
-(defun jr/abbrev-project-dir ()
-  (abbreviate-file-name (jr/project-dir)))
+(defun jr-abbrev-project-dir ()
+  (abbreviate-file-name (jr-project-dir)))
 
-(defun jr/grep-sym-at-point ()
+(defun jr-grep-sym-at-point ()
   (thing-at-point 'symbol))
 
-(defun jr/grep-prompt (dir)
-  (let ((sym (jr/grep-sym-at-point)))
+(defun jr-grep-prompt (dir)
+  (let ((sym (jr-grep-sym-at-point)))
     (list (read-from-minibuffer (format "Searching %s, enter query%s: "
                                         dir
                                         (if sym
                                           (format " (default: %s)" sym)
                                           ""))))))
 
-(defun jr/grep (provided-query)
-  (let ((query (if (equal provided-query "") (jr/grep-sym-at-point) provided-query)))
-    (grep (format jr/grep-command query))))
+(defun jr-grep (provided-query)
+  (let ((query (if (equal provided-query "") (jr-grep-sym-at-point) provided-query)))
+    (grep (format jr-grep-command query))))
 
-(defun jr/grep-in-project-dir (query)
-  (interactive (jr/grep-prompt (jr/abbrev-project-dir)))
-  (projectile-with-default-dir (jr/project-dir)
-    (jr/grep query)))
+(defun jr-grep-in-project-dir (query)
+  (interactive (jr-grep-prompt (jr-abbrev-project-dir)))
+  (projectile-with-default-dir (jr-project-dir)
+    (jr-grep query)))
 
-(defun jr/grep-in-current-dir (query)
-  (interactive (jr/grep-prompt default-directory))
-  (jr/grep query))
+(defun jr-grep-in-current-dir (query)
+  (interactive (jr-grep-prompt default-directory))
+  (jr-grep query))
 
 (use-package wgrep
   :load-path "site-lisp/Emacs-wgrep"
@@ -445,7 +445,7 @@
 (setq comment-style 'multi-line)
 
 ;;; Better comment-dwim
-(defun jr/comment-dwim ()
+(defun jr-comment-dwim ()
   (interactive)
   (if (region-active-p)
       (comment-or-uncomment-region (region-beginning) (region-end))
@@ -511,7 +511,7 @@
 
 ;;;; KEY BINDINGS
 
-(defun jr/notes ()
+(defun jr-notes ()
   "Opens up the notebook file."
   (interactive)
   (find-file "~/txt/notes.txt"))
@@ -520,38 +520,38 @@
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-z"))
 
-(jr/bind-keys
+(jr-bind-keys
  '(;;; overrides
    "C-a" crux-move-beginning-of-line
    "<home>" crux-move-beginning-of-line
    "C-o" crux-smart-open-line-above
-   "C-w" jr/kill-region-or-backward-delete-word
+   "C-w" jr-kill-region-or-backward-delete-word
    ;;; function keys
    "<f5>" dired-jump
    "<f6>" ibuffer
    "<f7>" previous-error
    "<f8>" next-error
    ;;; C-c - editing
-   "C-c ," jr/indent-decrease
-   "C-c ." jr/indent-increase
-   "C-c /" jr/comment-dwim
+   "C-c ," jr-indent-decrease
+   "C-c ." jr-indent-increase
+   "C-c /" jr-comment-dwim
    ;;; C-c - windmove
    "C-c <left>" windmove-left
    "C-c <right>" windmove-right
    "C-c <up>" windmove-up
    "C-c <down>" windmove-down
    ;;; C-c - utility window
-   "C-c u" jr/toggle-utility-window
+   "C-c u" jr-toggle-utility-window
    ;;; C-c - grep
-   "C-c g" jr/grep-in-project-dir
-   "C-c C-g" jr/grep-in-current-dir
+   "C-c g" jr-grep-in-project-dir
+   "C-c C-g" jr-grep-in-current-dir
    ;;; C-c - compilation
-   "C-c c" jr/compile-in-project-dir
-   "C-c C-c" jr/compile-in-current-dir
+   "C-c c" jr-compile-in-project-dir
+   "C-c C-c" jr-compile-in-current-dir
    "C-c r" recompile
    ;;; C-c - rest
    "C-c k" kill-this-buffer
-   "C-c n" jr/notes))
+   "C-c n" jr-notes))
 
 ;;;; STARTUP
 
