@@ -347,7 +347,7 @@
 
 (defun jr/compile-in-project-dir ()
   (interactive)
-  (projectile-with-default-dir (jr/projectile-dir)
+  (projectile-with-default-dir (jr/project-dir)
     (compile (jr/read-compile-command))))
 
 (defun jr/compile-in-current-dir ()
@@ -373,11 +373,12 @@
 (defvar jr/grep-command "rg --no-heading -n -H -F -- '%s'"
   "Command to use for searching for text queries")
 
-(defun jr/projectile-dir ()
-  (projectile-ensure-project (projectile-project-root)))
+(defun jr/project-dir ()
+  (or (projectile-project-root)
+      (error "No project is active")))
 
-(defun jr/abbrev-projectile-dir ()
-  (abbreviate-file-name (jr/projectile-dir)))
+(defun jr/abbrev-project-dir ()
+  (abbreviate-file-name (jr/project-dir)))
 
 (defun jr/grep-sym-at-point ()
   (thing-at-point 'symbol))
@@ -395,8 +396,8 @@
     (grep (format jr/grep-command query))))
 
 (defun jr/grep-in-project-dir (query)
-  (interactive (jr/grep-prompt (jr/abbrev-projectile-dir)))
-  (projectile-with-default-dir (jr/projectile-dir)
+  (interactive (jr/grep-prompt (jr/abbrev-project-dir)))
+  (projectile-with-default-dir (jr/project-dir)
     (jr/grep query)))
 
 (defun jr/grep-in-current-dir (query)
