@@ -33,24 +33,31 @@ the region does not start in the middle of the line text."
   "Indent the current region or current lines n levels more or n
 levels less"
   (save-mark-and-excursion
-    (let ((offset (* n (jr--indent-offset)))
-          (start (copy-marker (jr--region-non-empty-lines-start)))
-          (end (copy-marker (jr--region-non-empty-lines-end))))
+    (let* ((offset (* n (jr--indent-offset)))
+           (indent-string (when (> offset 0)
+                            (make-string offset ?\s)))
+           (start (copy-marker (jr--region-non-empty-lines-start)))
+           (end (copy-marker (jr--region-non-empty-lines-end))))
       (if (region-active-p)
-          (if (> offset 0)
-              (string-insert-rectangle start end (make-string offset ?\s))
-            (progn
-              (goto-char start)
-              (while (<= (line-beginning-position) (marker-position end))
-                (unless (jr--buffer-substring-match "^[ ]+$" (point) (+ (point) (- offset)))
-                  (error "Block cannot be dedented any more"))
-                (delete-char (- offset))
-                (next-line)
-                (beginning-of-line))))
+          (progn
+            (goto-char start)
+            (while (<= (line-beginning-position) (marker-position end))
+              (unless (jr--line-match-p "^[ ]*$")
+                (if (> offset 0)
+                    (insert indent-string)
+                  (progn
+                    (unless (jr--buffer-substring-match-p "^[ ]+$" (point) (+ (point) (- offset)))
+                      (error "Block cannot be dedented any more"))
+                    (delete-char (- offset)))))
+              (next-line)
+              (beginning-of-line)))
         (indent-rigidly (line-beginning-position) (line-end-position) offset nil)))))
 
-(defun jr--buffer-substring-match (regexp start end)
+(defun jr--buffer-substring-match-p (regexp start end)
   (string-match regexp (buffer-substring start end)))
+
+(defun jr--line-match-p (regexp)
+  (string-match regexp (buffer-substring (line-beginning-position) (line-end-position))))
 
 (defun jr--indent-offset ()
   (or (case major-mode
