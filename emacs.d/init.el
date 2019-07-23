@@ -504,6 +504,11 @@
   (setq python-shell-interpreter "ipython3"
         python-shell-interpreter-args "--simple-prompt -i"))
 
+;;;; PROGRAMMING - GO
+
+(use-package go-mode
+  :load-path "site-lisp/go-mode")
+
 ;;;; PROGRAMMING - HTML/CSS/JAVASCRIPT/JSX
 
 (use-package web-mode

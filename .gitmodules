@@ -61,3 +61,6 @@
 [submodule "emacs.d/site-lisp/markdown-mode"]
 	path = emacs.d/site-lisp/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
+[submodule "emacs.d/site-lisp/go-mode"]
+	path = emacs.d/site-lisp/go-mode
+	url = git@github.com:dominikh/go-mode.el.git
