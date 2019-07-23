@@ -186,11 +186,14 @@
 
 ;;;; GENERAL TEXT EDITING
 
+;;; UTF-8 everywhere
+(prefer-coding-system 'utf-8)
+
 ;;; No tabs
 (setq-default indent-tabs-mode nil)
 
-;;; UTF-8 everywhere
-(prefer-coding-system 'utf-8)
+;;; Show trailing whitespace
+(setq-default show-trailing-whitespace t)
 
 ;;; Reload externally changed files automatically (unless unsaved
 ;;; changes are present)

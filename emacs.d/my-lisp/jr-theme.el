@@ -128,6 +128,7 @@
     `(warning ((t ,warning)))
     `(success ((t ,@(jr-theme-demibold))))
     `(header-line ((t ,header)))
+    `(trailing-whitespace ((t (:background ,grey2))))
 
     ;;; Font lock
     `(font-lock-function-name-face ((t ,prio-a)))
