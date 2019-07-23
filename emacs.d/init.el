@@ -552,6 +552,10 @@
    "C-c c" jr-compile-in-project-dir
    "C-c C-c" jr-compile-in-current-dir
    "C-c r" recompile
+   ;;; C-c - magit
+   "C-c v f" magit-fetch-from-upstream
+   "C-c v b" magit-blame-echo
+   "C-c v l" magit-log-current
    ;;; C-c - rest
    "C-c k" kill-this-buffer
    "C-c n" jr-notes))
