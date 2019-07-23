@@ -288,6 +288,12 @@
   ;;; Do not clash with projectile
   (unbind-key "M-p" markdown-mode-map))
 
+;;;; MAN PAGES
+
+(use-package man
+  :config
+  (unbind-key "M-p" Man-mode-map))
+
 ;;;; PROGRAMMING - PROJECTILE
 
 (use-package projectile
@@ -468,13 +474,6 @@
 ;;; Highlight matching parens
 (show-paren-mode)
 
-;;; PROGRAMMING - MAKE
-
-(use-package make-mode
-  :config
-  ;; Do not clash with custom compile binding
-  (unbind-key "C-c C-c" makefile-mode-map))
-
 ;;; PROGRAMMING - C
 
 (use-package cc-mode
@@ -518,6 +517,13 @@
 (use-package yaml-mode
   :mode "\\.yml\\'"
   :load-path "site-lisp/yaml-mode")
+
+;;; PROGRAMMING - MAKE
+
+(use-package make-mode
+  :config
+  ;; Do not clash with custom compile binding
+  (unbind-key "C-c C-c" makefile-mode-map))
 
 ;;;; KEY BINDINGS
 
