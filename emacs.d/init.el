@@ -57,6 +57,14 @@
 ;;; Yank where the point is, not where clicked
 (setq mouse-yank-at-point t)
 
+;;; Determine major mode using buffer name, if buffer has no filename
+;;; (e.g. a buffer created by entering a name in C-x b)
+(setq-default major-mode
+              (lambda () (if buffer-file-name
+                             (fundamental-mode)
+                           (let ((buffer-file-name (buffer-name)))
+                             (set-auto-mode)))))
+
 ;;;; WINDOWS
 
 (setq jr-utility-buffers-list '("*compilation*" "*grep*" "*xref*" "*Python*"))
