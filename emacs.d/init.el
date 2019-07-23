@@ -468,6 +468,13 @@
 ;;; Highlight matching parens
 (show-paren-mode)
 
+;;; PROGRAMMING - MAKE
+
+(use-package make-mode
+  :config
+  ;; Do not clash with custom compile binding
+  (unbind-key "C-c C-c" makefile-mode-map))
+
 ;;; PROGRAMMING - C
 
 (use-package cc-mode
