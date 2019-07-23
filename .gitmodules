@@ -64,3 +64,6 @@
 [submodule "emacs.d/site-lisp/go-mode"]
 	path = emacs.d/site-lisp/go-mode
 	url = git@github.com:dominikh/go-mode.el.git
+[submodule "emacs.d/site-lisp/dockerfile-mode"]
+	path = emacs.d/site-lisp/dockerfile-mode
+	url = git@github.com:spotify/dockerfile-mode.git

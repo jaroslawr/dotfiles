@@ -538,6 +538,11 @@
   ;; Do not clash with custom compile binding
   (unbind-key "C-c C-c" makefile-mode-map))
 
+;;; PROGRAMMING - DOCKER
+
+(use-package dockerfile-mode
+  :load-path "site-lisp/dockerfile-mode")
+
 ;;;; KEY BINDINGS
 
 (defun jr-notes ()
