@@ -504,6 +504,9 @@
   (setq python-shell-interpreter "ipython3"
         python-shell-interpreter-args "--simple-prompt -i"))
 
+(use-package pyvenv
+  :load-path "site-lisp/pyvenv")
+
 ;;;; PROGRAMMING - GO
 
 (use-package go-mode
