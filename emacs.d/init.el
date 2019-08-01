@@ -265,6 +265,14 @@
   :init
   (counsel-mode t))
 
+;;;; AVG/ACE-WINDOW
+
+(use-package avy
+  :load-path "site-lisp/avy")
+
+(use-package ace-window
+  :load-path "site-lisp/ace-window")
+
 ;;;; DIRED
 
 (use-package dired
@@ -474,17 +482,12 @@
 
 ;;; Auto-indent
 (electric-indent-mode t)
+
+;;; No electric indent in org mode
 (setq electric-indent-functions
       '((lambda (inserted-char)
           (when (eq major-mode 'org-mode)
-            'no-indent)
-          (when (eq major-mode 'python-mode)
-            ;; Do not auto-indent after inserting any empty line
-            (when (save-excursion
-                    (previous-line)
-                    (beginning-of-line)
-                    (looking-at "^\s*$"))
-              'no-indent)))))
+            'no-indent))))
 
 ;;; Highlight matching parens
 (show-paren-mode)
@@ -513,6 +516,13 @@
 
 (use-package pyvenv
   :load-path "site-lisp/pyvenv")
+
+;; Do not auto-indent after inserting an empty line
+(add-to-list 'electric-indent-functions
+             (lambda (inserted-char)
+               (when (eq major-mode 'python-mode)
+                 (when (save-excursion (forward-line -1) (looking-at "^\s*$"))
+                   'no-indent))))
 
 ;;;; PROGRAMMING - GO
 
@@ -569,6 +579,7 @@
    "C-a" crux-move-beginning-of-line
    "<home>" crux-move-beginning-of-line
    "C-w" jr-kill-region-or-backward-delete-word
+   "C-x o" ace-window
    ;;; function keys
    "<f5>" dired-jump
    "<f6>" ibuffer
@@ -578,11 +589,6 @@
    "C-c ," jr-indent-decrease
    "C-c ." jr-indent-increase
    "C-c /" jr-comment-dwim
-   ;;; C-c - windmove
-   "C-c <left>" windmove-left
-   "C-c <right>" windmove-right
-   "C-c <up>" windmove-up
-   "C-c <down>" windmove-down
    ;;; C-c - utility window
    "C-c u" jr-toggle-utility-window
    ;;; C-c - grep

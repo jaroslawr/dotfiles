@@ -70,3 +70,9 @@
 [submodule "emacs.d/site-lisp/pyvenv"]
 	path = emacs.d/site-lisp/pyvenv
 	url = git@github.com:jorgenschaefer/pyvenv.git
+[submodule "emacs.d/site-lisp/ace-window"]
+	path = emacs.d/site-lisp/ace-window
+	url = git@github.com:abo-abo/ace-window.git
+[submodule "emacs.d/site-lisp/avy"]
+	path = emacs.d/site-lisp/avy
+	url = git@github.com:abo-abo/avy.git
