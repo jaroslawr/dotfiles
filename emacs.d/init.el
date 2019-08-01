@@ -475,9 +475,16 @@
 ;;; Auto-indent
 (electric-indent-mode t)
 (setq electric-indent-functions
-      '((lambda (arg)
+      '((lambda (inserted-char)
           (when (eq major-mode 'org-mode)
-            'no-indent))))
+            'no-indent)
+          (when (eq major-mode 'python-mode)
+            ;; Do not auto-indent after inserting any empty line
+            (when (save-excursion
+                    (previous-line)
+                    (beginning-of-line)
+                    (looking-at "^\s*$"))
+              'no-indent)))))
 
 ;;; Highlight matching parens
 (show-paren-mode)
@@ -561,7 +568,6 @@
  '(;;; overrides
    "C-a" crux-move-beginning-of-line
    "<home>" crux-move-beginning-of-line
-   "C-o" crux-smart-open-line-above
    "C-w" jr-kill-region-or-backward-delete-word
    ;;; function keys
    "<f5>" dired-jump
