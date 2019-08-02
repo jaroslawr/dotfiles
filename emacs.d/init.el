@@ -521,7 +521,7 @@
 (add-to-list 'electric-indent-functions
              (lambda (inserted-char)
                (when (eq major-mode 'python-mode)
-                 (when (save-excursion (forward-line -1) (looking-at "^\s*$"))
+                 (when (save-excursion (forward-line -1) (looking-at "^$"))
                    'no-indent))))
 
 ;;;; PROGRAMMING - GO
