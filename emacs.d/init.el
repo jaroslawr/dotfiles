@@ -453,6 +453,8 @@
 (use-package magit
   :load-path ("site-lisp/magit/lisp" "site-lisp/with-editor")
   :config
+  ;;; Do not automatically show diff when commiting
+  (setq magit-commit-show-diff nil)
   ;;; Do not clash with projectile mode
   (unbind-key "M-p" magit-mode-map))
 
