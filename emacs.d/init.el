@@ -446,6 +446,8 @@
 
 (use-package transient :load-path ("site-lisp/transient/lisp"))
 
+(use-package ssh-agency :load-path ("site-lisp/ssh-agency"))
+
 (use-package magit-popup :load-path ("site-lisp/magit-popup"))
 
 (use-package magit
