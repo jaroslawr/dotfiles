@@ -2,9 +2,6 @@
 
 # ENVIRONMENT
 
-# cd-s
-cdpath=(~ ~/projects)
-
 # set LS_COLORS
 eval $(dircolors ~/.dircolors)
 
@@ -130,6 +127,34 @@ alias ls='ls -h -l --color --group-directories-first'
 
 # Output installed packages matching a query, in format suitable for xargs pipelines
 alias findpkgs="dpkg-query -f '\${binary:Package}\n' -W | grep"
+
+# PROJECTS
+
+projects_root=~/Projects
+projects_root_re="${projects_root}/.*/.*"
+project_dirs_glob="${projects_root}/*/"
+
+function cdp() {
+    if [[ -n "$1" ]]; then
+        cd "${projects_root}/$1"
+    else
+        project=$(pwd | sed -E -n "s|${projects_root}/([^/]*)[/]?.*|\1|p")
+        if [[ -n "${project}" ]]; then
+            cd "${projects_root}/${project}"
+        else
+            echo "Not in a project dir"
+        fi
+    fi
+}
+
+function _projects() {
+    # ${~x} enables glob expansion in variable x
+    for proj in ${~project_dirs_glob}; do
+        compadd -M 'm:{a-z}={A-Z}' -M 'r:|[._-]=* r:|=*' -M 'l:|=* r:|=*' "${proj:t}"
+    done
+}
+
+compdef _projects cdp
 
 # MISC
 
