@@ -7,6 +7,9 @@ source /usr/share/doc/fzf/examples/fzf.vim
 
 set incsearch
 
+packadd! onedark.vim
+colorscheme onedark
+
 " PROGRAMMING
 
 " syntax highlighting
