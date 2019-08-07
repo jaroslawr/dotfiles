@@ -5,6 +5,7 @@ set nocompatible
 source ~/.vim/projects.vim
 source /usr/share/doc/fzf/examples/fzf.vim
 
+" theme
 packadd! onedark.vim
 colorscheme onedark
 

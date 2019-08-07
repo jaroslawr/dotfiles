@@ -42,6 +42,23 @@ function! ProFilePath()
   endif
 endfunction
 
+function! s:ProConfigFilePath()
+  if s:ProInProject(s:ProCurPath())
+    return expand("~/.vim/projects/" . ProName() . ".vim")
+  else
+    return ""
+  endif
+endfunction
+
+function! AutoSourceProConfigFilePath()
+  let l:config_file_path = s:ProConfigFilePath()
+  if len(l:config_file_path) > 0 && filereadable(l:config_file_path)
+    exec "source! " . l:config_file_path
+  endif
+endfunction!
+
+autocmd BufRead,BufNewFile * :call AutoSourceProConfigFilePath()
+
 function! ProNotInProject()
   echo "Not in a project"
 endfunction

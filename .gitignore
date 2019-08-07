@@ -3,6 +3,7 @@ emacs.d/var
 *.elc
 
 # Vim
+vim/projects
 vim/.netrwhist
 
 # Fonts
