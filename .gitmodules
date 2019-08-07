@@ -100,3 +100,6 @@
 [submodule "emacs.d/site-lisp/company-anaconda"]
 	path = emacs.d/site-lisp/company-anaconda
 	url = git@github.com:proofit404/company-anaconda.git
+[submodule "vim/pack/plugins/start/jedi-vim"]
+	path = vim/pack/plugins/start/jedi-vim
+	url = git@github.com:davidhalter/jedi-vim.git
