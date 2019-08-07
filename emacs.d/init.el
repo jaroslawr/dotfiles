@@ -55,6 +55,9 @@
 (setq kill-buffer-query-functions
       (remq 'process-kill-buffer-query-function kill-buffer-query-functions))
 
+;; Do not ask when killing processes on exit
+(setq confirm-kill-processes nil)
+
 ;;; Yank where the point is, not where clicked
 (setq mouse-yank-at-point t)
 
