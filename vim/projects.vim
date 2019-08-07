@@ -53,7 +53,7 @@ endfunction
 function! AutoSourceProConfigFilePath()
   let l:config_file_path = s:ProConfigFilePath()
   if len(l:config_file_path) > 0 && filereadable(l:config_file_path)
-    exec "source! " . l:config_file_path
+    exec "source " . l:config_file_path
   endif
 endfunction!
 
@@ -80,4 +80,19 @@ function! ProDirFzf()
   exec "cd " . expand('%:p:h')
   call fzf#run({'sink': 'e'})
   exec "cd " . l:store_cwd
+endfunction
+
+let g:ProMakePrg=""
+
+function! ProMake()
+  let l:path = s:ProCurPath()
+  if s:ProInProject(l:path)
+    let l:store_cwd = getcwd()
+    let l:store_makeprg = &makeprg
+    exec "cd " . ProPath()
+    let &makeprg=b:ProMakePrg
+    make
+    let &makeprg=l:store_makeprg
+    exec "cd " . l:store_cwd
+  endif
 endfunction

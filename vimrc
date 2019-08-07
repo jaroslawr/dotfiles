@@ -44,6 +44,7 @@ noremap <leader>w :w<CR>
 " projects
 noremap <leader>pf :call ProFzf()<CR>
 noremap <leader>df :call ProDirFzf()<CR>
+noremap <leader>pm :call ProMake()<CR>
 
 " git
 noremap <leader>gb :Gblame<CR>
