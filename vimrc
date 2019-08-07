@@ -15,6 +15,10 @@ set incsearch hlsearch
 " completion
 set wildmenu
 
+" working directory tracks the opened file
+set autochdir
+let g:netrw_keepdir=0
+
 " PROGRAMMING
 
 " syntax highlighting
