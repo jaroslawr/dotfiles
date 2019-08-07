@@ -103,3 +103,6 @@
 [submodule "vim/pack/plugins/start/jedi-vim"]
 	path = vim/pack/plugins/start/jedi-vim
 	url = git@github.com:davidhalter/jedi-vim.git
+[submodule "vim/pack/plugins/start/vim-compiler-python"]
+	path = vim/pack/plugins/start/vim-compiler-python
+	url = git@github.com:aliev/vim-compiler-python.git
