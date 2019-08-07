@@ -10,7 +10,12 @@ function! s:ProParsePath(path)
 endfunction!
 
 function! s:ProCurPath()
-  return expand('%:p')
+  let l:path = expand('%:p')
+  if len(l:path) == 0
+    return getcwd()
+  else
+    return l:path
+  endif
 endfunction!
 
 function! ProPath()
@@ -45,7 +50,7 @@ function! ProFzf()
   let l:path = s:ProCurPath()
   if s:ProInProject(l:path)
     let l:store_cwd = getcwd()
-    exec "cd " . l:path
+    exec "cd " . ProPath()
     call fzf#run({'sink': 'e'})
     exec "cd " . l:store_cwd
   else
