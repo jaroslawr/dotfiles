@@ -500,10 +500,11 @@
 ;;;; PROGRAMMING - COMPANY
 
 (use-package company
-  :load-path "site-lisp/company-mode")
-
-(eval-after-load "company"
-  '(add-to-list 'company-backends 'company-anaconda))
+  :load-path "site-lisp/company-mode"
+  :config
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous)
+  (define-key company-active-map (kbd "C-j") #'company-complete-selection))
 
 ;;; PROGRAMMING - C
 
@@ -544,7 +545,9 @@
   :load-path "site-lisp/anaconda-mode")
 
 (use-package company-anaconda
-  :load-path "site-lisp/company-anaconda")
+  :load-path "site-lisp/company-anaconda"
+  :config
+  (add-to-list 'company-backends 'company-anaconda))
 
 ;; Do not auto-indent after inserting an empty line
 (add-to-list 'electric-indent-functions
