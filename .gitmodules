@@ -106,3 +106,6 @@
 [submodule "vim/pack/plugins/start/vim-compiler-python"]
 	path = vim/pack/plugins/start/vim-compiler-python
 	url = git@github.com:aliev/vim-compiler-python.git
+[submodule "vim/pack/plugins/start/vim-python-pep8-indent"]
+	path = vim/pack/plugins/start/vim-python-pep8-indent
+	url = git@github.com:Vimjas/vim-python-pep8-indent.git
