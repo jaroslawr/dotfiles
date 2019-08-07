@@ -1,14 +1,18 @@
-" INCLUDES
+" GENERAL
+
+set nocompatible
 
 source ~/.vim/projects.vim
 source /usr/share/doc/fzf/examples/fzf.vim
 
-" GENERAL
-
-set incsearch
-
 packadd! onedark.vim
 colorscheme onedark
+
+" search
+set incsearch hlsearch
+
+" completion
+set wildmenu
 
 " PROGRAMMING
 
@@ -18,6 +22,9 @@ syntax enable
 " auto indent
 filetype plugin indent on
 set autoindent
+
+" default indentation settings
+set shiftwidth=4 expandtab
 
 " KEY BINDINGS
 
