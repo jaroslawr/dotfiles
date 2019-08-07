@@ -1,7 +1,7 @@
 ;;;; EMACS-LISP
 
 ;;; Turn on to debug errors
-(setq debug-on-error nil)
+(setq debug-on-error t)
 
 ;;; GC after 8MB
 (setq gc-cons-threshold (* 8 1024 1024))
@@ -17,6 +17,7 @@
 (use-package crux :load-path "site-lisp/crux")
 (use-package dash :load-path "site-lisp/dash.el")
 (use-package s :load-path "site-lisp/s.el")
+(use-package f :load-path "site-lisp/f.el")
 
 ;;; My own utilities
 (use-package jr-bind-keys :load-path "my-lisp/" :commands 'jr-bind-keys)
@@ -496,6 +497,14 @@
 ;;; Highlight matching parens
 (show-paren-mode)
 
+;;;; PROGRAMMING - COMPANY
+
+(use-package company
+  :load-path "site-lisp/company-mode")
+
+(eval-after-load "company"
+  '(add-to-list 'company-backends 'company-anaconda))
+
 ;;; PROGRAMMING - C
 
 (use-package cc-mode
@@ -518,8 +527,24 @@
   (setq python-shell-interpreter "ipython3"
         python-shell-interpreter-args "--simple-prompt -i"))
 
+(defun jr-python-mode-hook ()
+  (company-mode 1)
+  (anaconda-mode 1)
+  (anaconda-eldoc-mode 1))
+
+(add-hook 'python-mode-hook 'jr-python-mode-hook)
+
 (use-package pyvenv
   :load-path "site-lisp/pyvenv")
+
+(use-package pythonic
+  :load-path "site-lisp/pythonic")
+
+(use-package anaconda-mode
+  :load-path "site-lisp/anaconda-mode")
+
+(use-package company-anaconda
+  :load-path "site-lisp/company-anaconda")
 
 ;; Do not auto-indent after inserting an empty line
 (add-to-list 'electric-indent-functions
