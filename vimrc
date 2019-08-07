@@ -13,6 +13,9 @@ colorscheme onedark
 set incsearch hlsearch
 
 " completion
+set completeopt=menu,menuone,noinsert,noselect
+
+" command line completion
 set wildmenu
 
 " working directory tracks the opened file
