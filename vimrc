@@ -9,6 +9,9 @@ source /usr/share/doc/fzf/examples/fzf.vim
 packadd! onedark.vim
 colorscheme onedark
 
+" appearance
+set foldcolumn=1
+
 " search
 set incsearch hlsearch
 
