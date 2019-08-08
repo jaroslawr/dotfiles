@@ -22,3 +22,6 @@ git submodule update --recursive
 rcup -d . \
      -S emacs.d \
      -S vim
+
+# Gnome Terminal setup
+./termconf.sh
