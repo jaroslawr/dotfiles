@@ -10,7 +10,7 @@ function setting() {
 }
 
 setting "allow-bold" "false"
-setting "cell-height-scale" "1.05"
+setting "cell-height-scale" "1.1"
 setting "use-system-font" "false"
 setting "font" "Ubuntu Mono 12"
 setting "background-color" "#282a36"
