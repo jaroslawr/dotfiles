@@ -77,7 +77,7 @@ function! ProFzf()
   if s:ProInProject(l:path)
     let l:store_cwd = getcwd()
     exec "cd " . ProPath()
-    call fzf#run({'sink': 'e'})
+    call fzf#run({'sink': 'e', 'source': 'fdfind . -tf'})
     exec "cd " . l:store_cwd
   else
     call s:ProNotInProject()
@@ -87,7 +87,7 @@ endfunction
 function! ProDirFzf()
   let l:store_cwd = getcwd()
   exec "cd " . expand('%:p:h')
-  call fzf#run({'sink': 'e'})
+  call fzf#run({'sink': 'e', 'source': 'fdfind . -tf'})
   exec "cd " . l:store_cwd
 endfunction
 
