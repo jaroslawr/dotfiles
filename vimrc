@@ -41,7 +41,7 @@ set shiftwidth=4 expandtab
 
 " general
 let mapleader = ","
-noremap <leader>q :qall!<CR>
+noremap <leader>x :qall!<CR>
 noremap <leader>w :w<CR>
 
 " projects
@@ -51,6 +51,14 @@ noremap <leader>pg :ProGrep
 noremap <leader>dg :ProDirGrep 
 noremap <leader>pm :call ProMake()<CR>
 noremap <leader>pc :call ProEditConfigFile()<CR>
+
+" quickfix
+noremap <leader>qp :cprevious!<CR>
+noremap <leader>qn :cnext!<CR>
+noremap <leader>qf :cfirst<CR>
+noremap <leader>ql :clast!<CR>
+noremap <leader>qo :copen<CR>
+noremap <leader>qc :cclose<CR>
 
 " git
 noremap <leader>gb :Gblame<CR>
