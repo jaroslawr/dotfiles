@@ -79,9 +79,6 @@
 [submodule "emacs.d/site-lisp/ssh-agency"]
 	path = emacs.d/site-lisp/ssh-agency
 	url = git@github.com:magit/ssh-agency.git
-[submodule "vim/pack/plugins/start/onedark.vim"]
-	path = vim/pack/plugins/start/onedark.vim
-	url = git@github.com:joshdick/onedark.vim.git
 [submodule "vim/pack/plugins/start/vim-fugitive"]
 	path = vim/pack/plugins/start/vim-fugitive
 	url = git@github.com:tpope/vim-fugitive.git
