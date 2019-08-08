@@ -109,3 +109,6 @@
 [submodule "vim/pack/plugins/start/vim-python-pep8-indent"]
 	path = vim/pack/plugins/start/vim-python-pep8-indent
 	url = git@github.com:Vimjas/vim-python-pep8-indent.git
+[submodule "vim/pack/plugins/start/vim-noctu"]
+	path = vim/pack/plugins/start/vim-noctu
+	url = git@github.com:noahfrederick/vim-noctu.git
