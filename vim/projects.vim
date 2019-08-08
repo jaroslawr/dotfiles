@@ -50,16 +50,25 @@ function! s:ProConfigFilePath()
   endif
 endfunction
 
-function! AutoSourceProConfigFilePath()
+function! s:ProSourceConfigFile()
   let l:config_file_path = s:ProConfigFilePath()
   if len(l:config_file_path) > 0 && filereadable(l:config_file_path)
     exec "source " . l:config_file_path
   endif
 endfunction!
 
-autocmd BufRead,BufNewFile * :call AutoSourceProConfigFilePath()
+autocmd BufRead,BufNewFile * :call s:ProSourceConfigFile()
 
-function! ProNotInProject()
+function! ProEditConfigFile()
+  if s:ProInProject(s:ProCurPath())
+    let l:config_file_path = s:ProConfigFilePath()
+    exec "edit " . l:config_file_path
+  else
+    call s:ProNotInProject()
+  endif
+endfunction
+
+function! s:ProNotInProject()
   echo "Not in a project"
 endfunction
 
@@ -71,7 +80,7 @@ function! ProFzf()
     call fzf#run({'sink': 'e'})
     exec "cd " . l:store_cwd
   else
-    call ProNotInProject()
+    call s:ProNotInProject()
   endif
 endfunction
 

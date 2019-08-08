@@ -48,6 +48,7 @@ noremap <leader>w :w<CR>
 noremap <leader>pf :call ProFzf()<CR>
 noremap <leader>df :call ProDirFzf()<CR>
 noremap <leader>pm :call ProMake()<CR>
+noremap <leader>pc :call ProEditConfigFile()<CR>
 
 " git
 noremap <leader>gb :Gblame<CR>
