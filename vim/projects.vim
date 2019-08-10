@@ -1,5 +1,6 @@
 let s:home = expand('~')
-let s:projects_parent_dir_re = '\(' . s:home . '/Projects\)/\([^/]\+\)[/]\?\(.*\)'
+let s:projects_dir = s:home . '/Projects'
+let s:projects_parent_dir_re = '\(' . s:projects_dir . '\)/\([^/]\+\)[/]\?\(.*\)'
 
 function! s:ProInProject(path)
   return match(a:path, s:projects_parent_dir_re) != -1
@@ -71,6 +72,20 @@ endfunction
 function! s:ProNotInProject()
   echo "Not in a project"
 endfunction
+
+function! ProFzfProjects()
+  " -mindepth 1 excludes the projects-holding directory itself
+  call fzf#run({'sink': function('ProOpenProject'), 'source': 'find ' . s:projects_dir . ' -mindepth 1 -maxdepth 1 -type d -printf "%P\n"'})
+endfunction
+
+command! ProFzfProjects call ProFzfProjects()
+
+function! ProOpenProject(project)
+  let l:project_path = s:projects_dir . '/' . a:project
+  exec "edit " . fnameescape(l:project_path)
+endfunction
+
+command! ProOpenProject -nargs=1 call ProOpenProject(<q-args>)
 
 function! ProFzfFilesInProject()
   let l:path = s:ProCurPath()

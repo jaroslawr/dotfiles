@@ -67,6 +67,7 @@ noremap <leader>x :qall!<CR>
 noremap <leader>w :w<CR>
 
 " projects
+noremap <leader>pp :ProFzfProjects<CR>
 noremap <leader>pf :ProFzfFilesInProject<CR>
 noremap <leader>df :ProFzfFilesInWorkingDir<CR>
 noremap <leader>pg :ProGrepInProject 
