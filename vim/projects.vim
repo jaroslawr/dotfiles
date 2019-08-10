@@ -72,7 +72,7 @@ function! s:ProNotInProject()
   echo "Not in a project"
 endfunction
 
-function! ProFzf()
+function! ProFzfFilesInProject()
   let l:path = s:ProCurPath()
   if s:ProInProject(l:path)
     let l:store_cwd = getcwd()
@@ -84,12 +84,38 @@ function! ProFzf()
   endif
 endfunction
 
-function! ProDirFzf()
+command! ProFzfFilesInProject call ProFzfFilesInProject()
+
+function! ProFzfFilesInWorkingDir()
   let l:store_cwd = getcwd()
   exec "cd " . expand('%:p:h')
   call fzf#run({'sink': 'e', 'source': 'fdfind . -tf'})
   exec "cd " . l:store_cwd
 endfunction
+
+command! ProFzfFilesInWorkingDir call ProFzfFilesInWorkingDir()
+
+function! ProGrepInProject(query)
+  echo "ProGrep"
+  let l:path = s:ProCurPath()
+  if s:ProInProject(l:path)
+    let l:store_cwd = getcwd()
+    exec "cd " . ProPath()
+    exec "grep " . a:query
+    exec "cd " . l:store_cwd
+  endif
+endfunction
+
+command! -nargs=1 ProGrepInProject call ProGrepInProject(<q-args>)
+
+function! ProGrepInWorkingDir(query)
+  let l:store_cwd = getcwd()
+  exec "cd " . expand('%:p:h')
+  exec "grep ". a:query
+  exec "cd " . l:store_cwd
+endfunction
+
+command! -nargs=1 ProGrepInWorkingDir call ProGrepInWorkingDir(<q-args>)
 
 let g:ProMakePrg=""
 
@@ -106,24 +132,4 @@ function! ProMake()
   endif
 endfunction
 
-function! ProGrep(query)
-  echo "ProGrep"
-  let l:path = s:ProCurPath()
-  if s:ProInProject(l:path)
-    let l:store_cwd = getcwd()
-    exec "cd " . ProPath()
-    exec "grep " . a:query
-    exec "cd " . l:store_cwd
-  endif
-endfunction
-
-command! -nargs=1 ProGrep call ProGrep(<q-args>)
-
-function! ProDirGrep(query)
-  let l:store_cwd = getcwd()
-  exec "cd " . expand('%:p:h')
-  exec "grep ". a:query
-  exec "cd " . l:store_cwd
-endfunction
-
-command! -nargs=1 ProDirGrep call ProDirGrep(<q-args>)
+command! ProMake call ProMake()

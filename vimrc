@@ -64,12 +64,12 @@ noremap <leader>x :qall!<CR>
 noremap <leader>w :w<CR>
 
 " projects
-noremap <leader>pf :call ProFzf()<CR>
-noremap <leader>df :call ProDirFzf()<CR>
-noremap <leader>pg :ProGrep 
-noremap <leader>dg :ProDirGrep 
-noremap <leader>pm :call ProMake()<CR>
-noremap <leader>pc :call ProEditConfigFile()<CR>
+noremap <leader>pf :ProFzfFilesInProject<CR>
+noremap <leader>df :ProFzfFilesInWorkingDir<CR>
+noremap <leader>pg :ProGrepInProject 
+noremap <leader>dg :ProGrepInWorkingDir 
+noremap <leader>pm :ProMake<CR>
+noremap <leader>pc :ProEditConfigFile<CR>
 
 " quickfix
 noremap <leader>qp :cprevious!<CR>
