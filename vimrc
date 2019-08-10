@@ -9,9 +9,6 @@ source /usr/share/doc/fzf/examples/fzf.vim
 packadd! vim-noctu
 colorscheme noctu
 
-" appearance
-set foldcolumn=1
-
 " search
 set incsearch hlsearch
 
@@ -24,6 +21,17 @@ set wildmenu
 " working directory tracks the opened file
 set autochdir
 let g:netrw_keepdir=0
+
+" APPEARANCE
+
+" buffers need some left padding
+set foldcolumn=1
+
+" always show the status line
+set laststatus=2
+
+" show the pending command in bottom right corner of the screen
+set showcmd
 
 " PROGRAMMING
 
