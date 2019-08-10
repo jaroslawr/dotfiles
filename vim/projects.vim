@@ -106,21 +106,13 @@ function! ProMake()
   endif
 endfunction
 
-function! s:ProGrepCommand(query)
-  return "rg --no-heading -n -H -F -- '" . a:query . "'"
-endfunction
-
 function! ProGrep(query)
   echo "ProGrep"
   let l:path = s:ProCurPath()
   if s:ProInProject(l:path)
-    echo "IN PROJECT"
     let l:store_cwd = getcwd()
-    let l:store_makeprg = &makeprg
     exec "cd " . ProPath()
-    let &makeprg = s:ProGrepCommand(a:query)
-    make
-    let &makeprg = l:store_makeprg
+    exec "grep " . a:query
     exec "cd " . l:store_cwd
   endif
 endfunction
@@ -129,11 +121,8 @@ command! -nargs=1 ProGrep call ProGrep(<q-args>)
 
 function! ProDirGrep(query)
   let l:store_cwd = getcwd()
-  let l:store_makeprg = &makeprg
   exec "cd " . expand('%:p:h')
-  let &makeprg = s:ProGrepCommand(a:query)
-  make
-  let &makeprg = l:store_makeprg
+  exec "grep ". a:query
   exec "cd " . l:store_cwd
 endfunction
 

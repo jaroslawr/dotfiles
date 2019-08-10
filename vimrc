@@ -22,6 +22,9 @@ set wildmenu
 set autochdir
 let g:netrw_keepdir=0
 
+" grep with ripgrep
+set grepprg=rg\ --no-heading\ -n\ -H\ -F\ --\ '$*'
+
 " APPEARANCE
 
 " buffers need some left padding
