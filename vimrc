@@ -18,6 +18,9 @@ set completeopt=menu,menuone,noinsert,noselect
 " command line completion
 set wildmenu
 
+" keep a margin of visible lines when scrolling
+set scrolloff=8
+
 " working directory tracks the opened file
 set autochdir
 let g:netrw_keepdir=0
