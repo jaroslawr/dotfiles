@@ -63,28 +63,28 @@ set shiftwidth=4 expandtab
 
 " general
 let mapleader = ","
-noremap <leader>x :qall!<CR>
-noremap <leader>w :w<CR>
+nnoremap <leader>x :qall!<CR>
+nnoremap <leader>w :w<CR>
 
 " projects
-noremap <leader>pp :ProFzfProjects<CR>
-noremap <leader>pf :ProFzfFilesInProject<CR>
-noremap <leader>df :ProFzfFilesInWorkingDir<CR>
-noremap <leader>pg :ProGrepInProject 
-noremap <leader>dg :ProGrepInWorkingDir 
-noremap <leader>pm :ProMake<CR>
-noremap <leader>pc :ProEditConfigFile<CR>
+nnoremap <leader>pp :ProFzfProjects<CR>
+nnoremap <leader>pf :ProFzfFilesInProject<CR>
+nnoremap <leader>df :ProFzfFilesInWorkingDir<CR>
+nnoremap <leader>pg :ProGrepInProject 
+nnoremap <leader>dg :ProGrepInWorkingDir 
+nnoremap <leader>pm :ProMake<CR>
+nnoremap <leader>pc :ProEditConfigFile<CR>
 
 " quickfix
-noremap <leader>qp :cprevious!<CR>
-noremap <leader>qn :cnext!<CR>
-noremap <leader>qf :cfirst<CR>
-noremap <leader>ql :clast!<CR>
-noremap <leader>qo :copen<CR>
-noremap <leader>qc :cclose<CR>
+nnoremap <leader>qp :cprevious!<CR>
+nnoremap <leader>qn :cnext!<CR>
+nnoremap <leader>qf :cfirst<CR>
+nnoremap <leader>ql :clast!<CR>
+nnoremap <leader>qo :copen<CR>
+nnoremap <leader>qc :cclose<CR>
 
 " git
-noremap <leader>gb :Gblame<CR>
-noremap <leader>gl :Glog<CR>
-noremap <leader>gs :Gstatus<CR>
-noremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gl :Glog<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit<CR>
