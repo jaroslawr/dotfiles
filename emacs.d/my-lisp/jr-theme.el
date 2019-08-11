@@ -145,6 +145,16 @@
     ;;; Ivy
     `(ivy-current-match ((t ,highlight)))
 
+    ;;; Company
+    `(company-tooltip ((t (:background ,grey2))))
+    `(company-tooltip-selection ((t (:background ,grey4))))
+    `(company-tooltip-common ((t (:foreground ,prio-b-color))))
+    `(company-tooltip-annotation ((t (:foreground ,prio-d-color))))
+    `(company-scrollbar-bg ((t (:background ,grey2))))
+    `(company-scrollbar-fg ((t (:background ,grey5))))
+    `(company-preview ((t (:background ,grey5))))
+    `(company-preview-common ((t (:foreground ,fgcolor))))
+
     ;;; Web mode
     `(web-mode-html-tag-face ((t ,prio-a)))
     `(web-mode-html-attr-name-face ((t ,prio-b)))
