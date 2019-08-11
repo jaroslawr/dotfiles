@@ -5,6 +5,9 @@ emacs.d/var
 # Vim
 vim/projects
 vim/.netrwhist
+vim/.swap
+vim/.undo
+vim/.backup
 
 # Fonts
 fonts/.fonts/.uuid
