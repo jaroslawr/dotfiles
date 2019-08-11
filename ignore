@@ -1,0 +1,6 @@
+# C
+*.o
+# Python
+__pycache__/
+*.pyc
+*.pyi
