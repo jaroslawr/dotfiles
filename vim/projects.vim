@@ -69,6 +69,8 @@ function! ProEditConfigFile()
   endif
 endfunction
 
+command! ProEditConfigFile call ProEditConfigFile()
+
 function! s:ProNotInProject()
   echo "Not in a project"
 endfunction
