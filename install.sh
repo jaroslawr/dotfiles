@@ -20,8 +20,10 @@ git submodule update --recursive
 # Install dotfiles
 # -S symlinks whole directory
 rcup -d . \
+     -x install.sh \
+     -x scripts \
      -S emacs.d \
      -S vim
 
 # Gnome Terminal setup
-./termconf.sh
+source scripts/setup_gnome_terminal.sh
