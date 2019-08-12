@@ -34,7 +34,7 @@ let g:netrw_keepdir=0
 set grepprg=rg\ --no-heading\ -n\ -H\ -F\ --\ '$*'
 
 " fix pasting in tmux
-if &term =~ '^tmux'
+if &term =~ '^screen'
   let &t_BE="\<Esc>[?2004h"
   let &t_BD="\<Esc>[?2004l"
   let &t_PS="\<Esc>[200~"
