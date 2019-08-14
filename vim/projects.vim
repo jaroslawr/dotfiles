@@ -2,11 +2,6 @@ let s:home = expand('~')
 let s:projects_dir = s:home . '/Projects'
 let s:projects_parent_dir_re = '\(' . s:projects_dir . '\)/\([^/]\+\)[/]\?\(.*\)'
 
-" PROJECT CONFIGURATION VARIABLES
-
-let g:ProMakePrg=""
-let g:ProMakeCompiler=""
-
 " BASIC UTILITY FUNCTIONS
 
 function! s:ProInProject(path)
@@ -51,7 +46,7 @@ function! ProFilePath()
 endfunction
 
 function! s:ProSetupProject()
-  if exists('b:pro_project_set_up') && b:pro_project_setup
+  if exists('b:pro_project_set_up') && b:pro_project_set_up
     return 1
   endif
 
@@ -67,9 +62,14 @@ function! s:ProSetupProject()
   return 1
 endfunction!
 
+function! s:ProNotInProject()
+  echo "Not in a project"
+endfunction
+
 function! s:ProSourceConfigFile()
   let l:config_file_path = s:ProConfigFilePath()
   if len(l:config_file_path) > 0 && filereadable(l:config_file_path)
+    echo "Sourcing " . l:config_file_path
     exec "source " . l:config_file_path
   endif
 endfunction!
@@ -122,8 +122,6 @@ function! ProEditConfigFile()
   if s:ProSetupProject()
     let l:config_file_path = s:ProConfigFilePath()
     exec "edit! " . l:config_file_path
-  else
-    call s:ProNotInProject()
   endif
 endfunction
 
@@ -135,8 +133,6 @@ function! ProFzfFilesInProject()
     exec "cd " . ProPath()
     call fzf#run({'sink': 'edit!', 'source': 'fdfind . -tf'})
     exec "cd " . l:store_cwd
-  else
-    call s:ProNotInProject()
   endif
 endfunction
 
@@ -148,30 +144,36 @@ function! ProGrepInProject(query)
     exec "cd " . ProPath()
     exec "grep " . a:query
     exec "cd " . l:store_cwd
-  else
-    call s:ProNotInProject()
   endif
 endfunction
 
 command! -nargs=1 ProGrepInProject call ProGrepInProject(<q-args>)
 
+function! s:ProMakeCmdRequire()
+  if exists("b:ProMakeCmd") && len(b:ProMakeCmd) == 2
+    return 1
+  else
+    echo "ProMake(): command not configured"
+    return 0
+  endif
+endfunction!
+
 function! ProMake()
   if s:ProSetupProject()
+    if !s:ProMakeCmdRequire()
+      return
+    endif
+
     let l:store_cwd = getcwd()
     let l:store_makeprg = &makeprg
     exec "cd " . ProPath()
-    exec "compiler " . b:ProMakeCompiler
-    let &makeprg = b:ProMakePrg
+    exec "compiler " . b:ProMakeCmd[0]
+    let &makeprg = b:ProMakeCmd[1]
     make
     let &makeprg = l:store_makeprg
     exec "cd " . l:store_cwd
-  else
-    call s:ProNotInProject()
   endif
 endfunction
 
 command! ProMake call ProMake()
 
-function! s:ProNotInProject()
-  echo "Not in a project"
-endfunction
