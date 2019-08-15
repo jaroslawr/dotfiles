@@ -6,11 +6,11 @@ let s:projects_parent_dir_re = '\(' . s:projects_dir . '\)/\([^/]\+\)[/]\?\(.*\)
 
 function! s:ProInProject(path)
   return match(a:path, s:projects_parent_dir_re) != -1
-endfunction!
+endfunction
 
 function! s:ProParsePath(path)
   return matchlist(a:path, s:projects_parent_dir_re)
-endfunction!
+endfunction
 
 function! s:ProCurPath()
   let l:path = expand('%:p')
@@ -19,7 +19,7 @@ function! s:ProCurPath()
   else
     return l:path
   endif
-endfunction!
+endfunction
 
 function! ProPath()
   let l:path = s:ProCurPath()
@@ -27,7 +27,7 @@ function! ProPath()
     let l:pro_dir_name_path = s:ProParsePath(l:path)
     return pro_dir_name_path[1] . '/' . pro_dir_name_path[2]
   endif
-endfunction!
+endfunction
 
 function! ProName()
   let l:path = s:ProCurPath()
@@ -35,7 +35,7 @@ function! ProName()
     let l:pro_dir_name_path = s:ProParsePath(l:path)
     return pro_dir_name_path[2]
   endif
-endfunction!
+endfunction
 
 function! ProFilePath()
   let l:path = s:ProCurPath()
@@ -45,22 +45,30 @@ function! ProFilePath()
   endif
 endfunction
 
-function! s:ProSetupProject()
-  if exists('b:pro_project_set_up') && b:pro_project_set_up
-    return 1
+function! ProSetupProject()
+  if exists('b:pro_project') && b:pro_project
+    return
   endif
 
   let l:path = s:ProCurPath()
+  call s:ProSourceConfigFile()
+  let b:pro_project = ProName()
+endfunction
 
-  if !s:ProInProject(path)
+augroup pro
+  autocmd!
+  autocmd VimEnter,BufEnter * nested :call ProSetupProject()
+augroup END
+
+function! s:ProRequireProject()
+  let l:path = s:ProCurPath()
+  if s:ProInProject(path)
+    return 1
+  else
     call s:ProNotInProject()
     return 0
   endif
-
-  call s:ProSourceConfigFile()
-  let b:pro_project_set_up = 1
-  return 1
-endfunction!
+endfunction
 
 function! s:ProNotInProject()
   echo "Not in a project"
@@ -69,10 +77,9 @@ endfunction
 function! s:ProSourceConfigFile()
   let l:config_file_path = s:ProConfigFilePath()
   if len(l:config_file_path) > 0 && filereadable(l:config_file_path)
-    echo "Sourcing " . l:config_file_path
     exec "source " . l:config_file_path
   endif
-endfunction!
+endfunction
 
 function! s:ProConfigFilePath()
   if s:ProInProject(s:ProCurPath())
@@ -119,7 +126,7 @@ command! -nargs=1 ProGrepInWorkingDir call ProGrepInWorkingDir(<q-args>)
 " PROJECT-LOCAL COMMANDS
 
 function! ProEditConfigFile()
-  if s:ProSetupProject()
+  if s:ProRequireProject()
     let l:config_file_path = s:ProConfigFilePath()
     exec "edit! " . l:config_file_path
   endif
@@ -128,7 +135,7 @@ endfunction
 command! ProEditConfigFile call ProEditConfigFile()
 
 function! ProFzfFilesInProject()
-  if s:ProSetupProject()
+  if s:ProRequireProject()
     let l:store_cwd = getcwd()
     exec "cd " . ProPath()
     call fzf#run({'sink': 'edit!', 'source': 'fdfind . -tf'})
@@ -139,7 +146,7 @@ endfunction
 command! ProFzfFilesInProject call ProFzfFilesInProject()
 
 function! ProGrepInProject(query)
-  if s:ProSetupProject()
+  if s:ProRequireProject()
     let l:store_cwd = getcwd()
     exec "cd " . ProPath()
     exec "grep " . a:query
@@ -156,10 +163,10 @@ function! s:ProMakeCmdRequire()
     echo "ProMake(): command not configured"
     return 0
   endif
-endfunction!
+endfunction
 
 function! ProMake()
-  if s:ProSetupProject()
+  if s:ProRequireProject()
     if !s:ProMakeCmdRequire()
       return
     endif
