@@ -1,6 +1,8 @@
 let s:home = expand('~')
 let s:projects_dir = s:home . '/Projects'
 let s:projects_parent_dir_re = '\(' . s:projects_dir . '\)/\([^/]\+\)[/]\?\(.*\)'
+let s:projects_config_dir = expand('~/.vim/projects')
+let s:project_config_file_glob = resolve(s:projects_config_dir) . '/' . '*.vim'
 
 " BASIC UTILITY FUNCTIONS
 
@@ -46,19 +48,14 @@ function! ProFilePath()
 endfunction
 
 function! ProSetupProject()
-  if exists('b:pro_project') && b:pro_project
+  if exists('b:pro_project')
     return
   endif
 
   let l:path = s:ProCurPath()
-  call s:ProSourceConfigFile()
   let b:pro_project = ProName()
+  call ProSourceConfigFile()
 endfunction
-
-augroup pro
-  autocmd!
-  autocmd VimEnter,BufEnter * nested :call ProSetupProject()
-augroup END
 
 function! s:ProRequireProject()
   let l:path = s:ProCurPath()
@@ -74,19 +71,35 @@ function! s:ProNotInProject()
   echo "Not in a project"
 endfunction
 
-function! s:ProSourceConfigFile()
-  let l:config_file_path = s:ProConfigFilePath()
+function! ProBuffersInProject(project)
+  return filter(range(1, bufnr('$')), "getbufvar(v:val, 'pro_project') == '" . a:project . "'")
+endfunction
+
+" PROJECT CONFIG FILES
+
+function! s:ProConfigFilePath()
+  return expand(s:projects_config_dir . "/" . ProName() . ".vim")
+endfunction
+
+function! ProSourceConfigFile()
+  let l:config_file_path =  s:ProConfigFilePath()
   if len(l:config_file_path) > 0 && filereadable(l:config_file_path)
     exec "source " . l:config_file_path
   endif
 endfunction
 
-function! s:ProConfigFilePath()
-  if s:ProInProject(s:ProCurPath())
-    return expand("~/.vim/projects/" . ProName() . ".vim")
-  else
-    return ""
-  endif
+function! ProConfigFileChangeAutoCmd()
+  call s:ProReloadConfigOf(expand('%:r'))
+endfunction
+
+function! s:ProReloadConfigOf(project)
+  let l:store_bufnr = bufnr('%')
+  call map(ProBuffersInProject(a:project), function('s:ProReloadConfigInBuffer'))
+  exec "buffer " . l:store_bufnr
+endfunction
+
+function! s:ProReloadConfigInBuffer(idx, bufno)
+  exec a:bufno . "bufdo call ProSourceConfigFile()"
 endfunction
 
 " GLOBAL COMMANDS
@@ -184,3 +197,10 @@ endfunction
 
 command! ProMake call ProMake()
 
+" AUTOCMDS
+
+augroup pro
+  autocmd!
+  autocmd! VimEnter,BufEnter * nested :call ProSetupProject()
+  exec "autocmd! BufWritePost " . s:project_config_file_glob . " :call ProConfigFileChangeAutoCmd()"
+augroup END
