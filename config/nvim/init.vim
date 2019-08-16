@@ -64,6 +64,7 @@ set shiftwidth=4 expandtab
 
 " filetype-specific default indentation settings
 autocmd FileType vim setlocal shiftwidth=2
+autocmd FileType yaml setlocal shiftwidth=2
 
 " KEY BINDINGS
 
