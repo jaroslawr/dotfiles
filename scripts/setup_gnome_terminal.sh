@@ -1,6 +1,6 @@
 #!/bin/bash
 # Configure Gnome Terminal
-set -eux
+set -euxo pipefail
 
 PROFILE_ID=$(dconf read /org/gnome/terminal/legacy/profiles:/default | sed s/\'//g)
 PROFILE_KEY="org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${PROFILE_ID}/"
