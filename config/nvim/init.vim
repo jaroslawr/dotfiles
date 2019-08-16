@@ -2,17 +2,12 @@
 
 set nocompatible
 
-source ~/.vim/projects.vim
+source ~/.config/nvim/projects.vim
 source /usr/share/doc/fzf/examples/fzf.vim
 
 " theme
 packadd! vim-noctu
 colorscheme noctu
-
-" keep the working directory clean
-set backupdir=~/.vim/.backup
-set undodir=~/.vim/.undo
-set directory=~/.vim/.swap
 
 " search
 set incsearch hlsearch

@@ -80,7 +80,7 @@
 	path = emacs.d/site-lisp/ssh-agency
 	url = git@github.com:magit/ssh-agency.git
 [submodule "vim/pack/plugins/start/vim-fugitive"]
-	path = vim/pack/plugins/start/vim-fugitive
+	path = local/share/nvim/site/pack/plugins/start/vim-fugitive
 	url = git@github.com:tpope/vim-fugitive.git
 [submodule "emacs.d/site-lisp/anaconda-mode"]
 	path = emacs.d/site-lisp/anaconda-mode
@@ -98,14 +98,14 @@
 	path = emacs.d/site-lisp/company-anaconda
 	url = git@github.com:proofit404/company-anaconda.git
 [submodule "vim/pack/plugins/start/jedi-vim"]
-	path = vim/pack/plugins/start/jedi-vim
+	path = local/share/nvim/site/pack/plugins/start/jedi-vim
 	url = git@github.com:davidhalter/jedi-vim.git
 [submodule "vim/pack/plugins/start/vim-compiler-python"]
-	path = vim/pack/plugins/start/vim-compiler-python
+	path = local/share/nvim/site/pack/plugins/start/vim-compiler-python
 	url = git@github.com:aliev/vim-compiler-python.git
 [submodule "vim/pack/plugins/start/vim-python-pep8-indent"]
-	path = vim/pack/plugins/start/vim-python-pep8-indent
+	path = local/share/nvim/site/pack/plugins/start/vim-python-pep8-indent
 	url = git@github.com:Vimjas/vim-python-pep8-indent.git
 [submodule "vim/pack/plugins/start/vim-noctu"]
-	path = vim/pack/plugins/start/vim-noctu
+	path = local/share/nvim/site/pack/plugins/start/vim-noctu
 	url = git@github.com:noahfrederick/vim-noctu.git

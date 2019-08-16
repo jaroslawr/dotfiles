@@ -3,11 +3,10 @@ emacs.d/var
 *.elc
 
 # Vim
-vim/projects
-vim/.netrwhist
-vim/.swap
-vim/.undo
-vim/.backup
+config/nvim/projects
+config/nvim/.netrwhist
+local/share/nvim/shada
+local/share/nvim/swap
 
 # Fonts
 fonts/.fonts/.uuid

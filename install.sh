@@ -23,7 +23,8 @@ rcup -d . \
      -x install.sh \
      -x scripts \
      -S emacs.d \
-     -S vim
+     -S config/nvim \
+     -S local/share/nvim
 
 # Gnome Terminal setup
 source scripts/setup_gnome_terminal.sh
