@@ -5,10 +5,6 @@ set nocompatible
 source ~/.config/nvim/projects.vim
 source /usr/share/doc/fzf/examples/fzf.vim
 
-" theme
-packadd! vim-noctu
-colorscheme noctu
-
 " search
 set incsearch hlsearch
 
@@ -32,6 +28,18 @@ let g:netrw_keepdir=0
 set grepprg=rg\ --no-heading\ -n\ -H\ -F\ --\ '$*'
 
 " APPEARANCE
+
+" theme
+packadd! vim-noctu
+colorscheme noctu
+
+" theme overrides
+augroup vimrc 
+  autocmd!
+  autocmd ColorScheme * hi! VertSplit ctermfg=8
+  autocmd ColorScheme * hi! StatusLine ctermbg=236 ctermfg=15
+  autocmd ColorScheme * hi! StatusLineNC ctermbg=240 ctermfg=252
+augroup END
 
 " buffers need some left padding
 set foldcolumn=1
