@@ -147,6 +147,14 @@ endfunction
 
 command! ProEditConfigFile call ProEditConfigFile()
 
+function! ProOpenRoot()
+  if s:ProRequireProject()
+    exec "edit! " . ProPath()
+  endif
+endfunction
+
+command! ProOpenRoot call ProOpenRoot()
+
 function! ProFzfFilesInProject()
   if s:ProRequireProject()
     let l:store_cwd = getcwd()

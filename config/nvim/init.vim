@@ -79,6 +79,7 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>pp :ProFzfProjects<CR>
 nnoremap <leader>pf :ProFzfFilesInProject<CR>
 nnoremap <leader>df :ProFzfFilesInWorkingDir<CR>
+nnoremap <leader>pr :ProOpenRoot<CR>
 nnoremap <leader>pg :ProGrepInProject 
 nnoremap <leader>dg :ProGrepInWorkingDir 
 nnoremap <leader>pm :ProMake<CR>
