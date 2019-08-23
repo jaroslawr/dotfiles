@@ -70,6 +70,8 @@ autocmd FileType yaml setlocal shiftwidth=2
 
 " general
 let mapleader = ","
+nnoremap <leader>, :bprevious<CR>
+nnoremap <leader>. :bnext<CR>
 nnoremap <leader>x :qall!<CR>
 nnoremap <leader>w :w<CR>
 
