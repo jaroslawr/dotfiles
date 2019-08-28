@@ -20,6 +20,9 @@ set scrolloff=8
 " hide buffers, do not abandon them (e.g. when openining a new buffer)
 set hidden
 
+" y copies to both X selections
+set clipboard=unnamed,unnamedplus
+
 " working directory tracks the opened file
 set autochdir
 let g:netrw_keepdir=0
