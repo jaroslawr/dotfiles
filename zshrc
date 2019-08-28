@@ -8,6 +8,9 @@ eval $(dircolors ~/.dircolors)
 # ripgrep
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
+# fzf
+export FZF_DEFAULT_OPTS="--color 16"
+
 # HISTORY
 
 # Set history file
