@@ -1,6 +1,6 @@
 Xcursor.theme: Vanilla-DMZ
 
-emacs*.font: Ubuntu Mono:pixelsize=16
+emacs*.font: Fira Code:pixelsize=15
 emacs*.menuBar: 0
 emacs*.toolBar: 0
 emacs*.verticalScrollBars: on

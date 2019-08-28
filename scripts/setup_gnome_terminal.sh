@@ -10,9 +10,9 @@ function setting() {
 }
 
 setting "allow-bold" "false"
-setting "cell-height-scale" "1.2"
+setting "cell-height-scale" "1.1"
 setting "use-system-font" "false"
-setting "font" "Ubuntu Mono 14"
+setting "font" "Fira Code 11"
 setting "use-theme-colors" "false"
 setting "background-color" "#151515"
 setting "foreground-color" "#ffffff"
