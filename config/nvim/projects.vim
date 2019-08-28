@@ -6,12 +6,8 @@ let s:project_config_file_glob = resolve(s:projects_config_dir) . '/' . '*.vim'
 
 " BASIC UTILITY FUNCTIONS
 
-function! s:ProInProject(path)
-  return match(a:path, s:projects_parent_dir_re) != -1
-endfunction
-
-function! s:ProParsePath(path)
-  return matchlist(a:path, s:projects_parent_dir_re)
+function! ProInProject()
+  return match(s:ProCurPath(), s:projects_parent_dir_re) != -1
 endfunction
 
 function! s:ProCurPath()
@@ -23,28 +19,29 @@ function! s:ProCurPath()
   endif
 endfunction
 
-function! ProPath()
-  let l:path = s:ProCurPath()
-  if s:ProInProject(path)
-    let l:pro_dir_name_path = s:ProParsePath(l:path)
+function! ProProjectRoot()
+  if ProInProject()
+    let l:pro_dir_name_path = s:ProParsePath(s:ProCurPath())
     return pro_dir_name_path[1] . '/' . pro_dir_name_path[2]
   endif
 endfunction
 
-function! ProName()
-  let l:path = s:ProCurPath()
-  if s:ProInProject(path)
-    let l:pro_dir_name_path = s:ProParsePath(l:path)
+function! ProProjectName()
+  if ProInProject()
+    let l:pro_dir_name_path = s:ProParsePath(s:ProCurPath())
     return pro_dir_name_path[2]
   endif
 endfunction
 
-function! ProFilePath()
-  let l:path = s:ProCurPath()
-  if s:ProInProject(path)
-    let l:pro_dir_name_path = s:ProParsePath(l:path)
+function! ProProjectFilePath()
+  if ProInProject()
+    let l:pro_dir_name_path = s:ProParsePath(s:ProCurPath())
     return pro_dir_name_path[3]
   endif
+endfunction
+
+function! s:ProParsePath(path)
+  return matchlist(a:path, s:projects_parent_dir_re)
 endfunction
 
 function! ProSetupProject()
@@ -53,13 +50,12 @@ function! ProSetupProject()
   endif
 
   let l:path = s:ProCurPath()
-  let b:pro_project = ProName()
+  let b:pro_project = ProProjectName()
   call ProSourceConfigFile()
 endfunction
 
 function! s:ProRequireProject()
-  let l:path = s:ProCurPath()
-  if s:ProInProject(path)
+  if ProInProject()
     return 1
   else
     call s:ProNotInProject()
@@ -78,7 +74,7 @@ endfunction
 " PROJECT CONFIG FILES
 
 function! s:ProConfigFilePath()
-  return expand(s:projects_config_dir . "/" . ProName() . ".vim")
+  return expand(s:projects_config_dir . "/" . ProProjectName() . ".vim")
 endfunction
 
 function! ProSourceConfigFile()
@@ -149,7 +145,7 @@ command! ProEditConfigFile call ProEditConfigFile()
 
 function! ProOpenRoot()
   if s:ProRequireProject()
-    exec "edit! " . ProPath()
+    exec "edit! " . ProProjectRoot()
   endif
 endfunction
 
@@ -158,7 +154,7 @@ command! ProOpenRoot call ProOpenRoot()
 function! ProFzfFilesInProject()
   if s:ProRequireProject()
     let l:store_cwd = getcwd()
-    exec "cd " . ProPath()
+    exec "cd " . ProProjectRoot()
     call fzf#run({'sink': 'edit!', 'source': 'fdfind . -tf'})
     exec "cd " . l:store_cwd
   endif
@@ -169,7 +165,7 @@ command! ProFzfFilesInProject call ProFzfFilesInProject()
 function! ProGrepInProject(query)
   if s:ProRequireProject()
     let l:store_cwd = getcwd()
-    exec "cd " . ProPath()
+    exec "cd " . ProProjectRoot()
     exec "grep " . a:query
     exec "cd " . l:store_cwd
   endif
@@ -194,7 +190,7 @@ function! ProMake()
 
     let l:store_cwd = getcwd()
     let l:store_makeprg = &makeprg
-    exec "cd " . ProPath()
+    exec "cd " . ProProjectRoot()
     exec "compiler " . b:ProMakeCmd[0]
     let &makeprg = b:ProMakeCmd[1]
     make
