@@ -10,10 +10,10 @@ function setting() {
 }
 
 setting "allow-bold" "false"
-setting "cell-height-scale" "1.1"
+setting "cell-height-scale" "1.2"
 setting "use-system-font" "false"
-setting "font" "Ubuntu Mono 12"
+setting "font" "Ubuntu Mono 14"
 setting "use-theme-colors" "false"
 setting "background-color" "#151515"
-setting "foreground-color" "#e2e4e5"
+setting "foreground-color" "#ffffff"
 setting "palette" "['#151515', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#e2e4e5', '#78787e', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#f1f1f0']"
