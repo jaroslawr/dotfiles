@@ -39,11 +39,11 @@ colorscheme noctu
 " theme overrides
 augroup vimrc
   autocmd!
-  autocmd ColorScheme * hi! VertSplit ctermfg=8
-  autocmd ColorScheme * hi! StatusLine ctermbg=236 ctermfg=15
-  autocmd ColorScheme * hi! StatusLineNC ctermbg=238 ctermfg=252
-  autocmd ColorScheme * hi! User1 ctermfg=003 ctermbg=235 " status line - project
-  autocmd ColorScheme * hi! User2 ctermfg=006 ctermbg=235 " status line - file name
+  autocmd ColorScheme * hi! VertSplit                ctermfg=8
+  autocmd ColorScheme * hi! StatusLine   ctermbg=237 ctermfg=15
+  autocmd ColorScheme * hi! StatusLineNC ctermbg=235 ctermfg=252
+  autocmd ColorScheme * hi! User1                    ctermfg=003 " status line - project
+  autocmd ColorScheme * hi! User2                    ctermfg=006 " status line - file name
 augroup END
 
 function! StatusProProjectName()

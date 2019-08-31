@@ -59,8 +59,8 @@
 (setq compilation-message-face 'default)
 
 (let* (;;; Basic colors
-       (bgcolor      "#121212") ; #233
-       (fgcolor      "#ffffff") ; #15
+       (bgcolor      "#202020") ; #233
+       (fgcolor      "#f5f5f5") ; #15
        (prio-a-color "#ffffaf") ; #229 - hsl(60,100%,84%)
        (prio-b-color "#ff875f") ; #209 - hsl(15,100%,68%)
        (prio-c-color "#ffd7af") ; #223 - hsl(30,100%,84%)

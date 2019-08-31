@@ -30,6 +30,8 @@
 
 (load-theme 'jr)
 
+(setq-default line-spacing 1)
+
 (blink-cursor-mode 0)
 (menu-bar-mode 0)
 (tool-bar-mode 0)

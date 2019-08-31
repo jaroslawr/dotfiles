@@ -1,11 +1,11 @@
 Xcursor.theme: Vanilla-DMZ
 
-emacs*.font: Fira Code:pixelsize=15
+emacs*.font: Ubuntu Mono 14
 emacs*.menuBar: 0
 emacs*.toolBar: 0
 emacs*.verticalScrollBars: on
-emacs*.background: #171612
-emacs*.foreground: #ffffff
+emacs*.background: #202020
+emacs*.foreground: #f5f5f5
 emacs*.borderColor: #171612
 emacs*.mode-line.attributeForeground: #ffffff
 emacs*.mode-line.attributeBackground: #353535
