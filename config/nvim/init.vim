@@ -23,10 +23,6 @@ set hidden
 " y copies to both X selections
 set clipboard=unnamed,unnamedplus
 
-" working directory tracks the opened file
-set autochdir
-let g:netrw_keepdir=0
-
 " grep with ripgrep
 set grepprg=rg\ --no-heading\ -n\ -H\ -F\ --\ '$*'
 
