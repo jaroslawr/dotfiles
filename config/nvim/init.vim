@@ -26,6 +26,20 @@ set clipboard=unnamed,unnamedplus
 " grep with ripgrep
 set grepprg=rg\ --no-heading\ -n\ -H\ -F\ --\ '$*'
 
+" MARKDOWN
+
+" enable folding
+let g:markdown_folding=1
+
+" change how the heading of the fold looks
+function! MarkdownFoldText()
+  return getline(v:foldstart)
+endfunction
+autocmd BufEnter *.md setlocal foldtext=MarkdownFoldText()
+
+" fold starting from ## header
+autocmd BufEnter *.md setlocal foldlevel=1
+
 " APPEARANCE
 
 " theme
@@ -40,6 +54,7 @@ augroup vimrc
   autocmd ColorScheme * hi! StatusLineNC ctermbg=235 ctermfg=252
   autocmd ColorScheme * hi! User1                    ctermfg=003 " status line - project
   autocmd ColorScheme * hi! User2                    ctermfg=006 " status line - file name
+  autocmd Colorscheme * hi! FoldColumn               ctermbg=0 ctermfg=0 " fold column only for padding
 augroup END
 
 function! StatusProProjectName()
