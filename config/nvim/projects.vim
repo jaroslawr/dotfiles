@@ -12,10 +12,12 @@ endfunction
 
 function! s:ProCurPath()
   let l:path = expand('%:p')
-  if len(l:path) == 0
-    return getcwd()
-  else
+  if &ft == "netrw"
+    return b:netrw_curdir
+  elseif len(l:path) > 0
     return l:path
+  else
+    return getcwd()
   endif
 endfunction
 
@@ -50,12 +52,15 @@ function! ProSetupProject()
   endif
 
   let l:path = s:ProCurPath()
-  let b:pro_project = ProProjectName()
   call ProSourceConfigFile()
+  let b:pro_project = ProProjectName()
 endfunction
 
 function! s:ProRequireProject()
   if ProInProject()
+    " Netrw somehow looses the setup done in the autocmd
+    " This does the set up a second and final time in this case
+    call ProSetupProject()
     return 1
   else
     call s:ProNotInProject()
@@ -205,6 +210,6 @@ command! ProMake call ProMake()
 
 augroup pro
   autocmd!
-  autocmd! VimEnter,BufEnter * nested :call ProSetupProject()
+  autocmd! BufEnter * :call ProSetupProject()
   exec "autocmd! BufWritePost " . s:project_config_file_glob . " :call ProConfigFileChangeAutoCmd()"
 augroup END
