@@ -23,6 +23,9 @@ set hidden
 " y copies to both X selections
 set clipboard=unnamed,unnamedplus
 
+" enable mouse everywhere
+set mouse=a
+
 " grep with ripgrep
 set grepprg=rg\ --no-heading\ -n\ -H\ -F\ --\ '$*'
 
