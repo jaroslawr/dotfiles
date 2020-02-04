@@ -109,3 +109,6 @@
 [submodule "vim/pack/plugins/start/vim-noctu"]
 	path = local/share/nvim/site/pack/plugins/start/vim-noctu
 	url = git@github.com:noahfrederick/vim-noctu.git
+[submodule "local/share/nvim/site/pack/plugins/start/vim-dispatch"]
+	path = local/share/nvim/site/pack/plugins/start/vim-dispatch
+	url = git@github.com:tpope/vim-dispatch

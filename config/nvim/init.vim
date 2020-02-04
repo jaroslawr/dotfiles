@@ -126,6 +126,9 @@ set shiftwidth=4 expandtab
 autocmd FileType vim setlocal shiftwidth=2
 autocmd FileType yaml setlocal shiftwidth=2
 
+" vim-dispatch compiler settings
+let g:dispatch_compilers = { 'python3': 'python' }
+
 " KEY BINDINGS
 
 " general
