@@ -1,6 +1,6 @@
 Xcursor.theme: Vanilla-DMZ
 
-emacs*.font: Inconsolata 14
+emacs*.font: Ubuntu Mono 14
 emacs*.menuBar: 0
 emacs*.toolBar: 0
 emacs*.verticalScrollBars: on

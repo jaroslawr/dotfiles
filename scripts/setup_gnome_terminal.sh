@@ -12,7 +12,7 @@ function setting() {
 setting "allow-bold" "false"
 setting "cell-height-scale" "1.1"
 setting "use-system-font" "false"
-setting "font" "Inconsolata 14"
+setting "font" "Ubuntu Mono 14"
 setting "use-theme-colors" "false"
 setting "background-color" "#202020"
 setting "foreground-color" "#f5f5f5"
