@@ -132,11 +132,12 @@ let g:dispatch_compilers = { 'python3': 'python' }
 " KEY BINDINGS
 
 " general
-let mapleader = ","
+let mapleader = " "
 nnoremap <leader>, :bprevious<CR>
 nnoremap <leader>. :bnext<CR>
 nnoremap <leader>x :qall!<CR>
 nnoremap <leader>w :w<CR>
+inoremap jj <Esc>
 
 " projects
 nnoremap <leader>pp :ProFzfProjects<CR>
