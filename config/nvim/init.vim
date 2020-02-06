@@ -149,10 +149,9 @@ nnoremap <leader>pm :ProMake<CR>
 nnoremap <leader>pc :ProEditConfigFile<CR>
 
 " quickfix
+nnoremap <leader>qq :cc!<CR>
 nnoremap <leader>qp :cprevious!<CR>
 nnoremap <leader>qn :cnext!<CR>
-nnoremap <leader>qf :cfirst<CR>
-nnoremap <leader>ql :clast!<CR>
 nnoremap <leader>qo :copen<CR>
 nnoremap <leader>qc :cclose<CR>
 
