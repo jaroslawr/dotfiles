@@ -18,6 +18,7 @@ git submodule init
 git submodule update --recursive
 
 # Install dotfiles
+# -x excludes
 # -S symlinks whole directory
 rcup -d . \
      -x install.sh \
@@ -25,6 +26,9 @@ rcup -d . \
      -S emacs.d \
      -S config/nvim \
      -S local/share/nvim
+
+# Make scripts available
+ln -s "${PWD}/bin" ~/bin
 
 source scripts/setup_gnome_terminal.sh
 source scripts/set_default_browser.sh

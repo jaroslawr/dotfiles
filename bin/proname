@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+projects_root="${HOME}/Projects"
+if echo "$@" | grep -q -E "${projects_root}/([^/]+)(/.*)?"; then
+    echo "$@" | sed -E "s|${projects_root}/([^/]+)(/.*)?|\1|"
+fi
