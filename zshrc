@@ -123,9 +123,6 @@ PROMPT='%F{229}%~%E %F{209}${vcs_info_msg_0_}
 # Usable calendar
 alias cal='ncal -M -b'
 
-# Console emacs in console
-alias emacs='emacs -nw'
-
 # Usable ls
 alias ls='ls -h -l --color --group-directories-first'
 
