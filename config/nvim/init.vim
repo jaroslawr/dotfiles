@@ -41,10 +41,10 @@ endfunction
 autocmd BufEnter *.md setlocal foldtext=MarkdownFoldText()
 
 " fold starting from ## header
-autocmd BufEnter *.md setlocal foldlevel=1
+autocmd BufRead *.md setlocal foldlevel=1
 
 " disable spell checking
-autocmd BufEnter *.md setlocal nospell
+autocmd BufEnter * setlocal nospell
 
 " APPEARANCE
 
