@@ -43,9 +43,6 @@ autocmd BufEnter *.md setlocal foldtext=MarkdownFoldText()
 " fold starting from ## header
 autocmd BufRead *.md setlocal foldlevel=1
 
-" disable spell checking
-autocmd BufEnter * setlocal nospell
-
 " APPEARANCE
 
 " theme
