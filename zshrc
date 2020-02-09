@@ -134,6 +134,9 @@ alias ls='ls -h -l --color --group-directories-first'
 # Output installed packages matching a query, in format suitable for xargs pipelines
 alias findpkgs="dpkg-query -f '\${binary:Package}\n' -W | grep"
 
+# Notes
+alias n="nvim ~/txt/notes.md"
+
 # PROJECTS
 
 projects_root=~/Projects
