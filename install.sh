@@ -23,7 +23,6 @@ git submodule update --recursive
 rcup -d . \
      -x install.sh \
      -x scripts \
-     -S emacs.d \
      -S config/nvim \
      -S local/share/nvim
 
