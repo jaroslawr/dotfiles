@@ -23,11 +23,14 @@ git submodule update --recursive
 rcup -d . \
      -x install.sh \
      -x scripts \
+     -x bin \
      -S config/nvim \
      -S local/share/nvim
 
 # Make scripts available
-ln -s "${PWD}/bin" ~/bin
+if [[ ! -h "${HOME}/bin" ]]; then
+    ln -Ts "${PWD}/bin" "${HOME}/bin"
+fi
 
 source scripts/setup_gnome_terminal.sh
 source scripts/set_default_browser.sh
