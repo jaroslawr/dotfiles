@@ -166,3 +166,8 @@ compdef _projects cdp
 
 # More readable output of "time [command]"
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
+
+# SSH agent
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+    export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
