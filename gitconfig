@@ -5,9 +5,6 @@
         email = jrzeszotko@gmail.com
         name = Jarosław Rzeszótko
 
-[core]
-        editor = nano -r 72
-
 [color "diff"]
         commit = 223
         meta = 15
