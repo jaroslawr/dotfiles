@@ -2,17 +2,14 @@
 
 # ENVIRONMENT
 
-# set LS_COLORS
-eval $(dircolors ~/.dircolors)
-
-# ripgrep
+export PATH="${PATH}:${HOME}/bin"
+export PROJECTS_ROOT="${HOME}/Projects"
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
-
-# fzf
 export FZF_DEFAULT_OPTS="--color 16"
 
-# PATH
-export PATH="${PATH}:${HOME}/bin"
+# set LS_COLORS
+eval $(dircolors ~/.dircolors)
 
 # HISTORY
 
@@ -166,8 +163,3 @@ compdef _projects cdp
 
 # More readable output of "time [command]"
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
-
-# SSH agent
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-    export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-fi

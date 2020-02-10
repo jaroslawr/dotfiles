@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
-source profuns.sh
+source common.sh
+source $BIN_ROOT/lib/pro.sh
+
 pro "$@" | cut -f1
