@@ -2,6 +2,7 @@
 
 # ENVIRONMENT
 
+export EDITOR=nvim
 export PATH="${PATH}:${HOME}/bin"
 export PROJECTS_ROOT="${HOME}/Projects"
 export SSH_AUTH_SOCK="/run/user/${UID}/openssh_agent"
