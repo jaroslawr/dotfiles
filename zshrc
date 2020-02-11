@@ -7,7 +7,6 @@ export FZF_DEFAULT_OPTS="--color 16"
 export PATH="${HOME}/bin:${PATH}"
 export PROJECTS_ROOT="${HOME}/Projects"
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
-export SSH_AUTH_SOCK="/run/user/${UID}/openssh_agent"
 
 # set LS_COLORS
 eval $(dircolors ~/.dircolors)
