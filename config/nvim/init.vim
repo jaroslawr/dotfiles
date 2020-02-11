@@ -110,6 +110,13 @@ set laststatus=2
 " show the pending command in bottom right corner of the screen
 set showcmd
 
+" set the tmux title to current file name
+set t_ts=]2;
+set t_fs=\\
+set title
+
+autocmd BufEnter * let &titlestring = expand("%:t") . ' '
+
 " PROGRAMMING
 
 " syntax highlighting

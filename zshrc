@@ -106,9 +106,11 @@ zstyle ':vcs_info:*' stagedstr "+"
 zstyle ':vcs_info:*' unstagedstr "*"
 zstyle ':vcs_info:*' formats "%b%c%u"
 
-# Update VCS info before every command execution
 precmd() {
+    # Update VCS info before every command execution
     vcs_info
+    # Set a blank terminal title
+    print -Pn "\e]0;\a"
 }
 
 # Set prompt
