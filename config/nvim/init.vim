@@ -17,6 +17,9 @@ set completeopt=menu,menuone,noinsert,noselect
 " command line completion
 set wildmenu
 
+" open splits below
+set splitbelow
+
 " keep a margin of visible lines when scrolling
 set scrolloff=8
 
