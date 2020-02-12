@@ -142,7 +142,7 @@ let g:dispatch_compilers = { 'python3': 'python' }
 let mapleader = " "
 nnoremap <leader>, :bprevious<CR>
 nnoremap <leader>. :bnext<CR>
-nnoremap <leader>x :qall!<CR>
+nnoremap <leader>x :qall<CR>
 nnoremap <leader>w :w<CR>
 inoremap jj <Esc>
 
