@@ -150,6 +150,7 @@ nnoremap <leader>, :bprevious<CR>
 nnoremap <leader>. :bnext<CR>
 nnoremap <leader>x :qall<CR>
 nnoremap <leader>w :w<CR>
+nnoremap <leader>q :wq<CR>
 inoremap jj <Esc>
 
 " projects
@@ -163,11 +164,11 @@ nnoremap <leader>pm :ProMake<CR>
 nnoremap <leader>pc :ProEditConfigFile<CR>
 
 " quickfix
-nnoremap <leader>qq :cc!<CR>
-nnoremap <leader>qp :cprevious!<CR>
-nnoremap <leader>qn :cnext!<CR>
-nnoremap <leader>qo :copen<CR>
-nnoremap <leader>qc :cclose<CR>
+nnoremap <leader>cq :cc!<CR>
+nnoremap <leader>cp :cprevious!<CR>
+nnoremap <leader>cn :cnext!<CR>
+nnoremap <leader>co :copen<CR>
+nnoremap <leader>cc :cclose<CR>
 
 " git
 nnoremap <leader>gb :Gblame<CR>
