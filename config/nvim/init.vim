@@ -5,6 +5,9 @@ set nocompatible
 source ~/.config/nvim/projects.vim
 source /usr/share/doc/fzf/examples/fzf.vim
 
+" autowrite when changing buffers etc.
+set autowrite
+
 " search
 set incsearch hlsearch
 
