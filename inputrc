@@ -1,3 +1,18 @@
 set convert-meta on
+
+# COMPLETION
+
+# Tab gives next completion
+"\t": menu-complete
+# Shift-Tab gives previous completion
+"\e[Z": menu-complete-backward
+# On first Tab immediately list completions
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+# On first Tab immediately complete the common prefix
+set menu-complete-display-prefix on
+
+# HISTORY
+
 "\M-p": previous-history
 "\M-n": next-history
