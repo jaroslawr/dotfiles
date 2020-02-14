@@ -11,10 +11,6 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 # set LS_COLORS
 eval $(dircolors ~/.dircolors)
 
-# Load FZF
-source /usr/share/doc/fzf/examples/completion.zsh
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-
 # HISTORY
 
 # Set history file
@@ -56,6 +52,9 @@ bindkey 'OB' down-line-or-beginning-search
 # Prevent Ctrl-S from freezing the terminal, make it accessible as a key binding
 stty -ixon
 
+# Load FZF key bindings
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+
 # CD
 
 # Go to directory by typing just the directory name
@@ -90,6 +89,9 @@ zstyle ':completion:*:complete:(cd|pushd):*' tag-order 'local-directories named-
 
 # Suggest short options unless input is start of a long option
 zstyle ':completion:*:*:*:*:options' ignored-patterns '???*'
+
+# Load FZF completions
+source /usr/share/doc/fzf/examples/completion.zsh
 
 # PROMPT
 
