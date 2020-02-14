@@ -19,3 +19,6 @@
 [submodule "local/share/nvim/site/pack/plugins/start/vim-mkdir"]
 	path = local/share/nvim/site/pack/plugins/start/vim-mkdir
 	url = git@github.com:pbrisbin/vim-mkdir
+[submodule "local/share/nvim/site/pack/plugins/start/vim-lastplace"]
+	path = local/share/nvim/site/pack/plugins/start/vim-lastplace
+	url = git@github.com:farmergreg/vim-lastplace.git
