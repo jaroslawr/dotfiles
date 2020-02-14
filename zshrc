@@ -42,6 +42,9 @@ select-word-style normal
 
 # KEYBINDINGS
 
+# Emacs-style keybindings
+bindkey -e
+
 # Up and Down keys do history search when input is present
 autoload -U up-line-or-beginning-search
 zle -N up-line-or-beginning-search
