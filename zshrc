@@ -4,6 +4,7 @@
 
 export EDITOR=nvim
 export FZF_DEFAULT_OPTS="--layout=reverse --color 16"
+export FZF_TMUX=1
 export PATH="${HOME}/bin:${PATH}"
 export PROJECTS_ROOT="${HOME}/Projects"
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
