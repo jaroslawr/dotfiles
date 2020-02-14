@@ -3,13 +3,17 @@
 # ENVIRONMENT
 
 export EDITOR=nvim
-export FZF_DEFAULT_OPTS="--color 16"
+export FZF_DEFAULT_OPTS="--layout=reverse --color 16"
 export PATH="${HOME}/bin:${PATH}"
 export PROJECTS_ROOT="${HOME}/Projects"
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
 # set LS_COLORS
 eval $(dircolors ~/.dircolors)
+
+# Load FZF
+source /usr/share/doc/fzf/examples/completion.zsh
+source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 # HISTORY
 
@@ -48,10 +52,6 @@ bindkey 'OB' down-line-or-beginning-search
 
 # Prevent Ctrl-S from freezing the terminal, make it accessible as a key binding
 stty -ixon
-
-# Make pattern search the default
-bindkey '' history-incremental-pattern-search-backward
-bindkey '' history-incremental-pattern-search-forward
 
 # CD
 
