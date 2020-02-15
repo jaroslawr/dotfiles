@@ -45,29 +45,17 @@ let g:markdown_folding=1
 
 " change how the heading of the fold looks
 function! MarkdownFoldText()
-  return getline(v:foldstart)
+  return getline(v:foldstart) . "..."
 endfunction
 autocmd BufEnter *.md setlocal foldtext=MarkdownFoldText()
+autocmd BufEnter *.md setlocal fillchars=fold:\ 
 
 " fold starting from ## header
 autocmd BufRead *.md setlocal foldlevel=1
 
 " APPEARANCE
 
-" theme
-packadd! vim-noctu
-colorscheme noctu
-
-" theme overrides
-augroup vimrc
-  autocmd!
-  autocmd ColorScheme * hi! VertSplit                ctermfg=8
-  autocmd ColorScheme * hi! StatusLine   ctermbg=237 ctermfg=15
-  autocmd ColorScheme * hi! StatusLineNC ctermbg=235 ctermfg=252
-  autocmd ColorScheme * hi! User1                    ctermfg=003 " status line - project
-  autocmd ColorScheme * hi! User2                    ctermfg=006 " status line - file name
-  autocmd Colorscheme * hi! FoldColumn               ctermbg=0 ctermfg=0 " fold column only for padding
-augroup END
+colorscheme colors
 
 function! StatusProProjectName()
   if ProInProject()
@@ -103,12 +91,15 @@ set statusline+=%2*%{StatusFileName()}
 set statusline+=%*%r " readonly flag
 set statusline+=%m " modified flag
 set statusline+=\ 
-set statusline+=%l " line number
+set statusline+=%3*%l " line number
 set statusline+=,
 set statusline+=%c " column number
 set statusline+=\ 
 set statusline+=%p " percentage through the file
 set statusline+=%% " literal percent
+
+" show line numbers
+set number
 
 " buffers need some left padding
 set foldcolumn=1
@@ -123,8 +114,14 @@ set showcmd
 set t_ts=]2;
 set t_fs=\\
 set title
-
 autocmd BufEnter * let &titlestring = expand("%:t") . ' '
+
+" highlight current line in active window
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
 
 " PROGRAMMING
 
