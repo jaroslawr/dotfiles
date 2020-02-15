@@ -20,6 +20,9 @@ set wildmenu
 " open splits below
 set splitbelow
 
+" do not wrap long lines
+set nowrap
+
 " keep a margin of visible lines when scrolling
 set scrolloff=8
 
