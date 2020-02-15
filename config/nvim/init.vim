@@ -17,8 +17,8 @@ set completeopt=menu,menuone,noinsert,noselect
 " command line completion
 set wildmenu
 
-" open splits below
-set splitbelow
+" open splits below and to the right
+set splitbelow splitright
 
 " do not wrap long lines
 set nowrap
