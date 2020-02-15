@@ -25,3 +25,6 @@
 [submodule "local/share/nvim/site/pack/plugins/start/fzf.vim"]
 	path = local/share/nvim/site/pack/plugins/start/fzf.vim
 	url = git@github.com:junegunn/fzf.vim
+[submodule "local/share/nvim/site/pack/plugins/start/vim-scriptease"]
+	path = local/share/nvim/site/pack/plugins/start/vim-scriptease
+	url = git@github.com:tpope/vim-scriptease.git
