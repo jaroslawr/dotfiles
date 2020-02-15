@@ -148,6 +148,7 @@ let g:dispatch_compilers = { 'python3': 'python' }
 let mapleader = " "
 nnoremap <leader>, :bprevious<CR>
 nnoremap <leader>. :bnext<CR>
+nnoremap <leader>r :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>x :qall<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :wq<CR>
