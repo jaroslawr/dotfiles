@@ -32,6 +32,11 @@ hi! User1 ctermbg=236 ctermfg=3 " status line - project
 hi! User2 ctermbg=236 ctermfg=4 " status line - file name
 hi! User3 ctermbg=236 ctermfg=246 " status line - file name
 
+" ui - tabs
+hi! TabLineFill ctermbg=NONE ctermfg=246 cterm=NONE
+hi! TabLine ctermbg=NONE ctermfg=246 cterm=NONE
+hi! TabLineSel ctermbg=NONE ctermfg=246 cterm=NONE
+
 " ui - popup menu
 hi! Pmenu ctermbg=236 ctermfg=15
 hi! PmenuSel ctermbg=240 ctermfg=3
