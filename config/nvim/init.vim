@@ -23,6 +23,10 @@ set splitbelow splitright
 " do not wrap long lines
 set nowrap
 
+" indicate lines that do not fit screen
+set list
+autocmd BufEnter * set listchars=precedes:<,extends:>,tab:\ \ 
+
 " keep a margin of visible lines when scrolling
 set scrolloff=8
 

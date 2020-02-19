@@ -15,6 +15,7 @@ hi! PreProc ctermfg=11
 hi! Identifier ctermfg=10
 hi! Constant ctermfg=14
 hi! Comment ctermfg=246 cterm=NONE
+hi! Whitespace ctermbg=NONE ctermfg=NONE cterm=NONE
 
 " buffer
 hi! Search ctermbg=6
