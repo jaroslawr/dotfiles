@@ -145,17 +145,26 @@ let g:dispatch_compilers = { 'python3': 'python' }
 " KEY BINDINGS
 
 " general
-inoremap jj <Esc>
 nnoremap <silent> <C-l> :nohlsearch<CR>
+
+" buffers
+nnoremap <M-;> :bprevious<CR>
+nnoremap <M-'> :bnext<CR>
+
+" quickfix
+nnoremap <M-,> :cprevious!<CR>
+nnoremap <M-.> :cnext!<CR>
+nnoremap <M-/> :copen<CR>:cc<CR>
+
+" leader - general
+inoremap jj <Esc>
 let mapleader = " "
-nnoremap <leader>, :bprevious<CR>
-nnoremap <leader>. :bnext<CR>
 nnoremap <leader>r :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>x :qall<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :wq<CR>
 
-" projects
+" leader - projects
 nnoremap <leader>pp :ProFzfProjects<CR>
 nnoremap <leader>pf :ProFzfFilesInProject<CR>
 nnoremap <leader>df :ProFzfFilesInWorkingDir<CR>
@@ -165,14 +174,7 @@ nnoremap <leader>dg :ProGrepInWorkingDir
 nnoremap <leader>pm :ProMake<CR>
 nnoremap <leader>pc :ProEditConfigFile<CR>
 
-" quickfix
-nnoremap <leader>cq :cc!<CR>
-nnoremap <leader>cp :cprevious!<CR>
-nnoremap <leader>cn :cnext!<CR>
-nnoremap <leader>co :copen<CR>
-nnoremap <leader>cc :cclose<CR>
-
-" git
+" leader - git
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gl :Glog<CR>
 nnoremap <leader>gs :Gstatus<CR>
