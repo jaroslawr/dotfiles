@@ -15,7 +15,6 @@ hi! PreProc ctermfg=11
 hi! Identifier ctermfg=10
 hi! Constant ctermfg=14
 hi! Comment ctermfg=246 cterm=NONE
-hi! ErrorMsg ctermfg=4 cterm=none
 
 " buffer
 hi! Search ctermbg=6
@@ -24,6 +23,11 @@ hi! LineNr ctermfg=246
 hi! EndOfBuffer ctermfg=240 cterm=NONE
 hi! CursorLine ctermbg=238 cterm=NONE
 hi! CursorLineNr ctermbg=238
+
+" ui
+hi! ErrorMsg ctermbg=NONE ctermfg=1 cterm=none
+hi! WarningMsg ctermbg=NONE ctermfg=1 cterm=none
+hi! VertSplit ctermbg=NONE ctermfg=236 cterm=NONE
 
 " ui - status line
 hi! StatusLine ctermbg=236 ctermfg=15 cterm=NONE
@@ -40,9 +44,6 @@ hi! TabLineSel ctermbg=NONE ctermfg=246 cterm=NONE
 " ui - popup menu
 hi! Pmenu ctermbg=236 ctermfg=15
 hi! PmenuSel ctermbg=240 ctermfg=3
-
-" ui - others
-hi! VertSplit ctermfg=236 cterm=NONE
 
 " quickfix
 hi! QuickFixLine ctermbg=238 ctermfg=NONE
