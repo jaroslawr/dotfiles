@@ -28,6 +28,9 @@ setopt sharehistory
 setopt extendedhistory
 
 # Do not find duplicates in history
+setopt hist_save_no_dups
+
+# Do not find duplicates in history
 setopt hist_find_no_dups
 
 # EDITING
