@@ -54,7 +54,9 @@ endfunction
 autocmd BufEnter *.md setlocal foldtext=MarkdownFoldText()
 autocmd BufEnter *.md setlocal fillchars=fold:\ 
 
-" fold starting from ## header
+" start normal markdown with open folds
+autocmd BufRead *.md setlocal foldlevel=100
+" start notes.md with closed folds
 autocmd BufRead ~/txt/notes.md setlocal foldlevel=1
 
 " APPEARANCE
