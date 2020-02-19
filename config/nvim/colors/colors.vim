@@ -18,6 +18,7 @@ hi! Comment ctermfg=246 cterm=NONE
 
 " buffer
 hi! Search ctermbg=6
+hi! MatchParen ctermbg=6 ctermfg=0 cterm=NONE
 hi! Visual ctermbg=3 ctermfg=0
 hi! LineNr ctermfg=246
 hi! EndOfBuffer ctermfg=240 cterm=NONE
