@@ -40,7 +40,7 @@ set clipboard=unnamed,unnamedplus
 set mouse=a
 
 " grep with ripgrep
-set grepprg=rg\ --no-heading\ -n\ -H\ -F\ --\ '$*'
+set grepprg=rg\ --vimgrep\ $*
 
 " MARKDOWN
 
