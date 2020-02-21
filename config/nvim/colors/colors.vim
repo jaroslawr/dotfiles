@@ -5,38 +5,43 @@ set t_Co=256
 let g:colors_name = "colors"
 
 " text
-hi! Type ctermfg=250
-hi! Statement ctermfg=12
-hi! Number ctermfg=1
-hi! String ctermfg=3
-hi! Keyword ctermfg=6
-hi! Function ctermfg=8
-hi! PreProc ctermfg=11
-hi! Identifier ctermfg=10
 hi! Constant ctermfg=14
-hi! Comment ctermfg=246 cterm=NONE
+hi! String ctermfg=10
+hi! Number ctermfg=11
+hi! Identifier ctermfg=1
+hi! Function ctermfg=11
+hi! Statement ctermfg=14
+hi! Keyword ctermfg=13
+hi! PreProc ctermfg=13
+hi! Include ctermfg=13
+hi! Type ctermfg=250
+hi! Special ctermfg=1
+hi! SpecialChar ctermfg=1
+hi! Delimiter ctermfg=15
+hi! Comment ctermfg=7 cterm=NONE
 hi! Whitespace ctermbg=NONE ctermfg=NONE cterm=NONE
 
 " buffer
 hi! Search ctermbg=6
-hi! MatchParen ctermbg=6 ctermfg=0 cterm=NONE
 hi! Visual ctermbg=3 ctermfg=0
-hi! LineNr ctermfg=246
+hi! MatchParen ctermbg=6 ctermfg=0 cterm=NONE
 hi! EndOfBuffer ctermfg=240 cterm=NONE
-hi! CursorLine ctermbg=236 cterm=NONE
-hi! CursorLineNr ctermbg=236
+hi! Directory ctermfg=12
 
 " ui
+hi! LineNr ctermfg=246
+hi! CursorLine ctermbg=236 cterm=NONE
+hi! CursorLineNr ctermbg=236
 hi! ErrorMsg ctermbg=NONE ctermfg=1 cterm=none
 hi! WarningMsg ctermbg=NONE ctermfg=1 cterm=none
 hi! VertSplit ctermbg=NONE ctermfg=236 cterm=NONE
 
 " ui - status line
-hi! StatusLine ctermbg=0 ctermfg=248 cterm=NONE
-hi! StatusLineNC ctermbg=0 ctermfg=248 cterm=NONE
-hi! User1 ctermbg=0 ctermfg=3 " status line - project
-hi! User2 ctermbg=0 ctermfg=4 " status line - file name
-hi! User3 ctermbg=0 ctermfg=1 " status line - branch
+hi! StatusLine ctermbg=0 ctermfg=8 cterm=NONE
+hi! StatusLineNC ctermbg=0 ctermfg=8 cterm=NONE
+hi! User1 ctermbg=0 ctermfg=11 " status line - project
+hi! User2 ctermbg=0 ctermfg=2 " status line - file name
+hi! User3 ctermbg=0 ctermfg=9 " status line - branch
 
 " ui - tabs
 hi! TabLineFill ctermbg=NONE ctermfg=246 cterm=NONE
@@ -63,5 +68,27 @@ hi! markdownH3 ctermfg=3
 hi! markdownH4 ctermfg=3
 hi! markdownH5 ctermfg=3
 hi! markdownH6 ctermfg=3
-hi! markdownUrl ctermfg=6
+hi! markdownUrl ctermfg=12
 hi! markdownError ctermfg=1
+
+" python
+hi! def link pythonBuiltin Keyword
+
+" sql
+hi! def link sqlKeyword sqlStatement
+
+" diff
+hi! DiffAdd ctermbg=NONE ctermfg=10
+hi! DiffDelete ctermbg=NONE ctermfg=9
+hi! DiffChange ctermbg=NONE ctermfg=11 " changed line
+hi! DiffText ctermbg=8 ctermfg=11 " changed text in changed line
+hi! DiffDelete ctermbg=NONE ctermfg=8
+
+" vimscript
+hi! def link vimFuncName Keyword
+
+" git
+hi! gitHash ctermfg=13
+
+" git - fugitive
+hi! fugitiveSymbolicRef ctermfg=9
