@@ -23,8 +23,8 @@ hi! MatchParen ctermbg=6 ctermfg=0 cterm=NONE
 hi! Visual ctermbg=3 ctermfg=0
 hi! LineNr ctermfg=246
 hi! EndOfBuffer ctermfg=240 cterm=NONE
-hi! CursorLine ctermbg=238 cterm=NONE
-hi! CursorLineNr ctermbg=238
+hi! CursorLine ctermbg=236 cterm=NONE
+hi! CursorLineNr ctermbg=236
 
 " ui
 hi! ErrorMsg ctermbg=NONE ctermfg=1 cterm=none
@@ -32,11 +32,11 @@ hi! WarningMsg ctermbg=NONE ctermfg=1 cterm=none
 hi! VertSplit ctermbg=NONE ctermfg=236 cterm=NONE
 
 " ui - status line
-hi! StatusLine ctermbg=236 ctermfg=248 cterm=NONE
-hi! StatusLineNC ctermbg=236 ctermfg=248 cterm=NONE
-hi! User1 ctermbg=236 ctermfg=3 " status line - project
-hi! User2 ctermbg=236 ctermfg=4 " status line - file name
-hi! User3 ctermbg=236 ctermfg=1 " status line - branch
+hi! StatusLine ctermbg=0 ctermfg=248 cterm=NONE
+hi! StatusLineNC ctermbg=0 ctermfg=248 cterm=NONE
+hi! User1 ctermbg=0 ctermfg=3 " status line - project
+hi! User2 ctermbg=0 ctermfg=4 " status line - file name
+hi! User3 ctermbg=0 ctermfg=1 " status line - branch
 
 " ui - tabs
 hi! TabLineFill ctermbg=NONE ctermfg=246 cterm=NONE
