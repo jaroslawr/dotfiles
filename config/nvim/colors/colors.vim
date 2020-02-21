@@ -32,11 +32,11 @@ hi! WarningMsg ctermbg=NONE ctermfg=1 cterm=none
 hi! VertSplit ctermbg=NONE ctermfg=236 cterm=NONE
 
 " ui - status line
-hi! StatusLine ctermbg=236 ctermfg=15 cterm=NONE
-hi! StatusLineNC ctermbg=236 ctermfg=252 cterm=NONE
+hi! StatusLine ctermbg=236 ctermfg=248 cterm=NONE
+hi! StatusLineNC ctermbg=236 ctermfg=248 cterm=NONE
 hi! User1 ctermbg=236 ctermfg=3 " status line - project
 hi! User2 ctermbg=236 ctermfg=4 " status line - file name
-hi! User3 ctermbg=236 ctermfg=246 " status line - file name
+hi! User3 ctermbg=236 ctermfg=1 " status line - branch
 
 " ui - tabs
 hi! TabLineFill ctermbg=NONE ctermfg=246 cterm=NONE

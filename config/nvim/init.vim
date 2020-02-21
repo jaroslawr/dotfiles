@@ -63,46 +63,49 @@ autocmd BufRead ~/txt/notes.md setlocal foldlevel=1
 
 colorscheme colors
 
-function! StatusProProjectName()
+function! StatusProjectName()
   if ProInProject()
-    return " " . ProProjectName() . " "
+    return ProProjectName() . " "
   else
     return ""
   endif
-endfunction
-
-function! StatusProProjectFilePath()
-  if ProInProject()
-    let l:path = ProProjectFilePath()
-    if len(l:path) > 0
-      return " " . ProProjectFilePath() . " "
-    endif
-  endif
-  return ""
 endfunction
 
 function! StatusFileName()
   if ProInProject()
-    return ""
+    let l:path = ProProjectFilePath()
   else
-    return " " . expand("%") . " "
+    let l:path = expand("%")
   endif
+
+  if len(l:path) > 0
+    return l:path . (&modified ? "*" : "") . (&readonly ? "#" : "") . " "
+  else
+    return ""
+  endif
+endfunction
+
+function! StatusBranch()
+  return fugitive#head()
 endfunction
 
 " status line
 set statusline=\ 
-set statusline+=%1*%{StatusProProjectName()}
-set statusline+=%2*%{StatusProProjectFilePath()}
-set statusline+=%2*%{StatusFileName()}
-set statusline+=%*%r " readonly flag
-set statusline+=%m " modified flag
+set statusline+=%1*%{StatusProjectName()}%0*
+set statusline+=%2*%{StatusFileName()}%0*
+set statusline+=%3*%{StatusBranch()}%0*
+set statusline+=%=
+set statusline+=0x%B
 set statusline+=\ 
-set statusline+=%3*%l " line number
+set statusline+=%l " line number
 set statusline+=,
 set statusline+=%c " column number
 set statusline+=\ 
 set statusline+=%p " percentage through the file
 set statusline+=%% " literal percent
+set statusline+=\ %{''.(&fenc!=''?&fenc:&enc).''}
+set statusline+=\ %{&ff}
+set statusline+=\ 
 
 " show line numbers
 set number
