@@ -17,6 +17,9 @@ set completeopt=menu,menuone,noinsert,noselect
 " command line completion
 set wildmenu
 
+" no popup completion menu in command line
+set wildoptions=tagfile
+
 " open splits below and to the right
 set splitbelow splitright
 
