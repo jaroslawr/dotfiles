@@ -16,4 +16,5 @@ setting "font" "Ubuntu Mono 12"
 setting "use-theme-colors" "false"
 setting "background-color" "#181818"
 setting "foreground-color" "#f5f5f5"
-setting "palette" "['#181818', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#e2e4e5', '#78787e', '#ff5c57', '#5af78e', '#f3f99d', '#57c7ff', '#ff6ac1', '#9aedfe', '#f5f5f5']"
+# derp theme from https://terminal.sexy/ (xcolors.net collection)
+setting "palette" "['#111111', '#d36265', '#aece91', '#e7e18c', '#5297cf', '#963c59', '#5e7175', '#bebebe', '#666666', '#ef8171', '#cfefb3', '#fff796', '#74b8ef', '#b85e7b', '#a3babf', '#ffffff']"
