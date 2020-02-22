@@ -31,8 +31,8 @@ hi! Directory ctermfg=12
 
 " ui
 hi! LineNr ctermfg=246
-hi! CursorLine ctermbg=236 cterm=NONE
-hi! CursorLineNr ctermbg=236
+hi! CursorLine ctermbg=235 cterm=NONE
+hi! CursorLineNr ctermbg=235
 hi! Msg ctermbg=NONE ctermfg=7 cterm=NONE
 hi! ErrorMsg ctermbg=NONE ctermfg=1 cterm=none
 hi! WarningMsg ctermbg=NONE ctermfg=1 cterm=none
