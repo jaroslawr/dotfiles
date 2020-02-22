@@ -58,7 +58,7 @@ hi! QuickFixLine ctermbg=238 ctermfg=NONE
 hi! qfError ctermfg=9
 
 " folds
-hi! FoldColumn ctermbg=0 ctermfg=0
+hi! FoldColumn ctermbg=NONE ctermfg=0
 hi! Folded ctermbg=NONE ctermfg=3
 
 " markdown
