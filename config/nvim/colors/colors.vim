@@ -33,13 +33,14 @@ hi! Directory ctermfg=12
 hi! LineNr ctermfg=246
 hi! CursorLine ctermbg=236 cterm=NONE
 hi! CursorLineNr ctermbg=236
+hi! Msg ctermbg=NONE ctermfg=7 cterm=NONE
 hi! ErrorMsg ctermbg=NONE ctermfg=1 cterm=none
 hi! WarningMsg ctermbg=NONE ctermfg=1 cterm=none
 hi! VertSplit ctermbg=NONE ctermfg=236 cterm=NONE
 
 " ui - status line
-hi! StatusLine ctermbg=NONE ctermfg=8 cterm=NONE
-hi! StatusLineNC ctermbg=NONE ctermfg=8 cterm=NONE
+hi! StatusLine ctermbg=NONE ctermfg=7 cterm=NONE
+hi! StatusLineNC ctermbg=NONE ctermfg=7 cterm=NONE
 hi! User1 ctermbg=NONE ctermfg=11 " status line - project
 hi! User2 ctermbg=NONE ctermfg=2 " status line - file name
 hi! User3 ctermbg=NONE ctermfg=9 " status line - branch
