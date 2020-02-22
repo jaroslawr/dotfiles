@@ -126,7 +126,16 @@ set showcmd
 set t_ts=]2;
 set t_fs=\\
 set title
-autocmd BufEnter * let &titlestring = expand("%:t") . ' '
+
+function Title()
+  let l:path = expand("%:t")
+  if len(l:path) > 0
+    return l:path
+  else
+    return fnamemodify(getcwd(), ":t")
+  endif
+endfunction
+autocmd VimEnter,WinEnter,BufEnter * let &titlestring = Title()
 
 " highlight current line in active window
 augroup CursorLineOnlyInActiveWindow
