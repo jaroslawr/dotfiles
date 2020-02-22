@@ -22,7 +22,8 @@ hi! Comment ctermfg=7 cterm=NONE
 hi! Whitespace ctermbg=NONE ctermfg=NONE cterm=NONE
 
 " buffer
-hi! Search ctermbg=6
+hi! IncSearch ctermbg=3 ctermfg=0 cterm=NONE
+hi! Search ctermbg=NONE ctermfg=10
 hi! Visual ctermbg=3 ctermfg=0
 hi! MatchParen ctermbg=6 ctermfg=0 cterm=NONE
 hi! EndOfBuffer ctermfg=240 cterm=NONE
