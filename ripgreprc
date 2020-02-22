@@ -3,5 +3,6 @@
 --colors=path:fg:11
 --colors=path:style:nobold
 --colors=match:none
---colors=match:fg:10
+--colors=match:bg:11
+--colors=match:fg:0
 --colors=match:style:nobold
