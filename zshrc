@@ -142,6 +142,14 @@ alias findpkgs="dpkg-query -f '\${binary:Package}\n' -W | grep"
 # Notes
 alias n="nvim ~/txt/notes.md"
 
+function rg() {
+    if [[ -t 1 ]]; then
+        /usr/bin/rg --color=always --heading --line-number $@ | less -FRS
+    else
+        /usr/bin/rg $@
+    fi
+}
+
 # PROJECTS
 
 projects_root=~/Projects
