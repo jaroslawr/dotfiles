@@ -195,6 +195,10 @@ nnoremap <leader>q :wq<CR>
 nnoremap <leader>ce :edit ~/.config/nvim/init.vim<CR>
 nnoremap <leader>cr :source ~/.config/nvim/init.vim<CR>
 
+" leader - make
+nnoremap <leader>mm :make<CR>
+nnoremap <leader>md :Dispatch<CR>
+
 " leader - projects
 nnoremap <leader>pp :ProFzfProjects<CR>
 nnoremap <leader>pf :ProFzfFilesInProject<CR>
@@ -210,3 +214,15 @@ nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gl :Glog<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gc :Gcommit<CR>
+
+" python - jedi
+" jedi will conflict with leader mappings if this is not set
+let g:jedi#goto_command = "<leader>jg"
+let g:jedi#documentation_command = "<leader>jd"
+let g:jedi#usages_command = "<leader>ju"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#goto_assignments_command = ""
+let g:jedi#goto_stubs_command = ""
+let g:jedi#goto_definitions_command = ""
+let g:jedi#rename_command = ""
+
