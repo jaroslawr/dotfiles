@@ -45,6 +45,10 @@ set mouse=a
 " grep with ripgrep
 set grepprg=rg\ --vimgrep\ $*
 
+" FZF
+
+autocmd FileType fzf set laststatus=0 | autocmd WinLeave <buffer> set laststatus=2
+
 " MARKDOWN
 
 " enable folding
