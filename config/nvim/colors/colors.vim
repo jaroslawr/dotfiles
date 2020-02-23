@@ -95,7 +95,12 @@ hi! def link vimFuncName Keyword
 " git
 hi! gitHash ctermfg=13
 
-" git - commit
+" gitcommit - message
+hi! gitcommitSummary ctermfg=15
+hi! gitcommitOverflow ctermfg=15
+hi! gitcommitBlank ctermfg=9
+
+" gitcommit - body
 hi! gitcommitComment ctermfg=7
 hi! gitcommitHeader ctermfg=7
 hi! gitcommitSelected ctermfg=7
