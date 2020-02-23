@@ -54,7 +54,8 @@ hi! Pmenu ctermbg=236 ctermfg=15
 hi! PmenuSel ctermbg=240 ctermfg=3
 
 " netrw
-hi! Directory ctermfg=6
+hi! Directory ctermfg=4
+hi! netrwExe ctermfg=1
 
 " quickfix
 hi! QuickFixLine ctermbg=238 ctermfg=NONE
