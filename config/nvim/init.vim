@@ -5,6 +5,9 @@ set nocompatible
 source ~/.config/nvim/projects.vim
 source /usr/share/doc/fzf/examples/fzf.vim
 
+" refresh externally changed files
+autocmd FocusGained,BufEnter * :checktime
+
 " autowrite when changing buffers etc.
 set autowrite
 
