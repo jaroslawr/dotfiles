@@ -1,6 +1,6 @@
 --colors=line:fg:white
 --colors=line:style:nobold
---colors=path:fg:11
+--colors=path:fg:12
 --colors=path:style:nobold
 --colors=match:none
 --colors=match:fg:9

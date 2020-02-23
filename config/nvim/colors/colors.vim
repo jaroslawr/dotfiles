@@ -10,9 +10,9 @@ hi! String ctermfg=2
 hi! Number ctermfg=3
 hi! Identifier ctermfg=1
 hi! Function ctermfg=3
-hi! Statement ctermfg=6
+hi! Statement ctermfg=4
 hi! Keyword ctermfg=1
-hi! PreProc ctermfg=4
+hi! PreProc ctermfg=6
 hi! Include ctermfg=1
 hi! Type ctermfg=8
 hi! Special ctermfg=1
@@ -22,12 +22,11 @@ hi! Comment ctermfg=7 cterm=NONE
 hi! Whitespace ctermbg=NONE ctermfg=NONE cterm=NONE
 
 " buffer
-hi! IncSearch ctermbg=3 ctermfg=0 cterm=NONE
-hi! Search ctermbg=2 ctermfg=0
-hi! Visual ctermbg=3 ctermfg=0
+hi! Visual ctermbg=11 ctermfg=0
+hi! IncSearch ctermbg=8 ctermfg=0 cterm=NONE
+hi! Search ctermbg=NONE ctermfg=9
 hi! MatchParen ctermbg=NONE ctermfg=9 cterm=NONE
 hi! EndOfBuffer ctermfg=240 cterm=NONE
-hi! Directory ctermfg=6
 
 " ui
 hi! LineNr ctermfg=246
@@ -54,23 +53,26 @@ hi! TabLineSel ctermbg=NONE ctermfg=246 cterm=NONE
 hi! Pmenu ctermbg=236 ctermfg=15
 hi! PmenuSel ctermbg=240 ctermfg=3
 
+" netrw
+hi! Directory ctermfg=6
+
 " quickfix
 hi! QuickFixLine ctermbg=238 ctermfg=NONE
 hi! qfError ctermfg=9
 
 " folds
 hi! FoldColumn ctermbg=NONE ctermfg=0
-hi! Folded ctermbg=NONE ctermfg=3
+hi! Folded ctermbg=NONE ctermfg=11
 
 " markdown
-hi! markdownHeadingDelimiter ctermfg=3
-hi! markdownH1 ctermfg=3
-hi! markdownH2 ctermfg=3
-hi! markdownH3 ctermfg=3
-hi! markdownH4 ctermfg=3
-hi! markdownH5 ctermfg=3
-hi! markdownH6 ctermfg=3
-hi! markdownUrl ctermfg=12
+hi! markdownHeadingDelimiter ctermfg=11
+hi! markdownH1 ctermfg=11
+hi! markdownH2 ctermfg=11
+hi! markdownH3 ctermfg=11
+hi! markdownH4 ctermfg=11
+hi! markdownH5 ctermfg=11
+hi! markdownH6 ctermfg=11
+hi! markdownUrl ctermfg=4
 hi! markdownError ctermfg=1
 
 " python
