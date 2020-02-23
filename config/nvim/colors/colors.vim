@@ -23,7 +23,7 @@ hi! Whitespace ctermbg=NONE ctermfg=NONE cterm=NONE
 
 " buffer
 hi! Visual ctermbg=11 ctermfg=0
-hi! IncSearch ctermbg=8 ctermfg=0 cterm=NONE
+hi! IncSearch ctermbg=9 ctermfg=0 cterm=NONE
 hi! Search ctermbg=NONE ctermfg=9
 hi! MatchParen ctermbg=NONE ctermfg=9 cterm=NONE
 hi! EndOfBuffer ctermfg=240 cterm=NONE
