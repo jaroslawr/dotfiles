@@ -187,10 +187,13 @@ nnoremap <M-/> :copen<CR>:cc<CR>
 " leader - general
 inoremap jj <Esc>
 let mapleader = " "
-nnoremap <leader>r :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>x :qall<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :wq<CR>
+
+" leader - config
+nnoremap <leader>ce :edit ~/.config/nvim/init.vim<CR>
+nnoremap <leader>cr :source ~/.config/nvim/init.vim<CR>
 
 " leader - projects
 nnoremap <leader>pp :ProFzfProjects<CR>
