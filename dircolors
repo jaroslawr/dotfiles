@@ -1,6 +1,6 @@
 # Good reference on the syntax:
 # https://github.com/otterley/dotfiles/blob/master/.dircolors.xterm-256color
 
-DIR 38;5;12
-EXEC 38;5;11
-LINK 38;5;13
+DIR 38;5;6
+EXEC 38;5;1
+LINK 38;5;4

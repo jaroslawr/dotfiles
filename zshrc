@@ -3,7 +3,7 @@
 # ENVIRONMENT
 
 export EDITOR=nvim
-export FZF_DEFAULT_OPTS="--layout=reverse --color 16"
+export FZF_DEFAULT_OPTS="--layout=reverse --color 16,fg+:11,hl+:9,hl:9,pointer:9"
 export FZF_TMUX=1
 export PATH="${HOME}/bin:${PATH}"
 export PROJECTS_ROOT="${HOME}/Projects"
@@ -124,7 +124,7 @@ precmd() {
 
 # Set prompt
 PROMPT='%F{11}%~%E %F{9}${vcs_info_msg_0_}
-%F{2}> %f'
+%F{10}> %f'
 
 # OVERRIDES
 
