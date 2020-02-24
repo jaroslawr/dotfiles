@@ -12,7 +12,7 @@ function setting() {
 setting "allow-bold" "false"
 setting "cell-height-scale" "1.1"
 setting "use-system-font" "false"
-setting "font" "Fira Code 11"
+setting "font" "Fira Code weight=453 11" # Fira Code Retina
 setting "use-theme-colors" "false"
 setting "background-color" "#141010"
 setting "foreground-color" "#fff2f2"
