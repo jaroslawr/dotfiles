@@ -85,12 +85,8 @@ hi! def link javaScriptBraces Normal
 " sql
 hi! def link sqlKeyword sqlStatement
 
-" diff
-hi! DiffAdd ctermbg=NONE ctermfg=10
-hi! DiffDelete ctermbg=NONE ctermfg=9
-hi! DiffChange ctermbg=NONE ctermfg=11 " changed line
-hi! DiffText ctermbg=8 ctermfg=11 " changed text in changed line
-hi! DiffDelete ctermbg=NONE ctermfg=8
+" xml
+hi! def link xmlEndTag xmlTag
 
 " vimscript
 hi! def link vimFuncName Keyword
@@ -98,12 +94,12 @@ hi! def link vimFuncName Keyword
 " git
 hi! gitHash ctermfg=13
 
-" gitcommit - message
+" git - commit message header
 hi! gitcommitSummary ctermfg=15
 hi! gitcommitOverflow ctermfg=15
 hi! gitcommitBlank ctermfg=9
 
-" gitcommit - body
+" git - commit message body
 hi! gitcommitComment ctermfg=7
 hi! gitcommitHeader ctermfg=7
 hi! gitcommitSelected ctermfg=7
@@ -118,3 +114,10 @@ hi! gitcommitUntrackedFile ctermfg=7
 
 " git - fugitive
 hi! fugitiveSymbolicRef ctermfg=9
+
+" git - diff
+hi! DiffAdd ctermbg=NONE ctermfg=10
+hi! DiffDelete ctermbg=NONE ctermfg=9
+hi! DiffChange ctermbg=NONE ctermfg=11 " changed line
+hi! DiffText ctermbg=8 ctermfg=11 " changed text in changed line
+hi! DiffDelete ctermbg=NONE ctermfg=8
