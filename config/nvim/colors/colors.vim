@@ -30,19 +30,19 @@ hi! EndOfBuffer ctermfg=240 cterm=NONE
 
 " ui
 hi! LineNr ctermfg=246
-hi! CursorLine ctermbg=235 cterm=NONE
-hi! CursorLineNr ctermbg=235
+hi! CursorLine ctermbg=236 cterm=NONE
+hi! CursorLineNr ctermbg=236
 hi! Msg ctermbg=NONE ctermfg=7 cterm=NONE
 hi! ErrorMsg ctermbg=NONE ctermfg=1 cterm=none
 hi! WarningMsg ctermbg=NONE ctermfg=1 cterm=none
 hi! VertSplit ctermbg=NONE ctermfg=236 cterm=NONE
 
 " ui - status line
-hi! StatusLine ctermbg=NONE ctermfg=7 cterm=NONE
-hi! StatusLineNC ctermbg=NONE ctermfg=7 cterm=NONE
-hi! User1 ctermbg=NONE ctermfg=11 " status line - project
-hi! User2 ctermbg=NONE ctermfg=10 " status line - file name
-hi! User3 ctermbg=NONE ctermfg=9 " status line - branch
+hi! StatusLine ctermbg=234 ctermfg=7 cterm=NONE
+hi! StatusLineNC ctermbg=234 ctermfg=7 cterm=NONE
+hi! User1 ctermbg=234 ctermfg=11 " status line - project
+hi! User2 ctermbg=234 ctermfg=12 " status line - file name
+hi! User3 ctermbg=234 ctermfg=13 " status line - branch
 
 " ui - tabs
 hi! TabLineFill ctermbg=NONE ctermfg=246 cterm=NONE
@@ -92,7 +92,12 @@ hi! def link xmlEndTag xmlTag
 hi! def link vimFuncName Keyword
 
 " git
-hi! gitHash ctermfg=13
+hi! gitKeyword ctermfg=8
+hi! gitIdentityKeyword ctermfg=8
+hi! gitHash ctermfg=5
+hi! gitIdentity ctermfg=15
+hi! gitEmail ctermfg=4
+hi! gitDate ctermfg=15
 
 " git - commit message header
 hi! gitcommitSummary ctermfg=15
@@ -116,8 +121,12 @@ hi! gitcommitUntrackedFile ctermfg=7
 hi! fugitiveSymbolicRef ctermfg=9
 
 " git - diff
-hi! DiffAdd ctermbg=NONE ctermfg=10
-hi! DiffDelete ctermbg=NONE ctermfg=9
-hi! DiffChange ctermbg=NONE ctermfg=11 " changed line
-hi! DiffText ctermbg=8 ctermfg=11 " changed text in changed line
-hi! DiffDelete ctermbg=NONE ctermfg=8
+hi! diffSubname ctermbg=NONE ctermfg=7
+hi! diffAdded ctermbg=NONE ctermfg=2
+hi! diffRemoved ctermbg=NONE ctermfg=1
+
+" git - diff mode
+hi! DiffAdd ctermbg=NONE ctermfg=2
+hi! DiffDelete ctermbg=NONE ctermfg=1
+hi! DiffChange ctermbg=NONE ctermfg=NONE " changed line
+hi! DiffText ctermbg=NONE ctermfg=4 " changed text in changed line

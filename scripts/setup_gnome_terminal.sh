@@ -14,6 +14,6 @@ setting "cell-height-scale" "1.1"
 setting "use-system-font" "false"
 setting "font" "Fira Code weight=453 11" # Fira Code Retina
 setting "use-theme-colors" "false"
-setting "background-color" "#141010"
+setting "background-color" "#191818"
 setting "foreground-color" "#fff2f2"
-setting "palette" "['#141010', '#d88282', '#c7d882', '#d8c082', '#82b9d8', '#d882a1', '#82d8ce', '#999999', '#ccadad', '#f28585', '#dcf285', '#f2d385', '#85cbf2', '#f285ac', '#85f2e5', '#fff2f2']"
+setting "palette" "['#191818', '#ffb2b2', '#b2ffd8', '#fff2b2', '#b2ebff', '#ffc5b2', '#b2ffeb', '#999999', '#ccadad', '#ff7f7f', '#7fffbf', '#ffe97f', '#7fdfff', '#ff9f7f', '#7fffdf', '#fff2f2']"

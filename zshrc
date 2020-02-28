@@ -123,8 +123,8 @@ precmd() {
 }
 
 # Set prompt
-PROMPT='%F{11}%~%E %F{9}${vcs_info_msg_0_}
-%F{9}> %f'
+PROMPT='%F{11}%~%E %F{13}${vcs_info_msg_0_}
+%F{12}> %f'
 
 # OVERRIDES
 

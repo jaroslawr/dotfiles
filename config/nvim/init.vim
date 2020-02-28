@@ -91,7 +91,7 @@ function! StatusFileName()
   if len(l:path) > 0
     return l:path . (&modified ? "*" : "") . (&readonly ? "#" : "") . " "
   else
-    return ""
+    return "- "
   endif
 endfunction
 
