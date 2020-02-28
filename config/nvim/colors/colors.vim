@@ -58,8 +58,9 @@ hi! Directory ctermfg=4
 hi! netrwExe ctermfg=1
 
 " quickfix
-hi! QuickFixLine ctermbg=238 ctermfg=NONE
-hi! qfError ctermfg=9
+hi! QuickFixLine ctermbg=236 ctermfg=NONE
+hi! qfFileName ctermfg=3
+hi! qfError ctermfg=3
 
 " folds
 hi! FoldColumn ctermbg=NONE ctermfg=0
