@@ -46,7 +46,7 @@ set clipboard=unnamed,unnamedplus
 set mouse=a
 
 " grep with ripgrep
-set grepprg=rg\ --vimgrep\ $*
+set grepprg=rg\ -n\ $*
 
 " FZF
 
