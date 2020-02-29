@@ -61,11 +61,14 @@ let g:markdown_folding=1
 function! MarkdownFoldText()
   return getline(v:foldstart) . "..."
 endfunction
-autocmd BufEnter *.md setlocal foldtext=MarkdownFoldText()
-autocmd BufEnter *.md setlocal fillchars=fold:\ 
+autocmd BufEnter *.md setlocal foldtext=MarkdownFoldText() fillchars=fold:\ 
 
 " start normal markdown with open folds
 autocmd BufRead *.md setlocal foldlevel=100
+
+" formatting
+autocmd BufRead *.md setlocal textwidth=80
+
 " start notes.md with closed folds
 autocmd BufRead ~/txt/notes.md setlocal foldlevel=1
 
