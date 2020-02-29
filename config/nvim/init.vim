@@ -48,6 +48,9 @@ set mouse=a
 " grep with ripgrep
 set grepprg=rg\ -n\ $*
 
+" command line abbreviation for current buffers working dir
+cabbr <expr> %% expand('%:h')
+
 " FZF
 
 autocmd FileType fzf set laststatus=0 | autocmd WinLeave <buffer> set laststatus=2
