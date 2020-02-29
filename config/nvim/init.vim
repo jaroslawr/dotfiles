@@ -67,7 +67,7 @@ autocmd BufEnter *.md setlocal foldtext=MarkdownFoldText() fillchars=fold:\
 autocmd BufRead *.md setlocal foldlevel=100
 
 " formatting
-autocmd BufRead *.md setlocal textwidth=80
+autocmd BufNewFile,BufRead *.md setlocal textwidth=80
 
 " start notes.md with closed folds
 autocmd BufRead ~/txt/notes.md setlocal foldlevel=1
