@@ -34,3 +34,4 @@ fi
 
 source scripts/setup_gnome_terminal.sh
 source scripts/set_default_browser.sh
+source scripts/setup_vim_helptags.sh
