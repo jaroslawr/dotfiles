@@ -5,16 +5,16 @@ set t_Co=256
 let g:colors_name = "colors"
 
 " text
-hi! Constant ctermfg=5
-hi! String ctermfg=2
+hi! Constant ctermfg=6
+hi! String ctermfg=5
 hi! Number ctermfg=3
 hi! Identifier ctermfg=15
 hi! Function ctermfg=3
 hi! Statement ctermfg=4
 hi! Keyword ctermfg=1
-hi! PreProc ctermfg=6
+hi! PreProc ctermfg=1
 hi! Include ctermfg=1
-hi! Type ctermfg=8
+hi! Type ctermfg=6
 hi! Special ctermfg=1
 hi! SpecialChar ctermfg=1
 hi! Delimiter ctermfg=7
@@ -29,7 +29,7 @@ hi! MatchParen ctermbg=NONE ctermfg=9 cterm=NONE
 hi! EndOfBuffer ctermfg=240 cterm=NONE
 
 " ui
-hi! LineNr ctermfg=246
+hi! LineNr ctermfg=243
 hi! CursorLine ctermbg=236 cterm=NONE
 hi! CursorLineNr ctermbg=236
 hi! Msg ctermbg=NONE ctermfg=7 cterm=NONE
@@ -38,11 +38,11 @@ hi! WarningMsg ctermbg=NONE ctermfg=1 cterm=none
 hi! VertSplit ctermbg=NONE ctermfg=236 cterm=NONE
 
 " ui - status line
-hi! StatusLine ctermbg=234 ctermfg=7 cterm=NONE
-hi! StatusLineNC ctermbg=234 ctermfg=7 cterm=NONE
-hi! User1 ctermbg=234 ctermfg=11 " status line - project
-hi! User2 ctermbg=234 ctermfg=12 " status line - file name
-hi! User3 ctermbg=234 ctermfg=13 " status line - branch
+hi! StatusLine ctermbg=235 ctermfg=7 cterm=NONE
+hi! StatusLineNC ctermbg=235 ctermfg=7 cterm=NONE
+hi! User1 ctermbg=235 ctermfg=11 " status line - project
+hi! User2 ctermbg=235 ctermfg=8 " status line - file name
+hi! User3 ctermbg=235 ctermfg=13 " status line - branch
 
 " ui - tabs
 hi! TabLineFill ctermbg=NONE ctermfg=246 cterm=NONE
