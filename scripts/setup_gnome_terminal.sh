@@ -9,7 +9,6 @@ function setting() {
   gsettings set "${PROFILE_KEY}" "${1}" "${2}"
 }
 
-setting "allow-bold" "false"
 setting "cell-height-scale" "1.1"
 setting "use-system-font" "false"
 setting "font" "Fira Code weight=453 11" # Fira Code Retina
