@@ -3,7 +3,7 @@
 # ENVIRONMENT
 
 export EDITOR=nvim
-export FZF_DEFAULT_OPTS="--layout=reverse --color 16,fg+:11,hl+:9,hl:9,pointer:9"
+export FZF_DEFAULT_OPTS="--layout=reverse --no-bold --color 16,fg+:11,hl+:9,hl:9,pointer:9"
 export FZF_TMUX=1
 export PATH="${HOME}/bin:${PATH}"
 export PROJECTS_ROOT="${HOME}/Projects"
