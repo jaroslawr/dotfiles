@@ -11,8 +11,8 @@ function setting() {
 
 setting "cell-height-scale" "1.1"
 setting "use-system-font" "false"
-setting "font" "Fira Code weight=453 11" # Fira Code Retina
+setting "font" "Ubuntu Mono 12"
 setting "use-theme-colors" "false"
-setting "background-color" "#1e1e1e"
+setting "background-color" "#232323"
 setting "foreground-color" "#ffffff"
-setting "palette" "['#1e1e1e', '#efa8a8', '#a8efd7', '#efe3a8', '#a8d7ef', '#efc6a8', '#a8efef', '#a38e8e', '#e0b7b7', '#ff6565', '#65ffcc', '#ffe565', '#65cbff', '#ffa565', '#65feff', '#ffffff']"
+setting "palette" "['#232323', '#efa8a8', '#a8efd7', '#efe3a8', '#a8d7ef', '#efc6a8', '#a8efef', '#a38e8e', '#e0b7b7', '#ff6565', '#65ffcc', '#ffe565', '#65cbff', '#ffa565', '#65feff', '#ffffff']"
