@@ -11,7 +11,7 @@ function setting() {
 
 setting "cell-height-scale" "1.1"
 setting "use-system-font" "false"
-setting "font" "Ubuntu Mono 12"
+setting "font" "JetBrains Mono 10"
 setting "use-theme-colors" "false"
 setting "background-color" "#232323"
 setting "foreground-color" "#ffffff"
