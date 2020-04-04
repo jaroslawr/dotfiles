@@ -110,6 +110,8 @@ set statusline=\
 set statusline+=%1*%{StatusProjectName()}%0*
 set statusline+=%2*%{StatusFileName()}%0*
 set statusline+=%3*%{StatusBranch()}%0*
+set statusline+=\ 
+set statusline+=%< " when cutting, start here
 set statusline+=%=
 set statusline+=0x%B
 set statusline+=\ 
