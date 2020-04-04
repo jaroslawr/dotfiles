@@ -20,6 +20,7 @@ hi! SpecialChar ctermfg=1 cterm=NONE
 hi! Delimiter ctermfg=7 cterm=NONE
 hi! Comment ctermfg=7 cterm=NONE
 hi! Whitespace ctermbg=NONE ctermfg=NONE cterm=NONE
+hi! Todo ctermbg=NONE ctermfg=3 cterm=NONE
 
 " buffer
 hi! Visual ctermbg=11 ctermfg=0 cterm=NONE
