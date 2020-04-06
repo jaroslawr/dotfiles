@@ -7,7 +7,7 @@
 
 [color "diff"]
         commit = 5
-        meta = 8 # filename
+        meta = 3 # filename
         frag = 4 # hunk offset
         old = 1
         new = 2
