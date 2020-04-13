@@ -1,7 +1,7 @@
 let s:home = expand('~')
 let s:projects_dir = s:home . '/Projects'
 let s:projects_parent_dir_re = '\(' . s:projects_dir . '\)/\([^/]\+\)[/]\?\(.*\)'
-let s:projects_config_dir = expand('~/.config/nvim/projects')
+let s:projects_config_dir = expand('~/.vim/projects')
 let s:project_config_file_glob = resolve(s:projects_config_dir) . '/' . '*.vim'
 
 " BASIC UTILITY FUNCTIONS

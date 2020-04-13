@@ -140,7 +140,7 @@ alias ls='ls -h -l --color --group-directories-first'
 alias findpkgs="dpkg-query -f '\${binary:Package}\n' -W | grep"
 
 # Notes
-alias n="nvim ~/txt/notes.md"
+alias n="vim ~/txt/notes.md"
 
 function rg() {
     if [[ -t 1 ]]; then

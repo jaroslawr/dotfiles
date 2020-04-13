@@ -24,8 +24,7 @@ rcup -d . \
      -x install.sh \
      -x scripts \
      -x bin \
-     -S config/nvim \
-     -S local/share/nvim
+     -S vim
 
 # Make scripts available
 if [[ ! -h "${HOME}/bin" ]]; then

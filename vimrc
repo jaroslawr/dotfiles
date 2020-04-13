@@ -200,8 +200,8 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :wq<CR>
 
 " leader - config
-nnoremap <leader>ce :edit ~/.config/nvim/init.vim<CR>
-nnoremap <leader>cr :source ~/.config/nvim/init.vim<CR>
+nnoremap <leader>ce :edit ~/.vimrc<CR>
+nnoremap <leader>cr :source ~/.vimrc<CR>
 
 " leader - make
 nnoremap <leader>mm :make<CR>
