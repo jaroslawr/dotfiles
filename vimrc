@@ -208,25 +208,9 @@ nnoremap <leader>q :wq<CR>
 nnoremap <leader>ce :edit ~/.vimrc<CR>
 nnoremap <leader>cr :source ~/.vimrc<CR>
 
-" leader - make
-nnoremap <leader>mm :make<CR>
-nnoremap <leader>md :Dispatch<CR>
-
-" leader - projects
-nnoremap <leader>pp :ProFzfProjects<CR>
-nnoremap <leader>pf :ProFzfFilesInProject<CR>
-nnoremap <leader>df :ProFzfFilesInWorkingDir<CR>
-nnoremap <leader>pr :ProOpenRoot<CR>
-nnoremap <leader>pg :ProGrepInProject
-nnoremap <leader>dg :ProGrepInWorkingDir
-nnoremap <leader>pm :ProMake<CR>
-nnoremap <leader>pc :ProEditConfigFile<CR>
-
-" leader - git
-nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gl :Glog<CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gc :Gcommit<CR>
+" leader - fuzzy find
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fb :Buffers<CR>
 
 " python - jedi
 " jedi will conflict with leader mappings if this is not set
