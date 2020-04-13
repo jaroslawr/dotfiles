@@ -200,6 +200,8 @@ nnoremap <M-/> :copen<CR>:cc<CR>
 " leader - general
 inoremap jj <Esc>
 let mapleader = " "
+xnoremap <leader>y y:call system("wl-copy", @")<cr>
+nnoremap <leader>p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
 nnoremap <leader>x :qall<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :wq<CR>
