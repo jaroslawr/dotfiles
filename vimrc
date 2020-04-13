@@ -189,13 +189,13 @@ let g:dispatch_compilers = { 'python3': 'python' }
 nnoremap <silent> <C-l> :nohlsearch<CR>
 
 " buffers
-nnoremap <M-;> :bprevious<CR>
-nnoremap <M-'> :bnext<CR>
+nnoremap ; :bprevious<CR>
+nnoremap ' :bnext<CR>
 
 " quickfix
-nnoremap <M-,> :cprevious!<CR>
-nnoremap <M-.> :cnext!<CR>
-nnoremap <M-/> :copen<CR>:cc<CR>
+nnoremap , :cprevious!<CR>
+nnoremap . :cnext!<CR>
+nnoremap / :copen<CR>:cc<CR>
 
 " leader - general
 inoremap jj <Esc>
