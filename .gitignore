@@ -1,12 +1,5 @@
-# Emacs
-emacs.d/var
-*.elc
-
 # Vim
-config/nvim/projects
-config/nvim/.netrwhist
-local/share/nvim/shada
-local/share/nvim/swap
+vim/.netrwhist
 
 # Fonts
 fonts/.fonts/.uuid
