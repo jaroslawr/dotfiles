@@ -75,6 +75,7 @@ hi! markdownH3 ctermfg=11 cterm=NONE
 hi! markdownH4 ctermfg=11 cterm=NONE
 hi! markdownH5 ctermfg=11 cterm=NONE
 hi! markdownH6 ctermfg=11 cterm=NONE
+hi! markdownItalic ctermfg=8 cterm=NONE
 hi! markdownUrl ctermfg=4 cterm=NONE
 hi! markdownError ctermfg=1 cterm=NONE
 
