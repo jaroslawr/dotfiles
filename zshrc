@@ -132,7 +132,7 @@ PROMPT='%F{11}%~%E %F{13}${vcs_info_msg_0_}
 alias cal='ncal -M -b'
 
 # Usable ls
-alias ls='ls -h -l --color --group-directories-first'
+alias ls='ls --color=auto --group-directories-first --literal --time-style=long-iso --human-readable'
 
 # ALIASES
 
