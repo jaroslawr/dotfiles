@@ -216,15 +216,3 @@ nnoremap <leader>cr :source ~/.vimrc<CR>
 " leader - fuzzy find
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fb :Buffers<CR>
-
-" python - jedi
-" jedi will conflict with leader mappings if this is not set
-let g:jedi#goto_command = "<leader>jg"
-let g:jedi#documentation_command = "<leader>jd"
-let g:jedi#usages_command = "<leader>ju"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#goto_assignments_command = ""
-let g:jedi#goto_stubs_command = ""
-let g:jedi#goto_definitions_command = ""
-let g:jedi#rename_command = ""
-
