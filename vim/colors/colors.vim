@@ -30,7 +30,7 @@ hi! MatchParen ctermbg=NONE ctermfg=9 cterm=NONE
 hi! EndOfBuffer ctermfg=240 cterm=NONE
 
 " ui
-hi! LineNr ctermfg=243 cterm=NONE
+hi! LineNr ctermfg=240 cterm=NONE
 hi! CursorLine ctermbg=236 cterm=NONE
 hi! CursorLineNr ctermbg=236 cterm=NONE
 hi! Msg ctermbg=NONE ctermfg=7 cterm=NONE

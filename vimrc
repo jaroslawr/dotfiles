@@ -26,6 +26,9 @@ set wildoptions=tagfile
 " open splits below and to the right
 set splitbelow splitright
 
+" character to use for window border
+set fillchars+=vert:│
+
 " do not wrap long lines
 set nowrap
 
@@ -64,7 +67,7 @@ let g:markdown_folding=1
 function! MarkdownFoldText()
   return getline(v:foldstart) . "..."
 endfunction
-autocmd BufEnter *.md setlocal foldtext=MarkdownFoldText() fillchars=fold:\ 
+autocmd BufEnter *.md setlocal foldtext=MarkdownFoldText() fillchars+=fold:\ 
 
 " start normal markdown with open folds
 autocmd BufRead *.md setlocal foldlevel=100
