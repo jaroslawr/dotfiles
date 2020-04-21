@@ -63,6 +63,10 @@ autocmd FileType fzf set laststatus=0 | autocmd WinLeave <buffer> set laststatus
 " enable folding
 let g:markdown_folding=1
 
+" highlight in blocks of so many lines
+" increased for long code snippets to not break markdown highlighting
+let g:markdown_minlines=200
+
 " change how the heading of the fold looks
 function! MarkdownFoldText()
   return getline(v:foldstart) . "..."
