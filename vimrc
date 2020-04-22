@@ -88,7 +88,7 @@ colorscheme colors
 
 function! StatusProjectName()
   if ProInProject()
-    return ProProjectName() . " "
+    return "  " . ProProjectName() . " "
   else
     return ""
   endif
@@ -102,31 +102,35 @@ function! StatusFileName()
   endif
 
   if len(l:path) > 0
-    return l:path . (&modified ? "*" : "") . (&readonly ? "#" : "") . " "
+    return "  " . l:path . (&modified ? "*" : "") . (&readonly ? "#" : "") . " "
   else
-    return "- "
+    return "  - "
   endif
 endfunction
 
 function! StatusBranch()
-  return fugitive#head()
+  let l:branch = fugitive#head()
+  if len(l:branch) > 0
+    return l:branch . " "
+  else
+    return ""
+  endif
 endfunction
 
 " status line
-set statusline=\ 
-set statusline+=%1*%{StatusProjectName()}%0*
-set statusline+=%2*%{StatusFileName()}%0*
-set statusline+=%3*%{StatusBranch()}%0*
+set statusline=%1*%{StatusProjectName()}
+set statusline+=%{StatusBranch()}%0*
+set statusline+=%{StatusFileName()}
 set statusline+=\ 
 set statusline+=%< " when cutting, start here
 set statusline+=%=
-set statusline+=0x%B
-set statusline+=\ 
-set statusline+=%l " line number
+set statusline+=%1*\ 
+set statusline+=0x%02B\ 
+set statusline+=%03l " line number
 set statusline+=,
-set statusline+=%c " column number
+set statusline+=%03c " column number
 set statusline+=\ 
-set statusline+=%p " percentage through the file
+set statusline+=%02p " percentage through the file
 set statusline+=%% " literal percent
 set statusline+=\ %{''.(&fenc!=''?&fenc:&enc).''}
 set statusline+=\ %{&ff}
