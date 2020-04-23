@@ -11,8 +11,8 @@ function setting() {
 
 setting "cell-height-scale" "1.1"
 setting "use-system-font" "false"
-setting "font" "JetBrains Mono 10"
+setting "font" "Fira Code 11"
 setting "use-theme-colors" "false"
 setting "background-color" "#232323"
 setting "foreground-color" "#ffffff"
-setting "palette" "['#232323', '#f99e9e', '#9ef9db', '#f9ea9e', '#9edbf9', '#f9c49e', '#9ef9f9', '#a38e8e', '#e0b7b7', '#ff6565', '#65ffcc', '#ffe565', '#65cbff', '#ffa565', '#65feff', '#ffffff']"
+setting "palette" "['#232323', '#f99e9e', '#9ef9db', '#f9e29e', '#9edbf9', '#f9c49e', '#9ef9f9', '#a38e8e', '#e0b7b7', '#ff6565', '#65ffcc', '#ffd865', '#65cbff', '#ffa565', '#65feff', '#ffffff']"
