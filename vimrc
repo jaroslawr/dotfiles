@@ -217,6 +217,9 @@ nnoremap <leader>x :qall<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :wq<CR>
 
+" leader - folding
+nnoremap <leader><leader> za
+
 " leader - config
 nnoremap <leader>ce :edit ~/.vimrc<CR>
 nnoremap <leader>cr :source ~/.vimrc<CR>
