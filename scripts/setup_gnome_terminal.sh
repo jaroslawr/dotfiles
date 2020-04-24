@@ -11,7 +11,7 @@ function setting() {
 
 setting "cell-height-scale" "1.1"
 setting "use-system-font" "false"
-setting "font" "Fira Code 11"
+setting "font" "Fira Code weight=453 11"
 setting "use-theme-colors" "false"
 setting "background-color" "#232323"
 setting "foreground-color" "#ffffff"
