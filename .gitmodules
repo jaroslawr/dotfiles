@@ -31,3 +31,6 @@
 [submodule "vim/pack/plugins/start/vim-eunuch"]
 	path = vim/pack/plugins/start/vim-eunuch
 	url = git@github.com:tpope/vim-eunuch.git
+[submodule "vim/pack/plugins/start/vim-bracketed-paste"]
+	path = vim/pack/plugins/start/vim-bracketed-paste
+	url = git@github.com:ConradIrwin/vim-bracketed-paste.git
