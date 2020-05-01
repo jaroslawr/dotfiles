@@ -1,11 +1,10 @@
 @import url("resource:///org/gnome/theme/gnome-shell.css");
 
 * {
-    font-family: Ubuntu !important;
+    font-family: Lato !important;
 }
 
 #panel * {
-    font-family: Ubuntu !important;
-    font-size: 11pt !important;
-    font-weight: normal !important;
+    font-family: Lato !important;
+    font-size: 12pt !important;
 }
