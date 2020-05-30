@@ -144,7 +144,7 @@ alias n="vim ~/txt/notes.md"
 
 function rg() {
     if [[ -t 1 ]]; then
-        /usr/bin/rg --color=always --heading --line-number $@ | less -FRS
+        /usr/bin/rg --color=always --line-number $@ | less -FRS
     else
         /usr/bin/rg $@
     fi
