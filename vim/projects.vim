@@ -114,28 +114,11 @@ command! ProFzfProjects call ProFzfProjects()
 
 function! ProOpenProject(project)
   let l:project_path = s:projects_dir . '/' . a:project
-  exec "edit! " . fnameescape(l:project_path)
+  exec "cd " . fnameescape(l:project_path)
+  exec "Explore " . fnameescape(l:project_path)
 endfunction
 
 command! ProOpenProject -nargs=1 call ProOpenProject(<q-args>)
-
-function! ProFzfFilesInWorkingDir()
-  let l:store_cwd = getcwd()
-  exec "cd " . expand('%:p:h')
-  call fzf#run({'sink': 'edit!', 'source': 'fdfind . -tf'})
-  exec "cd " . l:store_cwd
-endfunction
-
-command! ProFzfFilesInWorkingDir call ProFzfFilesInWorkingDir()
-
-function! ProGrepInWorkingDir(query)
-  let l:store_cwd = getcwd()
-  exec "cd " . expand('%:p:h')
-  exec "grep ". a:query
-  exec "cd " . l:store_cwd
-endfunction
-
-command! -nargs=1 ProGrepInWorkingDir call ProGrepInWorkingDir(<q-args>)
 
 " PROJECT-LOCAL COMMANDS
 
@@ -147,36 +130,6 @@ function! ProEditConfigFile()
 endfunction
 
 command! ProEditConfigFile call ProEditConfigFile()
-
-function! ProOpenRoot()
-  if s:ProRequireProject()
-    exec "edit! " . ProProjectRoot()
-  endif
-endfunction
-
-command! ProOpenRoot call ProOpenRoot()
-
-function! ProFzfFilesInProject()
-  if s:ProRequireProject()
-    let l:store_cwd = getcwd()
-    exec "cd " . ProProjectRoot()
-    call fzf#run({'sink': 'edit!', 'source': 'fdfind . -tf'})
-    exec "cd " . l:store_cwd
-  endif
-endfunction
-
-command! ProFzfFilesInProject call ProFzfFilesInProject()
-
-function! ProGrepInProject(query)
-  if s:ProRequireProject()
-    let l:store_cwd = getcwd()
-    exec "cd " . ProProjectRoot()
-    exec "grep " . a:query
-    exec "cd " . l:store_cwd
-  endif
-endfunction
-
-command! -nargs=1 ProGrepInProject call ProGrepInProject(<q-args>)
 
 function! s:ProMakeCmdRequire()
   if exists("b:ProMakeCmd") && len(b:ProMakeCmd) == 2

@@ -225,5 +225,6 @@ nnoremap <leader>ce :edit ~/.vimrc<CR>
 nnoremap <leader>cr :source ~/.vimrc<CR>
 
 " leader - fuzzy find
+nnoremap <leader>fp :ProFzfProjects<CR>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fb :Buffers<CR>
