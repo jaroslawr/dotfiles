@@ -1,0 +1,8 @@
+set -eu
+
+TIMESTAMP=$(date +%Y-%m)
+
+NOTES_DIR=~/Notes
+PLAINTEXT_NOTES=${NOTES_DIR}/notes.md
+ENCRYPTED_NOTES=${NOTES_DIR}/notes.md.gpg
+MONTHLY_ENCRYPTED_NOTES=${NOTES_DIR}/notes.${TIMESTAMP}.md.gpg

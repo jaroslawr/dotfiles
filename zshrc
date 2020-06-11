@@ -139,9 +139,6 @@ alias ls='ls --color=auto --group-directories-first --literal --time-style=long-
 # Output installed packages matching a query, in format suitable for xargs pipelines
 alias findpkgs="dpkg-query -f '\${binary:Package}\n' -W | grep"
 
-# Notes
-alias n="vim ~/txt/notes.md"
-
 function rg() {
     if [[ -t 1 ]]; then
         /usr/bin/rg --color=always --line-number $@ | less -FRS
