@@ -188,6 +188,7 @@ set autoindent
 set shiftwidth=4 expandtab
 
 " filetype-specific default indentation settings
+autocmd FileType go setlocal shiftwidth=8 noexpandtab
 autocmd FileType vim setlocal shiftwidth=2
 autocmd FileType yaml setlocal shiftwidth=2
 
