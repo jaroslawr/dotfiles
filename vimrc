@@ -230,3 +230,6 @@ nnoremap <leader>cr :source ~/.vimrc<CR>
 nnoremap <leader>fp :ProFzfProjects<CR>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fb :Buffers<CR>
+
+" leader - make
+nnoremap <leader>m :ProMake<CR>

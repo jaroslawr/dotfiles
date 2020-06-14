@@ -135,25 +135,27 @@ function! s:ProMakeCmdRequire()
   if exists("b:ProMakeCmd") && len(b:ProMakeCmd) == 2
     return 1
   else
-    echo "ProMake(): command not configured"
     return 0
+  endif
+endfunction
+
+function! s:ProMakePrg()
+  if exists("g:ProMakePrg")
+    return g:ProMakePrg
+  elseif exists("b:ProMakePrg")
+    return b:ProMakePrg
+  else
+    errot "ProMakePrg not set"
+    return ""
   endif
 endfunction
 
 function! ProMake()
   if s:ProRequireProject()
-    if !s:ProMakeCmdRequire()
-      return
-    endif
-
-    let l:store_cwd = getcwd()
     let l:store_makeprg = &makeprg
-    exec "cd " . ProProjectRoot()
-    exec "compiler " . b:ProMakeCmd[0]
-    let &makeprg = b:ProMakeCmd[1]
+    let &makeprg = s:ProMakePrg()
     make
     let &makeprg = l:store_makeprg
-    exec "cd " . l:store_cwd
   endif
 endfunction
 
