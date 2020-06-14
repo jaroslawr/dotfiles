@@ -5,10 +5,11 @@ set nocompatible
 source ~/.vim/projects.vim
 source /usr/share/doc/fzf/examples/fzf.vim
 
-" refresh externally changed files
+" automatically reload externally changed files
+set autoread
 autocmd FocusGained,BufEnter * :checktime
 
-" autowrite when changing buffers etc.
+" automatically save when compiling, switching buffers etc.
 set autowrite
 
 " search
