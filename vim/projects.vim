@@ -145,17 +145,20 @@ function! s:ProMakePrg()
   elseif exists("b:ProMakePrg")
     return b:ProMakePrg
   else
-    errot "ProMakePrg not set"
+    echoerr "Set ProMakePrg to use ProMake()"
     return ""
   endif
 endfunction
 
 function! ProMake()
   if s:ProRequireProject()
-    let l:store_makeprg = &makeprg
-    let &makeprg = s:ProMakePrg()
-    make
-    let &makeprg = l:store_makeprg
+      let l:makeprg = s:ProMakePrg()
+      if len(l:makeprg) > 0
+        let l:store_makeprg = &makeprg
+        let &makeprg = l:makeprg
+        make
+        let &makeprg = l:store_makeprg
+      endif
   endif
 endfunction
 
