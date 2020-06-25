@@ -3,6 +3,7 @@
 # ENVIRONMENT
 
 export EDITOR=vim
+export FZF_DEFAULT_COMMAND="fdfind --type f"
 export FZF_DEFAULT_OPTS="--layout=reverse --no-bold --color 16,fg+:11,hl+:9,hl:9,pointer:9"
 export FZF_TMUX=1
 export PATH="${HOME}/bin:${PATH}"
