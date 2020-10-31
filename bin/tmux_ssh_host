@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Given tmux pane parent process pid,
+# detect if ssh is running and print hostname
+
+set -e
+ps h -p $1 --ppid $1 -o cmd | awk '/^ssh/ { split($NF, tokens, "@"); print tokens[2] }'
