@@ -8,7 +8,7 @@ ENCRYPTED_NOTES=${NOTES_DIR}/notes.md.gpg
 MONTHLY_ENCRYPTED_NOTES=${NOTES_DIR}/notes.${TIMESTAMP}.md.gpg
 
 ntpull() {
-        rclone copy gdrive:Notes/notes.md.gpg ${NOTES_DIR}
+        rclone copy cloud:Notes/notes.md.gpg ${NOTES_DIR}
         gpg --yes -o ${PLAINTEXT_NOTES} -d ${ENCRYPTED_NOTES}
         rm ${ENCRYPTED_NOTES}
 }

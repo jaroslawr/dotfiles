@@ -5,8 +5,8 @@ gpg -o ${ENCRYPTED_NOTES} -r jrzeszotko@gmail.com -e ${PLAINTEXT_NOTES}
 
 cp ${ENCRYPTED_NOTES} ${MONTHLY_ENCRYPTED_NOTES}
 
-rclone copy ${ENCRYPTED_NOTES} gdrive:Notes/
-rclone copy ${MONTHLY_ENCRYPTED_NOTES} gdrive:Notes/
+rclone copy ${ENCRYPTED_NOTES} cloud:Notes/
+rclone copy ${MONTHLY_ENCRYPTED_NOTES} cloud:Notes/
 
 rm ${ENCRYPTED_NOTES}
 rm ${MONTHLY_ENCRYPTED_NOTES}
