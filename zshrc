@@ -148,6 +148,20 @@ function rg() {
     fi
 }
 
+# FUNCTIONS
+
+function t() {
+    if [[ -t 1 ]]; then
+        tree -a -f -i --dirsfirst --noreport -I .git --matchdirs | tail -n +2 | cut -c3- | less -FRS
+    else
+        tree -a -f -i --dirsfirst --noreport -I .git --matchdirs | tail -n +2 | cut -c3-
+    fi
+}
+
+function vt() {
+        tree -a -f -i --dirsfirst --noreport -I .git --matchdirs | tail -n +2 | cut -c3- | vim -
+}
+
 # PROJECTS
 
 projects_root=~/Projects
