@@ -84,7 +84,7 @@ autocmd BufNewFile,BufRead *.md setlocal textwidth=80 shiftwidth=4 tabstop=4 exp
 autocmd BufRead ~/Notes/notes.md setlocal foldlevel=1
 
 " push notes after write
-autocmd BufWrite ~/Notes/notes.md !ntpush
+autocmd BufWrite ~/Notes/notes.md Dispatch ntpush
 
 " APPEARANCE
 
