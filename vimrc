@@ -216,6 +216,7 @@ nnoremap / :copen<CR>:cc<CR>
 " leader - general
 inoremap jj <Esc>
 let mapleader = " "
+nnoremap <leader>b :bdelete!<CR>
 nnoremap <leader>x :qall!<CR>
 nnoremap <leader>w :w<CR>
 
