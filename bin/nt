@@ -1,3 +1,4 @@
 #!/bin/bash
 source ntcommon.sh
+ntpull
 exec vim ${PLAINTEXT_NOTES}

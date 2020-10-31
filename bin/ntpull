@@ -1,6 +1,3 @@
 #!/bin/bash
 source ntcommon.sh
-
-rclone copy gdrive:Notes/notes.md.gpg ${NOTES_DIR}
-gpg -o ${PLAINTEXT_NOTES} -d ${ENCRYPTED_NOTES}
-rm ${ENCRYPTED_NOTES}
+ntpull

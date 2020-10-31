@@ -81,7 +81,10 @@ autocmd BufRead *.md setlocal foldlevel=100
 autocmd BufNewFile,BufRead *.md setlocal textwidth=80 shiftwidth=4 tabstop=4 expandtab
 
 " start notes.md with closed folds
-autocmd BufRead ~/txt/notes.md setlocal foldlevel=1
+autocmd BufRead ~/Notes/notes.md setlocal foldlevel=1
+
+" push notes after write
+autocmd BufWrite ~/Notes/notes.md !ntpush
 
 " APPEARANCE
 
