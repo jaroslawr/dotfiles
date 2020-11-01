@@ -205,6 +205,9 @@ nnoremap <silent> <C-l> :nohlsearch<CR>
 nnoremap ; :bprevious<CR>
 nnoremap ' :bnext<CR>
 
+" windows
+nnoremap x :close<CR>
+
 " quickfix
 nnoremap , :cprevious!<CR>
 nnoremap . :cnext!<CR>
