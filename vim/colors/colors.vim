@@ -68,12 +68,12 @@ hi! Folded ctermbg=NONE ctermfg=11 cterm=NONE
 " markdown
 hi! markdownH1 ctermfg=11 cterm=NONE
 hi! markdownH1Delimiter ctermfg=11 cterm=NONE
-hi! markdownH2 ctermfg=13 cterm=NONE
-hi! markdownH2Delimiter ctermfg=13 cterm=NONE
-hi! markdownH3 ctermfg=14 cterm=NONE
-hi! markdownH3Delimiter ctermfg=14 cterm=NONE
-hi! markdownH4 ctermfg=12 cterm=NONE
-hi! markdownH4Delimiter ctermfg=12 cterm=NONE
+hi! markdownH2 ctermfg=3 cterm=NONE
+hi! markdownH2Delimiter ctermfg=3 cterm=NONE
+hi! markdownH3 ctermfg=13 cterm=NONE
+hi! markdownH3Delimiter ctermfg=13 cterm=NONE
+hi! markdownH4 ctermfg=5 cterm=NONE
+hi! markdownH4Delimiter ctermfg=5 cterm=NONE
 hi! markdownH5 ctermfg=8 cterm=NONE
 hi! markdownH5Delimiter ctermfg=8 cterm=NONE
 hi! markdownH6 ctermfg=8 cterm=NONE
