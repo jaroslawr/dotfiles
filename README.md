@@ -25,6 +25,14 @@ Update submodules to newest remote revisions:
 git submodule update --recursive --remote
 ```
 
+Remove submodule:
+
+```
+git submodule deinit <path>
+git rm <path>
+git commit -m "Removed <submodule>."
+rm -rf .git/modules/<path>
+```
 
 ## Manual configuration
 
