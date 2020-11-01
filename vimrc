@@ -76,7 +76,7 @@ autocmd!
 " formatting
 autocmd BufNewFile,BufRead *.md setlocal textwidth=80 shiftwidth=4 tabstop=4 expandtab
 " push notes after write
-autocmd BufWrite ~/Notes/notes.md Dispatch ntpush
+autocmd BufWrite ~/Notes/notes.md AbortDispatch ntpush | Dispatch ntpush
 augroup end
 
 " APPEARANCE
