@@ -7,7 +7,7 @@ source /usr/share/doc/fzf/examples/fzf.vim
 
 " automatically reload externally changed files
 set autoread
-augroup autoread
+augroup vimrc-autoread
 autocmd!
 autocmd FocusGained,BufEnter * :checktime
 augroup end
@@ -38,7 +38,7 @@ set nowrap
 
 " indicate lines that do not fit screen
 set list
-augroup longlines
+augroup vimrc-longlines
 autocmd!
 autocmd BufEnter * set listchars=precedes:<,extends:>,tab:\ \ 
 augroup end
@@ -60,7 +60,7 @@ cabbr <expr> %% expand('%:h')
 
 " FZF
 
-augroup fzf
+augroup vimrc-fzf
 autocmd!
 autocmd FileType fzf set laststatus=0
 autocmd WinLeave <buffer> set laststatus=2
@@ -68,7 +68,7 @@ augroup end
 
 " MARKDOWN
 
-augroup markdown
+augroup vimrc-markdown
 autocmd!
 " formatting
 autocmd BufNewFile,BufRead *.md setlocal textwidth=80 shiftwidth=4 tabstop=4 expandtab
@@ -153,13 +153,13 @@ function Title()
   endif
 endfunction
 
-augroup title
+augroup vimrc-title
 autocmd!
 autocmd VimEnter,WinEnter,BufEnter * let &titlestring = Title()
 augroup end
 
 " highlight current line only in active window
-augroup currentline
+augroup vimrc-currentline
 autocmd!
 autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
@@ -183,7 +183,7 @@ set autoindent
 set shiftwidth=4 expandtab
 
 " filetype-specific default indentation settings
-augroup formatting
+augroup vimrc-formatting
 autocmd!
 autocmd FileType go setlocal shiftwidth=8 noexpandtab
 autocmd FileType vim setlocal shiftwidth=2
