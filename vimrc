@@ -52,8 +52,8 @@ set hidden
 " y copies to both X selections
 set clipboard=unnamed,unnamedplus
 
-" enable mouse everywhere
-set mouse=a
+" disable mouse
+set mouse=
 
 " grep with ripgrep
 set grepprg=rg\ -n\ $*
@@ -132,9 +132,6 @@ set statusline+=%% " literal percent
 set statusline+=\ %{''.(&fenc!=''?&fenc:&enc).''}
 set statusline+=\ %{&ff}
 set statusline+=\ 
-
-" show line numbers
-set number
 
 " buffers need some left padding
 set foldcolumn=1
