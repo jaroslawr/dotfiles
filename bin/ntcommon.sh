@@ -9,12 +9,17 @@ MONTHLY_ENCRYPTED_NOTES=${NOTES_DIR}/notes.${TIMESTAMP}.md.gpg
 
 ntpull() {
         rclone copy cloud:Notes/notes.md.gpg ${NOTES_DIR}
-        gpg --yes -q -o ${PLAINTEXT_NOTES} -d ${ENCRYPTED_NOTES}
+        gpg -q --yes -o ${PLAINTEXT_NOTES} -d ${ENCRYPTED_NOTES}
+        rm ${ENCRYPTED_NOTES}
 }
 
 cleanup() {
         if [[ -f ${ENCRYPTED_NOTES} ]]; then
                 rm ${ENCRYPTED_NOTES}
+        fi
+
+        if [[ -f ${MONTHLY_ENCRYPTED_NOTES} ]]; then
+                rm ${MONTHLY_ENCRYPTED_NOTES}
         fi
 }
 
