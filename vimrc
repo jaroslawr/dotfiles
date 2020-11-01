@@ -7,7 +7,10 @@ source /usr/share/doc/fzf/examples/fzf.vim
 
 " automatically reload externally changed files
 set autoread
+augroup autoread
+autocmd!
 autocmd FocusGained,BufEnter * :checktime
+augroup end
 
 " automatically save when compiling, switching buffers etc.
 set autowrite
@@ -35,7 +38,10 @@ set nowrap
 
 " indicate lines that do not fit screen
 set list
+augroup longlines
+autocmd!
 autocmd BufEnter * set listchars=precedes:<,extends:>,tab:\ \ 
+augroup end
 
 " keep a margin of visible lines when scrolling
 set scrolloff=8
@@ -57,15 +63,21 @@ cabbr <expr> %% expand('%:h')
 
 " FZF
 
-autocmd FileType fzf set laststatus=0 | autocmd WinLeave <buffer> set laststatus=2
+augroup fzf
+autocmd!
+autocmd FileType fzf set laststatus=0
+autocmd WinLeave <buffer> set laststatus=2
+augroup end
 
 " MARKDOWN
 
+augroup markdown
+autocmd!
 " formatting
 autocmd BufNewFile,BufRead *.md setlocal textwidth=80 shiftwidth=4 tabstop=4 expandtab
-
 " push notes after write
 autocmd BufWrite ~/Notes/notes.md Dispatch ntpush
+augroup end
 
 " APPEARANCE
 
@@ -146,14 +158,18 @@ function Title()
     return fnamemodify(getcwd(), ":t")
   endif
 endfunction
-autocmd VimEnter,WinEnter,BufEnter * let &titlestring = Title()
 
-" highlight current line in active window
-augroup CursorLineOnlyInActiveWindow
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-augroup END
+augroup title
+autocmd!
+autocmd VimEnter,WinEnter,BufEnter * let &titlestring = Title()
+augroup end
+
+" highlight current line only in active window
+augroup currentline
+autocmd!
+autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+augroup end
 
 " change cursor depending on mode
 let &t_SI = "\<Esc>[6 q"
@@ -173,9 +189,12 @@ set autoindent
 set shiftwidth=4 expandtab
 
 " filetype-specific default indentation settings
+augroup formatting
+autocmd!
 autocmd FileType go setlocal shiftwidth=8 noexpandtab
 autocmd FileType vim setlocal shiftwidth=2
 autocmd FileType yaml setlocal shiftwidth=2
+augroup end
 
 " vim-dispatch compiler settings
 let g:dispatch_compilers = { 'python3': 'python' }
