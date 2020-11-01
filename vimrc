@@ -49,9 +49,6 @@ set scrolloff=8
 " hide buffers, do not abandon them (e.g. when openining a new buffer)
 set hidden
 
-" y copies to both X selections
-set clipboard=unnamed,unnamedplus
-
 " disable mouse
 set mouse=
 
@@ -201,6 +198,11 @@ let g:dispatch_compilers = { 'python3': 'python' }
 " general
 nnoremap <silent> <C-l> :nohlsearch<CR>
 
+" clipboard
+xnoremap  y:call system("wl-copy", @")<cr>
+nnoremap  :let @"=substitute(system("wl-paste -n"),'<C-v><C-m>', '', 'g')<cr>p
+inoremap  <Esc>:let @"=substitute(system("wl-paste -n"),'<C-v><C-m>', '', 'g')<cr>pi
+
 " buffers
 nnoremap ; :bprevious<CR>
 nnoremap ' :bnext<CR>
@@ -219,10 +221,6 @@ let mapleader = " "
 nnoremap <leader>b :bdelete!<CR>
 nnoremap <leader>x :qall!<CR>
 nnoremap <leader>w :w<CR>
-
-" leader - clipboard
-xnoremap <leader>y y:call system("wl-copy", @")<cr>
-nnoremap <leader>p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
 
 " leader - folding
 nnoremap <leader><leader> za
