@@ -198,22 +198,13 @@ let g:dispatch_compilers = { 'python3': 'python' }
 " general
 nnoremap <silent> <C-l> :nohlsearch<CR>
 
+" windows
+nnoremap x :close<CR>
+
 " clipboard
 xnoremap  y:call system("wl-copy", @")<cr>
 nnoremap  :let @"=substitute(system("wl-paste -n"),'<C-v><C-m>', '', 'g')<cr>p
 inoremap  <Esc>:let @"=substitute(system("wl-paste -n"),'<C-v><C-m>', '', 'g')<cr>pi
-
-" buffers
-nnoremap ; :bprevious<CR>
-nnoremap ' :bnext<CR>
-
-" windows
-nnoremap x :close<CR>
-
-" quickfix
-nnoremap , :cprevious!<CR>
-nnoremap . :cnext!<CR>
-nnoremap / :copen<CR>:cc<CR>
 
 " leader - general
 inoremap jj <Esc>
@@ -221,9 +212,6 @@ let mapleader = " "
 nnoremap <leader>b :bdelete!<CR>
 nnoremap <leader>x :qall!<CR>
 nnoremap <leader>w :w<CR>
-
-" leader - folding
-nnoremap <leader><leader> za
 
 " leader - config
 nnoremap <leader>ce :edit ~/.vimrc<CR>
