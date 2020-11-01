@@ -202,9 +202,9 @@ nnoremap <silent> <C-l> :nohlsearch<CR>
 nnoremap x :close<CR>
 
 " clipboard
-xnoremap  y:call system("wl-copy", @")<cr>
-nnoremap  :let @"=substitute(system("wl-paste -n"),'<C-v><C-m>', '', 'g')<cr>p
-inoremap  <Esc>:let @"=substitute(system("wl-paste -n"),'<C-v><C-m>', '', 'g')<cr>pi
+xnoremap  y:call system("wl-copy", @")<cr>
+nnoremap  :let @"=substitute(system("wl-paste -n"),'<C-v><C-m>', '', 'g')<cr>p
+inoremap  <Esc>:let @"=substitute(system("wl-paste -n"),'<C-v><C-m>', '', 'g')<cr>pi
 
 " leader - general
 inoremap jj <Esc>
