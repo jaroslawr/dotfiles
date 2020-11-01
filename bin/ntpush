@@ -1,7 +1,7 @@
 #!/bin/bash
 source ntcommon.sh
 
-gpg -o ${ENCRYPTED_NOTES} -r jrzeszotko@gmail.com -e ${PLAINTEXT_NOTES}
+gpg --default-recipient-self -o ${ENCRYPTED_NOTES} -e ${PLAINTEXT_NOTES}
 
 cp ${ENCRYPTED_NOTES} ${MONTHLY_ENCRYPTED_NOTES}
 
