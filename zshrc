@@ -152,14 +152,14 @@ function rg() {
 
 function t() {
     if [[ -t 1 ]]; then
-        tree -a -f -i --dirsfirst --noreport -I .git --matchdirs | tail -n +2 | cut -c3- | less -FRS
+        tree -a -f -i --dirsfirst --noreport -I .git --matchdirs $@ | tail -n +2 | sed -E 's|^./||' | less -FRS
     else
-        tree -a -f -i --dirsfirst --noreport -I .git --matchdirs | tail -n +2 | cut -c3-
+        tree -a -f -i --dirsfirst --noreport -I .git --matchdirs $@ | tail -n +2 | sed -E 's|^./||'
     fi
 }
 
 function vt() {
-        tree -a -f -i --dirsfirst --noreport -I .git --matchdirs | tail -n +2 | cut -c3- | vim -
+        tree -a -f -i --dirsfirst --noreport -I .git --matchdirs $@ | tail -n +2 | sed -E 's|^./||' | vim -
 }
 
 # PROJECTS
