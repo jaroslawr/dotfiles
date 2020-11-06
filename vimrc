@@ -209,18 +209,15 @@ inoremap  <Esc>:let @"=substitute(system("wl-paste -n"),'<C-v><C-m>', '', 'g')<
 " leader - general
 inoremap jj <Esc>
 let mapleader = " "
-nnoremap <leader>b :bdelete!<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>d :bdelete!<CR>
 nnoremap <leader>x :qall!<CR>
 nnoremap <leader>w :w<CR>
 
 " leader - config
 nnoremap <leader>ce :edit ~/.vimrc<CR>
 nnoremap <leader>cr :source ~/.vimrc<CR>
-
-" leader - fuzzy find
-nnoremap <leader>fp :ProFzfProjects<CR>
-nnoremap <leader>ff :Files<CR>
-nnoremap <leader>fb :Buffers<CR>
 
 " leader - make
 nnoremap <leader>m :ProMake<CR>
