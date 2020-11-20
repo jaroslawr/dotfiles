@@ -1,33 +1,33 @@
 [submodule "vim/pack/plugins/start/fzf.vim"]
-	path = vim/pack/plugins/start/fzf.vim
+	path = dotfiles/vim/pack/plugins/start/fzf.vim
 	url = git@github.com:junegunn/fzf.vim
 [submodule "vim/pack/plugins/start/vim-fugitive"]
-	path = vim/pack/plugins/start/vim-fugitive
+	path = dotfiles/vim/pack/plugins/start/vim-fugitive
 	url = git@github.com:tpope/vim-fugitive.git
 [submodule "vim/pack/plugins/start/vim-dispatch"]
-	path = vim/pack/plugins/start/vim-dispatch
+	path = dotfiles/vim/pack/plugins/start/vim-dispatch
 	url = git@github.com:tpope/vim-dispatch
 [submodule "vim/pack/plugins/start/vim-compiler-python"]
-	path = vim/pack/plugins/start/vim-compiler-python
+	path = dotfiles/vim/pack/plugins/start/vim-compiler-python
 	url = git@github.com:aliev/vim-compiler-python.git
 [submodule "vim/pack/plugins/start/vim-mkdir"]
-	path = vim/pack/plugins/start/vim-mkdir
+	path = dotfiles/vim/pack/plugins/start/vim-mkdir
 	url = git@github.com:pbrisbin/vim-mkdir
 [submodule "vim/pack/plugins/start/vim-python-pep8-indent"]
-	path = vim/pack/plugins/start/vim-python-pep8-indent
+	path = dotfiles/vim/pack/plugins/start/vim-python-pep8-indent
 	url = git@github.com:Vimjas/vim-python-pep8-indent.git
 [submodule "vim/pack/plugins/start/vim-scriptease"]
-	path = vim/pack/plugins/start/vim-scriptease
+	path = dotfiles/vim/pack/plugins/start/vim-scriptease
 	url = git@github.com:tpope/vim-scriptease.git
 [submodule "vim/pack/plugins/start/vim-repeat"]
-	path = vim/pack/plugins/start/vim-repeat
+	path = dotfiles/vim/pack/plugins/start/vim-repeat
 	url = git@github.com:tpope/vim-repeat.git
 [submodule "vim/pack/plugins/start/vim-unimpaired"]
-	path = vim/pack/plugins/start/vim-unimpaired
+	path = dotfiles/vim/pack/plugins/start/vim-unimpaired
 	url = git@github.com:tpope/vim-unimpaired.git
 [submodule "vim/pack/plugins/start/vim-eunuch"]
-	path = vim/pack/plugins/start/vim-eunuch
+	path = dotfiles/vim/pack/plugins/start/vim-eunuch
 	url = git@github.com:tpope/vim-eunuch.git
 [submodule "vim/pack/plugins/start/vim-bracketed-paste"]
-	path = vim/pack/plugins/start/vim-bracketed-paste
+	path = dotfiles/vim/pack/plugins/start/vim-bracketed-paste
 	url = git@github.com:ConradIrwin/vim-bracketed-paste.git

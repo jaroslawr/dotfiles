@@ -20,10 +20,7 @@ git submodule update --recursive
 # Install dotfiles
 # -x excludes
 # -S symlinks whole directory
-rcup -d . \
-     -x install.sh \
-     -x scripts \
-     -x bin \
+rcup -d dotfiles \
      -S vim
 
 # Make scripts available
@@ -31,6 +28,6 @@ if [[ ! -h "${HOME}/bin" ]]; then
     ln -Ts "${PWD}/bin" "${HOME}/bin"
 fi
 
-source scripts/setup_gnome_terminal.sh
-source scripts/set_default_browser.sh
-source scripts/setup_vim_helptags.sh
+source setup/setup_gnome_terminal.sh
+source setup/setup_default_browser.sh
+source setup/setup_vim_helptags.sh
