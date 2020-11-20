@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-source common.sh
-source $BIN_ROOT/lib/pro.sh
+
+source lib.sh
+source ${LIB}/pro.sh
 
 pro "$@" | cut -f1

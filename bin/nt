@@ -1,4 +1,8 @@
 #!/bin/bash
-source ntcommon.sh
+
+source lib.sh
+source ${LIB}/nt.sh
+
 ntpull
+
 exec vim ${PLAINTEXT_NOTES}

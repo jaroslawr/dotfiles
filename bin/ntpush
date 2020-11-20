@@ -1,5 +1,7 @@
 #!/bin/bash
-source ntcommon.sh
+
+source lib.sh
+source ${LIB}/nt.sh
 
 gpg --default-recipient-self -o ${ENCRYPTED_NOTES} -e ${PLAINTEXT_NOTES}
 cp ${ENCRYPTED_NOTES} ${MONTHLY_ENCRYPTED_NOTES}
