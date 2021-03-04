@@ -9,9 +9,9 @@ function setting() {
   gsettings set "${PROFILE_KEY}" "${1}" "${2}"
 }
 
-setting "cell-height-scale" "1.05"
+setting "cell-height-scale" "1.10"
 setting "use-system-font" "false"
-setting "font" "Fira Code weight=453 11"
+setting "font" "Ubuntu Mono 12"
 setting "use-theme-colors" "false"
 setting "background-color" "#232323"
 setting "foreground-color" "#ffffff"
