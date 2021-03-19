@@ -58,14 +58,6 @@ set grepprg=rg\ -n\ $*
 " command line abbreviation for current buffers working dir
 cabbr <expr> %% expand('%:h')
 
-" FZF
-
-augroup vimrc-fzf
-autocmd!
-autocmd FileType fzf set laststatus=0
-autocmd WinLeave <buffer> set laststatus=2
-augroup end
-
 " MARKDOWN
 
 augroup vimrc-markdown
