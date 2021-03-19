@@ -71,7 +71,7 @@ augroup end
 augroup vimrc-markdown
 autocmd!
 " formatting
-autocmd BufNewFile,BufRead *.md setlocal textwidth=80 shiftwidth=4 tabstop=4 expandtab
+autocmd BufNewFile,BufRead *.md setlocal textwidth=80 shiftwidth=4 tabstop=4 expandtab formatoptions+=a
 " push notes after write
 autocmd BufWrite ~/Notes/notes.md AbortDispatch ntpush | Dispatch ntpush
 augroup end
