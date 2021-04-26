@@ -5,6 +5,9 @@
         email = jrzeszotko@gmail.com
         name = Jarosław Rzeszótko
 
+[alias]
+        lg = log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto)%h %<(100,trunc)%s %C(250)%>(20,trunc)%ad <%ae>' -n 10
+
 [color "diff"]
         commit = 5
         meta = 3 # filename
