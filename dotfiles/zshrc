@@ -150,16 +150,20 @@ function rg() {
 
 # FUNCTIONS
 
+function _t() {
+    find $@ -name '.git' -prune -o -printf '%p\n' | LC_ALL=C sort
+}
+
 function t() {
     if [[ -t 1 ]]; then
-        tree -a -f -i --dirsfirst --noreport -I .git --matchdirs $@ | tail -n +2 | sed -E 's|^./||' | less -FRS
+        _t $@ | less -FRS
     else
-        tree -a -f -i --dirsfirst --noreport -I .git --matchdirs $@ | tail -n +2 | sed -E 's|^./||'
+        _t $@
     fi
 }
 
 function vt() {
-        tree -a -f -i --dirsfirst --noreport -I .git --matchdirs $@ | tail -n +2 | sed -E 's|^./||' | vim -
+        _t $@ | vim -
 }
 
 # PROJECTS
