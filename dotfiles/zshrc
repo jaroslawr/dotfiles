@@ -127,19 +127,15 @@ precmd() {
 PROMPT='%F{11}%~%E %F{13}${vcs_info_msg_0_}
 %F{12}> %f'
 
-# OVERRIDES
-
-# Usable calendar
-alias cal='ncal -M -b'
-
-# Usable ls
-alias ls='ls --color=auto --group-directories-first --literal --time-style=long-iso --human-readable'
-
 # ALIASES
 
-# Output installed packages matching a query, in format suitable for xargs pipelines
-alias findpkgs="dpkg-query -f '\${binary:Package}\n' -W | grep"
+# cal with more readable output
+alias cal='ncal -M -b'
 
+# ls with more readable output
+alias ls='ls --color=auto --group-directories-first --literal --time-style=long-iso --human-readable'
+
+# diff with colors and pager, unless running in a pipeline
 function diff() {
     if [[ -t 1 ]]; then
         /usr/bin/diff --color=always $@ | less -FRS
@@ -148,6 +144,7 @@ function diff() {
     fi
 }
 
+# rg with colors and pager, unless running in a pipeline
 function rg() {
     if [[ -t 1 ]]; then
         /usr/bin/rg --color=always --line-number $@ | less -FRS
