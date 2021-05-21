@@ -155,6 +155,28 @@ function rg() {
 
 # FUNCTIONS
 
+# projects - go to project directory
+function cdp() {
+    if [[ $# -eq 0 ]]; then
+        local project=$(find "${PROJECTS_ROOT}" -mindepth 1 -maxdepth 1 -type d -printf "%P\n" | LC_ALL=C sort | fzf)
+        cd "${PROJECTS_ROOT}/${project}"
+    elif [[ $# -eq 1 ]]; then
+        cd "${PROJECTS_ROOT}/$1"
+    else
+        echo "cdp: Too many arguments"
+    fi
+}
+
+# projects - go to project root
+function cdpr() {
+    local project=$(pwd | sed -E -n "s|${PROJECTS_ROOT}/([^/]*)[/]?.*|\1|p")
+    if [[ -n "${project}" ]]; then
+        cd "${PROJECTS_ROOT}/${project}"
+    else
+        echo "cdr: Not in a project dir"
+    fi
+}
+
 # directory tree - 0-byte separated
 function dtree0() {
     if [[ "$#" -gt 1 ]]; then
@@ -185,34 +207,6 @@ function t() {
 function vt() {
         dtree0 $@ | xargs -0 -o vim
 }
-
-# PROJECTS
-
-projects_root=~/Projects
-projects_root_re="${projects_root}/.*/.*"
-project_dirs_glob="${projects_root}/*/"
-
-function cdp() {
-    if [[ -n "$1" ]]; then
-        cd "${projects_root}/$1"
-    else
-        project=$(pwd | sed -E -n "s|${projects_root}/([^/]*)[/]?.*|\1|p")
-        if [[ -n "${project}" ]]; then
-            cd "${projects_root}/${project}"
-        else
-            echo "Not in a project dir"
-        fi
-    fi
-}
-
-function _projects() {
-    # ${~x} enables glob expansion in variable x
-    for proj in ${~project_dirs_glob}; do
-        compadd -M 'm:{a-z}={A-Z}' -M 'r:|[._-]=* r:|=*' -M 'l:|=* r:|=*' "${proj:t}"
-    done
-}
-
-compdef _projects cdp
 
 # MISC
 
