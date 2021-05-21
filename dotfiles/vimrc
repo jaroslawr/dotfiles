@@ -224,4 +224,4 @@ nnoremap <leader>ce :edit ~/.vimrc<CR>
 nnoremap <leader>cr :source ~/.vimrc<CR>
 
 " leader - make
-nnoremap <leader>m :ProMake<CR>
+nnoremap <leader>m :make<CR>
