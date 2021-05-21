@@ -140,6 +140,14 @@ alias ls='ls --color=auto --group-directories-first --literal --time-style=long-
 # Output installed packages matching a query, in format suitable for xargs pipelines
 alias findpkgs="dpkg-query -f '\${binary:Package}\n' -W | grep"
 
+function diff() {
+    if [[ -t 1 ]]; then
+        /usr/bin/diff --color=always $@ | less -FRS
+    else
+        /usr/bin/diff $@
+    fi
+}
+
 function rg() {
     if [[ -t 1 ]]; then
         /usr/bin/rg --color=always --line-number $@ | less -FRS
