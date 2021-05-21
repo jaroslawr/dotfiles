@@ -201,6 +201,12 @@ xnoremap  y:call system("wl-copy -n", @")<cr>
 nnoremap  :let @"=substitute(system("wl-paste -n"),'<C-v><C-m>', '', 'g')<cr>p
 inoremap  <Esc>:let @"=substitute(system("wl-paste -n"),'<C-v><C-m>', '', 'g')<cr>pi
 
+" quickfix
+nnoremap , :cprev<CR>
+nnoremap . :cnext<CR>
+nnoremap / :copen<CR>
+nnoremap ? :cclose<CR>
+
 " leader - general
 inoremap jj <Esc>
 let mapleader = " "
