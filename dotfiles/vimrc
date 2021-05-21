@@ -3,7 +3,6 @@
 set nocompatible
 
 source ~/.vim/projects.vim
-source /usr/share/doc/fzf/examples/fzf.vim
 
 " automatically reload externally changed files
 set autoread
@@ -57,6 +56,10 @@ set grepprg=rg\ -n\ $*
 
 " command line abbreviation for current buffers working dir
 cabbr <expr> %% expand('%:h')
+
+" FZF
+source /usr/share/doc/fzf/examples/fzf.vim
+command! -bang Args call fzf#run(fzf#wrap('args', {'source': argv()}, <bang>0))
 
 " MARKDOWN
 
@@ -201,11 +204,14 @@ inoremap  <Esc>:let @"=substitute(system("wl-paste -n"),'<C-v><C-m>', '', 'g')<
 " leader - general
 inoremap jj <Esc>
 let mapleader = " "
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>d :bdelete!<CR>
 nnoremap <leader>x :qall!<CR>
 nnoremap <leader>w :w<CR>
+
+" leader - fzf
+nnoremap <leader>fa :Args<CR>
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fb :Buffers<CR>
 
 " leader - config
 nnoremap <leader>ce :edit ~/.vimrc<CR>
