@@ -158,20 +158,35 @@ function rg() {
 
 # FUNCTIONS
 
-function _t() {
-    find $@ -name '.git' -prune -o -printf '%p\n' | LC_ALL=C sort
-}
-
-function t() {
-    if [[ -t 1 ]]; then
-        _t $@ | less -FRS
+# directory tree - 0-byte separated
+function dtree0() {
+    if [[ "$#" -gt 1 ]]; then
+        while [[ "$#" -gt 0 ]]; do
+            dtree0 "$1"
+            shift
+        done
     else
-        _t $@
+        find $@ -name '.git' -prune -o -type f -print0 | sort -z
     fi
 }
 
+# directory tree - newline separated
+function dtree() {
+    dtree0 $@ | tr '\0' '\n'
+}
+
+# directory tree - with pager, unless running in a pipeline
+function t() {
+    if [[ -t 1 ]]; then
+        dtree $@ | less -FRS
+    else
+        dtree $@
+    fi
+}
+
+# directory tree - edit in vim
 function vt() {
-        _t $@ | vim -
+        dtree0 $@ | xargs -0 -o vim
 }
 
 # PROJECTS
