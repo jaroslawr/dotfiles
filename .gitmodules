@@ -7,9 +7,6 @@
 [submodule "vim/pack/plugins/start/vim-dispatch"]
 	path = dotfiles/vim/pack/plugins/start/vim-dispatch
 	url = git@github.com:tpope/vim-dispatch
-[submodule "vim/pack/plugins/start/vim-compiler-python"]
-	path = dotfiles/vim/pack/plugins/start/vim-compiler-python
-	url = git@github.com:aliev/vim-compiler-python.git
 [submodule "vim/pack/plugins/start/vim-mkdir"]
 	path = dotfiles/vim/pack/plugins/start/vim-mkdir
 	url = git@github.com:pbrisbin/vim-mkdir
