@@ -185,8 +185,11 @@ autocmd FileType vim setlocal shiftwidth=2
 autocmd FileType yaml setlocal shiftwidth=2
 augroup end
 
-" vim-dispatch compiler settings
-let g:dispatch_compilers = { 'python3': 'python' }
+" python compiler
+augroup python
+autocmd!
+autocmd FileType python compiler python
+augroup end
 
 " KEY BINDINGS
 
