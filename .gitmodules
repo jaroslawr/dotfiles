@@ -28,3 +28,6 @@
 [submodule "vim/pack/plugins/start/vim-bracketed-paste"]
 	path = dotfiles/vim/pack/plugins/start/vim-bracketed-paste
 	url = git@github.com:ConradIrwin/vim-bracketed-paste.git
+[submodule "dotfiles/vim/pack/plugins/start/vim-sleuth"]
+	path = dotfiles/vim/pack/plugins/start/vim-sleuth
+	url = git@github.com:tpope/vim-sleuth.git
