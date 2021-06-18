@@ -31,3 +31,6 @@
 [submodule "dotfiles/vim/pack/plugins/start/vim-sleuth"]
 	path = dotfiles/vim/pack/plugins/start/vim-sleuth
 	url = git@github.com:tpope/vim-sleuth.git
+[submodule "dotfiles/vim/pack/plugins/start/vim-trailing-whitespace"]
+	path = dotfiles/vim/pack/plugins/start/vim-trailing-whitespace
+	url = git@github.com:bronson/vim-trailing-whitespace.git
