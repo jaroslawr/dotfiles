@@ -4,6 +4,9 @@ set nocompatible
 
 source ~/.vim/projects.vim
 
+" no swap files
+set noswapfile
+
 " automatically reload externally changed files
 set autoread
 augroup vimrc-autoread
