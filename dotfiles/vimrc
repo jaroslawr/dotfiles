@@ -174,17 +174,6 @@ syntax enable
 filetype plugin indent on
 set autoindent
 
-" default indentation settings
-set shiftwidth=4 expandtab
-
-" filetype-specific default indentation settings
-augroup vimrc-formatting
-autocmd!
-autocmd FileType go setlocal shiftwidth=8 noexpandtab
-autocmd FileType vim setlocal shiftwidth=2
-autocmd FileType yaml setlocal shiftwidth=2
-augroup end
-
 " python compiler
 augroup python
 autocmd!
