@@ -183,6 +183,12 @@ autocmd!
 autocmd FileType python compiler python
 augroup end
 
+" jinja
+augroup jinja
+autocmd!
+autocmd BufNewFile,BufRead *.j2 set ft=jinja
+augroup end
+
 " KEY BINDINGS
 
 " general
