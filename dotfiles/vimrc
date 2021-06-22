@@ -124,8 +124,11 @@ set statusline+=%03c " column number
 set statusline+=\ 
 set statusline+=%02p " percentage through the file
 set statusline+=%% " literal percent
-set statusline+=\ %{''.(&fenc!=''?&fenc:&enc).''}
+set statusline+=\ ft=%{(&ft==''?'none':&ft)}
+set statusline+=\ sw=%{&sw}
+set statusline+=\ et=%{&et}
 set statusline+=\ %{&ff}
+set statusline+=\ %{''.(&fenc!=''?&fenc:&enc).''}
 set statusline+=\ 
 
 " buffers need some left padding
