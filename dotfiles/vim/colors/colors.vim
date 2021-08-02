@@ -37,6 +37,7 @@ hi! Msg ctermbg=NONE ctermfg=7 cterm=NONE
 hi! ErrorMsg ctermbg=NONE ctermfg=1 cterm=NONE
 hi! WarningMsg ctermbg=NONE ctermfg=1 cterm=NONE
 hi! VertSplit ctermbg=NONE ctermfg=236 cterm=NONE
+hi! SignColumn ctermbg=NONE
 
 " ui - status line
 hi! StatusLine ctermbg=235 ctermfg=3 cterm=NONE
@@ -96,6 +97,10 @@ hi! def link xmlEndTag xmlTag
 
 " vimscript
 hi! def link vimFuncName Keyword
+
+" ale
+hi! ALEErrorSign ctermfg=9
+hi! ALEWarningSign ctermfg=1
 
 " git
 hi! gitKeyword ctermfg=8 cterm=NONE
