@@ -34,3 +34,6 @@
 [submodule "dotfiles/vim/pack/plugins/start/vim-trailing-whitespace"]
 	path = dotfiles/vim/pack/plugins/start/vim-trailing-whitespace
 	url = git@github.com:bronson/vim-trailing-whitespace.git
+[submodule "dotfiles/vim/pack/plugins/start/ale"]
+	path = dotfiles/vim/pack/plugins/start/ale
+	url = git@github.com:dense-analysis/ale.git
