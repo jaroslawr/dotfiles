@@ -4,5 +4,6 @@ tags
 *.o
 # Python
 __pycache__/
+.mypy_cache/
 *.pyc
 *.pyi
