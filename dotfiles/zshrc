@@ -185,7 +185,7 @@ function dtree0() {
             shift
         done
     else
-        find $@ -name '.git' -prune -o -type f -print0 | sort -z
+        fdfind --type f -0 "." $1 | sort -z
     fi
 }
 
