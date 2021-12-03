@@ -6,7 +6,7 @@
         name = Jarosław Rzeszótko
 
 [alias]
-        lg = log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto)%h %<(100,trunc)%s %C(250)%>(20,trunc)%ad <%ae>'
+        lg = log --date=format:'%Y-%m-%d %H:%M' --format='%C(250)%ad %C(auto)%h %<(100,trunc)%s %C(250)%>(20,trunc) <%ae>'
         head = show --pretty=medium --no-patch
 
 [color "diff"]
