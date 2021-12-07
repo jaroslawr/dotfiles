@@ -31,3 +31,4 @@ fi
 source setup/setup_gnome_terminal.sh
 source setup/setup_default_browser.sh
 source setup/setup_vim_helptags.sh
+source setup/setup_systemd_user_services.sh
