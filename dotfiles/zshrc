@@ -9,7 +9,7 @@ export FZF_TMUX=1
 export PATH="${HOME}/bin:${PATH}"
 export PROJECTS_ROOT="${HOME}/Projects"
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
-export SSH_AUTH_SOCK=~/.ssh-agent.sock
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
 
 # set LS_COLORS
 eval $(dircolors ~/.dircolors)
