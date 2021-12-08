@@ -209,6 +209,37 @@ function vt() {
         dtree0 $@ | xargs -0 -o vim
 }
 
+# git log browser
+function lg() {
+    local dashdash=false
+    local -a args
+    local -a paths
+    for arg in "$@"
+    do
+        if [ $dashdash = true ]; then
+            paths+=("$arg")
+        else
+            args+=("$arg")
+        fi
+        if [ $arg = "--" ]; then
+            dashdash=true
+        fi
+    done
+
+    if [ $dashdash = false ]; then
+        paths=(".")
+    fi
+
+    local paths_expanded=$(printf "%q " "${paths[@]}")
+
+    git lg --color=always "${args[@]}" -- "${paths[@]}" | \
+        fzf \
+        --ansi \
+        --preview-window=bottom \
+        --preview="git show --color=always {1} -- ${paths_expanded}" \
+        --bind="ctrl-m:execute:(git show --color=always {1} -- ${paths_expanded} | less -CRX)"
+}
+
 # MISC
 
 # More readable output of "time [command]"
