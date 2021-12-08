@@ -42,25 +42,6 @@ autoload -U select-word-style
 WORDCHARS="()[]{}<>\"'|*?_-.~=&:;"
 select-word-style normal
 
-# KEYBINDINGS
-
-# Emacs-style keybindings
-bindkey -e
-
-# Up and Down keys do history search when input is present
-autoload -U up-line-or-beginning-search
-zle -N up-line-or-beginning-search
-bindkey 'OA' up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey 'OB' down-line-or-beginning-search
-
-# Prevent Ctrl-S from freezing the terminal, make it accessible as a key binding
-stty -ixon
-
-# Load FZF key bindings
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-
 # CD
 
 # Go to directory by typing just the directory name
@@ -174,7 +155,7 @@ function cdpr() {
     if [[ -n "${project}" ]]; then
         cd "${PROJECTS_ROOT}/${project}"
     else
-        echo "cdr: Not in a project dir"
+        echo "cdpr: Not in a project dir"
     fi
 }
 
@@ -239,6 +220,33 @@ function lg() {
         --preview="git show --color=always {1} -- ${paths_expanded}" \
         --bind="ctrl-m:execute:(git show --color=always {1} -- ${paths_expanded} | less -CRX)"
 }
+
+# KEYBINDINGS
+
+# Emacs-style keybindings
+bindkey -e
+
+# Prevent Ctrl-S from freezing the terminal, make it accessible as a key binding
+stty -ixon
+
+# Load FZF key bindings
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+
+# Up and Down keys do history search when input is present
+autoload -U up-line-or-beginning-search
+zle -N up-line-or-beginning-search
+bindkey 'OA' up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey 'OB' down-line-or-beginning-search
+
+# Alt-p - change project
+function cdpzle() {
+    cdp
+    zle reset-prompt
+}
+zle -N cdpzle
+bindkey "p" cdpzle
 
 # MISC
 
