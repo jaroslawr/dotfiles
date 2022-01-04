@@ -4,7 +4,9 @@
 
 export EDITOR=vim
 export FZF_DEFAULT_COMMAND="fdfind --type f"
-export FZF_DEFAULT_OPTS="--layout=reverse --no-bold --color 16,fg+:11,hl+:9,hl:9,pointer:9"
+export FZF_DEFAULT_OPTS="--layout=reverse --no-mouse --no-bold \
+    --bind shift-left:preview-page-up,shift-right:preview-page-down \
+    --color 16,fg+:11,hl+:9,hl:9,pointer:9"
 export FZF_TMUX=1
 export LESS="--raw-control-chars --chop-long-lines --no-init"
 export PATH="${HOME}/bin:${PATH}"
@@ -217,7 +219,6 @@ function lg() {
     git lg --color=always "${args[@]}" -- "${paths[@]}" | \
         fzf \
         --ansi \
-        --preview-window=bottom \
         --preview="git show --color=always {1} -- ${paths_expanded}" \
         --bind="ctrl-m:execute:(git show --color=always {1} -- ${paths_expanded} | less -CRX)"
 }
