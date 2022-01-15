@@ -5,6 +5,9 @@
         email = jrzeszotko@gmail.com
         name = Jarosław Rzeszótko
 
+[core]
+        pager = "less --quit-if-one-screen"
+
 [alias]
         lg = log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto)%h %C(1)%ad %C(7)%<(20,trunc)%ae %C(1)>>> %C(auto)%s'
         head = show --pretty=medium --no-patch
