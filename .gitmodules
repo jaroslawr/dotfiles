@@ -37,3 +37,6 @@
 [submodule "dotfiles/vim/pack/plugins/start/ale"]
 	path = dotfiles/vim/pack/plugins/start/ale
 	url = git@github.com:dense-analysis/ale.git
+[submodule "dotfiles/local/share/nvim/site/pack/plugins/start/fzf-lua"]
+	path = dotfiles/local/share/nvim/site/pack/plugins/start/fzf-lua
+	url = git@github.com:ibhagwan/fzf-lua
