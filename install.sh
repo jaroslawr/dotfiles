@@ -21,7 +21,9 @@ git submodule update --recursive
 # -x excludes
 # -S symlinks whole directory
 rcup -d dotfiles \
-     -S vim
+     -S vim \
+     -S config/nvim \
+     -S local/share/nvim/site/pack/plugins/start
 
 # Make scripts available
 if [[ ! -h "${HOME}/bin" ]]; then
