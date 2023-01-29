@@ -15,6 +15,16 @@ opt.clipboard = 'unnamedplus'
 -- Grep with ripgrep
 opt.grepprg = 'rg -n $*'
 
+-- PROGRAMMING
+--
+
+local python_autocmds = vim.api.nvim_create_augroup('vimrc', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
+  group = python_autocmds,
+  command = 'compiler python'
+})
+
 -- APPEARANCE
 --
 
