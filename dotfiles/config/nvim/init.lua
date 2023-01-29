@@ -18,7 +18,7 @@ opt.grepprg = 'rg -n $*'
 -- PROGRAMMING
 --
 
-local python_autocmds = vim.api.nvim_create_augroup('vimrc', { clear = true })
+local python_autocmds = vim.api.nvim_create_augroup('init_python', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'python',
   group = python_autocmds,
