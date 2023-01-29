@@ -31,6 +31,30 @@ vim.api.nvim_create_autocmd('FileType', {
 -- Show line numbers
 opt.number = true
 
+-- TMUX INTEGRATION
+--
+
+-- Set tmux window title
+opt.title = true
+
+-- Function for computing the title
+function tmux_title()
+	local path = vim.fn.expand("%:t")
+	if string.len(path) > 0 then
+		return path
+	else
+		return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+	end
+end
+
+-- Update the titlestring using tmux_title()
+local tmux_autocmds = vim.api.nvim_create_augroup('init_tmux', { clear = true })
+vim.api.nvim_create_autocmd({ 'VimEnter', 'WinEnter', 'BufEnter' }, {
+  pattern = '*',
+  group = tmux_autocmds,
+  command = 'let &titlestring = v:lua.tmux_title()'
+})
+
 -- KEY BINDINGS
 --
 
