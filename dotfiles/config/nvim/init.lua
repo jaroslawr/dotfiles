@@ -37,6 +37,12 @@ opt.number = true
 local keymap = vim.api.nvim_set_keymap
 local keymap_options = { noremap = true }
 
+-- quickfix
+keymap('n', ',', ':cprev<cr>', keymap_options)
+keymap('n', '.', ':cnext<cr>', keymap_options)
+keymap('n', '/', ':copen<cr>', keymap_options)
+keymap('n', '?', ':cclose<cr>', keymap_options)
+
 -- leader
 vim.g.mapleader = ' '
 
@@ -47,3 +53,6 @@ keymap('n', '<leader>w', ':w<cr>', keymap_options)
 -- leader - fzf
 keymap('n', '<leader>fb', ':FzfLua buffers<cr>', keymap_options)
 keymap('n', '<leader>ff', ':FzfLua files<cr>', keymap_options)
+
+-- leader - make
+keymap('n', '<leader>m', ':make<cr>', keymap_options)
