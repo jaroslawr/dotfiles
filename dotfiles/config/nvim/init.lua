@@ -75,8 +75,9 @@ keymap('n', '<leader>x', ':qall!<cr>', keymap_options)
 keymap('n', '<leader>w', ':w<cr>', keymap_options)
 
 -- leader - fzf
-keymap('n', '<leader>fb', ':FzfLua buffers<cr>', keymap_options)
 keymap('n', '<leader>ff', ':FzfLua files<cr>', keymap_options)
+keymap('n', '<leader>fb', ':FzfLua buffers<cr>', keymap_options)
+keymap('n', '<leader>fa', ':FzfLua args<cr>', keymap_options)
 
 -- leader - make
 keymap('n', '<leader>m', ':make<cr>', keymap_options)
