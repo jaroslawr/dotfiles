@@ -5,4 +5,4 @@ source ${LIB}/nt.sh
 
 ntpull
 
-exec vim ${PLAINTEXT_NOTES}
+exec ${EDITOR} ${PLAINTEXT_NOTES}

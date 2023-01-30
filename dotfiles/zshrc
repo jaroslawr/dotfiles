@@ -190,7 +190,7 @@ function t() {
 
 # directory tree - edit in vim
 function vt() {
-        dtree0 $@ | xargs -0 -o vim
+        dtree0 $@ | xargs -0 -o $EDITOR
 }
 
 # git log browser
