@@ -62,10 +62,10 @@ local keymap = vim.api.nvim_set_keymap
 local keymap_options = { noremap = true }
 
 -- quickfix
-keymap('n', ',', ':cprev<cr>', keymap_options)
-keymap('n', '.', ':cnext<cr>', keymap_options)
-keymap('n', '/', ':copen<cr>', keymap_options)
-keymap('n', '?', ':cclose<cr>', keymap_options)
+keymap('n', '<A-,>', ':cprev<cr>', keymap_options)
+keymap('n', '<A-.>', ':cnext<cr>', keymap_options)
+keymap('n', '<A-/>', ':copen<cr>', keymap_options)
+keymap('n', '<A-?>', ':cclose<cr>', keymap_options)
 
 -- leader
 vim.g.mapleader = ' '
