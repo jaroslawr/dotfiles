@@ -42,12 +42,12 @@ opt.title = true
 
 -- Function for computing the title
 function tmux_title()
-	local path = vim.fn.expand("%:t")
-	if string.len(path) > 0 then
-		return path
-	else
-		return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-	end
+  local path = vim.fn.expand("%:t")
+  if string.len(path) > 0 then
+    return path
+  else
+    return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+  end
 end
 
 -- Update the titlestring using tmux_title()
@@ -62,13 +62,13 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'WinEnter', 'BufEnter' }, {
 --
 
 require('fzf-lua').setup({
-	winopts = {
-		border = false,
-		fullscreen = true,
-		preview = {
-			layout = 'horizontal'
-		}
-	}
+  winopts = {
+    border = false,
+    fullscreen = true,
+    preview = {
+      layout = 'horizontal'
+    }
+  }
 })
 
 -- KEY BINDINGS
