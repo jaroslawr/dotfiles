@@ -1,0 +1,9 @@
+[Unit]
+Description=Rclone mount for notes
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/rclone mount notes: Notes/
+
+[Install]
+WantedBy=default.target
