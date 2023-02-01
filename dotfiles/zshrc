@@ -140,6 +140,11 @@ function rg() {
 
 # FUNCTIONS
 
+# notes
+function nt() {
+    $EDITOR Notes/notes.md
+}
+
 # projects - go to project directory
 function cdp() {
     if [[ $# -eq 0 ]]; then
