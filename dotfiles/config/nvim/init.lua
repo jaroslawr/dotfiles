@@ -61,6 +61,9 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'WinEnter', 'BufEnter' }, {
 local keymap = vim.api.nvim_set_keymap
 local keymap_options = { noremap = true }
 
+-- back to normal mode with jj when in insert mode
+keymap('i', 'jj', '<Esc>', keymap_options)
+
 -- quickfix
 keymap('n', '<A-,>', ':cprev<cr>', keymap_options)
 keymap('n', '<A-.>', ':cnext<cr>', keymap_options)
