@@ -40,3 +40,6 @@
 [submodule "dotfiles/local/share/nvim/site/pack/plugins/start/fzf-lua"]
 	path = dotfiles/local/share/nvim/site/pack/plugins/start/fzf-lua
 	url = git@github.com:ibhagwan/fzf-lua
+[submodule "dotfiles/local/share/nvim/site/pack/plugins/start/guess-indent.nvim"]
+	path = dotfiles/local/share/nvim/site/pack/plugins/start/guess-indent.nvim
+	url = git@github.com:NMAC427/guess-indent.nvim

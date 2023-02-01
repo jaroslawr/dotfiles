@@ -71,6 +71,11 @@ require('fzf-lua').setup({
   }
 })
 
+-- PLUGINS - guess-indent
+--
+
+require('guess-indent').setup({})
+
 -- KEY BINDINGS
 --
 
