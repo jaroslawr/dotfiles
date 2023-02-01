@@ -15,6 +15,16 @@ opt.clipboard = 'unnamedplus'
 -- Grep with ripgrep
 opt.grepprg = 'rg -n $*'
 
+-- MARKDOWN
+--
+
+local markdown_autocmds = vim.api.nvim_create_augroup('init_markdown', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  group = markdown_autocmds,
+  command = 'setlocal textwidth=80 shiftwidth=4 tabstop=4 expandtab'
+})
+
 -- PROGRAMMING
 --
 
