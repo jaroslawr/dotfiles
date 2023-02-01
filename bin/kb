@@ -1,4 +1,0 @@
-#!/bin/bash
-set -e
-cd ~/Projects/kb
-exec vim $(fzf)

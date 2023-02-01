@@ -1,6 +1,0 @@
-#!/bin/bash
-
-source lib.sh
-source ${LIB}/nt.sh
-
-ntpull

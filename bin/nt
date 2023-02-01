@@ -1,8 +1,0 @@
-#!/bin/bash
-
-source lib.sh
-source ${LIB}/nt.sh
-
-ntpull
-
-exec ${EDITOR} ${PLAINTEXT_NOTES}
