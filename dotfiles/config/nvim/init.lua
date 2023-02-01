@@ -58,6 +58,19 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'WinEnter', 'BufEnter' }, {
   command = 'let &titlestring = v:lua.tmux_title()'
 })
 
+-- PLUGINS - fzf-lua
+--
+
+require('fzf-lua').setup({
+	winopts = {
+		border = false,
+		fullscreen = true,
+		preview = {
+			layout = 'horizontal'
+		}
+	}
+})
+
 -- KEY BINDINGS
 --
 
