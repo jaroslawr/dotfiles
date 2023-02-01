@@ -28,6 +28,9 @@ vim.api.nvim_create_autocmd('FileType', {
 -- APPEARANCE
 --
 
+-- Load color theme
+require('colors')
+
 -- Show line numbers
 opt.number = true
 
