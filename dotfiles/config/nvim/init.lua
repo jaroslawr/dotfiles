@@ -15,26 +15,6 @@ opt.clipboard = 'unnamedplus'
 -- Grep with ripgrep
 opt.grepprg = 'rg -n $*'
 
--- MARKDOWN
---
-
-local markdown_autocmds = vim.api.nvim_create_augroup('init_markdown', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'markdown',
-  group = markdown_autocmds,
-  command = 'setlocal textwidth=80 shiftwidth=4 tabstop=4 expandtab'
-})
-
--- PROGRAMMING
---
-
-local python_autocmds = vim.api.nvim_create_augroup('init_python', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'python',
-  group = python_autocmds,
-  command = 'compiler python'
-})
-
 -- APPEARANCE
 --
 
@@ -66,6 +46,28 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'WinEnter', 'BufEnter' }, {
   pattern = '*',
   group = tmux_autocmds,
   command = 'let &titlestring = v:lua.tmux_title()'
+})
+
+-- FILE TYPES - markdown
+--
+
+-- Word wrap markdown at 80 characters
+local markdown_autocmds = vim.api.nvim_create_augroup('init_markdown', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  group = markdown_autocmds,
+  command = 'setlocal textwidth=80 shiftwidth=4 tabstop=4 expandtab'
+})
+
+-- FILE TYPES - python
+--
+
+-- Set the python interpreter as compiler for python files
+local python_autocmds = vim.api.nvim_create_augroup('init_python', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
+  group = python_autocmds,
+  command = 'compiler python'
 })
 
 -- PLUGINS - fzf-lua
