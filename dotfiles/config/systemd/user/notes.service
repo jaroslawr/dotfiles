@@ -3,7 +3,7 @@ Description=Rclone mount for notes
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/rclone mount notes: Notes/
+ExecStart=/usr/bin/rclone --vfs-cache-mode=full mount notes: Notes/
 
 [Install]
 WantedBy=default.target
