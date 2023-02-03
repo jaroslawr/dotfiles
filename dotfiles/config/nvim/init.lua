@@ -24,7 +24,7 @@ require('colors')
 -- Status line
 opt.statusline = table.concat({
   " %0", -- change color
-  "*%t ", -- filename
+  "*%f ", -- filename
   "%< ", -- avoid shortening everything until now
   "%=", -- right align
   "%1* ", -- change color
