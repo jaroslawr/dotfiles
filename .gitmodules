@@ -1,3 +1,6 @@
 [submodule "dotfiles/local/share/nvim/site/pack/plugins/start/fzf-lua"]
 	path = dotfiles/local/share/nvim/site/pack/plugins/start/fzf-lua
 	url = git@github.com:ibhagwan/fzf-lua
+[submodule "dotfiles/local/share/nvim/site/pack/plugins/start/vim-sleuth"]
+	path = dotfiles/local/share/nvim/site/pack/plugins/start/vim-sleuth
+	url = git@github.com:tpope/vim-sleuth.git
