@@ -21,6 +21,23 @@ opt.grepprg = 'rg -n $*'
 -- Load color theme
 require('colors')
 
+-- Status line
+opt.statusline = table.concat({
+  " %0", -- change color
+  "*%t ", -- filename
+  "%< ", -- avoid shortening everything until now
+  "%=", -- right align
+  "%1* ", -- change color
+  "0x%02B ", -- byte under cursor as hex
+  "%03l,%03c ", -- line and column number
+  "%02p%% ", -- percentage through the file
+  "%{(&ft==''?'none':&ft)} ", -- file type
+  "sw=%{&shiftwidth} ", -- shift width
+  "et=%{&expandtab} ", -- expand tabs
+  "%{&fileformat} ", -- file format
+  "%{&fileencoding==''?'':&fileencoding.' '}" -- file encoding
+})
+
 -- Show line numbers
 opt.number = true
 
