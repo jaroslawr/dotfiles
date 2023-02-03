@@ -12,6 +12,13 @@ opt.mouse = 'a'
 -- Use system clipboard
 opt.clipboard = 'unnamedplus'
 
+-- Disable backups
+vim.opt.backup = false
+vim.opt.writebackup = false
+
+-- Disable swapfiles
+vim.opt.swapfile = false
+
 -- Grep with ripgrep
 opt.grepprg = 'rg -n $*'
 
