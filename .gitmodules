@@ -4,3 +4,6 @@
 [submodule "dotfiles/local/share/nvim/site/pack/plugins/start/vim-sleuth"]
 	path = dotfiles/local/share/nvim/site/pack/plugins/start/vim-sleuth
 	url = git@github.com:tpope/vim-sleuth.git
+[submodule "dotfiles/local/share/nvim/site/pack/plugins/start/vim-unimpaired"]
+	path = dotfiles/local/share/nvim/site/pack/plugins/start/vim-unimpaired
+	url = git@github.com:tpope/vim-unimpaired.git
