@@ -172,3 +172,7 @@ vim.api.nvim_set_hl(0, "DiffText", { ctermfg=4 })
 vim.api.nvim_set_hl(0, "Directory", { ctermfg=4 })
 vim.api.nvim_set_hl(0, "netrwExe", { ctermfg=1 })
 
+-- PLUGINS - fzf-lua
+--
+vim.api.nvim_set_hl(0, "FzfLuaTitle", { ctermfg=11 })
+

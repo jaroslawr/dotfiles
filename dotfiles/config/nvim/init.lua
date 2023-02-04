@@ -101,8 +101,10 @@ require('fzf-lua').setup({
     border = false,
     fullscreen = true,
     preview = {
-      layout = 'horizontal'
-    }
+      layout = 'horizontal',
+      horizontal = 'down'
+    },
+    preview_pos = 'down'
   }
 })
 

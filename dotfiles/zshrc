@@ -4,7 +4,7 @@
 
 export EDITOR=nvim
 export FZF_DEFAULT_COMMAND="fdfind --type f"
-export FZF_DEFAULT_OPTS="--layout=reverse --no-mouse --no-bold \
+export FZF_DEFAULT_OPTS="--layout=reverse --preview-window=down --no-mouse --no-bold \
     --bind shift-left:preview-page-up,shift-right:preview-page-down \
     --color 16,fg+:11,hl+:9,hl:9,pointer:9"
 export FZF_TMUX=1
