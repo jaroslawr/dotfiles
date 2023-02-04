@@ -1,18 +1,38 @@
 set convert-meta on
 
 # COMPLETION
+#
 
 # Tab gives next completion
 "\t": menu-complete
+
 # Shift-Tab gives previous completion
 "\e[Z": menu-complete-backward
+
+# Only complete hidden files if pattern begins with .
+set match-hidden-files off
+
+# Complete the prefix first on ambiguous completion
+set menu-complete-display-prefix on
+
+# Ignore case
+set completion-ignore-case on
+
 # On first Tab immediately list completions
 set show-all-if-ambiguous on
 set show-all-if-unmodified on
-# On first Tab immediately complete the common prefix
-set menu-complete-display-prefix on
+
+# Never prompt whether to show all completions
+set completion-query-items 0
+
+# Do not page completions
+set page-completions off
+
+# Only complete hidden files if pattern begins with .
+set match-hidden-files off
 
 # HISTORY
+#
 
-"\M-p": previous-history
-"\M-n": next-history
+"\e[A": history-search-backward
+"\e[B": history-search-forward
