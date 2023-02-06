@@ -102,7 +102,10 @@ require('fzf-lua').setup({
     fullscreen = true,
     preview = {
       layout = 'horizontal',
-      horizontal = 'down'
+      horizontal = 'down',
+      winopts = {
+        cursorline = false
+      }
     },
     preview_pos = 'down'
   }
