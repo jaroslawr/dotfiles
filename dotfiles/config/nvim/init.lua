@@ -25,6 +25,9 @@ opt.grepprg = 'rg -n $*'
 -- APPEARANCE
 --
 
+-- Show line numbers
+opt.number = true
+
 -- Load color theme
 require('colors')
 
@@ -44,8 +47,18 @@ opt.statusline = table.concat({
   "%{&fileencoding==''?'':&fileencoding.' '}" -- file encoding
 })
 
--- Show line numbers
-opt.number = true
+-- Cursor line
+local cursorline_autocmds = vim.api.nvim_create_augroup('init_cursorline', { clear = true })
+vim.api.nvim_create_autocmd({ 'VimEnter', 'WinEnter' }, {
+  pattern = '*',
+  group = cursorline_autocmds,
+  command = 'set cursorline'
+})
+vim.api.nvim_create_autocmd({ 'WinLeave' }, {
+  pattern = '*',
+  group = cursorline_autocmds,
+  command = 'set nocursorline'
+})
 
 -- TMUX INTEGRATION
 --
