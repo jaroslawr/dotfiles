@@ -1,16 +1,11 @@
--- ALIASES
---
-
-local opt = vim.opt
-
 -- GENERAL OPTIONS
 --
 
 -- Enable mouse support
-opt.mouse = 'a'
+vim.opt.mouse = 'a'
 
 -- Use system clipboard
-opt.clipboard = 'unnamedplus'
+vim.opt.clipboard = 'unnamedplus'
 
 -- Disable backups
 vim.opt.backup = false
@@ -20,19 +15,19 @@ vim.opt.writebackup = false
 vim.opt.swapfile = false
 
 -- Grep with ripgrep
-opt.grepprg = 'rg -n $*'
+vim.opt.grepprg = 'rg -n $*'
 
 -- APPEARANCE
 --
 
 -- Show line numbers
-opt.number = true
+vim.opt.number = true
 
 -- Load color theme
 require('colors')
 
 -- Status line
-opt.statusline = table.concat({
+vim.opt.statusline = table.concat({
   " %0*%f%* ", -- filename
   "%< ", -- avoid shortening everything until now
   "%=", -- right align
@@ -64,7 +59,7 @@ vim.api.nvim_create_autocmd({ 'WinLeave' }, {
 --
 
 -- Set tmux window title
-opt.title = true
+vim.opt.title = true
 
 -- Function for computing the title
 function tmux_title()
