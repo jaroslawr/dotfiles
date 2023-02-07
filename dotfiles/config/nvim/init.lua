@@ -23,24 +23,11 @@ vim.opt.grepprg = 'rg -n $*'
 -- Show line numbers
 vim.opt.number = true
 
--- Load color theme
+-- Color theme
 require('colors')
 
 -- Status line
-vim.opt.statusline = table.concat({
-  " %0*%f%* ", -- filename
-  "%< ", -- avoid shortening everything until now
-  "%=", -- right align
-  "%1* ", -- change color
-  "0x%02B ", -- byte under cursor as hex
-  "%03l,%03c ", -- line and column number
-  "%02p%% ", -- percentage through the file
-  "%{(&ft==''?'none':&ft)} ", -- file type
-  "sw=%{&shiftwidth} ", -- shift width
-  "et=%{&expandtab} ", -- expand tabs
-  "%{&fileformat} ", -- file format
-  "%{&fileencoding==''?'':&fileencoding.' '}" -- file encoding
-})
+require('statusline')
 
 -- Cursor line
 local cursorline_autocmds = vim.api.nvim_create_augroup('init_cursorline', { clear = true })
