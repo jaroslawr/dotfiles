@@ -1,6 +1,6 @@
 BEGIN {
-  staged_changes=0
-  nonstaged_changes=0
+  changes_in_index=0
+  changes_in_worktree=0
   untracked_files=0
 }
 
@@ -11,14 +11,13 @@ $2 == "branch.head" {
 
 # ordinary
 $1 == "1" {
-  index_change=substr($2,1,1)
-  worktree_change=substr($2,2,1)
-  if (index_change == ".") {
-    if (worktree_change != ".") {
-      nonstaged_changes++
-    }
-  } else {
-    staged_changes++
+  status_in_index=substr($2,1,1)
+  status_in_worktree=substr($2,2,1)
+  if (status_in_index != ".") {
+    changes_in_index++
+  }
+  if (status_in_worktree != ".") {
+     changes_in_worktree++
   }
 }
 
@@ -40,5 +39,5 @@ $1 == "!" {
 }
 
 END {
-  print branch "\t" staged_changes "\t" nonstaged_changes "\t" untracked_files
+  print branch "\t" changes_in_index "\t" changes_in_worktree "\t" untracked_files
 }
