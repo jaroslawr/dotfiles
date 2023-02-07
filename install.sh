@@ -4,14 +4,11 @@
 set -euxo pipefail
 
 # Change the shell
-SHELL="/bin/zsh"
+SHELL=$(which bash)
 CURRENT_SHELL=$(getent passwd $LOGNAME | cut -d: -f7)
 if [[ ! $CURRENT_SHELL == $SHELL ]]; then
     chsh -s $SHELL $USER
 fi
-
-# Init the history file
-touch ~/.history
 
 # Make sure submodules are checked out and up to date
 git submodule init

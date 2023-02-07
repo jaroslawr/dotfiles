@@ -1,0 +1,146 @@
+if [ ! -z "${BASHRC_LOADED}" ]; then exit 0; fi
+export BASHRC_LOADED=1
+
+# ENVIRONMENT
+#
+
+export EDITOR=nvim
+export FZF_DEFAULT_OPTS="--layout=reverse --preview-window=down --no-mouse --no-bold \
+    --bind shift-left:preview-page-up,shift-right:preview-page-down \
+    --color 16,fg+:11,hl+:9,hl:9,pointer:9"
+export FZF_TMUX=1
+export LESS="--raw-control-chars --chop-long-lines --no-init"
+export PATH="${HOME}/bin:${PATH}"
+export PROJECTS_DIR=~/Projects
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
+
+# FZF
+#
+
+source /usr/share/doc/fzf/examples/key-bindings.bash
+
+# HISTORY
+#
+
+# Huge history
+HISTSIZE=100000
+HISTFILESIZE=100000
+
+# Append to history file instead of overwriting it
+shopt -s histappend
+
+# Save multi line commands literally, with newlines as entered
+shopt -s lithist
+
+# PROMPT
+#
+
+# Write history before each priting of the prompt
+PROMPT_COMMAND="history -a"
+
+# Color definitions
+BRIGHT_YELLOW="\[$(tput setaf 11)\]"
+BRIGHT_BLUE="\[$(tput setaf 12)\]"
+RESET="\[$(tput sgr0)\]"
+
+# Prompt definition
+PS1="${BRIGHT_YELLOW}\w
+${BRIGHT_BLUE}> ${RESET}"
+
+# ALIASES
+#
+
+# cal with more readable output
+alias cal='ncal -M -b'
+
+# ls with more readable output
+alias ls='ls --color=auto --group-directories-first --literal --time-style=long-iso --human-readable'
+
+# diff with colors and pager, unless running in a pipeline
+diff() {
+    if [[ -t 1 ]]; then
+        /usr/bin/diff --color=always $@ | less -FRS
+    else
+        /usr/bin/diff $@
+    fi
+}
+
+# rg with colors and pager, unless running in a pipeline
+rg() {
+    if [[ -t 1 ]]; then
+        /usr/bin/rg --color=always --line-number $@ | less -FRS
+    else
+        /usr/bin/rg $@
+    fi
+}
+
+# FUNCTIONS
+#
+
+# notes
+nt() {
+    $EDITOR ~/Notes/notes.md
+}
+
+# cd to project
+cdp() {
+    local project_dir="${PROJECTS_DIR}/$1"
+    if [ -d "${project_dir}" ]; then
+        cd "${project_dir}"
+    else
+        echo "Project does not exist"
+    fi
+}
+
+# current project root
+cpr() {
+    local cwd=$(pwd)
+    if [[ "${cwd}" =~ ^${PROJECTS_DIR}/.*$ ]]; then
+        pwd | cut -c "$((${#PROJECTS_DIR}+1))-" | cut -d/ -f2
+    fi
+}
+
+# cd to project root
+cdpr() {
+    local project=$(cpr)
+    if [ ! -z "${project}" ]; then
+        cdp "${project}"
+    else
+        echo "Not in a project"
+    fi
+}
+
+# COMPLETIONS
+#
+
+source /usr/share/bash-completion/bash_completion
+
+_cdp_completions() {
+    if [ ${#COMP_WORDS[@]} -gt 2 ]; then
+        return
+    fi
+
+    local query=${COMP_WORDS[1]}
+
+    if [[ ! "${query}" =~ / ]]; then
+        COMPREPLY=()
+        while read -d $'\n' PROJECT; do
+            COMPREPLY+=(${PROJECT})
+        done < <(find "${PROJECTS_DIR}" -mindepth 1 -maxdepth 1 -type d -name "${query}*" -printf "%P/\n" | LC_ALL=C sort)
+    else        
+        # The completed part of the user input - until last slash
+        local project_and_path=$(echo "${query}" | sed -E 's/(.*)\/.*/\1/')
+        
+        # The part of the user input to complete - after last slash
+        local path_to_complete=$(echo "${query}" | sed -E 's/.*\/(.*)/\1/')
+
+        COMPREPLY=()
+        while read -d $'\n' DIR; do
+            COMPREPLY+=(${DIR})
+        done < <(find "${PROJECTS_DIR}/${project_and_path}" -mindepth 1 -maxdepth 1 -type d -name "${path_to_complete}*" -printf "${project_and_path}/%P/\n" | LC_ALL=C sort)
+    fi
+}
+
+complete -F _cdp_completions -o nospace cdp
+
