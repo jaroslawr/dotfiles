@@ -1,3 +1,9 @@
+# GENERAL
+#
+
+# Define PROMPT_COMMAND as an array so following sections can add their own commands
+PROMPT_COMMAND=()
+
 # ENVIRONMENT
 #
 
@@ -30,11 +36,11 @@ shopt -s histappend
 # Save multi line commands literally, with newlines as entered
 shopt -s lithist
 
+# Write history before each priting of the prompt
+PROMPT_COMMAND+=("history -a")
+
 # PROMPT
 #
-
-# Write history before each priting of the prompt
-PROMPT_COMMAND="history -a"
 
 # Color definitions
 BRIGHT_YELLOW="\[$(tput setaf 11)\]"
