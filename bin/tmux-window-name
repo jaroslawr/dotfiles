@@ -1,0 +1,7 @@
+#!/bin/bash
+tmux_ssh_hostname=$(tmux-ssh-hostname "$1")
+if [ -z "${tmux_ssh_hostname}" ]; then
+    tmux-project-name "$1"
+else
+    echo "${tmux_ssh_hostname}"
+fi
