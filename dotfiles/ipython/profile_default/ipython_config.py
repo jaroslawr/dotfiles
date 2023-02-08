@@ -4,7 +4,7 @@ c = get_config()
 c.TerminalInteractiveShell.colors = 'NoColor'
 
 # Syntax highlighting color scheme
-c.TerminalInteractiveShell.highlighting_style="one-dark"
+c.TerminalInteractiveShell.highlighting_style = 'monokai'
 
 # Disable autosuggestion (that uses history items)
 c.TerminalInteractiveShell.autosuggestions_provider = None
