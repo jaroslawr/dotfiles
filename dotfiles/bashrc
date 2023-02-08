@@ -94,12 +94,12 @@ ${BRIGHT_BLUE}> ${RESET}"
 
 # cal with more readable output
 cal() {
-    ncal -M -b
+    ncal -M -b $@
 }
 
 # ls with more readable output
 ls() {
-    /usr/bin/ls --color=auto --group-directories-first --literal --time-style=long-iso --human-readable
+    /usr/bin/ls --color=auto --group-directories-first --literal --time-style=long-iso --human-readable $@
 }
 
 # diff with colors and pager, unless running in a pipeline
