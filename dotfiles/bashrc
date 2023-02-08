@@ -163,7 +163,7 @@ cdpr() {
 
 source /usr/share/bash-completion/bash_completion
 
-_cdp_completions() {
+_cdp() {
     if [ ${#COMP_WORDS[@]} -gt 2 ]; then
         return
     fi
@@ -173,8 +173,9 @@ _cdp_completions() {
     if [[ ! "${query}" =~ / ]]; then
         COMPREPLY=()
         while read -d $'\n' PROJECT; do
-            COMPREPLY+=(${PROJECT})
-        done < <(find "${PROJECTS_DIR}" -mindepth 1 -maxdepth 1 -type d -name "${query}*" -printf "%P/\n" | LC_ALL=C sort)
+            # Add slash here, if added to find in -printf it can prevent the shortest match from sorting first
+            COMPREPLY+=("${PROJECT}/")
+        done < <(__cdp_find_subdirs "${PROJECTS_DIR}" "${query}*" -printf "%P\n")
     else        
         # The completed part of the user input - until last slash
         local project_and_path=$(echo "${query}" | sed -E 's/(.*)\/.*/\1/')
@@ -184,10 +185,21 @@ _cdp_completions() {
 
         COMPREPLY=()
         while read -d $'\n' DIR; do
-            COMPREPLY+=(${DIR})
-        done < <(find "${PROJECTS_DIR}/${project_and_path}" -mindepth 1 -maxdepth 1 -type d -name "${path_to_complete}*" -printf "${project_and_path}/%P/\n" | LC_ALL=C sort)
+            # Add slash here, if added to find in -printf it can prevent the shortest match from sorting first
+            COMPREPLY+=("${DIR}/")
+        done < <(__cdp_find_subdirs "${PROJECTS_DIR}/${project_and_path}" "${path_to_complete}*" -printf "${project_and_path}/%P\n")
     fi
 }
 
-complete -F _cdp_completions -o nospace cdp
+__cdp_find_subdirs() {
+    local dir=$1
+    shift 1
+
+    local query=$1
+    shift 1
+
+    find "${dir}" -mindepth 1 -maxdepth 1 -not -path '*/.*' -type d -name "${query}" $@ | LC_ALL=C sort
+}
+
+complete -F _cdp -o nospace -o nosort cdp
 
