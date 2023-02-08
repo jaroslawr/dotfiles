@@ -42,44 +42,34 @@ PROMPT_COMMAND+=("history -a")
 # PROMPT
 #
 
-# Parse git status output
-__parse_git_status() {
-    git status --branch --porcelain=v2 | awk -f ~/bin/git-status-summary.awk
-}
-
-# Update git status variables
+# Parse git status output if in a git repo and set variables for prompt
 __update_git_status() {
-    if [ -d ".git" ]; then
-        IFS=$'\t' read GIT_PS1_BRANCH GIT_PS1_STAGED GIT_PS1_NONSTAGED GIT_PS1_UNTRACKED < <(__parse_git_status)
-    else
-        GIT_PS1_BRANCH=""
-        GIT_PS1_STAGED=""
-        GIT_PS1_NONSTAGED=""
-        GIT_PS1_UNTRACKED=""
+    GIT_STATUS=$(git status --branch --porcelain=v2 2>/dev/null)
+    GIT_REPO=$([ $? -eq 0 ] && echo "true" || echo "false")
+
+    if [ "${GIT_REPO}" = true ]; then
+        IFS=$'\t' read GIT_PS1_BRANCH GIT_PS1_STAGED GIT_PS1_NONSTAGED GIT_PS1_UNTRACKED < \
+            <(echo "${GIT_STATUS}" | awk -f ~/bin/git-status-summary.awk)
     fi
 }
+
+# Update git status before displaying the prompt
 PROMPT_COMMAND+=("__update_git_status")
 
 # Print the git branch part of the prompt
 __ps1_git_branch() {
-    if [ -d ".git" ]; then
+    if [ "${GIT_REPO}" = true ]; then
         echo ${GIT_PS1_BRANCH}
     fi
 }
 
 # Print the git status part of the prompt
 __ps1_git_status() {
-    if [ -d ".git" ]; then
+    if [ "${GIT_REPO}" = true ]; then
         local status=""
-        if [ ${GIT_PS1_STAGED} -gt 0 ]; then
-            status+='+'
-        fi
-        if [ ${GIT_PS1_NONSTAGED} -gt 0 ]; then
-            status+='*'
-        fi
-        if [ ${GIT_PS1_UNTRACKED} -gt 0 ]; then
-            status+='?'
-        fi
+        status+=$([ ${GIT_PS1_STAGED} -gt 0 ] && echo "+" || echo "")
+        status+=$([ ${GIT_PS1_NONSTAGED} -gt 0 ] && echo "*" || echo "")
+        status+=$([ ${GIT_PS1_UNTRACKED} -gt 0 ] && echo "?" || echo "")
         echo "${status}"
     fi
 }
