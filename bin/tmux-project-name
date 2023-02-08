@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+# Given tmux pane working directory, echo the project name the directory belongs to
+#
+
+tmux_pane_cwd="$1"
+
+if [[ "${tmux_pane_cwd}" =~ ^${PROJECTS_DIR}/.*$ ]]; then
+    echo "${tmux_pane_cwd}" | cut -c "$((${#PROJECTS_DIR}+1))-" | cut -d/ -f2
+fi

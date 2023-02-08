@@ -142,8 +142,7 @@ cdp() {
 
 # current project root
 cpr() {
-    local cwd=$(pwd)
-    if [[ "${cwd}" =~ ^${PROJECTS_DIR}/.*$ ]]; then
+    if [[ $(pwd) =~ ^${PROJECTS_DIR}/.*$ ]]; then
         pwd | cut -c "$((${#PROJECTS_DIR}+1))-" | cut -d/ -f2
     fi
 }

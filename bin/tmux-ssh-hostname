@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Given tmux pane parent process pid, print ssh hostname if ssh is running and nothing otherwise
+#
+
+tmux_pane_ppid=$1
+
+ps h -p "${tmux_pane_ppid}" --ppid "${tmux_pane_ppid}" -o cmd | sed -n -E 's/^ssh (.*)@([^ ]+).*$/\2/p'

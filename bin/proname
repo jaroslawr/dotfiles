@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-source lib.sh
-source ${LIB}/pro.sh
-
-pro "$@" | cut -f1
