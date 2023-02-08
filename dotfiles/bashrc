@@ -161,34 +161,30 @@ _cdp() {
     local query=${COMP_WORDS[1]}
 
     if [[ ! "${query}" =~ / ]]; then
-        COMPREPLY=()
-        while read -d $'\n' PROJECT; do
-            # Add slash here, if added to find in -printf it can prevent the shortest match from sorting first
-            COMPREPLY+=("${PROJECT}/")
-        done < <(__cdp_find_subdirs "${PROJECTS_DIR}" "${query}*" -printf "%P\n")
-    else        
+        # Find matching project names
+        IFS=$'\n' read -d '' -r -a COMPREPLY < \
+            <(__cdp_find_subdirs "${PROJECTS_DIR}" "${query}*" -printf "%P\n")
+    else
         # The completed part of the user input - until last slash
-        local project_and_path=$(echo "${query}" | sed -E 's/(.*)\/.*/\1/')
+        local complete_dirname=$(echo "${query}" | sed -E 's/(.*)\/.*/\1/')
         
         # The part of the user input to complete - after last slash
-        local path_to_complete=$(echo "${query}" | sed -E 's/.*\/(.*)/\1/')
+        local partial_dirname=$(echo "${query}" | sed -E 's/.*\/(.*)/\1/')
 
-        COMPREPLY=()
-        while read -d $'\n' DIR; do
-            # Add slash here, if added to find in -printf it can prevent the shortest match from sorting first
-            COMPREPLY+=("${DIR}/")
-        done < <(__cdp_find_subdirs "${PROJECTS_DIR}/${project_and_path}" "${path_to_complete}*" -printf "${project_and_path}/%P\n")
+        # Starting point for find
+        local root="${PROJECTS_DIR}/${complete_dirname}"
+
+        # Find matching project subdirectories
+        IFS=$'\n' read -d '' -r -a COMPREPLY < \
+            <(__cdp_find_subdirs "${root}" "${partial_dirname}*" -printf "${complete_dirname}/%P\n")
     fi
 }
 
 __cdp_find_subdirs() {
-    local dir=$1
-    shift 1
-
-    local query=$1
-    shift 1
-
-    find "${dir}" -mindepth 1 -maxdepth 1 -not -path '*/.*' -type d -name "${query}" $@ | LC_ALL=C sort
+    # "dir" is lexicographically before "dir-xyz", but "dir/" is lexicographically after "dir-xyz/",
+    # so sort first and only then add the trailing slash
+    find "$1" -mindepth 1 -maxdepth 1 -not -path '*/.*' -type d -name "$2" ${@:3} | \
+        LC_ALL=C sort | sed 's/$/\//'
 }
 
 complete -F _cdp -o nospace -o nosort cdp
