@@ -4,6 +4,12 @@
 # Define PROMPT_COMMAND as an array so following sections can add their own commands
 PROMPT_COMMAND=()
 
+# Source standard completions
+source /usr/share/bash-completion/bash_completion
+
+# FZF keybindings: cd with Alt-C, insert file path with Ctrl-T
+source /usr/share/doc/fzf/examples/key-bindings.bash
+
 # ENVIRONMENT
 #
 
@@ -17,11 +23,6 @@ export PATH="${HOME}/bin:${PATH}"
 export PROJECTS_DIR=~/Projects
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
-
-# FZF
-#
-
-source /usr/share/doc/fzf/examples/key-bindings.bash
 
 # HISTORY
 #
@@ -85,14 +86,18 @@ RESET="\[$(tput sgr0)\]"
 PS1="${BRIGHT_YELLOW}\w ${BRIGHT_PURPLE}\$(__ps1_git_branch)\$(__ps1_git_status)
 ${BRIGHT_BLUE}> ${RESET}"
 
-# ALIASES
+# FUNCTIONS - ALIASES
 #
 
 # cal with more readable output
-alias cal='ncal -M -b'
+cal() {
+    ncal -M -b
+}
 
 # ls with more readable output
-alias ls='ls --color=auto --group-directories-first --literal --time-style=long-iso --human-readable'
+ls() {
+    /usr/bin/ls --color=auto --group-directories-first --literal --time-style=long-iso --human-readable
+}
 
 # diff with colors and pager, unless running in a pipeline
 diff() {
@@ -112,13 +117,15 @@ rg() {
     fi
 }
 
-# FUNCTIONS
+# FUNCTIONS - NOTES
 #
 
-# notes
 nt() {
     $EDITOR ~/Notes/notes.md
 }
+
+# FUNCTIONS - PROJECTS
+#
 
 # cd to project
 cdp() {
@@ -137,21 +144,6 @@ cpr() {
         pwd | cut -c "$((${#PROJECTS_DIR}+1))-" | cut -d/ -f2
     fi
 }
-
-# cd to project root
-cdpr() {
-    local project=$(cpr)
-    if [ ! -z "${project}" ]; then
-        cdp "${project}"
-    else
-        echo "Not in a project"
-    fi
-}
-
-# COMPLETIONS
-#
-
-source /usr/share/bash-completion/bash_completion
 
 _cdp() {
     if [ ${#COMP_WORDS[@]} -gt 2 ]; then
@@ -189,3 +181,12 @@ __cdp_find_subdirs() {
 
 complete -F _cdp -o nospace -o nosort cdp
 
+# cd to project root
+cdpr() {
+    local project=$(cpr)
+    if [ ! -z "${project}" ]; then
+        cdp "${project}"
+    else
+        echo "Not in a project"
+    fi
+}
