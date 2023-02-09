@@ -193,3 +193,37 @@ cdpr() {
         echo "Not in a project"
     fi
 }
+
+# FUNCTIONS - DIRECTORY TREES
+#
+
+# directory tree - 0-byte separated
+dtree0() {
+    if [[ "$#" -gt 1 ]]; then
+        while [[ "$#" -gt 0 ]]; do
+            dtree0 "$1"
+            shift
+        done
+    else
+        fdfind --type f -0 "." $1 | sort -z
+    fi
+}
+
+# directory tree - newline separated
+dtree() {
+    dtree0 $@ | tr '\0' '\n'
+}
+
+# directory tree - with pager, unless running in a pipeline
+t() {
+    if [[ -t 1 ]]; then
+        dtree $@ | less -FRS
+    else
+        dtree $@
+    fi
+}
+
+# directory tree - edit in vim
+vt() {
+        dtree0 $@ | xargs -0 -o $EDITOR
+}
