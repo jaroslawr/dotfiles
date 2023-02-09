@@ -248,7 +248,7 @@ lg() {
         shift
     done
 
-    if [ $1 == "--" ]; then
+    if [ "$1" == "--" ]; then
         while [ $# -gt 0 ]; do
             paths+=($1)
             shift
