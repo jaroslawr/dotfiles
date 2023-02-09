@@ -14,6 +14,10 @@ vim.opt.writebackup = false
 -- Disable swapfiles
 vim.opt.swapfile = false
 
+-- New splits on the bottom and on the right
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
 -- Grep with ripgrep
 vim.opt.grepprg = 'rg -n $*'
 
