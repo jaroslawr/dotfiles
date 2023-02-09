@@ -7,6 +7,9 @@ PROMPT_COMMAND=()
 # Source standard completions
 source /usr/share/bash-completion/bash_completion
 
+# Prevent Ctrl-S from freezing the terminal
+stty -ixon
+
 # FZF keybindings: cd with Alt-C, insert file path with Ctrl-T
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
