@@ -89,40 +89,10 @@ RESET="\[$(tput sgr0)\]"
 PS1="${BRIGHT_YELLOW}\w ${BRIGHT_PURPLE}\$(__ps1_git_branch)\$(__ps1_git_status)
 ${BRIGHT_BLUE}> ${RESET}"
 
-# FUNCTIONS - ALIASES
+# FUNCTIONS
 #
 
-# cal with more readable output
-cal() {
-    ncal -M -b $@
-}
-
-# ls with more readable output
-ls() {
-    /usr/bin/ls --color=auto --group-directories-first --literal --time-style=long-iso --human-readable $@
-}
-
-# diff with colors and pager, unless running in a pipeline
-diff() {
-    if [[ -t 1 ]]; then
-        /usr/bin/diff --color=always $@ | less -FRS
-    else
-        /usr/bin/diff $@
-    fi
-}
-
-# rg with colors and pager, unless running in a pipeline
-rg() {
-    if [[ -t 1 ]]; then
-        /usr/bin/rg --color=always --line-number $@ | less -FRS
-    else
-        /usr/bin/rg $@
-    fi
-}
-
-# FUNCTIONS - NOTES
-#
-
+# open notes
 nt() {
     $EDITOR ~/Notes/notes.md
 }
@@ -192,3 +162,35 @@ cdpr() {
         echo "Not in a project"
     fi
 }
+
+# FUNCTIONS - ALIASES
+#
+
+# cal with more readable output
+cal() {
+    ncal -M -b $@
+}
+
+# ls with more readable output
+ls() {
+    /usr/bin/ls --color=auto --group-directories-first --literal --time-style=long-iso --human-readable $@
+}
+
+# diff with colors and pager, unless running in a pipeline
+diff() {
+    if [[ -t 1 ]]; then
+        /usr/bin/diff --color=always $@ | less -FRS
+    else
+        /usr/bin/diff $@
+    fi
+}
+
+# rg with colors and pager, unless running in a pipeline
+rg() {
+    if [[ -t 1 ]]; then
+        /usr/bin/rg --color=always --line-number $@ | less -FRS
+    else
+        /usr/bin/rg $@
+    fi
+}
+
