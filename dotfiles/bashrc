@@ -14,7 +14,10 @@ stty -ixon
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
 # Set tmux title to simply "bash"
-echo -ne "\033]0;\a"
+tmux_title() {
+    echo -ne "\033]0;\a"
+}
+PROMPT_COMMAND+=("tmux_title")
 
 # ENVIRONMENT
 #
