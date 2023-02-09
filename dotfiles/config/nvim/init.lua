@@ -14,7 +14,7 @@ vim.opt.writebackup = false
 -- Disable swapfiles
 vim.opt.swapfile = false
 
--- New splits on the bottom and on the right
+-- Open splits below and right
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
@@ -135,7 +135,7 @@ keymap('n', '<leader>w', ':w<cr>', keymap_options)
 -- leader - fzf
 keymap('n', '<leader>ff', ':FzfLua files<cr>', keymap_options)
 keymap('n', '<leader>fb', ':FzfLua buffers<cr>', keymap_options)
-keymap('n', '<leader>fa', ':FzfLua args<cr>', keymap_options)
+keymap('n', '<leader>fl', ":lua require'filelist'.filelist_fzf()<cr>", keymap_options)
 
 -- leader - make
 keymap('n', '<leader>m', ':make<cr>', keymap_options)
