@@ -1,6 +1,6 @@
 --
 function status_filename()
-  local result = vim.fn.expand("%:t")
+  local result = vim.fn.expand("%:.")
   if result == "" then
     return "-"
   end
