@@ -230,3 +230,35 @@ t() {
 vt() {
         dtree0 $@ | xargs -0 -o $EDITOR
 }
+
+# FUNCTIONS - GIT
+#
+
+# git log browser
+lg() {
+    local args=()
+    local paths=()
+
+    while [ $# -gt 0 ] && [ $1 != "--" ]; do
+        args+=($1)
+        shift
+    done
+
+    if [ $1 == "--" ]; then
+        while [ $# -gt 0 ]; do
+            paths+=($1)
+            shift
+        done
+    else
+        paths=(".")
+    fi
+
+    local paths_expanded=$(printf "%q " "${paths[@]}")
+
+    git lg --color=always "${args[@]}" -- "${paths[@]}" | \
+        fzf \
+        --ansi \
+        --preview="git show --color=always {1} -- ${paths_expanded}" \
+        --bind="ctrl-m:execute:(git show --color=always {1} -- ${paths_expanded} | less -CRX)"
+}
+
