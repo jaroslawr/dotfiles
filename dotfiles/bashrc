@@ -231,8 +231,8 @@ t() {
 
 # directory tree - edit in vim
 vt() {
-    dtree $@ | $EDITOR -c ":lua require('filelist').filelist_load()" \
-        -c ":lua require('filelist').filelist_fzf()"
+    dtree $@ | $EDITOR -c ":lua require('filelist').load()" \
+        -c ":lua require('filelist').fzf()"
 }
 
 # FUNCTIONS - GIT

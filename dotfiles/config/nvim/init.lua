@@ -135,7 +135,7 @@ keymap('n', '<leader>w', ':w<cr>', keymap_options)
 -- leader - fzf
 keymap('n', '<leader>ff', ':FzfLua files<cr>', keymap_options)
 keymap('n', '<leader>fb', ':FzfLua buffers<cr>', keymap_options)
-keymap('n', '<leader>fl', ":lua require'filelist'.filelist_fzf()<cr>", keymap_options)
+keymap('n', '<leader>fl', ":lua require'filelist'.fzf()<cr>", keymap_options)
 
 -- leader - make
 keymap('n', '<leader>m', ':make<cr>', keymap_options)
