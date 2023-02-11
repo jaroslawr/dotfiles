@@ -107,6 +107,9 @@ require('fzf-lua').setup({
       }
     },
     preview_pos = 'down'
+  },
+  fzf_opts = {
+    ['--tiebreak'] = 'index'
   }
 })
 
