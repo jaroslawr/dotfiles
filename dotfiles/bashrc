@@ -215,7 +215,9 @@ rl() {
 
 # directory tree - edit in vim
 v() {
-    command rl $@ | $EDITOR -c ":lua require('filelist').load()" \
+    command rl $@ | $EDITOR \
+        -c ":lua require('filelist').load()" \
+        -c ":bdelete!" \
         -c ":lua require('filelist').fzf()"
 }
 
