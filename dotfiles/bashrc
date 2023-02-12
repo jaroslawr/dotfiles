@@ -148,13 +148,6 @@ cdp() {
     fi
 }
 
-# current project root
-cpr() {
-    if [[ $(pwd) =~ ^${PROJECTS_DIR}/.*$ ]]; then
-        pwd | cut -c "$((${#PROJECTS_DIR}+1))-" | cut -d/ -f2
-    fi
-}
-
 _cdp() {
     if [ ${#COMP_WORDS[@]} -gt 2 ]; then
         return
@@ -163,10 +156,13 @@ _cdp() {
     local query=${COMP_WORDS[1]}
 
     if [[ ! "${query}" =~ / ]]; then
-        # Find matching project names
+        # Find matching project directories
+
         IFS=$'\n' read -d '' -r -a COMPREPLY < \
             <(__cdp_find_subdirs "${PROJECTS_DIR}" "${query}*" -printf "%P\n")
     else
+        # Find matching subdirectories within a project directory
+
         # The completed part of the user input - until last slash
         local complete_dirname=$(echo "${query}" | sed -E 's/(.*)\/.*/\1/')
         
@@ -193,9 +189,10 @@ complete -F _cdp -o nospace -o nosort cdp
 
 # cd to project root
 cdpr() {
-    local project=$(cpr)
-    if [ ! -z "${project}" ]; then
-        cdp "${project}"
+    local cwd=$(pwd)
+    if [[ "${cwd}" =~ ^${PROJECTS_DIR}/.+$ ]]; then
+        local project=$(echo "${cwd}" | cut -c "$((${#PROJECTS_DIR}+1))-" | cut -d/ -f2)
+        cd "${PROJECTS_DIR}/${project}"
     else
         echo "Not in a project"
     fi
