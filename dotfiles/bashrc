@@ -23,8 +23,8 @@ PROMPT_COMMAND+=("tmux_title")
 #
 
 export EDITOR=nvim
-export FZF_DEFAULT_OPTS="--tiebreak=index \
-    --layout=reverse --preview-window=down --no-mouse --no-bold \
+export FZF_DEFAULT_OPTS="--tiebreak=index --no-mouse --no-bold \
+    --layout=reverse --preview-window=down,border-top --margin 0,1 \
     --color 16,fg+:11,hl+:9,hl:9,pointer:9 \
     --bind shift-left:preview-page-up,shift-right:preview-page-down"
 export FZF_TMUX=1
