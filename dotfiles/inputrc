@@ -19,6 +19,9 @@ set completion-ignore-case on
 set show-all-if-ambiguous on
 set show-all-if-unmodified on
 
+# Only complete the common prefix if completion is ambiguous
+set menu-complete-display-prefix on
+
 # Never prompt whether to show all completions
 set completion-query-items 0
 
