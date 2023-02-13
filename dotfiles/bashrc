@@ -158,8 +158,7 @@ _cdp() {
     if [[ ! "${query}" =~ / ]]; then
         # Find matching project directories
 
-        IFS=$'\n' read -d '' -r -a COMPREPLY < \
-            <(__cdp_find_subdirs "${PROJECTS_DIR}" "${query}*" -printf "%P\n")
+        readarray -t COMPREPLY < <(__cdp_find_subdirs "${PROJECTS_DIR}" "${query}*" -printf "%P\n")
     else
         # Find matching subdirectories within a project directory
 
@@ -172,9 +171,7 @@ _cdp() {
         # Starting point for find
         local root="${PROJECTS_DIR}/${complete_dirname}"
 
-        # Find matching project subdirectories
-        IFS=$'\n' read -d '' -r -a COMPREPLY < \
-            <(__cdp_find_subdirs "${root}" "${partial_dirname}*" -printf "${complete_dirname}/%P\n")
+        readarray -t COMPREPLY < <(__cdp_find_subdirs "${root}" "${partial_dirname}*" -printf "${complete_dirname}/%P\n")
     fi
 }
 
