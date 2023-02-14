@@ -231,8 +231,8 @@ vt() {
 
 # git log browser
 lg() {
-    local args=()
-    local paths=()
+    declare -a args
+    declare -a paths
 
     while [ $# -gt 0 ] && [ $1 != "--" ]; do
         args+=($1)
