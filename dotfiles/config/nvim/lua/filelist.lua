@@ -10,7 +10,8 @@ function M.fzf ()
   require'fzf-lua'.fzf_exec(filelist, {
     actions = {
       ['default'] = require'fzf-lua'.actions.file_edit
-    }
+    },
+    previewer = "builtin"
   })
 end
 
