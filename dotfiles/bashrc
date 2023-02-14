@@ -158,7 +158,18 @@ _cdp() {
     if [[ ! "${query}" =~ / ]]; then
         # Find matching project directories
 
-        readarray -t COMPREPLY < <(__cdp_find_subdirs "${PROJECTS_DIR}" "${query}*" -printf "%P\n")
+        declare -a prefix_matches
+        declare -a infix_matches
+
+        while IFS=$'\n' read -r match; do
+            if [[ "${match}" =~ ^${query} ]]; then
+                prefix_matches+=(${match})
+            else
+                infix_matches+=(${match})
+            fi
+        done < <(__cdp_find_subdirs "${PROJECTS_DIR}" "*${query}*" -printf "%P\n")
+
+        COMPREPLY=("${prefix_matches[@]}" "${infix_matches[@]}")
     else
         # Find matching subdirectories within a project directory
 
