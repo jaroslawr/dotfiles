@@ -53,14 +53,17 @@ PROMPT_COMMAND+=("history -a")
 # PROMPT
 #
 
-# Parse git status output if in a git repo and set variables for prompt
+# Set git-related variables for prompt
 __update_git_status() {
-    GIT_STATUS=$(git status --branch --porcelain=v2 2>/dev/null)
-    GIT_REPO=$([ $? -eq 0 ] && echo "true" || echo "false")
+    GIT_REPO=$(git rev-parse --git-dir 2>&1 >/dev/null && echo true || echo false)
 
     if [ "${GIT_REPO}" = true ]; then
-        IFS=$'\t' read GIT_PS1_BRANCH GIT_PS1_STAGED GIT_PS1_NONSTAGED GIT_PS1_UNTRACKED < \
-            <(echo "${GIT_STATUS}" | awk -f ~/bin/parse-git-status.awk)
+        IFS=$'\t' read \
+            GIT_PS1_BRANCH \
+            GIT_PS1_STAGED \
+            GIT_PS1_NONSTAGED \
+            GIT_PS1_UNTRACKED \
+            < <(git status --branch --porcelain=v2 | awk -f ~/bin/parse-git-status.awk)
     fi
 }
 
