@@ -104,29 +104,35 @@ ${BRIGHT_BLUE}> ${RESET}"
 
 # cal with more readable output
 cal() {
-    ncal -M -b $@
+    ncal -M -b "$@"
 }
 
 # ls with more readable output
 ls() {
-    command ls --color=auto --group-directories-first --literal --time-style=long-iso --human-readable $@
+    command ls \
+        --color=auto \
+        --group-directories-first \
+        --literal \
+        --time-style=long-iso \
+        --human-readable \
+        "$@"
 }
 
 # diff with colors and pager, unless running in a pipeline
 diff() {
     if [[ -t 1 ]]; then
-        command diff --color=always $@ | less -FRS
+        command diff --color=always "$@" | less -FRS
     else
-        command diff $@
+        command diff "$@"
     fi
 }
 
 # rg with colors and pager, unless running in a pipeline
 rg() {
     if [[ -t 1 ]]; then
-        command rg --color=always --line-number $@ | less -FRS
+        command rg --color=always --line-number "$@" | less -FRS
     else
-        command rg $@
+        command rg "$@"
     fi
 }
 
@@ -215,15 +221,15 @@ cdpr() {
 # directory tree - with pager, unless running in a pipeline
 t() {
     if [[ -t 1 ]]; then
-        command rl $@ | less -FRS
+        command rl "$@" | less -FRS
     else
-        command rl $@
+        command rl "$@"
     fi
 }
 
 # directory tree - edit in vim
 vt() {
-    command rl $@ | $EDITOR \
+    command rl "$@" | $EDITOR \
         -c ":lua require('filelist').load()" \
         -c ":bdelete!" \
         -c ":lua require('filelist').fzf()"
