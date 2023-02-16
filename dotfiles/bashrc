@@ -231,8 +231,7 @@ t() {
 vt() {
     command rl "$@" | $EDITOR \
         -c ":lua require('filelist').load()" \
-        -c ":bdelete!" \
-        -c ":lua require('filelist').fzf()"
+        -c ":bdelete!"
 }
 
 # FUNCTIONS - GIT
