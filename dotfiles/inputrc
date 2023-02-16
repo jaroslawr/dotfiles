@@ -20,9 +20,6 @@ set completion-query-items 0
 # Do not page completions
 set page-completions off
 
-# Complete only the common prefix of all candidates if completion is ambiguous
-set menu-complete-display-prefix on
-
 # Complete hidden files only if pattern begins with .
 set match-hidden-files off
 
