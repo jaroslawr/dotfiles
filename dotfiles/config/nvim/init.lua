@@ -81,6 +81,21 @@ vim.api.nvim_create_autocmd('FileType', {
   command = 'setlocal textwidth=80 shiftwidth=4 tabstop=4 expandtab'
 })
 
+-- PROGRAMMING - common
+--
+
+local on_attach_common = function(client, bufnr)
+  local keymap_opts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, keymap_opts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, keymap_opts)
+end
+
+-- PROGRAMMING - go
+--
+
+local on_attach_gopls = on_attach_common
+require'lspconfig'.gopls.setup{ on_attach = on_attach_gopls }
+
 -- PROGRAMMING - python
 --
 
@@ -92,13 +107,8 @@ vim.api.nvim_create_autocmd('FileType', {
   command = 'compiler python'
 })
 
-local on_pylsp_attach = function(client, bufnr)
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-end
-
-require'lspconfig'.pylsp.setup{ on_attach = on_pylsp_attach }
+local on_attach_pylsp = on_attach_common
+require'lspconfig'.pylsp.setup{ on_attach = on_attach_pylsp }
 
 -- PLUGINS - fzf-lua
 --
