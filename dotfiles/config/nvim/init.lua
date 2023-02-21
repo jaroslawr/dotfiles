@@ -70,7 +70,7 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'WinEnter', 'BufEnter' }, {
   command = 'let &titlestring = v:lua.tmux_title()'
 })
 
--- FILE TYPES - markdown
+-- MARKDOWN
 --
 
 -- Word wrap markdown at 80 characters
@@ -81,7 +81,7 @@ vim.api.nvim_create_autocmd('FileType', {
   command = 'setlocal textwidth=80 shiftwidth=4 tabstop=4 expandtab'
 })
 
--- FILE TYPES - python
+-- PROGRAMMING - python
 --
 
 -- Set the python interpreter as compiler for python files
@@ -91,6 +91,14 @@ vim.api.nvim_create_autocmd('FileType', {
   group = python_autocmds,
   command = 'compiler python'
 })
+
+local on_pylsp_attach = function(client, bufnr)
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+end
+
+require'lspconfig'.pylsp.setup{ on_attach = on_pylsp_attach }
 
 -- PLUGINS - fzf-lua
 --
