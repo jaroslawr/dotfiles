@@ -73,7 +73,7 @@ PROMPT_COMMAND+=("__update_git_status")
 # Print the git branch part of the prompt
 __ps1_git_branch() {
     if [ "${GIT_REPO}" = true ]; then
-        echo ${GIT_PS1_BRANCH}
+        echo "${GIT_PS1_BRANCH}"
     fi
 }
 
@@ -81,9 +81,9 @@ __ps1_git_branch() {
 __ps1_git_status() {
     if [ "${GIT_REPO}" = true ]; then
         local status=""
-        status+=$([ ${GIT_PS1_STAGED} -gt 0 ] && echo "+" || echo "")
-        status+=$([ ${GIT_PS1_NONSTAGED} -gt 0 ] && echo "*" || echo "")
-        status+=$([ ${GIT_PS1_UNTRACKED} -gt 0 ] && echo "?" || echo "")
+        status+=$([ "${GIT_PS1_STAGED}" -gt 0 ] && echo "+" || echo "")
+        status+=$([ "${GIT_PS1_NONSTAGED}" -gt 0 ] && echo "*" || echo "")
+        status+=$([ "${GIT_PS1_UNTRACKED}" -gt 0 ] && echo "?" || echo "")
         echo "${status}"
     fi
 }
@@ -172,9 +172,9 @@ _cdp() {
 
         while IFS=$'\n' read -r match; do
             if [[ "${match}" =~ ^${query} ]]; then
-                prefix_matches+=(${match})
+                prefix_matches+=("${match}")
             else
-                infix_matches+=(${match})
+                infix_matches+=("${match}")
             fi
         done < <(__cdp_find_subdirs "${PROJECTS_DIR}" "*${query}*" -printf "%P\n")
 
@@ -198,7 +198,7 @@ _cdp() {
 __cdp_find_subdirs() {
     # "dir" is lexicographically before "dir-xyz", but "dir/" is lexicographically after "dir-xyz/",
     # so sort first and only then add the trailing slash
-    find "$1" -mindepth 1 -maxdepth 1 -not -path '*/.*' -type d -name "$2" ${@:3} | \
+    find "$1" -mindepth 1 -maxdepth 1 -not -path '*/.*' -type d -name "$2" "${@:3}" | \
         LC_ALL=C sort | sed 's/$/\//'
 }
 
@@ -242,17 +242,19 @@ lg() {
     declare -a args
     declare -a paths
 
-    while [ $# -gt 0 ] && [ $1 != "--" ]; do
-        args+=($1)
+    while [ $# -gt 0 ]; do
+        args+=("$1")
         shift
+
+        if [ "$1" == "--" ]; then
+            while [ $# -gt 0 ]; do
+                paths+=("$1")
+                shift
+            done
+        fi
     done
 
-    if [ "$1" == "--" ]; then
-        while [ $# -gt 0 ]; do
-            paths+=($1)
-            shift
-        done
-    else
+    if [ ${#paths[@]} -eq 0 ]; then
         paths=(".")
     fi
 
