@@ -27,6 +27,9 @@ vim.opt.grepprg = 'rg -n $*'
 -- Show line numbers
 vim.opt.number = true
 
+-- Show signs in number column
+vim.opt.signcolumn = 'number'
+
 -- Color theme
 require('colors')
 
