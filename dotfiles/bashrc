@@ -25,7 +25,7 @@ PROMPT_COMMAND+=("tmux_title")
 export EDITOR=nvim
 export FZF_DEFAULT_OPTS="--tiebreak=index --no-mouse --no-bold \
     --layout=reverse --preview-window=down,border-top --margin 0,1 \
-    --color 16,fg+:11,hl+:9,hl:9,pointer:9 \
+    --color 16,prompt:2,hl:2,hl+:3,fg+:3,pointer:3 \
     --bind shift-left:preview-page-up,shift-right:preview-page-down"
 export FZF_TMUX=1
 export LESS="--raw-control-chars --chop-long-lines --no-init"
@@ -52,6 +52,15 @@ PROMPT_COMMAND+=("history -a")
 
 # PROMPT
 #
+
+# Color definitions
+RED="$(tput setaf 1)"
+GREEN="$(tput setaf 2)"
+YELLOW="$(tput setaf 3)"
+BLUE="$(tput setaf 4)"
+PURPLE="$(tput setaf 5)"
+GRAY="$(tput setaf 7)"
+RESET="$(tput sgr0)"
 
 # Set git-related variables for prompt
 __update_git_status() {
@@ -88,16 +97,25 @@ __ps1_git_status() {
     fi
 }
 
-# Color definitions
-BRIGHT_YELLOW="\[$(tput setaf 11)\]"
-BRIGHT_BLUE="\[$(tput setaf 12)\]"
-BRIGHT_PURPLE="\[$(tput setaf 13)\]"
-GRAY="\[$(tput setaf 7)\]"
-RESET="\[$(tput sgr0)\]"
+# Save the exit code of last command before displaying the prompt
+__save_exit_code() {
+    EXIT_CODE=$?
+}
+PROMPT_COMMAND+=("__save_exit_code")
+
+# Print the prompt ">"
+# green if last command succeeded, red if it failed
+__ps1_prompt() {
+    if [ "${EXIT_CODE}" -eq 0 ]; then
+        echo "${GREEN}>${RESET}"
+    else
+        echo "${RED}>${RESET}"
+    fi
+}
 
 # Prompt definition
-PS1="${BRIGHT_YELLOW}\w ${BRIGHT_PURPLE}\$(__ps1_git_branch)\$(__ps1_git_status)
-${BRIGHT_BLUE}> ${RESET}"
+PS1="\[${YELLOW}\]\w \[${PURPLE}\]\$(__ps1_git_branch)\$(__ps1_git_status)
+\$(__ps1_prompt) "
 
 # ALIASES
 #

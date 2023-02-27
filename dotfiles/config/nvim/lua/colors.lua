@@ -1,34 +1,35 @@
 -- TEXT
 --
 
-vim.api.nvim_set_hl(0, "Constant", { ctermfg=6 })
-vim.api.nvim_set_hl(0, "String", { ctermfg=5 })
-vim.api.nvim_set_hl(0, "Number", { ctermfg=3 })
+vim.api.nvim_set_hl(0, "Constant", { ctermfg=14 })
+vim.api.nvim_set_hl(0, "String", { ctermfg=13 })
+vim.api.nvim_set_hl(0, "Number", { ctermfg=11 })
 vim.api.nvim_set_hl(0, "Identifier", { ctermfg=15 })
-vim.api.nvim_set_hl(0, "Function", { ctermfg=3 })
-vim.api.nvim_set_hl(0, "Statement", { ctermfg=4 })
-vim.api.nvim_set_hl(0, "Keyword", { ctermfg=1 })
-vim.api.nvim_set_hl(0, "PreProc", { ctermfg=1 })
-vim.api.nvim_set_hl(0, "Include", { ctermfg=1 })
-vim.api.nvim_set_hl(0, "Type", { ctermfg=6 })
-vim.api.nvim_set_hl(0, "Special", { ctermfg=1 })
-vim.api.nvim_set_hl(0, "SpecialChar", { ctermfg=1 })
+vim.api.nvim_set_hl(0, "Function", { ctermfg=11 })
+vim.api.nvim_set_hl(0, "Statement", { ctermfg=12 })
+vim.api.nvim_set_hl(0, "Keyword", { ctermfg=11 })
+vim.api.nvim_set_hl(0, "PreProc", { ctermfg=11 })
+vim.api.nvim_set_hl(0, "Include", { ctermfg=11 })
+vim.api.nvim_set_hl(0, "Type", { ctermfg=14 })
+vim.api.nvim_set_hl(0, "Special", { ctermfg=11 })
+vim.api.nvim_set_hl(0, "SpecialChar", { ctermfg=11 })
 vim.api.nvim_set_hl(0, "Delimiter", { ctermfg=7 })
-vim.api.nvim_set_hl(0, "Comment", { ctermfg=7 })
+vim.api.nvim_set_hl(0, "Comment", { ctermfg=8 })
 vim.api.nvim_set_hl(0, "Whitespace", {})
-vim.api.nvim_set_hl(0, "Todo", { ctermfg=3 })
+vim.api.nvim_set_hl(0, "Todo", { ctermfg=11 })
 
 -- BUFFER
 --
 
-vim.api.nvim_set_hl(0, "Visual", { ctermbg=11, ctermfg=0 })
-vim.api.nvim_set_hl(0, "IncSearch", { ctermbg=9, ctermfg=0 })
-vim.api.nvim_set_hl(0, "Search", { ctermfg=9 })
-vim.api.nvim_set_hl(0, "MatchParen", { ctermfg=9 })
+vim.api.nvim_set_hl(0, "Visual", { ctermbg=3, ctermfg=0 })
+vim.api.nvim_set_hl(0, "IncSearch", { ctermbg=2, ctermfg=0 })
+vim.api.nvim_set_hl(0, "Search", { ctermfg=2 })
+vim.api.nvim_set_hl(0, "MatchParen", { ctermfg=3 })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { ctermfg=240 })
 
 -- BUFFER - folds
 --
+
 vim.api.nvim_set_hl(0, "FoldColumn", { ctermfg=0 })
 vim.api.nvim_set_hl(0, "Folded", { ctermfg=11 })
 
@@ -54,11 +55,11 @@ vim.api.nvim_set_hl(0, "TabLineSel", { ctermfg=246 })
 -- UI - status line
 --
 
-vim.api.nvim_set_hl(0, "StatusLine", { ctermbg=235, ctermfg=3 })
+vim.api.nvim_set_hl(0, "StatusLine", { ctermbg=235, ctermfg=11 })
 vim.api.nvim_set_hl(0, "StatusLineNC", { ctermbg=235, ctermfg=7 })
 
 -- project name
-vim.api.nvim_set_hl(0, "User1", { ctermbg=236, ctermfg=5 })
+vim.api.nvim_set_hl(0, "User1", { ctermbg=236, ctermfg=13 })
 
 -- UI - popup menu
 --
@@ -72,6 +73,11 @@ vim.api.nvim_set_hl(0, "PmenuSel", { ctermbg=240, ctermfg=3 })
 vim.api.nvim_set_hl(0, "QuickFixLine", { ctermbg=236 })
 vim.api.nvim_set_hl(0, "qfFileName", { ctermfg=3 })
 vim.api.nvim_set_hl(0, "qfError", { ctermfg=3 })
+
+-- UI - diagnostics
+--
+
+vim.api.nvim_set_hl(0, "DiagnosticWarn", { ctermfg=8 })
 
 -- SYNTAX - markdown
 --
@@ -156,8 +162,8 @@ vim.api.nvim_set_hl(0, "gitIdentity", { ctermfg=15 })
 vim.api.nvim_set_hl(0, "gitEmail", { ctermfg=4 })
 vim.api.nvim_set_hl(0, "gitDate", { ctermfg=15 })
 
--- 
 -- SYNTAX - diff mode
+--
 
 vim.api.nvim_set_hl(0, "DiffAdd", { ctermfg=2 })
 vim.api.nvim_set_hl(0, "DiffDelete", { ctermfg=1 })
@@ -174,5 +180,5 @@ vim.api.nvim_set_hl(0, "netrwExe", { ctermfg=1 })
 
 -- PLUGINS - fzf-lua
 --
-vim.api.nvim_set_hl(0, "FzfLuaTitle", { ctermfg=11 })
 
+vim.api.nvim_set_hl(0, "FzfLuaTitle", { ctermfg=11 })

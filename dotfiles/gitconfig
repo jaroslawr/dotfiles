@@ -9,20 +9,20 @@
         pager = "less --quit-if-one-screen"
 
 [alias]
-        lg = log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto)%h %C(1)%ad %C(7)%<(20,trunc)%ae %C(1)>>> %C(auto)%s'
+        lg = log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto)%h %C(12)%ad %C(8)%<(20,trunc)%ae %C(auto)%s'
         head = show --pretty=medium --no-patch
 
 [color "diff"]
         commit = 5
-        meta = 3 # filename
-        frag = 4 # hunk offset
+        meta = 12 # filename
+        frag = 8 # hunk offset
         old = 1
         new = 2
 
 [color "status"]
-        added = 2 # staged and either new or modified
-        changed = 5 # not staged but tracked and modified
-        untracked = 8 # not staged and not tracked
+        added = 10 # staged and either new or modified
+        changed = 14 # not staged but tracked and modified
+        untracked = 15 # not staged and not tracked
         branch = 5
 
 # git log

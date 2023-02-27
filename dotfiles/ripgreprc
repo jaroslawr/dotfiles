@@ -1,7 +1,7 @@
 --colors=line:fg:white
 --colors=line:style:nobold
---colors=path:fg:3
+--colors=path:fg:14
 --colors=path:style:nobold
 --colors=match:none
---colors=match:fg:9
+--colors=match:fg:2
 --colors=match:style:nobold
