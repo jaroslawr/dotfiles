@@ -54,13 +54,14 @@ PROMPT_COMMAND+=("history -a")
 #
 
 # Color definitions
-RED="$(tput setaf 1)"
-GREEN="$(tput setaf 2)"
-YELLOW="$(tput setaf 3)"
-BLUE="$(tput setaf 4)"
-PURPLE="$(tput setaf 5)"
-GRAY="$(tput setaf 7)"
-RESET="$(tput sgr0)"
+# Bash will garble output if these are not surrounded by []
+RED="\[$(tput setaf 1)\]"
+GREEN="\[$(tput setaf 2)\]"
+YELLOW="\[$(tput setaf 3)\]"
+BLUE="\[$(tput setaf 4)\]"
+PURPLE="\[$(tput setaf 5)\]"
+GRAY="\[$(tput setaf 7)\]"
+RESET="\[$(tput setaf 15)\]"
 
 # Set git-related variables for prompt
 __update_git_status() {
@@ -97,25 +98,18 @@ __ps1_git_status() {
     fi
 }
 
-# Save the exit code of last command before displaying the prompt
-__save_exit_code() {
-    EXIT_CODE=$?
-}
-PROMPT_COMMAND+=("__save_exit_code")
-
-# Print the prompt ">"
-# green if last command succeeded, red if it failed
-__ps1_prompt() {
-    if [ "${EXIT_CODE}" -eq 0 ]; then
-        echo "${GREEN}>${RESET}"
+# Set final prompt
+__set_ps1() {
+    local prompt
+    if [ $? -eq 0 ]; then
+        prompt="${GREEN}>${RESET}"
     else
-        echo "${RED}>${RESET}"
+        prompt="${RED}>${RESET}"
     fi
+    export PS1="${YELLOW}\w ${PURPLE}$(__ps1_git_branch)$(__ps1_git_status)
+${prompt} "
 }
-
-# Prompt definition
-PS1="\[${YELLOW}\]\w \[${PURPLE}\]\$(__ps1_git_branch)\$(__ps1_git_status)
-\$(__ps1_prompt) "
+PROMPT_COMMAND+=("__set_ps1")
 
 # ALIASES
 #
