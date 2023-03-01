@@ -261,20 +261,24 @@ lg() {
     declare -a paths
 
     while [ $# -gt 0 ]; do
-        args+=("$1")
-        shift
-
         if [ "$1" == "--" ]; then
+            shift
             while [ $# -gt 0 ]; do
                 paths+=("$1")
                 shift
             done
+        else
+            args+=("$1")
+            shift
         fi
     done
 
     if [ ${#paths[@]} -eq 0 ]; then
         paths=(".")
     fi
+
+    echo "${args[@]}"
+    echo "${paths[@]}"
 
     local paths_expanded=$(printf "%q " "${paths[@]}")
 
