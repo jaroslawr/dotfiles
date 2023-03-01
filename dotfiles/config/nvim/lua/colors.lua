@@ -14,7 +14,7 @@ vim.api.nvim_set_hl(0, "Type", { ctermfg=14 })
 vim.api.nvim_set_hl(0, "Special", { ctermfg=11 })
 vim.api.nvim_set_hl(0, "SpecialChar", { ctermfg=11 })
 vim.api.nvim_set_hl(0, "Delimiter", { ctermfg=7 })
-vim.api.nvim_set_hl(0, "Comment", { ctermfg=8 })
+vim.api.nvim_set_hl(0, "Comment", { ctermfg=7 })
 vim.api.nvim_set_hl(0, "Whitespace", {})
 vim.api.nvim_set_hl(0, "Todo", { ctermfg=11 })
 
@@ -123,25 +123,25 @@ vim.api.nvim_set_hl(0, "xmlEndTag", { link="xmlTag" })
 
 vim.api.nvim_set_hl(0, "vimFuncName", { link="Keyword" })
 
--- SYNTAX - git commit message header
+-- SYNTAX - git commit (keep in sync with gitconfig)
 --
 
+-- header line
 vim.api.nvim_set_hl(0, "gitcommitSummary", { ctermfg=15 })
 vim.api.nvim_set_hl(0, "gitcommitOverflow", { ctermfg=15 })
 vim.api.nvim_set_hl(0, "gitcommitBlank", { ctermfg=9 })
 
--- SYNTAX - git commit message body
---
-
+-- message body
+vim.api.nvim_set_hl(0, "gitcommitBranch", { ctermfg=5 })
 vim.api.nvim_set_hl(0, "gitcommitComment", { ctermfg=7 })
 vim.api.nvim_set_hl(0, "gitcommitHeader", { ctermfg=7 })
-vim.api.nvim_set_hl(0, "gitcommitSelected", { ctermfg=7 })
-vim.api.nvim_set_hl(0, "gitcommitDiscarded", { ctermfg=7 })
+vim.api.nvim_set_hl(0, "gitcommitSelected", { ctermfg=10 })
+vim.api.nvim_set_hl(0, "gitcommitSelectedType", { ctermfg=10 })
+vim.api.nvim_set_hl(0, "gitcommitSelectedFile", { ctermfg=10 })
+vim.api.nvim_set_hl(0, "gitcommitDiscarded", { ctermfg=14 })
+vim.api.nvim_set_hl(0, "gitcommitDiscardedType", { ctermfg=14 })
+vim.api.nvim_set_hl(0, "gitcommitDiscardedFile", { ctermfg=14 })
 vim.api.nvim_set_hl(0, "gitcommitUntracked", { ctermfg=7 })
-vim.api.nvim_set_hl(0, "gitcommitSelectedType", { ctermfg=2 })
-vim.api.nvim_set_hl(0, "gitcommitSelectedFile", { ctermfg=2 })
-vim.api.nvim_set_hl(0, "gitcommitDiscardedType", { ctermfg=6 })
-vim.api.nvim_set_hl(0, "gitcommitDiscardedFile", { ctermfg=6 })
 vim.api.nvim_set_hl(0, "gitcommitUntrackedType", { ctermfg=7 })
 vim.api.nvim_set_hl(0, "gitcommitUntrackedFile", { ctermfg=7 })
 
