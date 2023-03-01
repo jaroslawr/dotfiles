@@ -177,8 +177,8 @@ __matching_dir_paths() {
     local find_root
 
     if [[ "${input}" =~ / ]]; then
-        input_complete_part=$(echo "${input}" | sed -E 's/(.*\/).*/\1/')
-        input_incomplete_part=$(echo "${input}" | sed -E 's/.*\/(.*)/\1/')
+        input_complete_part="${input%/*}/"
+        input_incomplete_part="${input##*/}"
         find_root="${root}/${input_complete_part}"
     else
         input_complete_part=""
@@ -192,7 +192,7 @@ __matching_dir_paths() {
     while IFS=$'\n' read -r matched_path; do
         local match
         if [[ "${matched_path}" =~ / ]]; then
-            match=$(echo "${matched_path}" | sed -E 's/.*\/(.*)/\1/')
+            match="${matched_path##*/}"
         else
             match="${matched_path}"
         fi
