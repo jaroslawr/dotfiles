@@ -10,3 +10,6 @@
 [submodule "dotfiles/local/share/nvim/site/pack/plugins/start/nvim-lspconfig"]
 	path = dotfiles/local/share/nvim/site/pack/plugins/start/nvim-lspconfig
 	url = git@github.com:neovim/nvim-lspconfig.git
+[submodule "dotfiles/local/share/nvim/site/pack/plugins/start/vim-scriptease"]
+	path = dotfiles/local/share/nvim/site/pack/plugins/start/vim-scriptease
+	url = git@github.com:tpope/vim-scriptease.git
