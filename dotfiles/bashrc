@@ -60,7 +60,7 @@ GREEN="\[$(tput setaf 2)\]"
 YELLOW="\[$(tput setaf 3)\]"
 BLUE="\[$(tput setaf 4)\]"
 PURPLE="\[$(tput setaf 5)\]"
-GRAY="\[$(tput setaf 7)\]"
+LIGHT_GRAY="\[$(tput setaf 8)\]"
 RESET="\[$(tput setaf 15)\]"
 
 # Set git-related variables for prompt
@@ -106,7 +106,7 @@ __set_ps1() {
     else
         prompt="${RED}>${RESET}"
     fi
-    export PS1="${YELLOW}\w ${PURPLE}$(__ps1_git_branch)$(__ps1_git_status)
+    export PS1="${YELLOW}\w ${PURPLE}$(__ps1_git_branch) ${LIGHT_GRAY}$(__ps1_git_status)
 ${prompt} "
 }
 PROMPT_COMMAND+=("__set_ps1")
