@@ -9,6 +9,10 @@ $2 == "branch.head" {
   branch=$3
 }
 
+$2 == "branch.oid" {
+  commit=$3
+}
+
 # ordinary
 $1 == "1" {
   status_in_index=substr($2,1,1)
@@ -39,5 +43,5 @@ $1 == "!" {
 }
 
 END {
-  print branch "\t" changes_in_index "\t" changes_in_worktree "\t" untracked_files
+  print branch "\t" commit "\t" changes_in_index "\t" changes_in_worktree "\t" untracked_files
 }

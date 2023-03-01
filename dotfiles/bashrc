@@ -70,6 +70,7 @@ __update_git_status() {
     if [ "${GIT_REPO}" = true ]; then
         IFS=$'\t' read \
             GIT_PS1_BRANCH \
+            GIT_PS1_COMMIT \
             GIT_PS1_STAGED \
             GIT_PS1_NONSTAGED \
             GIT_PS1_UNTRACKED \
@@ -83,7 +84,11 @@ PROMPT_COMMAND+=("__update_git_status")
 # Print the git branch part of the prompt
 __ps1_git_branch() {
     if [ "${GIT_REPO}" = true ]; then
-        echo "${GIT_PS1_BRANCH}"
+        if [ "${GIT_PS1_BRANCH}" = "(detached)" ]; then
+            echo "${GIT_PS1_COMMIT:0:8}"
+        else
+            echo "${GIT_PS1_BRANCH}"
+        fi
     fi
 }
 
