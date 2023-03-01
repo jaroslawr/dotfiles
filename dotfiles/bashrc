@@ -148,6 +148,66 @@ rg() {
     fi
 }
 
+# COMPLETION FUNCTIONS
+#
+
+# Complete directory paths using prefix or infix matches
+__matching_dir_paths() {
+    # Root directory under which to look for matching directory path
+    local root="$1"
+
+    # Input string to complete
+    local input="$2"
+
+    # Part of input until and including the last /
+    # it should consitute an already complete valid path,
+    # otherwise we should not attempt completion
+    local input_complete_part
+
+    # Part of input_string after last /
+    # this is the part that we actually try to complete
+    local input_incomplete_part
+
+    # Where to look for directory names to complete
+    local find_root
+
+    if [[ "${input}" =~ / ]]; then
+        input_complete_part=$(echo "${input}" | sed -E 's/(.*\/).*/\1/')
+        input_incomplete_part=$(echo "${input}" | sed -E 's/.*\/(.*)/\1/')
+        find_root="${root}/${input_complete_part}"
+    else
+        input_complete_part=""
+        input_incomplete_part="${input}"
+        find_root="${root}"
+    fi
+
+    declare -a prefix_matches
+    declare -a infix_matches
+
+    while IFS=$'\n' read -r matched_path; do
+        local match
+        if [[ "${matched_path}" =~ / ]]; then
+            match=$(echo "${matched_path}" | sed -E 's/.*\/(.*)/\1/')
+        else
+            match="${matched_path}"
+        fi
+
+        if [[ "${match}" =~ ^${input_incomplete_part} ]]; then
+            prefix_matches+=("${matched_path}/")
+        else
+            infix_matches+=("${matched_path}/")
+        fi
+    done < <(find "${find_root}" -mindepth 1 -maxdepth 1 -type d -name "*${input_incomplete_part}*" -printf "${input_complete_part}%P\n" | LC_ALL=C sort)
+
+    COMPREPLY=("${prefix_matches[@]}" "${infix_matches[@]}")
+}
+
+_cd_with_infix_completion() {
+    __matching_dir_paths "." "${COMP_WORDS[-1]}"
+}
+
+complete -F _cd_with_infix_completion -o nospace -o nosort cd
+
 # FUNCTIONS
 #
 
@@ -170,48 +230,7 @@ cdp() {
 }
 
 _cdp() {
-    if [ ${#COMP_WORDS[@]} -gt 2 ]; then
-        return
-    fi
-
-    local query=${COMP_WORDS[1]}
-
-    if [[ ! "${query}" =~ / ]]; then
-        # Find matching project directories
-
-        declare -a prefix_matches
-        declare -a infix_matches
-
-        while IFS=$'\n' read -r match; do
-            if [[ "${match}" =~ ^${query} ]]; then
-                prefix_matches+=("${match}")
-            else
-                infix_matches+=("${match}")
-            fi
-        done < <(__cdp_find_subdirs "${PROJECTS_DIR}" "*${query}*" -printf "%P\n")
-
-        COMPREPLY=("${prefix_matches[@]}" "${infix_matches[@]}")
-    else
-        # Find matching subdirectories within a project directory
-
-        # The completed part of the user input - until last slash
-        local complete_dirname=$(echo "${query}" | sed -E 's/(.*)\/.*/\1/')
-        
-        # The part of the user input to complete - after last slash
-        local partial_dirname=$(echo "${query}" | sed -E 's/.*\/(.*)/\1/')
-
-        # Starting point for find
-        local root="${PROJECTS_DIR}/${complete_dirname}"
-
-        readarray -t COMPREPLY < <(__cdp_find_subdirs "${root}" "${partial_dirname}*" -printf "${complete_dirname}/%P\n")
-    fi
-}
-
-__cdp_find_subdirs() {
-    # "dir" is lexicographically before "dir-xyz", but "dir/" is lexicographically after "dir-xyz/",
-    # so sort first and only then add the trailing slash
-    find "$1" -mindepth 1 -maxdepth 1 -not -path '*/.*' -type d -name "$2" "${@:3}" | \
-        LC_ALL=C sort | sed 's/$/\//'
+    __matching_dir_paths "${PROJECTS_DIR}" "${COMP_WORDS[-1]}"
 }
 
 complete -F _cdp -o nospace -o nosort cdp
@@ -231,6 +250,7 @@ cdpr() {
 #
 
 # directory tree - with pager, unless running in a pipeline
+
 t() {
     if [[ -t 1 ]]; then
         command rl "$@" | less -FRS
@@ -239,12 +259,17 @@ t() {
     fi
 }
 
+complete -F __dirs_with_infix -o nospace -o nosort t
+
 # directory tree - edit in vim
+
 vt() {
     command rl "$@" | $EDITOR \
         -c ":lua require('filelist').load()" \
         -c ":bdelete!"
 }
+
+complete -F __dirs_with_infix -o nospace -o nosort vt
 
 # FUNCTIONS - GIT
 #
