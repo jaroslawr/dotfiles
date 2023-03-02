@@ -301,9 +301,6 @@ lg() {
         paths=(".")
     fi
 
-    echo "${args[@]}"
-    echo "${paths[@]}"
-
     local paths_expanded=$(printf "%q " "${paths[@]}")
 
     git lg --color=always "${args[@]}" -- "${paths[@]}" | \
