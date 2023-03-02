@@ -156,13 +156,14 @@ rg() {
 # COMPLETION FUNCTIONS
 #
 
-# Complete directory paths using prefix or infix matches
-__matching_dir_paths() {
-    # Root directory under which to look for matching directory path
-    local root="$1"
-
+# Complete directory paths using prefix or infix completion of the last path
+# component
+__complete_directory_path() {
     # Input string to complete
-    local input="$2"
+    local input="$1"
+
+    # Root directory under which to look for matching directory path
+    local root="$2"
 
     # Part of input until and including the last /
     # it should consitute an already complete valid path,
@@ -173,17 +174,12 @@ __matching_dir_paths() {
     # this is the part that we actually try to complete
     local input_incomplete_part
 
-    # Where to look for directory names to complete
-    local find_root
-
     if [[ "${input}" =~ / ]]; then
         input_complete_part="${input%/*}/"
         input_incomplete_part="${input##*/}"
-        find_root="${root}/${input_complete_part}"
     else
         input_complete_part=""
         input_incomplete_part="${input}"
-        find_root="${root}"
     fi
 
     declare -a prefix_matches
@@ -202,16 +198,37 @@ __matching_dir_paths() {
         else
             infix_matches+=("${matched_path}/")
         fi
-    done < <(find "${find_root}" -mindepth 1 -maxdepth 1 -type d -name "*${input_incomplete_part}*" -printf "${input_complete_part}%P\n" | LC_ALL=C sort)
+    done < <(__find_subdirs_infix "${root}/${input_complete_part}" "${input_incomplete_part}" -printf "${input_complete_part}%P\n")
 
     COMPREPLY=("${prefix_matches[@]}" "${infix_matches[@]}")
 }
 
-_cd_with_infix_completion() {
-    __matching_dir_paths "." "${COMP_WORDS[-1]}"
+__find_subdirs_infix() {
+    # Directory in which to look for subdirectories
+    local root="$1"
+    # Infix search query
+    local query="$2"
+    # Actions to pass to find
+    declare -a action
+    action=("${@:3}")
+
+    declare -a find_args
+    find_args+=("${root}" -mindepth 1 -maxdepth 1 -type d -name "*${query}*")
+    # Ignore hidden directories unless search query starts with .
+    if [[ ! "${query}" =~ ^\. ]]; then
+        find_args+=(-not -name ".*")
+    fi
+    find_args+=("${action[@]}")
+
+    # Find and sort using C locale
+    find "${find_args[@]}" | LC_ALL=C sort
 }
 
-complete -F _cd_with_infix_completion -o nospace -o nosort cd
+__complete_cd_infix() {
+    __complete_directory_path "${COMP_WORDS[-1]}" "."
+}
+
+complete -F __complete_cd_infix -o nospace -o nosort cd
 
 # FUNCTIONS
 #
@@ -234,11 +251,11 @@ cdp() {
     fi
 }
 
-_cdp() {
-    __matching_dir_paths "${PROJECTS_DIR}" "${COMP_WORDS[-1]}"
+__complete_cdp() {
+    __complete_directory_path "${COMP_WORDS[-1]}" "${PROJECTS_DIR}"
 }
 
-complete -F _cdp -o nospace -o nosort cdp
+complete -F __complete_cdp -o nospace -o nosort cdp
 
 # cd to project root
 cdpr() {
@@ -264,7 +281,7 @@ t() {
     fi
 }
 
-complete -F __dirs_with_infix -o nospace -o nosort t
+complete -F __complete_cd_infix -o nospace -o nosort t
 
 # directory tree - edit in vim
 
@@ -274,7 +291,7 @@ vt() {
         -c ":bdelete!"
 }
 
-complete -F __dirs_with_infix -o nospace -o nosort vt
+complete -F __complete_cd_infix -o nospace -o nosort vt
 
 # FUNCTIONS - GIT
 #
