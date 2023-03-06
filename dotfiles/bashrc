@@ -162,66 +162,72 @@ __complete_directory_path() {
     # Input string to complete
     local input="$1"
 
-    # Root directory under which to look for matching directory path
-    local root="$2"
+    # Root directory under which to look for matching directory path,
+    # used only if input is a relative path
+    local relative_root="$2"
+
+    # Expand ~ in input if present
+    if [[ "${input}" =~ ^~ ]]; then
+        input="${HOME}/${input#"~/"}"
+    fi
 
     # Part of input until and including the last /
     # it should consitute an already complete valid path,
     # otherwise we should not attempt completion
-    local input_complete_part
+    local complete_path
 
-    # Part of input_string after last /
+    # Part of input after last /
     # this is the part that we actually try to complete
-    local input_incomplete_part
+    local incomplete_path
 
+    # Split input string into complete and incomplete part
     if [[ "${input}" =~ / ]]; then
-        input_complete_part="${input%/*}/"
-        input_incomplete_part="${input##*/}"
+        complete_path="${input%/*}/"
+        incomplete_path="${input##*/}"
     else
-        input_complete_part=""
-        input_incomplete_part="${input}"
+        complete_path=""
+        incomplete_path="${input}"
     fi
 
-    declare -a prefix_matches
-    declare -a infix_matches
-
-    while IFS=$'\n' read -r matched_path; do
-        local match
-        if [[ "${matched_path}" =~ / ]]; then
-            match="${matched_path##*/}"
-        else
-            match="${matched_path}"
-        fi
-
-        if [[ "${match}" =~ ^${input_incomplete_part} ]]; then
-            prefix_matches+=("${matched_path}/")
-        else
-            infix_matches+=("${matched_path}/")
-        fi
-    done < <(__find_subdirs_infix "${root}/${input_complete_part}" "${input_incomplete_part}" -printf "${input_complete_part}%P\n")
-
-    COMPREPLY=("${prefix_matches[@]}" "${infix_matches[@]}")
-}
-
-__find_subdirs_infix() {
-    # Directory in which to look for subdirectories
-    local root="$1"
-    # Infix search query
-    local query="$2"
-    # Actions to pass to find
-    declare -a action
-    action=("${@:3}")
-
+    # Argument list for find
     declare -a find_args
-    find_args+=("${root}" -mindepth 1 -maxdepth 1 -type d -name "*${query}*")
-    # Ignore hidden directories unless search query starts with .
-    if [[ ! "${query}" =~ ^\. ]]; then
+
+    # Determine the directory in which to look for completion candidates
+    if [[ "${complete_path}" =~ ^/ ]]; then
+        # Case of absolute path
+        find_args+=("${complete_path}")
+    else
+        # Case of relative path
+        find_args+=("${relative_root}/${complete_path}")
+    fi
+
+    # Look for immediate subdirectories
+    find_args+=(-mindepth 1 -maxdepth 1 -type d)
+
+    # Look for the substring in directory name
+    find_args+=(-name "*${incomplete_path}*")
+
+    # Ignore hidden directories unless the substring to search for starts with .
+    if [[ ! "${substring}" =~ ^\. ]]; then
         find_args+=(-not -name ".*")
     fi
-    find_args+=("${action[@]}")
 
-    # Find and sort using C locale
-    find "${find_args[@]}" | LC_ALL=C sort
+    # Print only names of matching directories
+    find_args+=(-printf "%P\n")
+
+    # Read and postprocess the completion candidates
+    declare -a prefix_matches
+    declare -a infix_matches
+    while IFS=$'\n' read -r match; do
+        if [[ "${match}" =~ ^${incomplete_path} ]]; then
+            prefix_matches+=("${complete_path}${match}/")
+        else
+            infix_matches+=("${complete_path}${match}/")
+        fi
+    done < <(find "${find_args[@]}" | LC_ALL=C sort)
+
+    # Completion candidates consists of prefix matches followed by infix matches
+    COMPREPLY=("${prefix_matches[@]}" "${infix_matches[@]}")
 }
 
 __complete_cd_infix() {
