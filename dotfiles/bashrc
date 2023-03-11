@@ -208,7 +208,7 @@ __complete_directory_path() {
     find_args+=(-name "*${incomplete_path}*")
 
     # Ignore hidden directories unless the substring to search for starts with .
-    if [[ ! "${substring}" =~ ^\. ]]; then
+    if [[ ! "${incomplete_path}" =~ ^\. ]]; then
         find_args+=(-not -name ".*")
     fi
 
