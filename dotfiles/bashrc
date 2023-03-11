@@ -1,24 +1,3 @@
-# GENERAL
-#
-
-# Define PROMPT_COMMAND as an array so following sections can add their own commands
-PROMPT_COMMAND=()
-
-# Source standard completions
-source /usr/share/bash-completion/bash_completion
-
-# Prevent Ctrl-S from freezing the terminal
-stty -ixon
-
-# FZF keybindings: cd with Alt-C, insert file path with Ctrl-T
-source /usr/share/doc/fzf/examples/key-bindings.bash
-
-# Set tmux title to simply "bash"
-tmux_title() {
-    echo -ne "\033]0;\a"
-}
-PROMPT_COMMAND+=("tmux_title")
-
 # ENVIRONMENT
 #
 
@@ -33,6 +12,30 @@ export PATH="${HOME}/bin:${HOME}/go/bin:${PATH}"
 export PROJECTS_DIR=~/Projects
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
+
+# GENERAL
+#
+
+# Define PROMPT_COMMAND as an array so following sections can add their own commands
+PROMPT_COMMAND=()
+
+# Set tmux title to simply "bash"
+tmux_title() {
+    echo -ne "\033]0;\a"
+}
+PROMPT_COMMAND+=("tmux_title")
+
+# Prevent Ctrl-S from freezing the terminal
+stty -ixon
+
+# DEPENDENCIES
+#
+
+# Source standard completions
+source /usr/share/bash-completion/bash_completion
+
+# FZF keybindings: cd with Alt-C, insert file path with Ctrl-T
+source /usr/share/doc/fzf/examples/key-bindings.bash
 
 # HISTORY
 #
