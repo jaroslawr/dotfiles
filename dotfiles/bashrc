@@ -10,6 +10,7 @@ export FZF_TMUX=1
 export LESS="--raw-control-chars --chop-long-lines --no-init"
 export PATH="${HOME}/bin:${HOME}/go/bin:${PATH}"
 export PROJECTS_DIR=~/Projects
+export PROJECT_HOME="${PROJECTS_DIR}"
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
 
@@ -36,6 +37,9 @@ source /usr/share/bash-completion/bash_completion
 
 # FZF keybindings: cd with Alt-C, insert file path with Ctrl-T
 source /usr/share/doc/fzf/examples/key-bindings.bash
+
+# Virtualenvwrapper
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 # HISTORY
 #
@@ -88,9 +92,9 @@ PROMPT_COMMAND+=("__update_git_status")
 __ps1_git_branch() {
     if [ "${GIT_REPO}" = true ]; then
         if [ "${GIT_PS1_BRANCH}" = "(detached)" ]; then
-            echo "${GIT_PS1_COMMIT:0:8}"
+            echo "${GIT_PS1_COMMIT:0:8} "
         else
-            echo "${GIT_PS1_BRANCH}"
+            echo "${GIT_PS1_BRANCH} "
         fi
     fi
 }
@@ -106,6 +110,11 @@ __ps1_git_status() {
     fi
 }
 
+# Virtualenv
+__ps1_virtualenv() {
+    [[ "${VIRTUAL_ENV}" == "" ]] && echo "" || echo "${BLUE}venv${RESET} "
+}
+
 # Set final prompt
 __set_ps1() {
     local prompt
@@ -114,7 +123,7 @@ __set_ps1() {
     else
         prompt="${RED}>${RESET}"
     fi
-    export PS1="${YELLOW}\w ${PURPLE}$(__ps1_git_branch) ${LIGHT_GRAY}$(__ps1_git_status)
+    export PS1="${YELLOW}\w $(__ps1_virtualenv)${PURPLE}$(__ps1_git_branch)${LIGHT_GRAY}$(__ps1_git_status) 
 ${prompt} "
 }
 PROMPT_COMMAND+=("__set_ps1")
@@ -221,7 +230,7 @@ __complete_directory_path() {
     # Read and postprocess the completion candidates
     declare -a prefix_matches
     declare -a infix_matches
-    while IFS=$'\n' read -r match; do
+    while IFS= read -r match; do
         if [[ "${match}" =~ ^${incomplete_path} ]]; then
             prefix_matches+=("${complete_path}${match}/")
         else
@@ -252,12 +261,32 @@ nt() {
 
 # cd to project
 cdp() {
-    local project_dir="${PROJECTS_DIR}/$1"
-    if [ -d "${project_dir}" ]; then
-        cd "${project_dir}"
+    local project_name="${1%%/*}"
+    local project_relative_path="${1#*/}"
+
+    local project_root="${PROJECTS_DIR}/${project_name}"
+
+    if [ -d "${project_root}" ]; then
+        local destination_path="${project_root}/${project_relative_path}"
+        if [ -d "${destination_path}" ]; then
+            __activate_venv "${project_name}"
+            cd "${destination_path}"
+        else
+            printf "Destination '%s' in project '%s' does not exist\n" "${project_relative_path}" "${project_name}"
+        fi
     else
-        echo "Project does not exist"
+        printf "Project '%s' does not exist\n" "${project_name}"
     fi
+}
+
+__activate_venv() {
+    local project_name="$1"
+
+    while IFS= read virtualenv; do
+        if [[ "${virtualenv}" == "${project_name}" ]]; then
+            workon "${virtualenv}"
+        fi
+    done < <(lsvirtualenv -b)
 }
 
 __complete_cdp() {
