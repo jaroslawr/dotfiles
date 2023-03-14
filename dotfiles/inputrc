@@ -28,3 +28,7 @@ set match-hidden-files off
 
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+
+$if Bash
+" ": magic-space
+$endif
