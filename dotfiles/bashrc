@@ -140,8 +140,9 @@ __ps1_virtualenv() {
 
 # Set final prompt
 __set_ps1() {
+    local status=$?
     local prompt
-    if [ $? -eq 0 ]; then
+    if [ "${status}" -eq 0 ]; then
         prompt="${GREEN}>${RESET}"
     else
         prompt="${RED}>${RESET}"
