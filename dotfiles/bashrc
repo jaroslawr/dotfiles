@@ -94,14 +94,14 @@ __update_git_status() {
                     ;;
                 "1")
                     if [ "${fields[1]:0:1}" != "." ]; then
-                        GIT_PS1_STAGED+=1
+                        ((GIT_PS1_STAGED++))
                     fi
                     if [ "${fields[1]:1:1}" != "." ]; then
-                        GIT_PS1_NONSTAGED+=1
+                        ((GIT_PS1_NONSTAGED++))
                     fi
                     ;;
                 "?")
-                    GIT_PS1_UNTRACKED+=1
+                    ((GIT_PS1_UNTRACKED++))
                     ;;
             esac
         done < <(git status --branch --porcelain=v2)
