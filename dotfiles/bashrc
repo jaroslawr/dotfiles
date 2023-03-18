@@ -286,7 +286,10 @@ nt() {
 # cd to project
 cdp() {
     local project_name="${1%%/*}"
-    local project_relative_path="${1#*/}"
+    local project_relative_path=""
+    if [[ $1 =~ / ]]; then
+        project_relative_path="${1#*/}"
+    fi
 
     local project_root="${PROJECTS_DIR}/${project_name}"
 
