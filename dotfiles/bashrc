@@ -177,7 +177,7 @@ __ps1_git_status() {
 
 # Virtualenv
 __ps1_virtualenv() {
-    [[ "${VIRTUAL_ENV}" == "" ]] && echo "" || echo "${BLUE}venv${RESET} "
+    [[ "${VIRTUAL_ENV}" == "" ]] && printf "" || printf "${BLUE}venv${RESET} "
 }
 
 # Set final prompt
