@@ -112,8 +112,8 @@ __update_git_status() {
                             GIT_PS1_COMMIT="${fields[2]}"
                             ;;
                         "branch.ab")
-                            [[ "${fields[2]}" -gt 0 ]] && GIT_PS1_AHEAD="${fields[2]}"
-                            [[ "${fields[3]}" -lt 0 ]] && GIT_PS1_BEHIND="${fields[3]}"
+                            [ "${fields[2]}" -gt 0 ] && GIT_PS1_AHEAD="${fields[2]}"
+                            [ "${fields[3]}" -lt 0 ] && GIT_PS1_BEHIND="${fields[3]}"
                             ;;
                     esac
                     ;;
@@ -155,11 +155,11 @@ __ps1_git_status() {
         local local_status="${GIT_PS1_STAGED}${GIT_PS1_NONSTAGED}${GIT_PS1_UNTRACKED}"
 
         declare -a fields
-        [[ -n "${local_status}" ]] && fields+=("${LIGHT_GRAY}${local_status}${RESET}")
-        [[ -n "${GIT_PS1_AHEAD}" ]] && fields+=("${GREEN}${GIT_PS1_AHEAD}${RESET}")
-        [[ -n "${GIT_PS1_BEHIND}" ]] && fields+=("${RED}${GIT_PS1_BEHIND}${RESET}")
+        [ -n "${local_status}" ] && fields+=("${LIGHT_GRAY}${local_status}${RESET}")
+        [ -n "${GIT_PS1_AHEAD}" ] && fields+=("${GREEN}${GIT_PS1_AHEAD}${RESET}")
+        [ -n "${GIT_PS1_BEHIND}" ] && fields+=("${RED}${GIT_PS1_BEHIND}${RESET}")
 
-        if [[ "${#fields[@]}" -gt 0 ]]; then
+        if [ "${#fields[@]}" -gt 0 ]; then
             # Join fields with spaces and print
             local first=${fields[0]}
             local rest=${fields[@]:1}
@@ -171,7 +171,7 @@ __ps1_git_status() {
 
 # Virtualenv
 __ps1_virtualenv() {
-    [[ "${VIRTUAL_ENV}" == "" ]] && printf "" || printf "${BLUE}venv${RESET} "
+    [ "${VIRTUAL_ENV}" == "" ] && printf "" || printf "${BLUE}venv${RESET} "
 }
 
 # Set final prompt
@@ -209,7 +209,7 @@ ls() {
 
 # diff with colors and pager, unless running in a pipeline
 diff() {
-    if [[ -t 1 ]]; then
+    if [ -t 1 ]; then
         command diff --color=always "$@" | less -FRS
     else
         command diff "$@"
@@ -218,7 +218,7 @@ diff() {
 
 # rg with colors and pager, unless running in a pipeline
 rg() {
-    if [[ -t 1 ]]; then
+    if [ -t 1 ]; then
         command rg --color=always --line-number "$@" | less -FRS
     else
         command rg "$@"
@@ -346,7 +346,7 @@ __activate_venv() {
     local project_name="$1"
 
     while IFS= read -r virtualenv; do
-        if [[ "${virtualenv}" == "${project_name}" ]]; then
+        if [ "${virtualenv}" == "${project_name}" ]; then
             workon "${virtualenv}"
         fi
     done < <(lsvirtualenv -b)
