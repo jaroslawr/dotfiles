@@ -21,14 +21,14 @@ export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
 PROMPT_COMMAND=()
 
 # Set tmux title to simply "bash"
-tmux_title() {
+__set_tmux_title() {
     echo -ne "\033]0;\a"
 }
-PROMPT_COMMAND+=("tmux_title")
+PROMPT_COMMAND+=("__set_tmux_title")
 
 # Functions added to PRECMDS will be executed each time a command is about to execute
 PRECMDS=()
-precmd() {
+__execute_precmds() {
     # Skip execution for commands in PROMPT_COMMAND
     local prompt_command
     for prompt_command in "${PROMPT_COMMAND[@]}"; do
@@ -42,7 +42,7 @@ precmd() {
         "${cmd}"
     done
 }
-trap precmd DEBUG
+trap __execute_precmds DEBUG
 
 # Prevent Ctrl-S from freezing the terminal
 stty -ixon
