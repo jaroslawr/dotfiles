@@ -26,6 +26,24 @@ tmux_title() {
 }
 PROMPT_COMMAND+=("tmux_title")
 
+# Functions added to PRECMDS will be executed each time a command is about to execute
+PRECMDS=()
+precmd() {
+    # Skip execution for commands in PROMPT_COMMAND
+    local prompt_command
+    for prompt_command in "${PROMPT_COMMAND[@]}"; do
+        if [ "${BASH_COMMAND}" = "${prompt_command}" ]; then
+            return
+        fi
+    done
+
+    # Execute PRECMDs
+    for cmd in "${PRECMDS[@]}"; do
+        "${cmd}"
+    done
+}
+trap precmd DEBUG
+
 # Prevent Ctrl-S from freezing the terminal
 stty -ixon
 
@@ -54,8 +72,9 @@ shopt -s histappend
 # Save multi line commands literally, with newlines as entered
 shopt -s lithist
 
-# Write history before each priting of the prompt
-PROMPT_COMMAND+=("history -a")
+# Save history each time a command is about to execute
+__save_history() { history -a; }
+PRECMDS+=("__save_history")
 
 # PROMPT
 #
