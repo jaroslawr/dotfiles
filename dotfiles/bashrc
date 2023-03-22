@@ -14,19 +14,6 @@ export PROJECT_HOME="${PROJECTS_DIR}"
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
 
-
-# UTILITIES
-#
-
-# Use separator ($1) to join array elements ($2, $3, ...)
-__join() {
-  local sep=${1-}
-  local first=${2-}
-  if shift 2; then
-    printf %s "${first}" "${@/#/$sep}"
-  fi
-}
-
 # GENERAL
 #
 
@@ -171,7 +158,15 @@ __ps1_git_status() {
         [[ ! -z "${local_status}" ]] && fields+=("${LIGHT_GRAY}${local_status}${RESET}")
         [[ ! -z "${GIT_PS1_AHEAD}" ]] && fields+=("${GREEN}${GIT_PS1_AHEAD}${RESET}")
         [[ ! -z "${GIT_PS1_BEHIND}" ]] && fields+=("${RED}${GIT_PS1_BEHIND}${RESET}")
-        __join " " "${fields[@]}"
+
+
+        if [[ "${#fields[@]}" -gt 0 ]]; then
+            # Join fields with spaces and print
+            local first=${fields[0]}
+            local rest=${fields[@]:1}
+            local sep=" "
+            printf %s "${first}" "${rest[@]#/${sep}}"
+        fi
     fi
 }
 
