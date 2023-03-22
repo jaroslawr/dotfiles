@@ -101,7 +101,7 @@ __update_git_status() {
         GIT_PS1_BEHIND=""
 
         declare -a fields
-        while IFS=$' ' read -a fields; do
+        while IFS=$' ' read -r -a fields; do
             case "${fields[0]}" in
                 "#")
                     case "${fields[1]}" in
@@ -155,10 +155,9 @@ __ps1_git_status() {
         local local_status="${GIT_PS1_STAGED}${GIT_PS1_NONSTAGED}${GIT_PS1_UNTRACKED}"
 
         declare -a fields
-        [[ ! -z "${local_status}" ]] && fields+=("${LIGHT_GRAY}${local_status}${RESET}")
-        [[ ! -z "${GIT_PS1_AHEAD}" ]] && fields+=("${GREEN}${GIT_PS1_AHEAD}${RESET}")
-        [[ ! -z "${GIT_PS1_BEHIND}" ]] && fields+=("${RED}${GIT_PS1_BEHIND}${RESET}")
-
+        [[ -n "${local_status}" ]] && fields+=("${LIGHT_GRAY}${local_status}${RESET}")
+        [[ -n "${GIT_PS1_AHEAD}" ]] && fields+=("${GREEN}${GIT_PS1_AHEAD}${RESET}")
+        [[ -n "${GIT_PS1_BEHIND}" ]] && fields+=("${RED}${GIT_PS1_BEHIND}${RESET}")
 
         if [[ "${#fields[@]}" -gt 0 ]]; then
             # Join fields with spaces and print
@@ -346,7 +345,7 @@ cdp() {
 __activate_venv() {
     local project_name="$1"
 
-    while IFS= read virtualenv; do
+    while IFS= read -r virtualenv; do
         if [[ "${virtualenv}" == "${project_name}" ]]; then
             workon "${virtualenv}"
         fi
