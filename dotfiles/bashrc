@@ -198,7 +198,7 @@ cal() {
 
 # cd with virtualenv support
 cd() {
-    command cd "$1"
+    command cd "$@"
 
     local cwd=$(pwd)
 
@@ -223,8 +223,10 @@ cd() {
         # Outside project directry
         # Deactivation of virtualenv possibly needed
 
-        printf "Deactivating virtualenv\n"
-        deactivate
+        if [[ -n "${VIRTUAL_ENV}" ]]; then
+            printf "Deactivating virtualenv\n"
+            deactivate
+        fi
     fi
 }
 
