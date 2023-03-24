@@ -161,10 +161,10 @@ __ps1_git_status() {
 
         if [ "${#fields[@]}" -gt 0 ]; then
             # Join fields with spaces and print
-            local first=${fields[0]}
-            local rest=${fields[@]:1}
+            local first="${fields[0]}"
+            local rest=("${fields[@]:1}")
             local sep=" "
-            printf %s "${first}" "${rest[@]#/${sep}}"
+            printf %s "${first}" "${rest[@]/#/${sep}}"
         fi
     fi
 }
