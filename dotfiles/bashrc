@@ -196,6 +196,38 @@ cal() {
     ncal -M -b "$@"
 }
 
+# cd with virtualenv support
+cd() {
+    command cd "$1"
+
+    local cwd=$(pwd)
+
+    if [[ "${cwd}" == ${PROJECT_HOME}/* ]]; then
+        # Inside projects directory,
+        # activation or change of virtualenv possibly needed
+
+        local cwd_relative_to_projects_home=${cwd#"${PROJECT_HOME}/"}
+        local current_project=${cwd_relative_to_projects_home%%/*}
+
+        local active_virtualenv="${VIRTUAL_ENV##*/}"
+
+        if [ "${active_virtualenv}" != "${current_project}" ]; then
+            while IFS= read -r virtualenv; do
+                if [ "${virtualenv}" == "${current_project}" ]; then
+                    printf "Activating virtualenv: %s\n" "${current_project}"
+                    workon "${virtualenv}"
+                fi
+            done < <(lsvirtualenv -b)
+        fi
+    else
+        # Outside project directry
+        # Deactivation of virtualenv possibly needed
+
+        printf "Deactivating virtualenv\n"
+        deactivate
+    fi
+}
+
 # ls with more readable output
 ls() {
     command ls \
@@ -332,7 +364,6 @@ cdp() {
     if [ -d "${project_root}" ]; then
         local destination_path="${project_root}/${project_relative_path}"
         if [ -d "${destination_path}" ]; then
-            __activate_venv "${project_name}"
             cd "${destination_path}"
         else
             printf "Destination '%s' in project '%s' does not exist\n" "${project_relative_path}" "${project_name}"
@@ -340,16 +371,6 @@ cdp() {
     else
         printf "Project '%s' does not exist\n" "${project_name}"
     fi
-}
-
-__activate_venv() {
-    local project_name="$1"
-
-    while IFS= read -r virtualenv; do
-        if [ "${virtualenv}" == "${project_name}" ]; then
-            workon "${virtualenv}"
-        fi
-    done < <(lsvirtualenv -b)
 }
 
 __complete_cdp() {
