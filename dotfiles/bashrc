@@ -382,8 +382,8 @@ complete -F __complete_cdp -o nospace -o nosort cdp
 # cd to project root
 cdpr() {
     local cwd=$(pwd)
-    if [[ "${cwd}" =~ ^${PROJECTS_DIR}/.+$ ]]; then
-        local project=$(echo "${cwd}" | cut -c "$((${#PROJECTS_DIR}+1))-" | cut -d/ -f2)
+    if [[ "${cwd}" == ${PROJECTS_DIR}/* ]]; then
+        local project=${cwd#"${PROJECTS_DIR}/"}
         cd "${PROJECTS_DIR}/${project}"
     else
         echo "Not in a project"
