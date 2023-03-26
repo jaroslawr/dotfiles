@@ -32,7 +32,7 @@ __execute_precmds() {
     # Skip execution for commands in PROMPT_COMMAND
     local prompt_command
     for prompt_command in "${PROMPT_COMMAND[@]}"; do
-        if [ "${BASH_COMMAND}" = "${prompt_command}" ]; then
+        if [[ "${BASH_COMMAND}" == "${prompt_command}" ]]; then
             return
         fi
     done
@@ -113,16 +113,16 @@ __update_git_status() {
                             GIT_PS1_COMMIT="${fields[2]}"
                             ;;
                         "branch.ab")
-                            [ "${fields[2]}" -gt 0 ] && GIT_PS1_AHEAD="${fields[2]}"
-                            [ "${fields[3]}" -lt 0 ] && GIT_PS1_BEHIND="${fields[3]}"
+                            [[ "${fields[2]}" -gt 0 ]] && GIT_PS1_AHEAD="${fields[2]}"
+                            [[ "${fields[3]}" -lt 0 ]] && GIT_PS1_BEHIND="${fields[3]}"
                             ;;
                     esac
                     ;;
                 "1")
-                    if [ "${fields[1]:0:1}" != "." ]; then
+                    if [[ "${fields[1]:0:1}" != "." ]]; then
                         GIT_PS1_STAGED="+"
                     fi
-                    if [ "${fields[1]:1:1}" != "." ]; then
+                    if [[ "${fields[1]:1:1}" != "." ]]; then
                         GIT_PS1_NONSTAGED="*"
                     fi
                     ;;
@@ -139,9 +139,9 @@ PROMPT_COMMAND+=("__update_git_status")
 
 # Print the git branch part of the prompt
 __ps1_git_branch() {
-    if [ "${GIT_REPO}" = true ]; then
+    if [[ "${GIT_REPO}" == true ]]; then
         local branch
-        if [ "${GIT_PS1_BRANCH}" = "(detached)" ]; then
+        if [[ "${GIT_PS1_BRANCH}" == "(detached)" ]]; then
             branch="${GIT_PS1_COMMIT:0:8}"
         else
             branch="${GIT_PS1_BRANCH}"
@@ -152,15 +152,15 @@ __ps1_git_branch() {
 
 # Print the git status part of the prompt
 __ps1_git_status() {
-    if [ "${GIT_REPO}" = true ]; then
+    if [[ "${GIT_REPO}" == true ]]; then
         local local_status="${GIT_PS1_STAGED}${GIT_PS1_NONSTAGED}${GIT_PS1_UNTRACKED}"
 
         declare -a fields
-        [ -n "${local_status}" ] && fields+=("${LIGHT_GRAY}${local_status}${RESET}")
-        [ -n "${GIT_PS1_AHEAD}" ] && fields+=("${GREEN}${GIT_PS1_AHEAD}${RESET}")
-        [ -n "${GIT_PS1_BEHIND}" ] && fields+=("${RED}${GIT_PS1_BEHIND}${RESET}")
+        [[ -n "${local_status}" ]] && fields+=("${LIGHT_GRAY}${local_status}${RESET}")
+        [[ -n "${GIT_PS1_AHEAD}" ]] && fields+=("${GREEN}${GIT_PS1_AHEAD}${RESET}")
+        [[ -n "${GIT_PS1_BEHIND}" ]] && fields+=("${RED}${GIT_PS1_BEHIND}${RESET}")
 
-        if [ "${#fields[@]}" -gt 0 ]; then
+        if [[ "${#fields[@]}" -gt 0 ]]; then
             # Join fields with spaces and print
             local first="${fields[0]}"
             local rest=("${fields[@]:1}")
@@ -172,14 +172,14 @@ __ps1_git_status() {
 
 # Virtualenv
 __ps1_virtualenv() {
-    [ "${VIRTUAL_ENV}" == "" ] && printf "" || printf "${BLUE}venv${RESET} "
+    [[ "${VIRTUAL_ENV}" == "" ]] && printf "" || printf "${BLUE}venv${RESET} "
 }
 
 # Set final prompt
 __set_ps1() {
     local status=$?
     local prompt
-    if [ "${status}" -eq 0 ]; then
+    if [[ "${status}" -eq 0 ]]; then
         prompt="${GREEN}>${RESET}"
     else
         prompt="${RED}>${RESET}"
@@ -207,10 +207,10 @@ cd() {
 
         local active_virtualenv="${VIRTUAL_ENV##*/}"
 
-        if [ "${active_virtualenv}" != "${current_project}" ]; then
+        if [[ "${active_virtualenv}" != "${current_project}" ]]; then
             local virtualenv
             while IFS= read -r virtualenv; do
-                if [ "${virtualenv}" == "${current_project}" ]; then
+                if [[ "${virtualenv}" == "${current_project}" ]]; then
                     printf "Activating virtualenv: %s\n" "${current_project}"
                     workon "${virtualenv}"
                 fi
@@ -240,7 +240,7 @@ ls() {
 
 # diff with colors and pager, unless running in a pipeline
 diff() {
-    if [ -t 1 ]; then
+    if [[ -t 1 ]]; then
         command diff --color=always "$@" | less -FRS
     else
         command diff "$@"
@@ -249,7 +249,7 @@ diff() {
 
 # rg with colors and pager, unless running in a pipeline
 rg() {
-    if [ -t 1 ]; then
+    if [[ -t 1 ]]; then
         command rg --color=always --line-number "$@" | less -FRS
     else
         command rg "$@"
@@ -366,9 +366,9 @@ cdp() {
 
     local project_root="${PROJECTS_DIR}/${project_name}"
 
-    if [ -d "${project_root}" ]; then
+    if [[ -d "${project_root}" ]]; then
         local destination_path="${project_root}/${project_relative_path}"
-        if [ -d "${destination_path}" ]; then
+        if [[ -d "${destination_path}" ]]; then
             cd "${destination_path}"
         else
             printf "Destination '%s' in project '%s' does not exist\n" "${project_relative_path}" "${project_name}"
@@ -441,7 +441,7 @@ lg() {
         fi
     done
 
-    if [ ${#paths[@]} -eq 0 ]; then
+    if [[ ${#paths[@]} -eq 0 ]]; then
         paths=(".")
     fi
 
