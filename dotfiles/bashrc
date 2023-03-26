@@ -38,6 +38,7 @@ __execute_precmds() {
     done
 
     # Execute PRECMDs
+    local cmd
     for cmd in "${PRECMDS[@]}"; do
         "${cmd}"
     done
@@ -207,6 +208,7 @@ cd() {
         local active_virtualenv="${VIRTUAL_ENV##*/}"
 
         if [ "${active_virtualenv}" != "${current_project}" ]; then
+            local virtualenv
             while IFS= read -r virtualenv; do
                 if [ "${virtualenv}" == "${current_project}" ]; then
                     printf "Activating virtualenv: %s\n" "${current_project}"
@@ -324,6 +326,7 @@ __complete_directory_path() {
     # Read and postprocess the completion candidates
     declare -a prefix_matches
     declare -a infix_matches
+    local match
     while IFS= read -r match; do
         if [[ "${match}" =~ ^${incomplete_path} ]]; then
             prefix_matches+=("${complete_path}${match}/")
