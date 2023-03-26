@@ -422,19 +422,19 @@ complete -F __complete_cd_infix -o nospace -o nosort vt
 
 # git log browser
 lg() {
-    declare -a args
+    declare -a options
     declare -a paths
 
-    while [ $# -gt 0 ]; do
-        if [ "$1" == "--" ]; then
-            shift
-            while [ $# -gt 0 ]; do
-                paths+=("$1")
-                shift
-            done
+    local arg past_options
+    for arg in "$@"; do
+        if [[ "${arg}" == "--" ]]; then
+            past_options="true"
         else
-            args+=("$1")
-            shift
+            if [[ "${past_options}" == "true" ]]; then
+                paths+=("${arg}")
+            else
+                options+=("${arg}")
+            fi
         fi
     done
 
@@ -443,11 +443,9 @@ lg() {
     fi
 
     local paths_expanded=$(printf "%q " "${paths[@]}")
+    local git_show="git show --color=always {1} -- ${paths_expanded}"
 
-    git lg --color=always "${args[@]}" -- "${paths[@]}" | \
-        fzf \
-        --ansi \
-        --preview="git show --color=always {1} -- ${paths_expanded}" \
-        --bind="ctrl-m:execute:(git show --color=always {1} -- ${paths_expanded} | less -CRX)"
+    git lg --color=always "${options[@]}" -- "${paths[@]}" | \
+        fzf --ansi --preview="${git_show}" --bind="ctrl-m:execute:(${git_show} | less -CRX)"
 }
 
