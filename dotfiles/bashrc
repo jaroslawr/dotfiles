@@ -191,11 +191,6 @@ PROMPT_COMMAND+=("__set_ps1")
 # ALIASES
 #
 
-# cal with more readable output
-cal() {
-    ncal -M -b "$@"
-}
-
 # cd with virtualenv support
 cd() {
     command cd "$@"
@@ -257,6 +252,11 @@ rg() {
     else
         command rg "$@"
     fi
+}
+
+# cal with more readable output
+cal() {
+    ncal -M -b "$@"
 }
 
 # COMPLETION FUNCTIONS
