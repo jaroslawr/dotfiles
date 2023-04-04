@@ -189,21 +189,17 @@ ${prompt} "
 }
 PROMPT_COMMAND+=("__set_ps1")
 
-# ALIASES
+# VIRTUALENV
 #
 
-# cd with virtualenv support
-cd() {
-    command cd "$@"
-
-    local cwd=$(pwd)
-
-    if [[ "${cwd}" == ${PROJECT_HOME}/* ]]; then
+# Activate venv valid for current PWD
+__activate_venv_for_pwd() {
+    if [[ "${PWD}" == ${PROJECT_HOME}/* ]]; then
         # Inside projects directory,
         # activation or change of virtualenv possibly needed
 
-        local cwd_relative_to_projects_home=${cwd#"${PROJECT_HOME}/"}
-        local current_project=${cwd_relative_to_projects_home%%/*}
+        local pwd_relative_to_projects_home=${PWD#"${PROJECT_HOME}/"}
+        local current_project=${pwd_relative_to_projects_home%%/*}
 
         local active_virtualenv="${VIRTUAL_ENV##*/}"
 
@@ -226,6 +222,18 @@ cd() {
         fi
     fi
 }
+
+# Activate venv on bash startup
+__activate_venv_for_pwd
+
+# cd with virtualenv support
+cd() {
+    command cd "$@"
+    __activate_venv_for_pwd
+}
+
+# ALIASES
+#
 
 # ls with more readable output
 ls() {
