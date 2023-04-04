@@ -2,7 +2,7 @@
 #
 
 export EDITOR=nvim
-export FZF_DEFAULT_OPTS="--tiebreak=index --no-mouse --no-bold \
+export FZF_DEFAULT_OPTS="--cycle --tiebreak=index --no-mouse --no-bold \
     --layout=reverse --preview-window=down,border-top --margin 0,1 \
     --color 16,prompt:2,hl:2,hl+:2,fg+:3,pointer:3 \
     --bind shift-left:preview-page-up,shift-right:preview-page-down"
