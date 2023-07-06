@@ -10,7 +10,7 @@ function setting() {
 }
 
 setting "use-system-font" "false"
-setting "font" "monospace 10.5"
+setting "font" "monospace 10"
 setting "cell-height-scale" "1.00"
 setting "use-theme-colors" "false"
 setting "background-color" "#232323"
