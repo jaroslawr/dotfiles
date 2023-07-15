@@ -26,6 +26,9 @@ set match-hidden-files off
 # Do not add / to completed directory names
 set mark-directories off
 
+# Color completions
+set colored-stats on
+
 # HISTORY
 #
 
