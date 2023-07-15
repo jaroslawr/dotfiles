@@ -23,6 +23,9 @@ set page-completions off
 # Complete hidden files only if pattern begins with .
 set match-hidden-files off
 
+# Do not add / to completed directory names
+set mark-directories off
+
 # HISTORY
 #
 

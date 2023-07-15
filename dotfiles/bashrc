@@ -337,9 +337,9 @@ __complete_directory_path() {
     local match
     while IFS= read -r match; do
         if [[ "${match}" =~ ^${incomplete_path} ]]; then
-            prefix_matches+=("${complete_path}${match}/")
+            prefix_matches+=("${complete_path}${match}")
         else
-            infix_matches+=("${complete_path}${match}/")
+            infix_matches+=("${complete_path}${match}")
         fi
     done < <(find "${find_args[@]}" | LC_ALL=C sort)
 
