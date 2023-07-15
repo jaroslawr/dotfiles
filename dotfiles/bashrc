@@ -14,6 +14,9 @@ export PROJECT_HOME="${PROJECTS_DIR}"
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
 
+# Set LS_COLORS
+eval $(dircolors ~/.dircolors)
+
 # GENERAL
 #
 
