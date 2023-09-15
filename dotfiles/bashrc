@@ -444,36 +444,3 @@ vt() {
 }
 
 complete -F __complete_cd_infix -o nospace -o nosort vt
-
-# FUNCTIONS - GIT
-#
-
-# git log browser
-lg() {
-    declare -a options
-    declare -a paths
-
-    local arg past_options
-    for arg in "$@"; do
-        if [[ "${arg}" == "--" ]]; then
-            past_options="true"
-        else
-            if [[ "${past_options}" == "true" ]]; then
-                paths+=("${arg}")
-            else
-                options+=("${arg}")
-            fi
-        fi
-    done
-
-    if [[ ${#paths[@]} -eq 0 ]]; then
-        paths=(".")
-    fi
-
-    local paths_expanded=$(printf "%q " "${paths[@]}")
-    local git_show="git show --color=always {1} -- ${paths_expanded}"
-
-    git lg --color=always "${options[@]}" -- "${paths[@]}" | \
-        fzf --ansi --preview="${git_show}" --bind="ctrl-m:execute:(${git_show} | less -CRX)"
-}
-

@@ -8,10 +8,6 @@
 [core]
         pager = "less --quit-if-one-screen"
 
-[alias]
-        lg = log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto)%h %C(12)%ad %C(8)%<(20,trunc)%ae %C(auto)%s'
-        head = show --pretty=medium --no-patch
-
 [color "diff"]
         commit = 5
         meta = 12 # filename
