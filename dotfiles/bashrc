@@ -272,6 +272,11 @@ cal() {
     ncal -M -b "$@"
 }
 
+# nice git log
+lg() {
+    fzf-git-log "$@"
+}
+
 # COMPLETION FUNCTIONS
 #
 

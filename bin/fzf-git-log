@@ -21,7 +21,7 @@ GIT_SHOW_OPTIONS+=("--pretty=fuller")
 FZF_OPTIONS=()
 FZF_OPTIONS=("--ansi")
 
-lg() {
+main() {
     # Split command line arguments on "--" into:
     #   - git log options
     #   - paths (to be used to narrow down both the git log and the patch displayed in git show)
@@ -72,4 +72,4 @@ lg() {
     git log "${git_log_args[@]}" | fzf "${fzf_args[@]}"
 }
 
-lg "$@"
+main "$@"
