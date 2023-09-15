@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
 # Git log browser using fzf
+#
 
 # Git log format
 GIT_LOG_FORMAT="%C(auto)%h %C(12)%cd %C(8)%<(20,trunc)%ae %C(auto)%s"

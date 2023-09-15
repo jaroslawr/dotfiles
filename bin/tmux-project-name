@@ -2,6 +2,7 @@
 
 # Given tmux window parent process pid,
 # echo the project name to which the process working directory belongs, if any
+#
 
 tmux_pane_cwd=$(readlink -e "/proc/$1/cwd")
 

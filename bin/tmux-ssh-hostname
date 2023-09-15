@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/usr/bin/bash
 
-# Given tmux pane parent process pid, print ssh hostname if ssh is running and nothing otherwise
+# Given tmux pane parent process pid,
+# print ssh hostname if ssh is running and nothing otherwise
 #
 
 tmux_pane_ppid=$1

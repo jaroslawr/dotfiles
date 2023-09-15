@@ -1,7 +1,12 @@
-#!/bin/bash
+#!/usr/bin/bash
+
+# Given tmux pane parent process pid,
+# print ssh hostname if ssh is running, otherwise print current project name, if present
+#
+
 tmux_ssh_hostname=$(tmux-ssh-hostname "$1")
-if [ -z "${tmux_ssh_hostname}" ]; then
-    tmux-project-name "$1"
-else
+if [ -n "${tmux_ssh_hostname}" ]; then
     echo "${tmux_ssh_hostname}"
+else
+    tmux-project-name "$1"
 fi
