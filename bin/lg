@@ -2,61 +2,73 @@
 
 # Git log browser using fzf
 
+# Git log format
 GIT_LOG_FORMAT="%C(auto)%h %C(12)%cd %C(8)%<(20,trunc)%ae %C(auto)%s"
 
+# Git log options
 GIT_LOG_OPTIONS=()
 GIT_LOG_OPTIONS+=("--color=always")
 GIT_LOG_OPTIONS+=("--date=iso-strict")
 GIT_LOG_OPTIONS+=("--format=${GIT_LOG_FORMAT}")
 
+# Git show options for preview
 GIT_SHOW_OPTIONS=()
 GIT_SHOW_OPTIONS+=("--color=always")
 GIT_SHOW_OPTIONS+=("--date=iso-strict")
 GIT_SHOW_OPTIONS+=("--pretty=fuller")
 
+# Fzf options
 FZF_OPTIONS=()
 FZF_OPTIONS=("--ansi")
 
 lg() {
-    # Split arguments on "--" into options and paths
-    declare -a options
-    declare -a paths
-    local options_parsed
+    # Split command line arguments on "--" into:
+    #   - git log options
+    #   - paths (to be used to narrow down both the git log and the patch displayed in git show)
+    declare -a supplied_options
+    declare -a supplied_paths
+    local past_supplied_options
     for arg in "$@"; do
         if [[ "${arg}" == "--" ]]; then
-            options_parsed="true"
+            past_supplied_options="true"
         else
-            if [[ "${options_parsed}" == "true" ]]; then
-                paths+=("${arg}")
+            if [[ "${past_supplied_options}" == "true" ]]; then
+                supplied_paths+=("${arg}")
             else
-                options+=("${arg}")
+                supplied_options+=("${arg}")
             fi
         fi
     done
 
+    # Build up the the full git log argument list
     declare -a git_log_args
     git_log_args+=("${GIT_LOG_OPTIONS[@]}")
-    if [[ ${#paths[@]} -gt 0 ]]; then
+    git_log_args+=("${supplied_options[@]}")
+    if [[ ${#supplied_paths[@]} -gt 0 ]]; then
         git_log_args+=("--")
-        git_log_args+=("${paths[@]}")
+        git_log_args+=("${supplied_paths[@]}")
     fi
 
+    # Build up the the full git show argument list
     declare -a git_show_args
-    git_show_args+=(${GIT_SHOW_OPTIONS[@]})
+    git_show_args+=("${GIT_SHOW_OPTIONS[@]}")
     git_show_args+=("{1}")
-    if [[ ${#paths[@]} -gt 0 ]]; then
+    if [[ ${#supplied_paths[@]} -gt 0 ]]; then
         git_show_args+=("--")
-        git_show_args+=("$(printf "%q " "${paths[@]}")")
+        git_show_args+=("$(printf "%q " "${supplied_paths[@]}")")
     fi
 
+    # Build up a git show command line string to pass to fzf
     local git_show_cmdline
-    git_show_cmdline="git show ${git_show_args[@]}"
+    git_show_cmdline="git show ${git_show_args[*]}"
 
+    # Build up the full fzf argument list
     declare -a fzf_args
     fzf_args+=("${FZF_OPTIONS[@]}")
     fzf_args+=("--preview=${git_show_cmdline}")
     fzf_args+=("--bind=ctrl-m:execute:(${git_show_cmdline} | less -CRX)")
 
+    # Run fzf using the git log as input
     git log "${git_log_args[@]}" | fzf "${fzf_args[@]}"
 }
 
