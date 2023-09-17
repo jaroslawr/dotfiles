@@ -3,20 +3,17 @@
 # Git log browser using fzf
 #
 
-# Git log format
-GIT_LOG_FORMAT="%C(auto)%h %C(12)%cd %C(8)%<(20,trunc)%ae %C(auto)%s"
-
 # Git log options
 GIT_LOG_OPTIONS=()
 GIT_LOG_OPTIONS+=("--color=always")
 GIT_LOG_OPTIONS+=("--date=iso-strict")
-GIT_LOG_OPTIONS+=("--format=${GIT_LOG_FORMAT}")
+GIT_LOG_OPTIONS+=("--pretty=${FZF_GIT_LOG_PRETTY}")
 
 # Git show options for preview
 GIT_SHOW_OPTIONS=()
 GIT_SHOW_OPTIONS+=("--color=always")
 GIT_SHOW_OPTIONS+=("--date=iso-strict")
-GIT_SHOW_OPTIONS+=("--pretty=fuller")
+GIT_SHOW_OPTIONS+=("--pretty='${FZF_GIT_LOG_SHOW_PRETTY}'")
 
 # Fzf options
 FZF_OPTIONS=()

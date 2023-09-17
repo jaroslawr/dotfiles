@@ -1,12 +1,8 @@
 # ENVIRONMENT
 #
 
+# Basics
 export EDITOR=nvim
-export FZF_DEFAULT_OPTS="--cycle --tiebreak=index --no-mouse --no-bold \
-    --layout=reverse --preview-window=down,border-top --margin 0,1 \
-    --color 16,prompt:2,hl:2,hl+:2,fg+:3,pointer:3 \
-    --bind shift-left:preview-page-up,shift-right:preview-page-down"
-export FZF_TMUX=1
 export LESS="--raw-control-chars --chop-long-lines --no-init"
 export PATH="${HOME}/bin:${HOME}/go/bin:${PATH}"
 export PROJECTS_DIR=~/Projects
@@ -14,7 +10,31 @@ export PROJECT_HOME="${PROJECTS_DIR}"
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
 
-# Set LS_COLORS
+# fzf
+export FZF_DEFAULT_OPTS="--cycle --tiebreak=index --no-mouse --no-bold \
+    --layout=reverse --preview-window=down,border-top --margin 0,1 \
+    --color 16,prompt:2,hl:2,hl+:2,fg+:3,pointer:3 \
+    --bind shift-left:preview-page-up,shift-right:preview-page-down"
+export FZF_TMUX=1
+
+# fzf-git-log
+GIT_COLOR_SHA1="auto"
+GIT_COLOR_AUTHOR=8
+GIT_COLOR_DATE=12
+read -d '' FZF_GIT_LOG_PRETTY <<-EOF
+format:%C(${GIT_COLOR_SHA1})%h %C(${GIT_COLOR_DATE})%cd %C(${GIT_COLOR_AUTHOR})%<(20,trunc)%ae %Creset%s
+EOF
+export FZF_GIT_LOG_PRETTY
+read -d '' FZF_GIT_LOG_SHOW_PRETTY <<-EOF
+format:Committed: %C(${GIT_COLOR_DATE})%cd %C(${GIT_COLOR_AUTHOR})%cn <%ce>%Creset
+Authored:  %C(${GIT_COLOR_DATE})%ad %C(${GIT_COLOR_AUTHOR})%an <%ae>%Creset
+SHA1:      %C(${GIT_COLOR_SHA1})%H
+Subject:   %s
+%+b
+EOF
+export FZF_GIT_LOG_SHOW_PRETTY
+
+# LS_COLORS
 eval $(dircolors ~/.dircolors)
 
 # GENERAL
@@ -275,6 +295,11 @@ cal() {
 # nice git log
 lg() {
     fzf-git-log "$@"
+}
+
+# nice git show
+sw() {
+    git show --pretty="${FZF_GIT_LOG_SHOW_PRETTY}" "$@"
 }
 
 # COMPLETION FUNCTIONS
