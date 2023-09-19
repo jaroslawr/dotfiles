@@ -9,19 +9,14 @@ GIT_LOG_OPTIONS+=("--color=always")
 GIT_LOG_OPTIONS+=("--date=iso-strict")
 GIT_LOG_OPTIONS+=("--pretty=${FZF_GIT_LOG_PRETTY}")
 
-# Git show options for preview
-GIT_SHOW_OPTIONS=()
-GIT_SHOW_OPTIONS+=("--color=always")
-GIT_SHOW_OPTIONS+=("--date=iso-strict")
-GIT_SHOW_OPTIONS+=("--pretty='${FZF_GIT_LOG_SHOW_PRETTY}'")
-
 # Fzf options
 FZF_OPTIONS=()
 FZF_OPTIONS=("--ansi")
 
 main() {
+    # Quit if not in a git repository
     if ! git rev-parse --git-dir > /dev/null 2>&1; then
-        echo "Not a git repository"
+        echo "Not in a git repository"
         exit 1
     fi
 
@@ -52,18 +47,11 @@ main() {
         git_log_args+=("${supplied_paths[@]}")
     fi
 
-    # Build up the the full git show argument list
-    declare -a git_show_args
-    git_show_args+=("${GIT_SHOW_OPTIONS[@]}")
-    git_show_args+=("{1}")
-    if [[ ${#supplied_paths[@]} -gt 0 ]]; then
-        git_show_args+=("--")
-        git_show_args+=("$(printf "%q " "${supplied_paths[@]}")")
-    fi
-
     # Build up a git show command line string to pass to fzf
-    local git_show_cmdline
-    git_show_cmdline="git show ${git_show_args[*]}"
+    local git_show_cmdline="fzf-git-log-show {1}"
+    if [[ ${#supplied_paths[@]} -gt 0 ]]; then
+        git_show_cmdline+=" -- $(printf "%q " "${supplied_paths[@]}")"
+    fi
 
     # Build up the full fzf argument list
     declare -a fzf_args

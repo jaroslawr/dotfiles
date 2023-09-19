@@ -299,7 +299,7 @@ lg() {
 
 # nice git show
 sw() {
-    git show --pretty="${FZF_GIT_LOG_SHOW_PRETTY}" "$@"
+    fzf-git-log-show "$@"
 }
 
 # COMPLETION FUNCTIONS
