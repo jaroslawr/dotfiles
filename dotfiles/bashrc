@@ -260,13 +260,22 @@ cd() {
 
 # ls with more readable output
 ls() {
-    command ls \
+    LC_ALL=C command ls \
         --color=auto \
         --group-directories-first \
         --literal \
         --time-style=long-iso \
         --human-readable \
         "$@"
+}
+
+# long-form ls with colors and pager, unless running in a pipeline
+l() {
+    if [[ -t 1 ]]; then
+        ls -l --color=always "$@" | less -FRS
+    else
+        ls -l "$@"
+    fi
 }
 
 # diff with colors and pager, unless running in a pipeline
