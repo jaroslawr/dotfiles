@@ -393,7 +393,7 @@ __complete_cd_infix() {
     __complete_directory_path "${COMP_WORDS[-1]}" "."
 }
 
-complete -F __complete_cd_infix -o nospace -o nosort cd
+complete -F __complete_cd_infix -o filenames -o nospace -o nosort cd
 
 # FUNCTIONS
 #
@@ -472,7 +472,7 @@ t() {
     fi
 }
 
-complete -F __complete_cd_infix -o nospace -o nosort t
+complete -F __complete_cd_infix -o filenames -o nospace -o nosort t
 
 # directory tree - edit in vim
 
@@ -482,4 +482,4 @@ vt() {
         -c ":bdelete!"
 }
 
-complete -F __complete_cd_infix -o nospace -o nosort vt
+complete -F __complete_cd_infix -o filenames -o nospace -o nosort vt
