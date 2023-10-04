@@ -77,6 +77,9 @@ stty -ixon
 # Source standard completions
 source /usr/share/bash-completion/bash_completion
 
+# FZF completion, makes **<TAB> work
+source /usr/share/bash-completion/completions/fzf
+
 # FZF keybindings: cd with Alt-C, insert file path with Ctrl-T
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
