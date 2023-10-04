@@ -29,7 +29,8 @@ read -d '' FZF_GIT_LOG_SHOW_PRETTY <<-EOF
 format:Committed: %C(${GIT_COLOR_DATE})%cd %C(${GIT_COLOR_AUTHOR})%cn <%ce>%Creset
 Authored:  %C(${GIT_COLOR_DATE})%ad %C(${GIT_COLOR_AUTHOR})%an <%ae>%Creset
 SHA1:      %C(${GIT_COLOR_SHA1})%H
-Subject:   %s
+
+%s
 %+b
 EOF
 export FZF_GIT_LOG_SHOW_PRETTY
