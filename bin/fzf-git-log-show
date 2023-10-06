@@ -7,6 +7,7 @@
 GIT_SHOW_OPTIONS=()
 GIT_SHOW_OPTIONS+=("--color=always")
 GIT_SHOW_OPTIONS+=("--date=iso-strict")
+GIT_SHOW_OPTIONS+=("--patch-with-stat")
 GIT_SHOW_OPTIONS+=("--pretty=${FZF_GIT_LOG_SHOW_PRETTY}")
 
 # Run git show
