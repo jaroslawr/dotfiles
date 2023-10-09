@@ -21,8 +21,9 @@ export FZF_TMUX=1
 GIT_COLOR_SHA1="auto"
 GIT_COLOR_AUTHOR=8
 GIT_COLOR_DATE=12
+GIT_COLOR_REFS=8
 read -r -d '' FZF_GIT_LOG_PRETTY <<-EOF
-format:%C(${GIT_COLOR_SHA1})%h %C(${GIT_COLOR_DATE})%cd %C(${GIT_COLOR_AUTHOR})%<(20,trunc)%ae %Creset%s
+format:%C(${GIT_COLOR_SHA1})%h %C(${GIT_COLOR_DATE})%cd %C(${GIT_COLOR_AUTHOR})%<(20,trunc)%ae %Creset%s %C(${GIT_COLOR_REFS})%D
 EOF
 export FZF_GIT_LOG_PRETTY
 
@@ -30,7 +31,7 @@ export FZF_GIT_LOG_PRETTY
 IFS= read -r -d '' FZF_GIT_LOG_SHOW_PRETTY <<-EOF
 format:Committed: %C(${GIT_COLOR_DATE})%cd %C(${GIT_COLOR_AUTHOR})%cn <%ce>%Creset
 Authored:  %C(${GIT_COLOR_DATE})%ad %C(${GIT_COLOR_AUTHOR})%an <%ae>%Creset
-SHA1:      %C(${GIT_COLOR_SHA1})%H
+SHA1:      %C(${GIT_COLOR_SHA1})%H%C(${GIT_COLOR_REFS})%d%Creset
 
 %s
 %+b
