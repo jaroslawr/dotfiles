@@ -7,9 +7,11 @@
 # Shift-Tab gives previous completion
 "\e[Z": menu-complete-backward
 
-# On first Tab immediately list completions
+# When all completions have a common prefix, at first complete only the prefix
+set menu-complete-display-prefix on
+
+# List completions when multiple are available rather then ringing the bell
 set show-all-if-ambiguous on
-set show-all-if-unmodified on
 
 # Ignore case
 set completion-ignore-case on
