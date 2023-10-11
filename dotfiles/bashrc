@@ -5,8 +5,6 @@
 export EDITOR=nvim
 export LESS="--raw-control-chars --chop-long-lines --no-init"
 export PATH="${HOME}/bin:${HOME}/go/bin:${PATH}"
-export PROJECTS_DIR=~/Projects
-export PROJECT_HOME="${PROJECTS_DIR}"
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
 
@@ -222,39 +220,43 @@ PROMPT_COMMAND+=("__set_ps1")
 # PROJECTS
 #
 
-__in_project() {
-    [[ "${PWD}" == ${PROJECTS_DIR}/* ]]
+# Root directory with projects
+export PROJECTS_ROOT_DIR=~/Projects
+
+# Test if current working directory inside a project
+__is_pwd_in_project() {
+    [[ "${PWD}" == ${PROJECTS_ROOT_DIR}/* ]]
 }
 
 # cd to project
 cdp() {
     if [[ $# -eq 0 ]]; then
-        __cdp_to_root
+        __cdp_up_to_project_root
     elif [[ $# -eq 1 ]]; then
-        __cdp_to_path "${@}"
+        __cdp_to_project_path "${@}"
     else
         printf "cdp: 0 or 1 arguments necesary, $# supplied\n"
     fi
 }
 
-__cdp_to_root() {
-    if __in_project; then
-        local project_and_path="${PWD#"${PROJECTS_DIR}/"}"
+__cdp_up_to_project_root() {
+    if __is_pwd_in_project; then
+        local project_and_path="${PWD#"${PROJECTS_ROOT_DIR}/"}"
         local project="${project_and_path%%/*}"
-        cd "${PROJECTS_DIR}/${project}"
+        cd "${PROJECTS_ROOT_DIR}/${project}"
     else
         echo "cdp: not in a project"
     fi
 }
 
-__cdp_to_path() {
+__cdp_to_project_path() {
     local project_name="${1%%/*}"
     local project_relative_path=""
     if [[ $1 =~ / ]]; then
         project_relative_path="${1#*/}"
     fi
 
-    local project_root="${PROJECTS_DIR}/${project_name}"
+    local project_root="${PROJECTS_ROOT_DIR}/${project_name}"
 
     if [[ -d "${project_root}" ]]; then
         local destination_path="${project_root}/${project_relative_path}"
@@ -269,14 +271,14 @@ __cdp_to_path() {
 }
 
 __complete_cdp() {
-    __complete_directory_path "${COMP_WORDS[-1]}" "${PROJECTS_DIR}"
+    __complete_directory_path "${COMP_WORDS[-1]}" "${PROJECTS_ROOT_DIR}"
 }
 
 complete -F __complete_cdp -o filenames -o nospace -o nosort cdp
 
 # cd to projects root
 cdpr() {
-    cd "${PROJECTS_DIR}"
+    cd "${PROJECTS_ROOT_DIR}"
 }
 
 # VIRTUALENV
@@ -284,11 +286,11 @@ cdpr() {
 
 # Activate venv
 __activate_venv_for_current_project() {
-    if __in_project; then
+    if __is_pwd_in_project; then
         # Inside projects directory,
         # activation or change of virtualenv possibly needed
 
-        local pwd_relative_to_projects_home=${PWD#"${PROJECT_HOME}/"}
+        local pwd_relative_to_projects_home=${PWD#"${PROJECTS_ROOT_DIR}/"}
         local current_project=${pwd_relative_to_projects_home%%/*}
 
         local active_virtualenv="${VIRTUAL_ENV##*/}"
@@ -322,10 +324,10 @@ __activate_venv_for_current_project
 # cd with virtualenv support
 cd() {
     local in_project_before=false
-    __in_project && in_project_before=true
+    __is_pwd_in_project && in_project_before=true
     command cd "$@"
     local in_project_after=false
-    __in_project && in_project_after=true
+    __is_pwd_in_project && in_project_after=true
 
     if ! __activate_venv_for_current_project; then
         if [ "${in_project_before}" = true ] || [ "${in_project_after}" = true ]; then
