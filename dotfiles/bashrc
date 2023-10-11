@@ -1,21 +1,18 @@
 # ENVIRONMENT
 #
 
-# Basics
-export EDITOR=nvim
-export LESS="--raw-control-chars --chop-long-lines --no-init"
+# General
 export PATH="${HOME}/bin:${HOME}/go/bin:${PATH}"
-export RIPGREP_CONFIG_PATH=~/.ripgreprc
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
+export EDITOR=nvim
 
-# fzf
+# Fzf
 export FZF_DEFAULT_OPTS="--cycle --tiebreak=index --no-mouse --no-bold \
     --layout=reverse --preview-window=down,border-top --margin 0,1 \
     --color 16,prompt:2,hl:2,hl+:2,fg+:3,pointer:3 \
     --bind shift-left:preview-page-up,shift-right:preview-page-down"
 export FZF_TMUX=1
 
-# fzf-git-log
+# Fzf-git-log
 GIT_COLOR_SHA1="auto"
 GIT_COLOR_AUTHOR=8
 GIT_COLOR_DATE=12
@@ -24,7 +21,6 @@ read -r -d '' FZF_GIT_LOG_PRETTY <<-EOF
 format:%C(${GIT_COLOR_SHA1})%h %C(${GIT_COLOR_DATE})%cd %C(${GIT_COLOR_AUTHOR})%<(20,trunc)%ae %Creset%s %C(${GIT_COLOR_REFS})%D
 EOF
 export FZF_GIT_LOG_PRETTY
-
 # Clear IFS to preserve the final newline before EOF
 IFS= read -r -d '' FZF_GIT_LOG_SHOW_PRETTY <<-EOF
 format:Committed: %C(${GIT_COLOR_DATE})%cd %C(${GIT_COLOR_AUTHOR})%cn <%ce>%Creset
@@ -35,6 +31,15 @@ SHA1:      %C(${GIT_COLOR_SHA1})%H%C(${GIT_COLOR_REFS})%d%Creset
 %+b
 EOF
 export FZF_GIT_LOG_SHOW_PRETTY
+
+# Less
+export LESS="--raw-control-chars --chop-long-lines --no-init"
+
+# Ripgrep
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
+# Ssh-agent
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
 
 # LS_COLORS
 eval $(dircolors ~/.dircolors)
