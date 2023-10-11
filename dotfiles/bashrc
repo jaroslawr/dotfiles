@@ -239,17 +239,25 @@ __activate_venv_for_pwd() {
                 if [[ "${virtualenv}" == "${current_project}" ]]; then
                     printf "Activating virtualenv: %s\n" "${current_project}"
                     workon "${virtualenv}"
+                    return
                 fi
             done < <(lsvirtualenv -b)
+
+            # No matching virtualenv found for project
+            __deactivate_venv
         fi
     else
         # Outside project directry
         # Deactivation of virtualenv possibly needed
+        __deactivate_venv
+    fi
+}
 
-        if [[ -n "${VIRTUAL_ENV}" ]]; then
-            printf "Deactivating virtualenv\n"
-            deactivate
-        fi
+# Deactivate venv
+__deactivate_venv() {
+    if [[ -n "${VIRTUAL_ENV}" ]]; then
+        printf "Deactivating virtualenv\n"
+        deactivate
     fi
 }
 
