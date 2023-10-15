@@ -7,12 +7,12 @@ vim.api.nvim_set_hl(0, "Number", { ctermfg=11 })
 vim.api.nvim_set_hl(0, "Identifier", { ctermfg=15 })
 vim.api.nvim_set_hl(0, "Function", { ctermfg=11 })
 vim.api.nvim_set_hl(0, "Statement", { ctermfg=12 })
-vim.api.nvim_set_hl(0, "Keyword", { ctermfg=11 })
-vim.api.nvim_set_hl(0, "PreProc", { ctermfg=11 })
+vim.api.nvim_set_hl(0, "Keyword", { ctermfg=12 })
+vim.api.nvim_set_hl(0, "PreProc", { ctermfg=14 })
 vim.api.nvim_set_hl(0, "Include", { ctermfg=11 })
 vim.api.nvim_set_hl(0, "Type", { ctermfg=14 })
-vim.api.nvim_set_hl(0, "Special", { ctermfg=11 })
-vim.api.nvim_set_hl(0, "SpecialChar", { ctermfg=11 })
+vim.api.nvim_set_hl(0, "Special", { ctermfg=14 })
+vim.api.nvim_set_hl(0, "SpecialChar", { ctermfg=14 })
 vim.api.nvim_set_hl(0, "Delimiter", { ctermfg=7 })
 vim.api.nvim_set_hl(0, "Comment", { ctermfg=7 })
 vim.api.nvim_set_hl(0, "Whitespace", {})
@@ -59,7 +59,7 @@ vim.api.nvim_set_hl(0, "StatusLine", { ctermbg=235, ctermfg=11 })
 vim.api.nvim_set_hl(0, "StatusLineNC", { ctermbg=235, ctermfg=7 })
 
 -- project name
-vim.api.nvim_set_hl(0, "User1", { ctermbg=236, ctermfg=13 })
+vim.api.nvim_set_hl(0, "User1", { ctermbg=235, ctermfg=13 })
 
 -- UI - popup menu
 --
@@ -101,7 +101,10 @@ vim.api.nvim_set_hl(0, "markdownError", { ctermfg=1 })
 -- SYNTAX - python
 --
 
-vim.api.nvim_set_hl(0, "pythonBuiltin", { link="Keyword" })
+vim.api.nvim_set_hl(0, "pythonInclude", { link="Keyword" })
+vim.api.nvim_set_hl(0, "pythonStatement", { link="Keyword" })
+vim.api.nvim_set_hl(0, "pythonFunction", { link="Function" })
+vim.api.nvim_set_hl(0, "pythonBuiltin", { link="Special" })
 
 -- SYNTAX - javascript
 --
