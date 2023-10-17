@@ -6,6 +6,6 @@
 
 tmux_pane_cwd=$(readlink -e "/proc/$1/cwd")
 
-if [[ "${tmux_pane_cwd}" =~ ^${PROJECTS_DIR}/.*$ ]]; then
-    echo "${tmux_pane_cwd}" | cut -c "$((${#PROJECTS_DIR}+1))-" | cut -d/ -f2
+if [[ "${tmux_pane_cwd}" =~ ^${PROJECTS_ROOT_DIR}/.*$ ]]; then
+    echo "${tmux_pane_cwd}" | cut -c "$((${#PROJECTS_ROOT_DIR}+1))-" | cut -d/ -f2
 fi
