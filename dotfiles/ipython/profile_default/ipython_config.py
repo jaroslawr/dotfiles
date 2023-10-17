@@ -3,11 +3,11 @@ from pygments.token import Comment, Keyword, Name, String, Number, Operator
 
 class Colors(Style):
     styles = {
-            Keyword: 'ansibrightblue',
-            Name.Builtin: 'ansibrightcyan',
-            Name.Function: 'ansibrightyellow',
-            String: 'ansibrightmagenta',
-            Number: 'ansibrightyellow',
+            Keyword: 'ansiblue',
+            Name.Builtin: 'ansicyan',
+            Name.Function: 'ansiyellow',
+            String: 'ansimagenta',
+            Number: 'ansiyellow',
             Comment: 'ansigray',
     }
 

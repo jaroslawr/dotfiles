@@ -10,15 +10,15 @@
 
 [color "diff"]
         commit = 5
-        meta = 12 # filename
+        meta = 4 # filename
         frag = 8 # hunk offset
         old = 1
         new = 2
 
 [color "status"]
-        added = 10 # staged and either new or modified
-        changed = 14 # not staged but tracked and modified
-        untracked = 15 # not staged and not tracked
+        added = 2 # staged and either new or modified
+        changed = 6 # not staged but tracked and modified
+        untracked = 8 # not staged and not tracked
         branch = 5
 
 # git log

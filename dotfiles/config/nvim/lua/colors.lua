@@ -1,29 +1,29 @@
 -- TEXT
 --
 
-vim.api.nvim_set_hl(0, "Constant", { ctermfg=14 })
-vim.api.nvim_set_hl(0, "String", { ctermfg=13 })
-vim.api.nvim_set_hl(0, "Number", { ctermfg=11 })
+vim.api.nvim_set_hl(0, "Constant", { ctermfg=6 })
+vim.api.nvim_set_hl(0, "String", { ctermfg=5 })
+vim.api.nvim_set_hl(0, "Number", { ctermfg=3 })
 vim.api.nvim_set_hl(0, "Identifier", { ctermfg=15 })
-vim.api.nvim_set_hl(0, "Function", { ctermfg=11 })
-vim.api.nvim_set_hl(0, "Statement", { ctermfg=12 })
-vim.api.nvim_set_hl(0, "Keyword", { ctermfg=12 })
-vim.api.nvim_set_hl(0, "PreProc", { ctermfg=14 })
-vim.api.nvim_set_hl(0, "Include", { ctermfg=11 })
-vim.api.nvim_set_hl(0, "Type", { ctermfg=14 })
-vim.api.nvim_set_hl(0, "Special", { ctermfg=14 })
-vim.api.nvim_set_hl(0, "SpecialChar", { ctermfg=14 })
+vim.api.nvim_set_hl(0, "Function", { ctermfg=3 })
+vim.api.nvim_set_hl(0, "Statement", { ctermfg=4 })
+vim.api.nvim_set_hl(0, "Keyword", { ctermfg=4 })
+vim.api.nvim_set_hl(0, "PreProc", { ctermfg=6 })
+vim.api.nvim_set_hl(0, "Include", { ctermfg=3 })
+vim.api.nvim_set_hl(0, "Type", { ctermfg=6 })
+vim.api.nvim_set_hl(0, "Special", { ctermfg=6 })
+vim.api.nvim_set_hl(0, "SpecialChar", { ctermfg=6 })
 vim.api.nvim_set_hl(0, "Delimiter", { ctermfg=7 })
 vim.api.nvim_set_hl(0, "Comment", { ctermfg=7 })
 vim.api.nvim_set_hl(0, "Whitespace", {})
-vim.api.nvim_set_hl(0, "Todo", { ctermfg=11 })
+vim.api.nvim_set_hl(0, "Todo", { ctermfg=3 })
 
 -- BUFFER
 --
 
 vim.api.nvim_set_hl(0, "Visual", { ctermbg=3, ctermfg=0 })
 vim.api.nvim_set_hl(0, "IncSearch", { ctermbg=2, ctermfg=0 })
-vim.api.nvim_set_hl(0, "Search", { ctermfg=2 })
+vim.api.nvim_set_hl(0, "Search", { ctermfg=13 })
 vim.api.nvim_set_hl(0, "MatchParen", { ctermfg=3 })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { ctermfg=240 })
 
@@ -55,11 +55,11 @@ vim.api.nvim_set_hl(0, "TabLineSel", { ctermfg=246 })
 -- UI - status line
 --
 
-vim.api.nvim_set_hl(0, "StatusLine", { ctermbg=235, ctermfg=11 })
+vim.api.nvim_set_hl(0, "StatusLine", { ctermbg=235, ctermfg=5 })
 vim.api.nvim_set_hl(0, "StatusLineNC", { ctermbg=235, ctermfg=7 })
 
 -- project name
-vim.api.nvim_set_hl(0, "User1", { ctermbg=235, ctermfg=13 })
+vim.api.nvim_set_hl(0, "User1", { ctermbg=235, ctermfg=5 })
 
 -- UI - popup menu
 --
@@ -138,12 +138,12 @@ vim.api.nvim_set_hl(0, "gitcommitBlank", { ctermfg=9 })
 vim.api.nvim_set_hl(0, "gitcommitBranch", { ctermfg=5 })
 vim.api.nvim_set_hl(0, "gitcommitComment", { ctermfg=7 })
 vim.api.nvim_set_hl(0, "gitcommitHeader", { ctermfg=7 })
-vim.api.nvim_set_hl(0, "gitcommitSelected", { ctermfg=10 })
-vim.api.nvim_set_hl(0, "gitcommitSelectedType", { ctermfg=10 })
-vim.api.nvim_set_hl(0, "gitcommitSelectedFile", { ctermfg=10 })
-vim.api.nvim_set_hl(0, "gitcommitDiscarded", { ctermfg=14 })
-vim.api.nvim_set_hl(0, "gitcommitDiscardedType", { ctermfg=14 })
-vim.api.nvim_set_hl(0, "gitcommitDiscardedFile", { ctermfg=14 })
+vim.api.nvim_set_hl(0, "gitcommitSelected", { ctermfg=2 })
+vim.api.nvim_set_hl(0, "gitcommitSelectedType", { ctermfg=2 })
+vim.api.nvim_set_hl(0, "gitcommitSelectedFile", { ctermfg=2 })
+vim.api.nvim_set_hl(0, "gitcommitDiscarded", { ctermfg=6 })
+vim.api.nvim_set_hl(0, "gitcommitDiscardedType", { ctermfg=6 })
+vim.api.nvim_set_hl(0, "gitcommitDiscardedFile", { ctermfg=6 })
 vim.api.nvim_set_hl(0, "gitcommitUntracked", { ctermfg=7 })
 vim.api.nvim_set_hl(0, "gitcommitUntrackedType", { ctermfg=7 })
 vim.api.nvim_set_hl(0, "gitcommitUntrackedFile", { ctermfg=7 })

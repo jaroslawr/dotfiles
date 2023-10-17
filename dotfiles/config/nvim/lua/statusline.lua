@@ -1,4 +1,3 @@
---
 function status_filename()
   local result = vim.fn.expand("%:.")
   if result == "" then
@@ -17,7 +16,6 @@ vim.opt.statusline = table.concat({
   " %0*%{luaeval('status_filename()')}%* ", -- filename
   "%< ", -- avoid shortening everything until now
   "%=", -- right align
-  "%1* ", -- change color
   "0x%02B ", -- byte under cursor as hex
   "%03l,%03c ", -- line and column number
   "%02p%% ", -- percentage through the file

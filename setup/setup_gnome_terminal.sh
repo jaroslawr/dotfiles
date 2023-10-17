@@ -9,10 +9,13 @@ function setting() {
   gsettings set "${PROFILE_KEY}" "${1}" "${2}"
 }
 
+
+source dotfiles/colors
+
 setting "use-system-font" "false"
 setting "font" "monospace 10"
 setting "cell-height-scale" "1.00"
 setting "use-theme-colors" "false"
-setting "background-color" "#232323"
-setting "foreground-color" "#ffffff"
-setting "palette" "['#252218', '#ff8080', '#80ffbf', '#ffea80', '#80d4ff', '#ffb580', '#80ffff', '#ad8585', '#d6c2c2', '#ffb3b3', '#b3ffd9', '#fff2b3', '#b3e5ff', '#ffd2b3', '#b3ffff', '#ffffff']"
+setting "background-color" "${COLOR_BLACK_RGB}"
+setting "foreground-color" "${COLOR_BRIGHT_WHITE_RGB}"
+setting "palette" "['${COLOR_BLACK_RGB}', '${COLOR_RED_RGB}', '${COLOR_GREEN_RGB}', '${COLOR_YELLOW_RGB}', '${COLOR_BLUE_RGB}', '${COLOR_MAGENTA_RGB}', '${COLOR_CYAN_RGB}', '${COLOR_WHITE_RGB}', '${COLOR_BRIGHT_BLACK_RGB}', '${COLOR_BRIGHT_RED_RGB}', '${COLOR_BRIGHT_GREEN_RGB}', '${COLOR_BRIGHT_YELLOW_RGB}', '${COLOR_BRIGHT_BLUE_RGB}', '${COLOR_BRIGHT_MAGENTA_RGB}', '${COLOR_BRIGHT_CYAN_RGB}', '${COLOR_BRIGHT_WHITE_RGB}']"

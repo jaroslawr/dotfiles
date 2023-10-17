@@ -1,6 +1,9 @@
 # ENVIRONMENT
 #
 
+# Color definitions
+source ~/.colors
+
 # General
 export PATH="${HOME}/bin:${HOME}/go/bin:${PATH}"
 export EDITOR=nvim
@@ -8,14 +11,14 @@ export EDITOR=nvim
 # Fzf
 export FZF_DEFAULT_OPTS="--cycle --tiebreak=index --no-mouse --no-bold \
     --layout=reverse --preview-window=down,border-top --margin 0,1 \
-    --color 16,prompt:2,hl:2,hl+:2,fg+:3,pointer:3 \
+    --color 16,prompt:13,hl:13,hl+:13,fg+:3,pointer:3 \
     --bind shift-left:preview-page-up,shift-right:preview-page-down"
 export FZF_TMUX=1
 
 # Fzf-git-log
 GIT_COLOR_SHA1="auto"
 GIT_COLOR_AUTHOR=8
-GIT_COLOR_DATE=12
+GIT_COLOR_DATE=4
 GIT_COLOR_REFS=8
 read -r -d '' FZF_GIT_LOG_PRETTY <<-EOF
 format:%C(${GIT_COLOR_SHA1})%h %C(${GIT_COLOR_DATE})%cd %C(${GIT_COLOR_AUTHOR})%<(20,trunc)%ae %Creset%s %C(${GIT_COLOR_REFS})%D
@@ -113,16 +116,6 @@ PRECMDS+=("__save_history")
 # PROMPT
 #
 
-# Color definitions
-# Bash will garble output if these are not surrounded by []
-RED="\[$(tput setaf 1)\]"
-GREEN="\[$(tput setaf 2)\]"
-YELLOW="\[$(tput setaf 3)\]"
-BLUE="\[$(tput setaf 4)\]"
-PURPLE="\[$(tput setaf 5)\]"
-LIGHT_GRAY="\[$(tput setaf 8)\]"
-RESET="\[$(tput setaf 15)\]"
-
 # Set git-related variables for prompt
 __update_git_status() {
     GIT_REPO=$(git rev-parse --git-dir 2>&1 >/dev/null && echo true || echo false)
@@ -179,7 +172,7 @@ __ps1_git_branch() {
         else
             branch="${GIT_PS1_BRANCH}"
         fi
-        printf "${PURPLE}${branch}${RESET} "
+        printf "${COLOR_MAGENTA}${branch}${COLOR_BRIGHT_WHITE} "
     fi
 }
 
@@ -189,9 +182,9 @@ __ps1_git_status() {
         local local_status="${GIT_PS1_STAGED}${GIT_PS1_NONSTAGED}${GIT_PS1_UNTRACKED}"
 
         declare -a fields
-        [[ -n "${local_status}" ]] && fields+=("${LIGHT_GRAY}${local_status}${RESET}")
-        [[ -n "${GIT_PS1_AHEAD}" ]] && fields+=("${GREEN}${GIT_PS1_AHEAD}${RESET}")
-        [[ -n "${GIT_PS1_BEHIND}" ]] && fields+=("${RED}${GIT_PS1_BEHIND}${RESET}")
+        [[ -n "${local_status}" ]] && fields+=("${COLOR_LIGHT_GRAY}${local_status}${COLOR_BRIGHT_WHITE}")
+        [[ -n "${GIT_PS1_AHEAD}" ]] && fields+=("${COLOR_GREEN}${GIT_PS1_AHEAD}${COLOR_BRIGHT_WHITE}")
+        [[ -n "${GIT_PS1_BEHIND}" ]] && fields+=("${COLOR_RED}${GIT_PS1_BEHIND}${COLOR_BRIGHT_WHITE}")
 
         if [[ "${#fields[@]}" -gt 0 ]]; then
             # Join fields with spaces and print
@@ -205,19 +198,20 @@ __ps1_git_status() {
 
 # Virtualenv
 __ps1_virtualenv() {
-    [[ "${VIRTUAL_ENV}" == "" ]] && printf "" || printf "${BLUE}venv${RESET} "
+    [[ "${VIRTUAL_ENV}" == "" ]] && printf "" || printf "${COLOR_BLUE}venv${COLOR_BRIGHT_WHITE} "
 }
 
 # Set final prompt
 __set_ps1() {
     local status=$?
     local prompt
+
     if [[ "${status}" -eq 0 ]]; then
-        prompt="${GREEN}>${RESET}"
+        prompt="${COLOR_GREEN}>${COLOR_BRIGHT_WHITE}"
     else
-        prompt="${RED}>${RESET}"
+        prompt="${COLOR_RED}>${COLOR_BRIGHT_WHITE}"
     fi
-    export PS1="${YELLOW}\w $(__ps1_virtualenv)$(__ps1_git_branch)${LIGHT_GRAY}$(__ps1_git_status) 
+    export PS1="${COLOR_YELLOW}\w $(__ps1_virtualenv)$(__ps1_git_branch)${COLOR_BRIGHT_BLACK}$(__ps1_git_status) 
 ${prompt} "
 }
 PROMPT_COMMAND+=("__set_ps1")
