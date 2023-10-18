@@ -33,11 +33,11 @@ bright_s = 1.0
 bright_l = 0.75
 
 grayscale_h = 210
-grayscale_s = 0.15
+grayscale_s = 0.06
 
 black_h = 210
-black_s = 0.15
-black_l = 0.10
+black_s = 0.06
+black_l = 0.15
 
 # Define colors to use as standard ANSI terminal colors
 defcolor(name="BLACK",          h=black_h,     s=black_s,     l=black_l)  # 0
