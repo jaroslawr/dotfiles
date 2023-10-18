@@ -294,7 +294,9 @@ __activate_venv_for_current_project() {
 
         local active_virtualenv="${VIRTUAL_ENV##*/}"
 
-        if [[ "${active_virtualenv}" != "${current_project}" ]]; then
+        if [[ "${active_virtualenv}" == "${current_project}" ]]; then
+            return 0
+        else
             local virtualenv
             while IFS= read -r virtualenv; do
                 if [[ "${virtualenv}" == "${current_project}" ]]; then
