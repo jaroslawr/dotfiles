@@ -15,54 +15,61 @@ class Color:
     h: float
     s: float
     l: float
+    comment: str | None = None
+
+
+global colors
+colors = []
+
+
+def defcolor(**kwargs):
+    colors.append(Color(**kwargs))
 
 
 normal_s = 1.0
 normal_l = 0.75
 
 bright_s = 1.0
-bright_l = 0.7
+bright_l = 0.75
 
-grayscale_h = 200
-grayscale_s = 0.4
+grayscale_h = 210
+grayscale_s = 0.15
 
-black_l = 0.1
+black_h = 210
+black_s = 0.15
+black_l = 0.10
 
-colors = []
-colors.append(Color(name="BLACK",          h=grayscale_h, s=grayscale_s, l=black_l))
-colors.append(Color(name="RED",            h=0,           s=normal_s,    l=normal_l))
-colors.append(Color(name="GREEN",          h=150,         s=normal_s,    l=normal_l))
-colors.append(Color(name="YELLOW",         h=55,          s=normal_s,    l=normal_l))
-colors.append(Color(name="BLUE",           h=200,         s=normal_s,    l=normal_l))
-colors.append(Color(name="MAGENTA",        h=25,          s=normal_s,    l=normal_l))
-colors.append(Color(name="CYAN",           h=180,         s=normal_s,    l=normal_l))
-colors.append(Color(name="WHITE",          h=grayscale_h, s=grayscale_s, l=normal_l))
-colors.append(Color(name="BRIGHT_BLACK",   h=grayscale_h, s=grayscale_s, l=bright_l))
-colors.append(Color(name="BRIGHT_RED",     h=30,          s=bright_s,    l=bright_l))
-colors.append(Color(name="BRIGHT_GREEN",   h=105,         s=bright_s,    l=bright_l))
-colors.append(Color(name="BRIGHT_YELLOW",  h=85,          s=bright_s,    l=bright_l))
-colors.append(Color(name="BRIGHT_BLUE",    h=260,         s=bright_s,    l=bright_l))
-colors.append(Color(name="BRIGHT_MAGENTA", h=335,         s=bright_s,    l=bright_l))
-colors.append(Color(name="BRIGHT_CYAN",    h=210,         s=bright_s,    l=bright_l))
-colors.append(Color(name="BRIGHT_WHITE",   h=0,           s=0,           l=1.0))
+# Define colors to use as standard ANSI terminal colors
+defcolor(name="BLACK",          h=black_h,     s=black_s,     l=black_l)  # 0
+defcolor(name="RED",            h=0,           s=normal_s,    l=normal_l) # 1
+defcolor(name="GREEN",          h=140,         s=normal_s,    l=normal_l) # 2
+defcolor(name="YELLOW",         h=60,          s=normal_s,    l=normal_l) # 3
+defcolor(name="BLUE",           h=190,         s=normal_s,    l=normal_l) # 4
+defcolor(name="MAGENTA",        h=30,          s=normal_s,    l=normal_l) # 5
+defcolor(name="CYAN",           h=170,         s=normal_s,    l=normal_l) # 6
+defcolor(name="WHITE",          h=grayscale_h, s=grayscale_s, l=normal_l) # 7
+defcolor(name="BRIGHT_BLACK",   h=grayscale_h, s=grayscale_s, l=bright_l) # 8
+defcolor(name="BRIGHT_RED",     h=15,          s=bright_s,    l=bright_l) # 9
+defcolor(name="BRIGHT_GREEN",   h=70,          s=bright_s,    l=bright_l) # 10
+defcolor(name="BRIGHT_YELLOW",  h=40,          s=bright_s,    l=bright_l) # 11
+defcolor(name="BRIGHT_BLUE",    h=210,         s=bright_s,    l=bright_l) # 12
+defcolor(name="BRIGHT_MAGENTA", h=340,         s=bright_s,    l=bright_l) # 13
+defcolor(name="BRIGHT_CYAN",    h=150,         s=bright_s,    l=bright_l) # 14
+defcolor(name="BRIGHT_WHITE",   h=0,           s=0,           l=1.0)      # 15
 
+# Write out COLOR_{name} environment variables with escape codes for ANSI colors
 for i, color in enumerate(colors):
     print(f"export COLOR_{color.name}=\"\\[$(tput setaf {i})\\]\"")
 
 print()
 
-for color in colors:
-    hsl = colormath.color_objects.HSLColor(color.h, color.s, color.l)
-    rgb = convert_color(hsl, colormath.color_objects.sRGBColor)
-    rgb_hex = rgb.get_rgb_hex()
-    print(f"export COLOR_{color.name}_RGB='{rgb_hex}'")
-
-print()
-
-grayscale_colors = []
-grayscale_count = 100
+# Add pseudo-grayscale colors
+grayscale_count = 200
 for i in range(0, grayscale_count):
-    color = Color(name=f"GRAY_{i}", h=grayscale_h,s=grayscale_s, l=i*(1.0/grayscale_count))
+    defcolor(name=f"GRAY_{i}", h=grayscale_h,s=grayscale_s, l=i*(1.0/grayscale_count))
+
+# Write out COLOR_{name}_RGB environment variables
+for color in colors:
     hsl = colormath.color_objects.HSLColor(color.h, color.s, color.l)
     rgb = convert_color(hsl, colormath.color_objects.sRGBColor)
     rgb_hex = rgb.get_rgb_hex()

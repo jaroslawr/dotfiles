@@ -9,7 +9,7 @@
         pager = "less --quit-if-one-screen"
 
 [color "diff"]
-        commit = 5
+        commit = 9
         meta = 4 # filename
         frag = 8 # hunk offset
         old = 1

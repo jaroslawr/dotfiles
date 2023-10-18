@@ -30,6 +30,9 @@ vim.opt.number = true
 -- Show signs in number column
 vim.opt.signcolumn = 'number'
 
+-- Use GUI colors
+vim.opt.termguicolors = true
+
 -- Color theme
 require('colors')
 

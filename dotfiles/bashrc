@@ -11,15 +11,15 @@ export EDITOR=nvim
 # Fzf
 export FZF_DEFAULT_OPTS="--cycle --tiebreak=index --no-mouse --no-bold \
     --layout=reverse --preview-window=down,border-top --margin 0,1 \
-    --color 16,prompt:13,hl:13,hl+:13,fg+:3,pointer:3 \
+    --color 16,hl:13,hl+:13,prompt:10,fg+:10,pointer:10 \
     --bind shift-left:preview-page-up,shift-right:preview-page-down"
 export FZF_TMUX=1
 
 # Fzf-git-log
 GIT_COLOR_SHA1="auto"
-GIT_COLOR_AUTHOR=8
+GIT_COLOR_AUTHOR=7
 GIT_COLOR_DATE=4
-GIT_COLOR_REFS=8
+GIT_COLOR_REFS=7
 read -r -d '' FZF_GIT_LOG_PRETTY <<-EOF
 format:%C(${GIT_COLOR_SHA1})%h %C(${GIT_COLOR_DATE})%cd %C(${GIT_COLOR_AUTHOR})%<(20,trunc)%ae %Creset%s %C(${GIT_COLOR_REFS})%D
 EOF
@@ -172,7 +172,7 @@ __ps1_git_branch() {
         else
             branch="${GIT_PS1_BRANCH}"
         fi
-        printf "${COLOR_MAGENTA}${branch}${COLOR_BRIGHT_WHITE} "
+        printf "${COLOR_BRIGHT_YELLOW}${branch}${COLOR_BRIGHT_WHITE} "
     fi
 }
 
@@ -198,7 +198,7 @@ __ps1_git_status() {
 
 # Virtualenv
 __ps1_virtualenv() {
-    [[ "${VIRTUAL_ENV}" == "" ]] && printf "" || printf "${COLOR_BLUE}venv${COLOR_BRIGHT_WHITE} "
+    [[ "${VIRTUAL_ENV}" == "" ]] && printf "" || printf "${COLOR_BRIGHT_BLUE}venv${COLOR_BRIGHT_WHITE} "
 }
 
 # Set final prompt
@@ -211,7 +211,7 @@ __set_ps1() {
     else
         prompt="${COLOR_RED}>${COLOR_BRIGHT_WHITE}"
     fi
-    export PS1="${COLOR_YELLOW}\w $(__ps1_virtualenv)$(__ps1_git_branch)${COLOR_BRIGHT_BLACK}$(__ps1_git_status) 
+    export PS1="${COLOR_BRIGHT_GREEN}\w $(__ps1_virtualenv)$(__ps1_git_branch)${COLOR_BRIGHT_BLACK}$(__ps1_git_status) 
 ${prompt} "
 }
 PROMPT_COMMAND+=("__set_ps1")
