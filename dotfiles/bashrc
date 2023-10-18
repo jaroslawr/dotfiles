@@ -483,6 +483,11 @@ nt() {
     $EDITOR ~/Notes/notes.md
 }
 
+# open ipython
+py() {
+    ipython3
+}
+
 # FUNCTIONS - DIRECTORY TREES
 #
 
