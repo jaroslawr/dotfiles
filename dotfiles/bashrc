@@ -9,7 +9,7 @@ export PATH="${HOME}/bin:${HOME}/go/bin:${PATH}"
 export EDITOR=nvim
 
 # Fzf
-export FZF_DEFAULT_OPTS="--cycle --tiebreak=index --no-mouse --no-bold \
+export FZF_DEFAULT_OPTS="--cycle --tiebreak=begin,index --no-mouse --no-bold \
     --layout=reverse --preview-window=down,border-top --margin 0,1 \
     --color 16,hl:13,hl+:13,prompt:10,fg+:10,pointer:10 \
     --bind shift-left:preview-page-up,shift-right:preview-page-down"
