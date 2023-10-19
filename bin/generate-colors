@@ -27,17 +27,17 @@ def defcolor(**kwargs):
 
 
 normal_s = 0.95
-normal_l = 0.78
+normal_l = 0.75
 
 bright_s = 0.95
-bright_l = 0.78
+bright_l = 0.75
 
 grayscale_h = 210
-grayscale_s = 0.06
+grayscale_s = 0.2
 
 black_h = 210
-black_s = 0.06
-black_l = 0.15
+black_s = 0.2
+black_l = 0.1
 
 # Define colors to use as standard ANSI terminal colors
 defcolor(name="BLACK",          h=black_h,     s=black_s,     l=black_l)  # 0

@@ -18,7 +18,7 @@ local color_bright_magenta = os.getenv("COLOR_BRIGHT_MAGENTA_RGB") -- 13
 local color_bright_cyan    = os.getenv("COLOR_BRIGHT_CYAN_RGB")    -- 14
 local color_bright_white   = os.getenv("COLOR_BRIGHT_WHITE_RGB")   -- 15
 
-local color_gray_35 = os.getenv("COLOR_GRAY_35_RGB")
+local color_gray_30 = os.getenv("COLOR_GRAY_30_RGB")
 local color_gray_40 = os.getenv("COLOR_GRAY_40_RGB")
 local color_gray_50 = os.getenv("COLOR_GRAY_50_RGB")
 local color_gray_70 = os.getenv("COLOR_GRAY_70_RGB")
@@ -67,8 +67,8 @@ vim.api.nvim_set_hl(0, "SignColumn", {})
 -- UI - status line
 --
 
-vim.api.nvim_set_hl(0, "StatusLine", { bg=color_gray_35, fg=color_bright_yellow })
-vim.api.nvim_set_hl(0, "StatusLineNC", { bg=color_gray_35, fg=color_white })
+vim.api.nvim_set_hl(0, "StatusLine", { bg=color_gray_30, fg=color_bright_yellow })
+vim.api.nvim_set_hl(0, "StatusLineNC", { bg=color_gray_30, fg=color_white })
 
 -- UI - quickfix
 --
