@@ -50,13 +50,13 @@ vim.api.nvim_set_hl(0, "Visual", { bg=color_yellow, fg=color_black })
 vim.api.nvim_set_hl(0, "IncSearch", { bg=color_bright_magenta, fg=color_black })
 vim.api.nvim_set_hl(0, "Search", { fg=color_bright_magenta })
 vim.api.nvim_set_hl(0, "MatchParen", { fg=color_yellow })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { fg=color_gray_70 })
+vim.api.nvim_set_hl(0, "EndOfBuffer", { fg=color_gray_40 })
 
 -- UI
 --
 
 vim.api.nvim_set_hl(0, "LineNr", { fg=color_gray_70 })
-vim.api.nvim_set_hl(0, "CursorLine", { bg=color_gray_50 })
+vim.api.nvim_set_hl(0, "CursorLine", { bg=color_gray_40 })
 vim.api.nvim_set_hl(0, "CursorLineNr", { fg=color_white })
 vim.api.nvim_set_hl(0, "Msg", { fg=color_white })
 vim.api.nvim_set_hl(0, "ErrorMsg", { fg=color_red })

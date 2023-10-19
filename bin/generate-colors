@@ -26,11 +26,11 @@ def defcolor(**kwargs):
     colors.append(Color(**kwargs))
 
 
-normal_s = 1.0
-normal_l = 0.75
+normal_s = 0.95
+normal_l = 0.78
 
-bright_s = 1.0
-bright_l = 0.75
+bright_s = 0.95
+bright_l = 0.78
 
 grayscale_h = 210
 grayscale_s = 0.06
@@ -44,7 +44,7 @@ defcolor(name="BLACK",          h=black_h,     s=black_s,     l=black_l)  # 0
 defcolor(name="RED",            h=0,           s=normal_s,    l=normal_l) # 1
 defcolor(name="GREEN",          h=140,         s=normal_s,    l=normal_l) # 2
 defcolor(name="YELLOW",         h=60,          s=normal_s,    l=normal_l) # 3
-defcolor(name="BLUE",           h=190,         s=normal_s,    l=normal_l) # 4
+defcolor(name="BLUE",           h=210,         s=normal_s,    l=normal_l) # 4
 defcolor(name="MAGENTA",        h=30,          s=normal_s,    l=normal_l) # 5
 defcolor(name="CYAN",           h=170,         s=normal_s,    l=normal_l) # 6
 defcolor(name="WHITE",          h=grayscale_h, s=grayscale_s, l=normal_l) # 7
