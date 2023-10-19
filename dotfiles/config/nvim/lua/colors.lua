@@ -57,7 +57,7 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", { fg=color_gray_40 })
 
 vim.api.nvim_set_hl(0, "LineNr", { fg=color_gray_70 })
 vim.api.nvim_set_hl(0, "CursorLine", { bg=color_gray_40 })
-vim.api.nvim_set_hl(0, "CursorLineNr", { fg=color_white })
+vim.api.nvim_set_hl(0, "CursorLineNr", { bg=color_gray_40, fg=color_white })
 vim.api.nvim_set_hl(0, "Msg", { fg=color_white })
 vim.api.nvim_set_hl(0, "ErrorMsg", { fg=color_red })
 vim.api.nvim_set_hl(0, "WarningMsg", { fg=color_red })
