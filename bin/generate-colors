@@ -1,12 +1,7 @@
 #!/usr/bin/python
 
-import sys
-
-import colormath
-import colormath.color_objects
-
+from colorsys import hls_to_rgb
 from dataclasses import dataclass
-from colormath.color_conversions import convert_color
 
 
 @dataclass
@@ -70,7 +65,6 @@ for i in range(0, grayscale_count):
 
 # Write out COLOR_{name}_RGB environment variables
 for color in colors:
-    hsl = colormath.color_objects.HSLColor(color.h, color.s, color.l)
-    rgb = convert_color(hsl, colormath.color_objects.sRGBColor)
-    rgb_hex = rgb.get_rgb_hex()
+    r, g, b = hls_to_rgb(color.h/360, color.l, color.s)
+    rgb_hex = "#%02x%02x%02x" % (round(r*255), round(g*255), round(b*255))
     print(f"export COLOR_{color.name}_RGB='{rgb_hex}'")
