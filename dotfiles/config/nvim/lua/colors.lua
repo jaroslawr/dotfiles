@@ -67,7 +67,7 @@ vim.api.nvim_set_hl(0, "SignColumn", {})
 -- UI - status line
 --
 
-vim.api.nvim_set_hl(0, "StatusLine", { bg=color_gray_30, fg=color_bright_yellow })
+vim.api.nvim_set_hl(0, "StatusLine", { bg=color_gray_30, fg=color_magenta })
 vim.api.nvim_set_hl(0, "StatusLineNC", { bg=color_gray_30, fg=color_white })
 
 -- UI - quickfix

@@ -172,7 +172,7 @@ __ps1_git_branch() {
         else
             branch="${GIT_PS1_BRANCH}"
         fi
-        printf "${COLOR_BRIGHT_YELLOW}${branch}${COLOR_BRIGHT_WHITE} "
+        printf "${COLOR_MAGENTA}${branch}${COLOR_BRIGHT_WHITE} "
     fi
 }
 
@@ -211,7 +211,7 @@ __set_ps1() {
     else
         prompt="${COLOR_RED}>${COLOR_BRIGHT_WHITE}"
     fi
-    export PS1="${COLOR_BRIGHT_GREEN}\w $(__ps1_virtualenv)$(__ps1_git_branch)${COLOR_BRIGHT_BLACK}$(__ps1_git_status) 
+    export PS1="${COLOR_YELLOW}\w $(__ps1_virtualenv)$(__ps1_git_branch)${COLOR_BRIGHT_BLACK}$(__ps1_git_status) 
 ${prompt} "
 }
 PROMPT_COMMAND+=("__set_ps1")
