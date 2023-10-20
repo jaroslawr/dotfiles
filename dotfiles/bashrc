@@ -116,6 +116,17 @@ PRECMDS+=("__save_history")
 # PROMPT
 #
 
+# Prompt colors
+PS1_COLOR_PWD="${COLOR_BRIGHT_YELLOW}"
+PS1_COLOR_GIT_BRANCH="${COLOR_BRIGHT_MAGENTA}"
+PS1_COLOR_GIT_STATUS="${COLOR_BRIGHT_BLACK}"
+PS1_COLOR_GIT_AHEAD="${COLOR_GREEN}"
+PS1_COLOR_GIT_BEHIND="${COLOR_RED}"
+PS1_COLOR_VENV="${COLOR_BRIGHT_BLUE}"
+PS1_COLOR_PROMPT_SUCCESS="${COLOR_GREEN}"
+PS1_COLOR_PROMPT_FAILURE="${COLOR_RED}"
+PS1_COLOR_RESET="${COLOR_BRIGHT_WHITE}"
+
 # Set git-related variables for prompt
 __update_git_status() {
     GIT_REPO=$(git rev-parse --git-dir 2>&1 >/dev/null && echo true || echo false)
@@ -172,7 +183,7 @@ __ps1_git_branch() {
         else
             branch="${GIT_PS1_BRANCH}"
         fi
-        printf "${COLOR_BRIGHT_MAGENTA}${branch}${COLOR_BRIGHT_WHITE} "
+        printf "${PS1_COLOR_GIT_BRANCH}${branch}${PS1_COLOR_RESET} "
     fi
 }
 
@@ -182,9 +193,9 @@ __ps1_git_status() {
         local local_status="${GIT_PS1_STAGED}${GIT_PS1_NONSTAGED}${GIT_PS1_UNTRACKED}"
 
         declare -a fields
-        [[ -n "${local_status}" ]] && fields+=("${COLOR_LIGHT_GRAY}${local_status}${COLOR_BRIGHT_WHITE}")
-        [[ -n "${GIT_PS1_AHEAD}" ]] && fields+=("${COLOR_BRIGHT_GREEN}${GIT_PS1_AHEAD}${COLOR_BRIGHT_WHITE}")
-        [[ -n "${GIT_PS1_BEHIND}" ]] && fields+=("${COLOR_BRIGHT_RED}${GIT_PS1_BEHIND}${COLOR_BRIGHT_WHITE}")
+        [[ -n "${local_status}" ]] && fields+=("${PS1_COLOR_GIT_STATUS}${local_status}${PS1_COLOR_RESET}")
+        [[ -n "${GIT_PS1_AHEAD}" ]] && fields+=("${PS1_COLOR_GIT_AHEAD}${GIT_PS1_AHEAD}${PS1_COLOR_RESET}")
+        [[ -n "${GIT_PS1_BEHIND}" ]] && fields+=("${PS1_COLOR_GIT_BEHIND}${GIT_PS1_BEHIND}${PS1_COLOR_RESET}")
 
         if [[ "${#fields[@]}" -gt 0 ]]; then
             # Join fields with spaces and print
@@ -198,7 +209,7 @@ __ps1_git_status() {
 
 # Virtualenv
 __ps1_virtualenv() {
-    [[ "${VIRTUAL_ENV}" == "" ]] && printf "" || printf "${COLOR_BRIGHT_BLUE}venv${COLOR_BRIGHT_WHITE} "
+    [[ "${VIRTUAL_ENV}" == "" ]] && printf "" || printf "${PS1_COLOR_VENV}venv${PS1_COLOR_RESET} "
 }
 
 # Set final prompt
@@ -207,11 +218,11 @@ __set_ps1() {
     local prompt
 
     if [[ "${status}" -eq 0 ]]; then
-        prompt="${COLOR_GREEN}>${COLOR_BRIGHT_WHITE}"
+        prompt="${PS1_COLOR_PROMPT_SUCCESS}>${PS1_COLOR_RESET}"
     else
-        prompt="${COLOR_RED}>${COLOR_BRIGHT_WHITE}"
+        prompt="${PS1_COLOR_PROMPT_FAILURE}>${PS1_COLOR_RESET}"
     fi
-    export PS1="${COLOR_BRIGHT_YELLOW}\w $(__ps1_virtualenv)$(__ps1_git_branch)${COLOR_BRIGHT_BLACK}$(__ps1_git_status) 
+    export PS1="${PS1_COLOR_PWD}\w $(__ps1_virtualenv)$(__ps1_git_branch)$(__ps1_git_status) 
 ${prompt} "
 }
 PROMPT_COMMAND+=("__set_ps1")
