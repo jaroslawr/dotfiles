@@ -14,14 +14,14 @@ end
 
 vim.opt.statusline = table.concat({
   " %0*%{luaeval('status_filename()')}%* ", -- filename
-  "%< ", -- avoid shortening everything until now
-  "%=", -- right align
-  "0x%02B ", -- byte under cursor as hex
-  "%03l,%03c ", -- line and column number
+  "%1*",
+  "%<", -- avoid shortening everything until now
+  "%03l:%03c ", -- line and column number
   "%02p%% ", -- percentage through the file
+  "%=", -- right align
+  "%{&fileformat} ", -- file format
+  "%{&fileencoding==''?'':&fileencoding.' '}", -- file encoding
   "%{(&ft==''?'none':&ft)} ", -- file type
   "sw=%{&shiftwidth} ", -- shift width
   "et=%{&expandtab} ", -- expand tabs
-  "%{&fileformat} ", -- file format
-  "%{&fileencoding==''?'':&fileencoding.' '}" -- file encoding
 })
