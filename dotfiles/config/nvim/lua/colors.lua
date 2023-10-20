@@ -47,8 +47,8 @@ vim.api.nvim_set_hl(0, "Todo", { fg=color_yellow })
 --
 
 vim.api.nvim_set_hl(0, "Visual", { bg=color_yellow, fg=color_black })
-vim.api.nvim_set_hl(0, "IncSearch", { bg=color_bright_magenta, fg=color_black })
-vim.api.nvim_set_hl(0, "Search", { fg=color_bright_magenta })
+vim.api.nvim_set_hl(0, "IncSearch", { bg=color_bright_red, fg=color_black })
+vim.api.nvim_set_hl(0, "Search", { fg=color_bright_red })
 vim.api.nvim_set_hl(0, "MatchParen", { fg=color_yellow })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { fg=color_gray_40 })
 
@@ -67,7 +67,7 @@ vim.api.nvim_set_hl(0, "SignColumn", {})
 -- UI - status line
 --
 
-vim.api.nvim_set_hl(0, "StatusLine", { bg=color_gray_30, fg=color_magenta })
+vim.api.nvim_set_hl(0, "StatusLine", { bg=color_gray_30, fg=color_bright_magenta })
 vim.api.nvim_set_hl(0, "StatusLineNC", { bg=color_gray_30, fg=color_white })
 
 -- UI - quickfix

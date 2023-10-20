@@ -11,7 +11,7 @@ export EDITOR=nvim
 # Fzf
 export FZF_DEFAULT_OPTS="--cycle --tiebreak=begin,index --no-mouse --no-bold \
     --layout=reverse --preview-window=down,border-top --margin 0,1 \
-    --color 16,hl:13,hl+:13,prompt:10,fg+:10,pointer:10 \
+    --color 16,hl:9,hl+:9,prompt:11,fg+:11,pointer:11 \
     --bind shift-left:preview-page-up,shift-right:preview-page-down"
 export FZF_TMUX=1
 
@@ -172,7 +172,7 @@ __ps1_git_branch() {
         else
             branch="${GIT_PS1_BRANCH}"
         fi
-        printf "${COLOR_MAGENTA}${branch}${COLOR_BRIGHT_WHITE} "
+        printf "${COLOR_BRIGHT_MAGENTA}${branch}${COLOR_BRIGHT_WHITE} "
     fi
 }
 
@@ -183,8 +183,8 @@ __ps1_git_status() {
 
         declare -a fields
         [[ -n "${local_status}" ]] && fields+=("${COLOR_LIGHT_GRAY}${local_status}${COLOR_BRIGHT_WHITE}")
-        [[ -n "${GIT_PS1_AHEAD}" ]] && fields+=("${COLOR_GREEN}${GIT_PS1_AHEAD}${COLOR_BRIGHT_WHITE}")
-        [[ -n "${GIT_PS1_BEHIND}" ]] && fields+=("${COLOR_RED}${GIT_PS1_BEHIND}${COLOR_BRIGHT_WHITE}")
+        [[ -n "${GIT_PS1_AHEAD}" ]] && fields+=("${COLOR_BRIGHT_GREEN}${GIT_PS1_AHEAD}${COLOR_BRIGHT_WHITE}")
+        [[ -n "${GIT_PS1_BEHIND}" ]] && fields+=("${COLOR_BRIGHT_RED}${GIT_PS1_BEHIND}${COLOR_BRIGHT_WHITE}")
 
         if [[ "${#fields[@]}" -gt 0 ]]; then
             # Join fields with spaces and print
@@ -211,7 +211,7 @@ __set_ps1() {
     else
         prompt="${COLOR_RED}>${COLOR_BRIGHT_WHITE}"
     fi
-    export PS1="${COLOR_YELLOW}\w $(__ps1_virtualenv)$(__ps1_git_branch)${COLOR_BRIGHT_BLACK}$(__ps1_git_status) 
+    export PS1="${COLOR_BRIGHT_YELLOW}\w $(__ps1_virtualenv)$(__ps1_git_branch)${COLOR_BRIGHT_BLACK}$(__ps1_git_status) 
 ${prompt} "
 }
 PROMPT_COMMAND+=("__set_ps1")
