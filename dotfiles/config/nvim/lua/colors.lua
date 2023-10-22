@@ -51,6 +51,7 @@ vim.api.nvim_set_hl(0, "IncSearch", { bg=color_bright_red, fg=color_black })
 vim.api.nvim_set_hl(0, "Search", { fg=color_bright_red })
 vim.api.nvim_set_hl(0, "MatchParen", { fg=color_yellow })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { fg=color_gray_40 })
+vim.api.nvim_set_hl(0, "NonText", { fg=color_yellow })
 
 -- UI
 --
