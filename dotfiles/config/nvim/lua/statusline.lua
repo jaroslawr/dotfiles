@@ -1,7 +1,8 @@
 local M={}
 
 local function filename()
-  local filename = vim.fn.expand("%:.")
+  local buffer = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
+  local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buffer), ":.")
   if filename == "" then
     filename = "-"
   end
