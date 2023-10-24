@@ -21,36 +21,39 @@ def defcolor(**kwargs):
     colors.append(Color(**kwargs))
 
 
+black_h = 210
+black_s = 0.10
+black_l = 0.10
+
 normal_s = 1.00
 normal_l = 0.82
 
 bright_s = 1.00
 bright_l = 0.75
 
-grayscale_h = 210
-grayscale_s = 0.10
+gray1_h = 210
+gray1_s = 0.20
 
-black_h = 210
-black_s = 0.10
-black_l = 0.10
+gray2_h = 210
+gray2_s = 0.10
 
 # Define colors to use as standard ANSI terminal colors
-defcolor(name="BLACK",          h=black_h,     s=black_s,     l=black_l)  # 0
-defcolor(name="RED",            h=0,           s=normal_s,    l=normal_l) # 1
-defcolor(name="GREEN",          h=140,         s=normal_s,    l=normal_l) # 2
-defcolor(name="YELLOW",         h=50,          s=normal_s,    l=normal_l) # 3
-defcolor(name="BLUE",           h=200,         s=normal_s,    l=normal_l) # 4
-defcolor(name="MAGENTA",        h=20,          s=normal_s,    l=normal_l) # 5
-defcolor(name="CYAN",           h=170,         s=normal_s,    l=normal_l) # 6
-defcolor(name="WHITE",          h=grayscale_h, s=grayscale_s, l=normal_l) # 7
-defcolor(name="BRIGHT_BLACK",   h=grayscale_h, s=grayscale_s, l=bright_l) # 8
-defcolor(name="BRIGHT_RED",     h=220,         s=bright_s,    l=bright_l) # 9
-defcolor(name="BRIGHT_GREEN",   h=140,         s=bright_s,    l=bright_l) # 10
-defcolor(name="BRIGHT_YELLOW",  h=50,          s=bright_s,    l=bright_l) # 11
-defcolor(name="BRIGHT_BLUE",    h=200,         s=bright_s,    l=bright_l) # 12
-defcolor(name="BRIGHT_MAGENTA", h=20,          s=bright_s,    l=bright_l) # 13
-defcolor(name="BRIGHT_CYAN",    h=170,         s=bright_s,    l=bright_l) # 14
-defcolor(name="BRIGHT_WHITE",   h=0,           s=0,           l=1.0)      # 15
+defcolor(name="BLACK",          h=black_h, s=black_s,     l=black_l)  # 0
+defcolor(name="RED",            h=0,       s=normal_s,    l=normal_l) # 1
+defcolor(name="GREEN",          h=140,     s=normal_s,    l=normal_l) # 2
+defcolor(name="YELLOW",         h=50,      s=normal_s,    l=normal_l) # 3
+defcolor(name="BLUE",           h=200,     s=normal_s,    l=normal_l) # 4
+defcolor(name="MAGENTA",        h=20,      s=normal_s,    l=normal_l) # 5
+defcolor(name="CYAN",           h=170,     s=normal_s,    l=normal_l) # 6
+defcolor(name="WHITE",          h=gray1_h, s=gray1_s,     l=normal_l) # 7
+defcolor(name="BRIGHT_BLACK",   h=gray2_h, s=gray2_s,     l=bright_l) # 8
+defcolor(name="BRIGHT_RED",     h=220,     s=bright_s,    l=bright_l) # 9
+defcolor(name="BRIGHT_GREEN",   h=140,     s=bright_s,    l=bright_l) # 10
+defcolor(name="BRIGHT_YELLOW",  h=50,      s=bright_s,    l=bright_l) # 11
+defcolor(name="BRIGHT_BLUE",    h=200,     s=bright_s,    l=bright_l) # 12
+defcolor(name="BRIGHT_MAGENTA", h=20,      s=bright_s,    l=bright_l) # 13
+defcolor(name="BRIGHT_CYAN",    h=170,     s=bright_s,    l=bright_l) # 14
+defcolor(name="BRIGHT_WHITE",   h=0,       s=0,           l=1.0)      # 15
 
 # Write out COLOR_{name} environment variables with escape codes for ANSI colors
 for i, color in enumerate(colors):
@@ -58,10 +61,13 @@ for i, color in enumerate(colors):
 
 print()
 
-# Add pseudo-grayscale colors
-grayscale_count = 200
-for i in range(0, grayscale_count):
-    defcolor(name=f"GRAY_{i}", h=grayscale_h,s=grayscale_s, l=i*(1.0/grayscale_count))
+# Define pseudo-grayscale color ranges
+grayscale_count = 100
+grayscale_h = 210
+grayscale_sats = [0.15, 0.3]
+for i, grayscale_s in enumerate(grayscale_sats):
+    for j in range(0, grayscale_count):
+        defcolor(name=f"GRAY_{i+1}_{j}", h=grayscale_h, s=grayscale_s, l=j*(1.0/grayscale_count))
 
 # Write out COLOR_{name}_RGB environment variables
 for color in colors:

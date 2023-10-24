@@ -26,6 +26,7 @@ vim.opt.grepprg = 'rg -n $*'
 
 -- Show line numbers
 vim.opt.number = true
+vim.opt.numberwidth = 6
 
 -- Show signs in number column
 vim.opt.signcolumn = 'number'
