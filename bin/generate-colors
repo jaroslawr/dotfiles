@@ -21,7 +21,11 @@ def defcolor(**kwargs):
     colors.append(Color(**kwargs))
 
 
-black_h = 210
+# Tunables
+
+grayscale_h = 210
+
+black_h = grayscale_h
 black_s = 0.10
 black_l = 0.10
 
@@ -31,13 +35,18 @@ normal_l = 0.82
 bright_s = 1.00
 bright_l = 0.75
 
-gray1_h = 210
+gray1_h = grayscale_h
 gray1_s = 0.50
 
-gray2_h = 210
+gray2_h = grayscale_h
 gray2_s = 0.25
 
+# Grayscale range of grayscale_count_per_set colors for each grayscale_range_sat
+grayscale_ranges_sats = [0.15, 0.30]
+grayscale_count_per_sat = 100
+
 # Define colors to use as standard ANSI terminal colors
+
 defcolor(name="BLACK",          h=black_h, s=black_s,     l=black_l)  # 0
 defcolor(name="RED",            h=0,       s=normal_s,    l=normal_l) # 1
 defcolor(name="GREEN",          h=140,     s=normal_s,    l=normal_l) # 2
@@ -56,20 +65,21 @@ defcolor(name="BRIGHT_CYAN",    h=170,     s=bright_s,    l=bright_l) # 14
 defcolor(name="BRIGHT_WHITE",   h=0,       s=0,           l=1.0)      # 15
 
 # Write out COLOR_{name} environment variables with escape codes for ANSI colors
+
 for i, color in enumerate(colors):
     print(f"export COLOR_{color.name}=\"\\[$(tput setaf {i})\\]\"")
 
 print()
 
 # Define pseudo-grayscale color ranges
-grayscale_count = 100
-grayscale_h = 210
-grayscale_sats = [0.15, 0.3]
-for i, grayscale_s in enumerate(grayscale_sats):
-    for j in range(0, grayscale_count):
-        defcolor(name=f"GRAY_{i+1}_{j}", h=grayscale_h, s=grayscale_s, l=j*(1.0/grayscale_count))
+
+sat_step = 1.0/grayscale_count_per_sat
+for i, grayscale_s in enumerate(grayscale_ranges_sats):
+    for j in range(0, grayscale_count_per_sat):
+        defcolor(name=f"GRAY_{i+1}_{j}", h=grayscale_h, s=grayscale_s, l=j*sat_step)
 
 # Write out COLOR_{name}_RGB environment variables
+
 for color in colors:
     r, g, b = hls_to_rgb(color.h/360, color.l, color.s)
     rgb_hex = "#%02x%02x%02x" % (round(r*255), round(g*255), round(b*255))
