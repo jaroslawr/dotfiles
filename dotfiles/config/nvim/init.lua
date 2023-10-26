@@ -97,6 +97,12 @@ local on_attach_common = function(client, bufnr)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, keymap_opts)
 end
 
+-- PROGRAMMING - c
+--
+
+local on_attach_clangd = on_attach_common
+require'lspconfig'.clangd.setup{ on_attach = on_attach_clangd }
+
 -- PROGRAMMING - go
 --
 
