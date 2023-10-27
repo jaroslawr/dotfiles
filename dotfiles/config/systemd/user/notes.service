@@ -5,6 +5,7 @@ Description=Rclone mount for notes
 Type=simple
 Environment=RCLONE_DROPBOX_BATCH_MODE=off
 Environment=RCLONE_VFS_CACHE_MODE=full
+Environment=RCLONE_TIMEOUT=5s
 ExecStart=/usr/bin/rclone mount notes: Notes/
 
 [Install]
