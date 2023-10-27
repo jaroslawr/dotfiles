@@ -63,7 +63,7 @@ vim.api.nvim_set_hl(0, "NonText", { fg=color_yellow })
 -- UI
 --
 
-vim.api.nvim_set_hl(0, "LineNr", { fg=color_gray_2_35 })
+vim.api.nvim_set_hl(0, "LineNr", { fg=color_gray_35 })
 vim.api.nvim_set_hl(0, "CursorLine", { bg=color_gray_2_20 })
 vim.api.nvim_set_hl(0, "CursorLineNr", { bg=color_gray_2_20, fg=color_white })
 vim.api.nvim_set_hl(0, "CursorLineSign", { bg=color_red })

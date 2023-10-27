@@ -23,7 +23,7 @@ def defcolor(**kwargs):
 
 # Tunables
 
-grayscale_h = 220
+grayscale_h = 210
 
 black_h = grayscale_h
 black_s = 0.15
