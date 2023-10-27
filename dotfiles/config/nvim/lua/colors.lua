@@ -8,8 +8,8 @@ local color_yellow         = os.getenv("COLOR_YELLOW_RGB")         -- 3
 local color_blue           = os.getenv("COLOR_BLUE_RGB")           -- 4
 local color_magenta        = os.getenv("COLOR_MAGENTA_RGB")        -- 5
 local color_cyan           = os.getenv("COLOR_CYAN_RGB")           -- 6
-local color_white          = os.getenv("COLOR_WHITE_RGB")          -- 7
-local color_bright_black   = os.getenv("COLOR_BRIGHT_BLACK_RGB")   -- 8
+local color_gray           = os.getenv("COLOR_GRAY_RGB")           -- 7
+local color_bright_gray    = os.getenv("COLOR_BRIGHT_GRAY_RGB")    -- 8
 local color_bright_red     = os.getenv("COLOR_BRIGHT_RED_RGB")     -- 9
 local color_bright_green   = os.getenv("COLOR_BRIGHT_GREEN_RGB")   -- 10
 local color_bright_yellow  = os.getenv("COLOR_BRIGHT_YELLOW_RGB")  -- 11
@@ -46,7 +46,7 @@ vim.api.nvim_set_hl(0, "Type", { fg=color_cyan })
 vim.api.nvim_set_hl(0, "Special", { fg=color_cyan })
 vim.api.nvim_set_hl(0, "SpecialChar", { fg=color_cyan })
 vim.api.nvim_set_hl(0, "Delimiter", { fg=color_white })
-vim.api.nvim_set_hl(0, "Comment", { fg=color_white })
+vim.api.nvim_set_hl(0, "Comment", { fg=color_gray })
 vim.api.nvim_set_hl(0, "Whitespace", {})
 vim.api.nvim_set_hl(0, "Todo", { fg=color_yellow })
 
@@ -65,9 +65,9 @@ vim.api.nvim_set_hl(0, "NonText", { fg=color_yellow })
 
 vim.api.nvim_set_hl(0, "LineNr", { fg=color_gray_35 })
 vim.api.nvim_set_hl(0, "CursorLine", { bg=color_gray_2_20 })
-vim.api.nvim_set_hl(0, "CursorLineNr", { bg=color_gray_2_20, fg=color_white })
+vim.api.nvim_set_hl(0, "CursorLineNr", { bg=color_gray_2_20, fg=color_gray })
 vim.api.nvim_set_hl(0, "CursorLineSign", { bg=color_red })
-vim.api.nvim_set_hl(0, "Msg", { fg=color_white })
+vim.api.nvim_set_hl(0, "Msg", { fg=color_bright_white })
 vim.api.nvim_set_hl(0, "ErrorMsg", { fg=color_red })
 vim.api.nvim_set_hl(0, "WarningMsg", { fg=color_red })
 vim.api.nvim_set_hl(0, "VertSplit", { fg=color_gray_25 })
@@ -77,11 +77,11 @@ vim.api.nvim_set_hl(0, "SignColumn", {})
 --
 
 -- focused
-vim.api.nvim_set_hl(0, "StatusLine", { bg=color_gray_2_25, fg=color_bright_black })
+vim.api.nvim_set_hl(0, "StatusLine", { bg=color_gray_2_25, fg=color_gray })
 vim.api.nvim_set_hl(0, "User1", { bg=color_gray_2_25, fg=color_bright_yellow })
 -- not focused
-vim.api.nvim_set_hl(0, "StatusLineNC", { bg=color_gray_20, fg=color_bright_black })
-vim.api.nvim_set_hl(0, "User2", { bg=color_gray_20, fg=color_bright_black })
+vim.api.nvim_set_hl(0, "StatusLineNC", { bg=color_gray_20, fg=color_gray })
+vim.api.nvim_set_hl(0, "User2", { bg=color_gray_20, fg=color_gray })
 
 -- UI - quickfix
 --
@@ -154,22 +154,22 @@ vim.api.nvim_set_hl(0, "gitcommitBlank", { bg=color_bright_black })
 
 -- message body
 vim.api.nvim_set_hl(0, "gitcommitBranch", { fg=color_magenta })
-vim.api.nvim_set_hl(0, "gitcommitComment", { fg=color_white })
-vim.api.nvim_set_hl(0, "gitcommitHeader", { fg=color_white })
+vim.api.nvim_set_hl(0, "gitcommitComment", { fg=color_bright_white })
+vim.api.nvim_set_hl(0, "gitcommitHeader", { fg=color_bright_white })
 vim.api.nvim_set_hl(0, "gitcommitSelected", { fg=color_green })
 vim.api.nvim_set_hl(0, "gitcommitSelectedType", { fg=color_green })
 vim.api.nvim_set_hl(0, "gitcommitSelectedFile", { fg=color_green })
 vim.api.nvim_set_hl(0, "gitcommitDiscarded", { fg=color_cyan })
 vim.api.nvim_set_hl(0, "gitcommitDiscardedType", { fg=color_cyan })
 vim.api.nvim_set_hl(0, "gitcommitDiscardedFile", { fg=color_cyan })
-vim.api.nvim_set_hl(0, "gitcommitUntracked", { fg=color_white })
-vim.api.nvim_set_hl(0, "gitcommitUntrackedType", { fg=color_white })
-vim.api.nvim_set_hl(0, "gitcommitUntrackedFile", { fg=color_white })
+vim.api.nvim_set_hl(0, "gitcommitUntracked", { fg=color_bright_white })
+vim.api.nvim_set_hl(0, "gitcommitUntrackedType", { fg=color_bright_white })
+vim.api.nvim_set_hl(0, "gitcommitUntrackedFile", { fg=color_bright_white })
 
 -- SYNTAX - diff
 --
 
-vim.api.nvim_set_hl(0, "diffSubname", { fg=color_white })
+vim.api.nvim_set_hl(0, "diffSubname", { fg=color_bright_white })
 vim.api.nvim_set_hl(0, "diffAdded", { fg=color_green })
 vim.api.nvim_set_hl(0, "diffRemoved", { fg=color_red })
 

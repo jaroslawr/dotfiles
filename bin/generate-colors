@@ -58,8 +58,8 @@ defcolor(name="YELLOW",         h=50,      s=normal_s,    l=normal_l) # 3
 defcolor(name="BLUE",           h=200,     s=normal_s,    l=normal_l) # 4
 defcolor(name="MAGENTA",        h=20,      s=normal_s,    l=normal_l) # 5
 defcolor(name="CYAN",           h=170,     s=normal_s,    l=normal_l) # 6
-defcolor(name="WHITE",          h=gray1_h, s=gray1_s,     l=normal_l) # 7
-defcolor(name="BRIGHT_BLACK",   h=gray2_h, s=gray2_s,     l=bright_l) # 8
+defcolor(name="GRAY",           h=gray1_h, s=gray1_s,     l=normal_l) # 7
+defcolor(name="BRIGHT_GRAY",    h=gray2_h, s=gray2_s,     l=bright_l) # 8
 defcolor(name="BRIGHT_RED",     h=0,       s=bright_s,    l=bright_l) # 9
 defcolor(name="BRIGHT_GREEN",   h=140,     s=bright_s,    l=bright_l) # 10
 defcolor(name="BRIGHT_YELLOW",  h=50,      s=bright_s,    l=bright_l) # 11
