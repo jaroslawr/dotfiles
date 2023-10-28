@@ -91,8 +91,17 @@ _fzf_compgen_path() {
     fi
 }
 
-# Command for Ctrl-T completion
-export FZF_CTRL_T_COMMAND="fdfind --type d"
+# Source of directories for ** completion (for cd/pushd/...)
+_fzf_compgen_dir() {
+    local -a fdopts
+    fdopts+=(--type d)
+
+    if [[ $(realpath "$1") == $PWD ]]; then
+        fdfind ${fdopts[@]} .
+    else
+        fdfind ${fdopts[@]} . "$1"
+    fi
+}
 
 # DEPENDENCIES
 #
@@ -103,7 +112,7 @@ source /usr/share/bash-completion/bash_completion
 # FZF completion, makes **<TAB> work
 source /usr/share/bash-completion/completions/fzf
 
-# FZF keybindings: cd with Alt-C, insert file path with Ctrl-T
+# FZF keybindings: cd with Alt-C, insert paths with Ctrl-T
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
 # Virtualenvwrapper
@@ -294,7 +303,7 @@ __cdp_to_project_path() {
 }
 
 __complete_cdp() {
-    __complete_directory_path "${COMP_WORDS[-1]}" "${PROJECTS_ROOT_DIR}"
+    __complete_directory_path_under_root "${COMP_WORDS[1]}" "${PROJECTS_ROOT_DIR}"
 }
 
 complete -F __complete_cdp -o filenames -o nospace -o nosort cdp
@@ -420,15 +429,16 @@ sw() {
 # COMPLETION FUNCTIONS
 #
 
-# Complete directory paths using prefix or infix completion of the last path
-# component
-__complete_directory_path() {
-    # Input string to complete
+# Given an input string and a root directory, complete the input string
+# assuming it is an incomplete directory path within the root directory, using
+# prefix or infix completion of the last path component of the input
+__complete_directory_path_under_root() {
+   # Input string to complete
     local input="$1"
 
     # Root directory under which to look for matching directory path,
     # used only if input is a relative path
-    local relative_root="$2"
+    local root="$2"
 
     # Expand ~ in input if present
     if [[ "${input}" =~ ^~ ]]; then
@@ -462,7 +472,7 @@ __complete_directory_path() {
         find_args+=("${complete_path}")
     else
         # Case of relative path
-        find_args+=("${relative_root}/${complete_path}")
+        find_args+=("${root}/${complete_path}")
     fi
 
     # Look for immediate subdirectories
@@ -495,11 +505,6 @@ __complete_directory_path() {
     COMPREPLY=("${prefix_matches[@]}" "${infix_matches[@]}")
 }
 
-__complete_cd_infix() {
-    __complete_directory_path "${COMP_WORDS[-1]}" "."
-}
-
-complete -F __complete_cd_infix -o filenames -o nospace -o nosort cd
 
 # FUNCTIONS
 #
