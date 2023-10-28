@@ -3,6 +3,11 @@
 # Git log browser using fzf
 #
 
+# Log format
+read -r -d '' FZF_GIT_LOG_PRETTY <<-EOF
+format:%C(${FZF_GIT_COLOR_SHA1})%h %C(${FZF_GIT_COLOR_DATE})%cd %C(${FZF_GIT_COLOR_AUTHOR})%<(20,trunc)%ae %Creset%s %C(${GIT_COLOR_REFS})%D
+EOF
+
 # Git log options
 GIT_LOG_OPTIONS=()
 GIT_LOG_OPTIONS+=("--color=always")

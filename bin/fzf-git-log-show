@@ -3,6 +3,17 @@
 # 'git show' wrapper for fzf-git-log
 #
 
+# Git show pretty format
+# (clear IFS to preserve the final newline before EOF)
+IFS= read -r -d '' FZF_GIT_LOG_SHOW_PRETTY <<-EOF
+format:Committed: %C(${FZF_GIT_COLOR_DATE})%cd %C(${FZF_GIT_COLOR_AUTHOR})%cn <%ce>%Creset
+Authored:  %C(${FZF_GIT_COLOR_DATE})%ad %C(${FZF_GIT_COLOR_AUTHOR})%an <%ae>%Creset
+SHA1:      %C(${FZF_GIT_COLOR_SHA1})%H%C(${FZF_GIT_COLOR_REFS})%d%Creset
+
+%s
+%+b
+EOF
+
 # Git show options for preview
 GIT_SHOW_OPTIONS=()
 GIT_SHOW_OPTIONS+=("--color=always")
