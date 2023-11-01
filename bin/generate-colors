@@ -27,7 +27,7 @@ grayscale_h = 210
 
 black_h = grayscale_h
 black_s = 0.15
-black_l = 0.15
+black_l = 0.12
 
 white_h = grayscale_h
 white_s = 1.0
@@ -46,7 +46,7 @@ gray2_h = grayscale_h
 gray2_s = 0.25
 
 # Grayscale range of grayscale_count_per_set colors for each grayscale_range_sat
-grayscale_ranges_sats = [0.2, 0.35]
+grayscale_ranges_sats = [black_s, 2*black_s]
 grayscale_count_per_sat = 100
 
 # Define colors to use as standard ANSI terminal colors
