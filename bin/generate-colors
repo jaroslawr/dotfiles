@@ -26,8 +26,8 @@ def defcolor(**kwargs):
 grayscale_h = 210
 
 black_h = grayscale_h
-black_s = 0.14
-black_l = 0.18
+black_s = 0.08
+black_l = 0.15
 
 white_h = grayscale_h
 white_s = 1.0
@@ -46,7 +46,7 @@ gray2_h = grayscale_h
 gray2_s = 0.25
 
 # Grayscale range of grayscale_count_per_set colors for each grayscale_range_sat
-grayscale_ranges_sats = [0.14, 0.28, 0.42]
+grayscale_ranges_sats = [0.08, 0.24, 0.40]
 grayscale_count_per_sat = 180
 
 # Define colors to use as standard ANSI terminal colors
