@@ -40,6 +40,17 @@ local color_gray_2_50 = os.getenv("COLOR_GRAY_2_50_RGB")
 local color_gray_2_55 = os.getenv("COLOR_GRAY_2_55_RGB")
 local color_gray_2_60 = os.getenv("COLOR_GRAY_2_60_RGB")
 
+local color_gray_3_15 = os.getenv("COLOR_GRAY_3_15_RGB")
+local color_gray_3_20 = os.getenv("COLOR_GRAY_3_20_RGB")
+local color_gray_3_25 = os.getenv("COLOR_GRAY_3_25_RGB")
+local color_gray_3_30 = os.getenv("COLOR_GRAY_3_30_RGB")
+local color_gray_3_35 = os.getenv("COLOR_GRAY_3_35_RGB")
+local color_gray_3_40 = os.getenv("COLOR_GRAY_3_40_RGB")
+local color_gray_3_45 = os.getenv("COLOR_GRAY_3_45_RGB")
+local color_gray_3_50 = os.getenv("COLOR_GRAY_3_50_RGB")
+local color_gray_3_55 = os.getenv("COLOR_GRAY_3_55_RGB")
+local color_gray_3_60 = os.getenv("COLOR_GRAY_3_60_RGB")
+
 -- TEXT
 --
 
@@ -67,31 +78,31 @@ vim.api.nvim_set_hl(0, "Visual", { bg=color_yellow, fg=color_black })
 vim.api.nvim_set_hl(0, "IncSearch", { bg=color_bright_red, fg=color_black })
 vim.api.nvim_set_hl(0, "Search", { fg=color_bright_red })
 vim.api.nvim_set_hl(0, "MatchParen", { fg=color_yellow })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { fg=color_gray_50 })
+vim.api.nvim_set_hl(0, "EndOfBuffer", { fg=color_gray_2_60 })
 vim.api.nvim_set_hl(0, "NonText", { fg=color_yellow })
 
 -- UI
 --
 
-vim.api.nvim_set_hl(0, "LineNr", { fg=color_gray_55 })
-vim.api.nvim_set_hl(0, "CursorLine", { bg=color_gray_35 })
-vim.api.nvim_set_hl(0, "CursorLineNr", { bg=color_gray_35, fg=color_gray })
+vim.api.nvim_set_hl(0, "LineNr", { fg=color_gray_2_60 })
+vim.api.nvim_set_hl(0, "CursorLine", { bg=color_gray_2_40 })
+vim.api.nvim_set_hl(0, "CursorLineNr", { bg=color_gray_2_40, fg=color_gray })
 vim.api.nvim_set_hl(0, "CursorLineSign", { bg=color_red })
 vim.api.nvim_set_hl(0, "Msg", { fg=color_bright_white })
 vim.api.nvim_set_hl(0, "ErrorMsg", { fg=color_red })
 vim.api.nvim_set_hl(0, "WarningMsg", { fg=color_red })
-vim.api.nvim_set_hl(0, "VertSplit", { fg=color_gray_35 })
+vim.api.nvim_set_hl(0, "VertSplit", { fg=color_gray_40 })
 vim.api.nvim_set_hl(0, "SignColumn", {})
 
 -- UI - status line
 --
 
 -- focused
-vim.api.nvim_set_hl(0, "StatusLine", { bg=color_gray_2_45, fg=color_gray })
-vim.api.nvim_set_hl(0, "User1", { bg=color_gray_2_45, fg=color_bright_yellow })
+vim.api.nvim_set_hl(0, "StatusLine", { bg=color_gray_3_55, fg=color_gray })
+vim.api.nvim_set_hl(0, "User1", { bg=color_gray_3_55, fg=color_bright_yellow })
 -- not focused
-vim.api.nvim_set_hl(0, "StatusLineNC", { bg=color_gray_30, fg=color_gray })
-vim.api.nvim_set_hl(0, "User2", { bg=color_gray_30, fg=color_gray })
+vim.api.nvim_set_hl(0, "StatusLineNC", { bg=color_gray_40, fg=color_gray })
+vim.api.nvim_set_hl(0, "User2", { bg=color_gray_40, fg=color_gray })
 
 -- UI - quickfix
 --
