@@ -46,7 +46,7 @@ gray2_h = grayscale_h
 gray2_s = 0.25
 
 # Grayscale range of grayscale_count_per_set colors for each grayscale_range_sat
-grayscale_ranges_sats = [0.08, 0.24, 0.40]
+grayscale_ranges_sats = [0.08, 0.20, 0.32]
 grayscale_count_per_sat = 180
 
 # Define colors to use as standard ANSI terminal colors

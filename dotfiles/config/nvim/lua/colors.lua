@@ -85,13 +85,13 @@ vim.api.nvim_set_hl(0, "NonText", { fg=color_yellow })
 --
 
 vim.api.nvim_set_hl(0, "LineNr", { fg=color_gray_2_60 })
-vim.api.nvim_set_hl(0, "CursorLine", { bg=color_gray_2_40 })
-vim.api.nvim_set_hl(0, "CursorLineNr", { bg=color_gray_2_40, fg=color_gray })
+vim.api.nvim_set_hl(0, "CursorLine", { bg=color_gray_2_35 })
+vim.api.nvim_set_hl(0, "CursorLineNr", { bg=color_gray_2_35, fg=color_gray })
 vim.api.nvim_set_hl(0, "CursorLineSign", { bg=color_red })
 vim.api.nvim_set_hl(0, "Msg", { fg=color_bright_white })
 vim.api.nvim_set_hl(0, "ErrorMsg", { fg=color_red })
 vim.api.nvim_set_hl(0, "WarningMsg", { fg=color_red })
-vim.api.nvim_set_hl(0, "VertSplit", { fg=color_gray_40 })
+vim.api.nvim_set_hl(0, "VertSplit", { fg=color_gray_35 })
 vim.api.nvim_set_hl(0, "SignColumn", {})
 
 -- UI - status line
