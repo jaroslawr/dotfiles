@@ -169,23 +169,23 @@ vim.api.nvim_set_hl(0, "vimFuncName", { link="Keyword" })
 --
 
 -- header line
-vim.api.nvim_set_hl(0, "gitcommitSummary", { fg=color_red5 })
-vim.api.nvim_set_hl(0, "gitcommitOverflow", { fg=color_red5 })
-vim.api.nvim_set_hl(0, "gitcommitBlank", { bg=color_bright_black })
+vim.api.nvim_set_hl(0, "gitcommitSummary", { fg=color_bright_white })
+vim.api.nvim_set_hl(0, "gitcommitOverflow", { fg=color_bright_white })
+vim.api.nvim_set_hl(0, "gitcommitBlank", { fg=color_red })
 
 -- message body
 vim.api.nvim_set_hl(0, "gitcommitBranch", { fg=color_magenta })
-vim.api.nvim_set_hl(0, "gitcommitComment", { fg=color_bright_white })
-vim.api.nvim_set_hl(0, "gitcommitHeader", { fg=color_bright_white })
+vim.api.nvim_set_hl(0, "gitcommitComment", { fg=color_gray })
+vim.api.nvim_set_hl(0, "gitcommitHeader", { fg=color_gray })
 vim.api.nvim_set_hl(0, "gitcommitSelected", { fg=color_green })
 vim.api.nvim_set_hl(0, "gitcommitSelectedType", { fg=color_green })
 vim.api.nvim_set_hl(0, "gitcommitSelectedFile", { fg=color_green })
 vim.api.nvim_set_hl(0, "gitcommitDiscarded", { fg=color_cyan })
 vim.api.nvim_set_hl(0, "gitcommitDiscardedType", { fg=color_cyan })
 vim.api.nvim_set_hl(0, "gitcommitDiscardedFile", { fg=color_cyan })
-vim.api.nvim_set_hl(0, "gitcommitUntracked", { fg=color_bright_white })
-vim.api.nvim_set_hl(0, "gitcommitUntrackedType", { fg=color_bright_white })
-vim.api.nvim_set_hl(0, "gitcommitUntrackedFile", { fg=color_bright_white })
+vim.api.nvim_set_hl(0, "gitcommitUntracked", { fg=color_bright_gray })
+vim.api.nvim_set_hl(0, "gitcommitUntrackedType", { fg=color_bright_gray })
+vim.api.nvim_set_hl(0, "gitcommitUntrackedFile", { fg=color_bright_gray })
 
 -- SYNTAX - diff
 --
