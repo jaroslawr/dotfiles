@@ -24,6 +24,9 @@ vim.opt.grepprg = 'rg -n $*'
 -- APPEARANCE
 --
 
+-- Do not wrap long lines
+vim.opt.wrap = false
+
 -- Show line numbers
 vim.opt.number = true
 vim.opt.numberwidth = 6
