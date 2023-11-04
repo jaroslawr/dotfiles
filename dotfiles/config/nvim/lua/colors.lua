@@ -56,7 +56,7 @@ local color_gray_3_60 = os.getenv("COLOR_GRAY_3_60_RGB")
 
 vim.api.nvim_set_hl(0, "Constant", { fg=color_cyan })
 vim.api.nvim_set_hl(0, "String", { fg=color_magenta })
-vim.api.nvim_set_hl(0, "Number", { fg=color_yellow })
+vim.api.nvim_set_hl(0, "Number", { fg=color_green })
 vim.api.nvim_set_hl(0, "Identifier", { fg=color_bright_white })
 vim.api.nvim_set_hl(0, "Function", { fg=color_yellow })
 vim.api.nvim_set_hl(0, "Statement", { fg=color_blue })

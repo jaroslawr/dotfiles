@@ -15,7 +15,7 @@ class Color:
     comment: str | None = None
 
     def to_rgb(self):
-        r, g, b = hls_to_rgb(color.h/360, color.l, color.s)
+        r, g, b = hls_to_rgb(self.h/360, self.l, self.s)
         return (round(r*255), round(g*255), round(b*255))
 
     def to_rgbhex(self):
@@ -23,22 +23,26 @@ class Color:
 
 
 global colors
-colors = []
+colors = {}
 
 
 def defcolor(**kwargs):
-    colors.append(Color(**kwargs))
+    colors[kwargs['name']] = Color(**kwargs)
 
 
 def emit_output(output):
     print(output)
 
 
-def emit_test_output(output, bg: Color | None = None, fg: Color | None = None):
-    if fg:
-        r, g, b = fg.to_rgb()
-        sys.stderr.write(f'\u001b[38;2;{r};{g};{b}m')
-    print(output, file=sys.stderr)
+def emit_test_output(output, bg: Color, fg: Color):
+    br, bg, bb = bg.to_rgb()
+    sys.stderr.write(f"\x1b[48;2;{br};{bg};{bb}m")
+
+    fr, fg, fb = fg.to_rgb()
+    sys.stderr.write(f"\x1b[38;2;{fr};{fg};{fb}m")
+
+    sys.stderr.write(output)
+    sys.stderr.write("\x1b[0m\n")
 
 
 # Tunables
@@ -54,7 +58,7 @@ white_s = 1.0
 white_l = 0.95
 
 normal_s = 1.00
-normal_l = 0.78
+normal_l = 0.82
 
 bright_s = 1.00
 bright_l = 0.70
@@ -73,7 +77,7 @@ grayscale_count_per_sat = 180
 
 defcolor(name="BLACK",          h=black_h, s=black_s,     l=black_l)  # 0
 defcolor(name="RED",            h=0,       s=normal_s,    l=normal_l) # 1
-defcolor(name="GREEN",          h=130,     s=normal_s,    l=normal_l) # 2
+defcolor(name="GREEN",          h=110,     s=normal_s,    l=normal_l) # 2
 defcolor(name="YELLOW",         h=40,      s=normal_s,    l=normal_l) # 3
 defcolor(name="BLUE",           h=190,     s=normal_s,    l=normal_l) # 4
 defcolor(name="MAGENTA",        h=20,      s=normal_s,    l=normal_l) # 5
@@ -81,7 +85,7 @@ defcolor(name="CYAN",           h=330,     s=normal_s,    l=normal_l) # 6
 defcolor(name="GRAY",           h=gray1_h, s=gray1_s,     l=normal_l) # 7
 defcolor(name="BRIGHT_GRAY",    h=gray2_h, s=gray2_s,     l=bright_l) # 8
 defcolor(name="BRIGHT_RED",     h=0,       s=bright_s,    l=bright_l) # 9
-defcolor(name="BRIGHT_GREEN",   h=130,     s=bright_s,    l=bright_l) # 10
+defcolor(name="BRIGHT_GREEN",   h=110,     s=bright_s,    l=bright_l) # 10
 defcolor(name="BRIGHT_YELLOW",  h=40,      s=bright_s,    l=bright_l) # 11
 defcolor(name="BRIGHT_BLUE",    h=190,     s=bright_s,    l=bright_l) # 12
 defcolor(name="BRIGHT_MAGENTA", h=20,      s=bright_s,    l=bright_l) # 13
@@ -90,7 +94,7 @@ defcolor(name="BRIGHT_WHITE",   h=white_h, s=white_s,     l=white_l)  # 15
 
 # Write out COLOR_{name} environment variables with escape codes for ANSI colors
 
-for i, color in enumerate(colors):
+for i, color in enumerate(colors.values()):
     print(f"export COLOR_{color.name}=\"\\[$(tput setaf {i})\\]\"")
 
 print()
@@ -104,7 +108,7 @@ for i, grayscale_s in enumerate(grayscale_ranges_sats):
 
 # Write out COLOR_{name}_RGB environment variables
 
-for i, color in enumerate(colors):
+for i, color in enumerate(colors.values()):
     print(f"export COLOR_{color.name}_RGB='{color.to_rgbhex()}'")
-    if i <= 16:
-        emit_test_output("this is some example text", fg=color)
+    if i < 16:
+        emit_test_output("this is some example text", bg=colors['BLACK'], fg=color)
