@@ -7,7 +7,7 @@ class Colors(Style):
             Name.Builtin: 'ansicyan',
             Name.Function: 'ansiyellow',
             String: 'ansimagenta',
-            Number: 'ansiyellow',
+            Number: 'ansigreen',
             Comment: 'ansigray',
     }
 
