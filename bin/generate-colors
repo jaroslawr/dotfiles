@@ -50,8 +50,8 @@ def emit_test_output(output, bg: Color, fg: Color):
 grayscale_h = 205
 
 black_h = grayscale_h
-black_s = 0.1
-black_l = 0.15
+black_s = 0.20
+black_l = 0.14
 
 white_h = grayscale_h
 white_s = 1.0
