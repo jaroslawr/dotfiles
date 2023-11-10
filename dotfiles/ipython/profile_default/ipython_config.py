@@ -7,8 +7,8 @@ class Colors(Style):
             Name.Builtin: 'ansicyan',
             Name.Function: 'ansiyellow',
             String: 'ansimagenta',
-            Number: 'ansigreen',
-            Comment: 'ansigray',
+            Number: 'ansired',
+            Comment: 'ansibrightblack',
     }
 
 # Get jupyter config object
@@ -19,9 +19,6 @@ c.TerminalInteractiveShell.confirm_exit = False
 
 # Disable autosuggestion (that uses history items)
 c.TerminalInteractiveShell.autosuggestions_provider = None
-
-# Shell color scheme
-c.TerminalInteractiveShell.colors = 'NoColor'
 
 # Syntax highlighting color scheme
 c.TerminalInteractiveShell.highlighting_style = Colors

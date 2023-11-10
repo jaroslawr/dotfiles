@@ -47,10 +47,10 @@ def emit_test_output(output, bg: Color, fg: Color):
 
 # Tunables
 
-grayscale_h = 200
+grayscale_h = 205
 
 black_h = grayscale_h
-black_s = 0.08
+black_s = 0.1
 black_l = 0.15
 
 white_h = grayscale_h
@@ -58,39 +58,43 @@ white_s = 1.0
 white_l = 0.95
 
 normal_s = 1.00
-normal_l = 0.80
+normal_l = 0.78
 
 bright_s = 1.00
 bright_l = 0.70
 
 gray1_h = grayscale_h
-gray1_s = 0.50
+gray1_s = 0.3
+gray1_l = 0.8
 
 gray2_h = grayscale_h
-gray2_s = 0.25
+gray2_s = 0.3
+gray2_l = 0.65
 
-# Grayscale range of grayscale_count_per_set colors for each grayscale_range_sat
-grayscale_ranges_sats = [0.08, 0.20, 0.32]
-grayscale_count_per_sat = 180
+# UI color ranges, with hue matching background color
+ui_h = grayscale_h
+# ui_count_per_set colors at increasing lightness for each saturation in ui_sats
+ui_count_per_sat = 40
+ui_sats = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 
 # Define colors to use as standard ANSI terminal colors
 
-defcolor(name="BLACK",          h=black_h, s=black_s,     l=black_l)  # 0
-defcolor(name="RED",            h=350,     s=normal_s,    l=normal_l) # 1
-defcolor(name="GREEN",          h=160,     s=normal_s,    l=normal_l) # 2
-defcolor(name="YELLOW",         h=40,      s=normal_s,    l=normal_l) # 3
-defcolor(name="BLUE",           h=200,     s=normal_s,    l=normal_l) # 4
-defcolor(name="MAGENTA",        h=20,      s=normal_s,    l=normal_l) # 5
-defcolor(name="CYAN",           h=180,     s=normal_s,    l=normal_l) # 6
-defcolor(name="GRAY",           h=gray1_h, s=gray1_s,     l=normal_l) # 7
-defcolor(name="BRIGHT_GRAY",    h=gray2_h, s=gray2_s,     l=bright_l) # 8
-defcolor(name="BRIGHT_RED",     h=350,     s=bright_s,    l=bright_l) # 9
-defcolor(name="BRIGHT_GREEN",   h=160,     s=bright_s,    l=bright_l) # 10
-defcolor(name="BRIGHT_YELLOW",  h=40,      s=bright_s,    l=bright_l) # 11
-defcolor(name="BRIGHT_BLUE",    h=200,     s=bright_s,    l=bright_l) # 12
-defcolor(name="BRIGHT_MAGENTA", h=20,      s=bright_s,    l=bright_l) # 13
-defcolor(name="BRIGHT_CYAN",    h=180,     s=bright_s,    l=bright_l) # 14
-defcolor(name="BRIGHT_WHITE",   h=white_h, s=white_s,     l=white_l)  # 15
+defcolor(name="BLACK",          h=black_h, s=black_s,     l=black_l)   # 0
+defcolor(name="RED",            h=0,       s=normal_s,    l=normal_l)  # 1
+defcolor(name="GREEN",          h=160,     s=normal_s,    l=normal_l)  # 2
+defcolor(name="YELLOW",         h=40,      s=normal_s,    l=normal_l)  # 3
+defcolor(name="BLUE",           h=205,     s=normal_s,    l=normal_l)  # 4
+defcolor(name="MAGENTA",        h=20,      s=normal_s,    l=normal_l)  # 5
+defcolor(name="CYAN",           h=190,     s=normal_s,    l=normal_l)  # 6
+defcolor(name="GRAY",           h=gray1_h, s=gray1_s,     l=gray1_l)   # 7
+defcolor(name="BRIGHT_GRAY",    h=gray2_h, s=gray2_s,     l=gray2_l)   # 8
+defcolor(name="BRIGHT_RED",     h=0,       s=bright_s,    l=bright_l)  # 9
+defcolor(name="BRIGHT_GREEN",   h=160,     s=bright_s,    l=bright_l)  # 10
+defcolor(name="BRIGHT_YELLOW",  h=40,      s=bright_s,    l=bright_l)  # 11
+defcolor(name="BRIGHT_BLUE",    h=205,     s=bright_s,    l=bright_l)  # 12
+defcolor(name="BRIGHT_MAGENTA", h=20,      s=bright_s,    l=bright_l)  # 13
+defcolor(name="BRIGHT_CYAN",    h=190,     s=bright_s,    l=bright_l)  # 14
+defcolor(name="BRIGHT_WHITE",   h=white_h, s=white_s,     l=white_l)   # 15
 
 # Write out COLOR_{name} environment variables with escape codes for ANSI colors
 
@@ -99,16 +103,18 @@ for i, color in enumerate(colors.values()):
 
 print()
 
-# Define pseudo-grayscale color ranges
+# Define UI color ranges
 
-sat_step = 1.0/grayscale_count_per_sat
-for i, grayscale_s in enumerate(grayscale_ranges_sats):
-    for j in range(0, grayscale_count_per_sat):
-        defcolor(name=f"GRAY_{i+1}_{j}", h=grayscale_h, s=grayscale_s, l=j*sat_step)
+sat_step = 1.0/ui_count_per_sat
+for i, ui_s in enumerate(ui_sats):
+    for j in range(0, ui_count_per_sat):
+        defcolor(name=f"UI_{i+1}_{j}", h=ui_h, s=ui_s, l=j*sat_step)
 
-# Write out COLOR_{name}_RGB environment variables
+# Write out COLOR_{name}_RGB environment variables to stdout, test output to stderr
 
 for i, color in enumerate(colors.values()):
     print(f"export COLOR_{color.name}_RGB='{color.to_rgbhex()}'")
     if i < 16:
         emit_test_output("this is some example text", bg=colors['BLACK'], fg=color)
+    else:
+        emit_test_output(f"                         {color.name}", bg=color, fg=colors['BRIGHT_WHITE'])
