@@ -51,11 +51,11 @@ grayscale_h = 205
 
 black_h = grayscale_h
 black_s = 0.15
-black_l = 0.20
+black_l = 0.18
 
 white_h = grayscale_h
 white_s = 1.0
-white_l = 0.95
+white_l = 0.98
 
 normal_s = 1.00
 normal_l = 0.78
