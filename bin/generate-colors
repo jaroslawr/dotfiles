@@ -53,7 +53,7 @@ grayscale_count = 40
 
 black_h = grayscale_h
 black_s = grayscale_s
-black_l = 0.20
+black_l = 0.18
 
 white_h = grayscale_h
 white_s = 1.0
@@ -74,7 +74,7 @@ gray2_s = grayscale_s
 gray2_l = 0.65
 
 # UI color ranges (hue+sat pairs)
-ui_colors = [(195, 0.35), (345, 0.35)]
+ui_colors = [(195, 0.4), (345, 0.4)]
 # ui_count colors at increasing lightness for each hue+sat in ui_colors
 ui_count = 40
 
