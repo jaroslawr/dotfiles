@@ -47,11 +47,13 @@ def emit_test_output(output, bg: Color, fg: Color):
 
 # Tunables
 
-grayscale_h = 205
+grayscale_h = 195
+grayscale_s = 0.25
+grayscale_count = 40
 
 black_h = grayscale_h
 black_s = 0.15
-black_l = 0.20
+black_l = 0.15
 
 white_h = grayscale_h
 white_s = 1.0
@@ -64,34 +66,33 @@ bright_s = 1.00
 bright_l = 0.70
 
 gray1_h = grayscale_h
-gray1_s = 0.3
+gray1_s = grayscale_s
 gray1_l = 0.8
 
 gray2_h = grayscale_h
-gray2_s = 0.3
+gray2_s = grayscale_s
 gray2_l = 0.65
 
-# UI color ranges, with hue matching background color
-ui_h = grayscale_h
-# ui_count_per_set colors at increasing lightness for each saturation in ui_sats
-ui_count_per_sat = 40
-ui_sats = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+# UI color ranges (hue+sat pairs)
+ui_colors = [(195, 0.35), (345, 0.35)]
+# ui_count colors at increasing lightness for each hue+sat in ui_colors
+ui_count = 40
 
 # Define colors to use as standard ANSI terminal colors
 
 defcolor(name="BLACK",          h=black_h, s=black_s,     l=black_l)   # 0
-defcolor(name="RED",            h=0,       s=normal_s,    l=normal_l)  # 1
+defcolor(name="RED",            h=345,     s=normal_s,    l=normal_l)  # 1
 defcolor(name="GREEN",          h=160,     s=normal_s,    l=normal_l)  # 2
-defcolor(name="YELLOW",         h=40,      s=normal_s,    l=normal_l)  # 3
-defcolor(name="BLUE",           h=210,     s=normal_s,    l=normal_l)  # 4
+defcolor(name="YELLOW",         h=45,      s=normal_s,    l=normal_l)  # 3
+defcolor(name="BLUE",           h=195,     s=normal_s,    l=normal_l)  # 4
 defcolor(name="MAGENTA",        h=20,      s=normal_s,    l=normal_l)  # 5
 defcolor(name="CYAN",           h=190,     s=normal_s,    l=normal_l)  # 6
 defcolor(name="GRAY",           h=gray1_h, s=gray1_s,     l=gray1_l)   # 7
 defcolor(name="BRIGHT_GRAY",    h=gray2_h, s=gray2_s,     l=gray2_l)   # 8
-defcolor(name="BRIGHT_RED",     h=0,       s=bright_s,    l=bright_l)  # 9
+defcolor(name="BRIGHT_RED",     h=345,     s=bright_s,    l=bright_l)  # 9
 defcolor(name="BRIGHT_GREEN",   h=160,     s=bright_s,    l=bright_l)  # 10
-defcolor(name="BRIGHT_YELLOW",  h=40,      s=bright_s,    l=bright_l)  # 11
-defcolor(name="BRIGHT_BLUE",    h=210,     s=bright_s,    l=bright_l)  # 12
+defcolor(name="BRIGHT_YELLOW",  h=45,      s=bright_s,    l=bright_l)  # 11
+defcolor(name="BRIGHT_BLUE",    h=195,     s=bright_s,    l=bright_l)  # 12
 defcolor(name="BRIGHT_MAGENTA", h=20,      s=bright_s,    l=bright_l)  # 13
 defcolor(name="BRIGHT_CYAN",    h=190,     s=bright_s,    l=bright_l)  # 14
 defcolor(name="BRIGHT_WHITE",   h=white_h, s=white_s,     l=white_l)   # 15
@@ -103,12 +104,17 @@ for i, color in enumerate(colors.values()):
 
 print()
 
+# Define grayscale color range
+grayscale_l_step = 1.0/grayscale_count
+for i in range(grayscale_count):
+    defcolor(name=f"GRAY_{i+1}", h=grayscale_h, s=grayscale_s, l=i*grayscale_l_step)
+
 # Define UI color ranges
 
-sat_step = 1.0/ui_count_per_sat
-for i, ui_s in enumerate(ui_sats):
-    for j in range(0, ui_count_per_sat):
-        defcolor(name=f"UI_{i+1}_{j}", h=ui_h, s=ui_s, l=j*sat_step)
+ui_l_step = 1.0/ui_count
+for i, (ui_h, ui_s) in enumerate(ui_colors):
+    for j in range(ui_count):
+        defcolor(name=f"UI_{i+1}_{j}", h=ui_h, s=ui_s, l=j*ui_l_step)
 
 # Write out COLOR_{name}_RGB environment variables to stdout, test output to stderr
 
