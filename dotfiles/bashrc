@@ -63,9 +63,6 @@ stty -ixon
 # FZF
 #
 
-# Open fzf in dedicated tmux split
-export FZF_TMUX=1
-
 # Default fzf options
 FZF_OPTS=()
 FZF_OPTS+=(--layout=reverse)
