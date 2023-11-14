@@ -26,7 +26,7 @@ vim.api.nvim_set_hl(0, "Type", { fg=color("cyan") })
 vim.api.nvim_set_hl(0, "Special", { fg=color("cyan") })
 vim.api.nvim_set_hl(0, "SpecialChar", { fg=color("cyan") })
 vim.api.nvim_set_hl(0, "Delimiter", { fg=color("white") })
-vim.api.nvim_set_hl(0, "Comment", { fg=color("bright_gray") })
+vim.api.nvim_set_hl(0, "Comment", { fg=color("gray") })
 vim.api.nvim_set_hl(0, "Whitespace", {})
 vim.api.nvim_set_hl(0, "Todo", { fg=color("yellow") })
 
@@ -57,11 +57,11 @@ vim.api.nvim_set_hl(0, "SignColumn", {})
 --
 
 -- focused
-vim.api.nvim_set_hl(0, "StatusLine", { bg=color("ui_1_10"), fg=color("gray") })
+vim.api.nvim_set_hl(0, "StatusLine", { bg=color("ui_1_10"), fg=color("bright_gray") })
 vim.api.nvim_set_hl(0, "User1", { bg=color("ui_1_10"), fg=color("bright_yellow") })
 -- not focused
-vim.api.nvim_set_hl(0, "StatusLineNC", { bg=color("gray_8"), fg=color("bright_gray") })
-vim.api.nvim_set_hl(0, "User2", { bg=color("gray_8"), fg=color("bright_gray") })
+vim.api.nvim_set_hl(0, "StatusLineNC", { bg=color("gray_8"), fg=color("gray") })
+vim.api.nvim_set_hl(0, "User2", { bg=color("gray_8"), fg=color("gray") })
 
 -- UI - quickfix
 --
@@ -75,7 +75,8 @@ vim.api.nvim_set_hl(0, "qfError", { fg=color("red") })
 --
 
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg=color("red") })
-vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg=color("bright_black") })
+vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg=color("bright_gray") })
+vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg=color("bright_gray") })
 
 -- SYNTAX - markdown
 --
