@@ -97,17 +97,11 @@ _fzf_compgen_dir() {
 # DEPENDENCIES
 #
 
-# Source standard completions
-source /usr/share/bash-completion/bash_completion
-
-# FZF completion, makes **<TAB> work
-source /usr/share/bash-completion/completions/fzf
-
 # FZF keybindings: cd with Alt-C, insert paths with Ctrl-T
-source /usr/share/doc/fzf/examples/key-bindings.bash
+source /usr/share/fzf/shell/key-bindings.bash
 
 # Virtualenvwrapper
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+source /usr/bin/virtualenvwrapper.sh
 
 # HISTORY
 #
@@ -366,6 +360,7 @@ cd() {
 #
 
 # ls with more readable output
+unalias ls
 ls() {
     LC_ALL=C command ls \
         --color=auto \
