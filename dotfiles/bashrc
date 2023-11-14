@@ -403,7 +403,7 @@ diff() {
 # rg with colors and pager, unless running in a pipeline
 rg() {
     if [[ -t 1 ]]; then
-        command rg --color=always --line-number "$@" | less -FRS
+        command rg --color=always --heading --line-number "$@" | less -FRS
     else
         command rg "$@"
     fi
