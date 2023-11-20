@@ -47,13 +47,13 @@ def emit_test_output(output, bg: Color, fg: Color):
 
 # Tunables
 
-grayscale_h = 210
+grayscale_h = 205
 grayscale_s = 0.1
 grayscale_count = 40
 
 black_h = grayscale_h
 black_s = grayscale_s
-black_l = 0.16
+black_l = 0.18
 
 white_h = grayscale_h
 white_s = 1.0
@@ -74,25 +74,25 @@ gray2_s = 2*grayscale_s
 gray2_l = 0.70
 
 # UI color ranges (hue+sat pairs)
-ui_colors = [(grayscale_h, 2*grayscale_s), (grayscale_h, 3*grayscale_s), (345, 2*grayscale_s)]
+ui_colors = [(grayscale_h, 2*grayscale_s), (grayscale_h, 3*grayscale_s), (5, 3*grayscale_s)]
 # ui_count colors at increasing lightness for each hue+sat in ui_colors
 ui_count = 40
 
 # Define colors to use as standard ANSI terminal colors
 
 defcolor(name="BLACK",          h=black_h, s=black_s,     l=black_l)   # 0
-defcolor(name="RED",            h=0,       s=normal_s,    l=normal_l)  # 1
+defcolor(name="RED",            h=5,       s=normal_s,    l=normal_l)  # 1
 defcolor(name="GREEN",          h=160,     s=normal_s,    l=normal_l)  # 2
-defcolor(name="YELLOW",         h=40,      s=normal_s,    l=normal_l)  # 3
-defcolor(name="BLUE",           h=210,     s=normal_s,    l=normal_l)  # 4
+defcolor(name="YELLOW",         h=45,      s=normal_s,    l=normal_l)  # 3
+defcolor(name="BLUE",           h=205,     s=normal_s,    l=normal_l)  # 4
 defcolor(name="MAGENTA",        h=20,      s=normal_s,    l=normal_l)  # 5
 defcolor(name="CYAN",           h=190,     s=normal_s,    l=normal_l)  # 6
 defcolor(name="GRAY",           h=gray1_h, s=gray1_s,     l=gray1_l)   # 7
 defcolor(name="BRIGHT_GRAY",    h=gray2_h, s=gray2_s,     l=gray2_l)   # 8
-defcolor(name="BRIGHT_RED",     h=0,       s=bright_s,    l=bright_l)  # 9
+defcolor(name="BRIGHT_RED",     h=5,       s=bright_s,    l=bright_l)  # 9
 defcolor(name="BRIGHT_GREEN",   h=160,     s=bright_s,    l=bright_l)  # 10
-defcolor(name="BRIGHT_YELLOW",  h=40,      s=bright_s,    l=bright_l)  # 11
-defcolor(name="BRIGHT_BLUE",    h=210,     s=bright_s,    l=bright_l)  # 12
+defcolor(name="BRIGHT_YELLOW",  h=45,      s=bright_s,    l=bright_l)  # 11
+defcolor(name="BRIGHT_BLUE",    h=205,     s=bright_s,    l=bright_l)  # 12
 defcolor(name="BRIGHT_MAGENTA", h=20,      s=bright_s,    l=bright_l)  # 13
 defcolor(name="BRIGHT_CYAN",    h=190,     s=bright_s,    l=bright_l)  # 14
 defcolor(name="BRIGHT_WHITE",   h=white_h, s=white_s,     l=white_l)   # 15
