@@ -76,9 +76,9 @@ _fzf_compgen_path() {
     fdopts+=(--type f)
 
     if [[ $(realpath "$1") == $PWD ]]; then
-        fdfind ${fdopts[@]} .
+        fd ${fdopts[@]} .
     else
-        fdfind ${fdopts[@]} . "$1"
+        fd ${fdopts[@]} . "$1"
     fi
 }
 
@@ -88,9 +88,9 @@ _fzf_compgen_dir() {
     fdopts+=(--type d)
 
     if [[ $(realpath "$1") == $PWD ]]; then
-        fdfind ${fdopts[@]} .
+        fd ${fdopts[@]} .
     else
-        fdfind ${fdopts[@]} . "$1"
+        fd ${fdopts[@]} . "$1"
     fi
 }
 
