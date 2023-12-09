@@ -359,8 +359,12 @@ cd() {
 # ALIASES
 #
 
+__unalias_if_needed() {
+    [[ $(type -t "$1") == "alias" ]] && unalias "$1"
+}
+
 # ls with more readable output
-unalias ls
+__unalias_if_needed ls
 ls() {
     LC_ALL=C command ls \
         --color=auto \
