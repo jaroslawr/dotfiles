@@ -375,6 +375,11 @@ ls() {
         "$@"
 }
 
+# vim is neovim
+vim() {
+    nvim "$@"
+}
+
 # long-form ls with colors and pager, unless running in a pipeline
 l() {
     if [[ -t 1 ]]; then
