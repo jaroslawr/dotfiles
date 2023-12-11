@@ -3,16 +3,11 @@
 # Git log browser using fzf
 #
 
-# Log format
-read -r -d '' FZF_GIT_LOG_PRETTY <<-EOF
-format:%C(${FZF_GIT_COLOR_SHA1})%h %C(${FZF_GIT_COLOR_DATE})%cd %C(${FZF_GIT_COLOR_AUTHOR})%<(20,trunc)%ae %Creset%s %C(${GIT_COLOR_REFS})%D
-EOF
-
 # Git log options
 GIT_LOG_OPTIONS=()
 GIT_LOG_OPTIONS+=("--color=always")
 GIT_LOG_OPTIONS+=("--date=iso-strict")
-GIT_LOG_OPTIONS+=("--pretty=${FZF_GIT_LOG_PRETTY}")
+GIT_LOG_OPTIONS+=("--pretty=lg")
 
 # Fzf options
 FZF_OPTIONS=()
@@ -53,7 +48,7 @@ main() {
     fi
 
     # Build up a git show command line string to pass to fzf
-    local git_show_cmdline="fzf-git-log-show {1}"
+    local git_show_cmdline="fz-lg-sw {1}"
     if [[ ${#supplied_paths[@]} -gt 0 ]]; then
         git_show_cmdline+=" -- $(printf "%q " "${supplied_paths[@]}")"
     fi

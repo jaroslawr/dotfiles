@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+# 'git show' wrapper for fzf-git-log
+#
+
+# Git show options for preview
+GIT_SHOW_OPTIONS=()
+GIT_SHOW_OPTIONS+=("--color=always")
+GIT_SHOW_OPTIONS+=("--patch-with-stat")
+GIT_SHOW_OPTIONS+=("--pretty=sw")
+
+# Run git show
+exec git show "${GIT_SHOW_OPTIONS[@]}" "$@"

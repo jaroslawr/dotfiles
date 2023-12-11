@@ -8,6 +8,18 @@
 [core]
         pager = "less --quit-if-one-screen"
 
+[pretty]
+        lg = "format:%C(auto)%h %C(4)%cd %C(7)%<(20,trunc)%ae %Creset%s %C(auto)%D"
+        sw = "format:Committed: %C(4)%cd %C(7)%cn <%ce>%Creset\n\
+Authored:  %C(4)%ad %C(7)%an <%ae>%Creset\n\
+SHA1:      %C(auto)%H%C(7)%d%Creset\n\
+\n\
+%s\n\
+%+b"
+
+[log]
+        date = iso-strict
+
 [color "diff"]
         commit = 5
         meta = 4 # filename

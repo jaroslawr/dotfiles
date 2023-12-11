@@ -17,12 +17,6 @@ export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/.ssh-agent.sock"
 # Color definitions
 source ~/.colors
 
-# Colors for fzf-git-log etc.
-export FZF_GIT_COLOR_SHA1=auto
-export FZF_GIT_COLOR_AUTHOR=7
-export FZF_GIT_COLOR_DATE=4
-export FZF_GIT_COLOR_REFS=7
-
 # LS_COLORS
 eval $(dircolors ~/.dircolors)
 
@@ -409,19 +403,32 @@ rg() {
     fi
 }
 
-# cal with more readable output
-cal() {
-    ncal -M -b "$@"
-}
-
 # nice git log
 lg() {
-    fzf-git-log "$@"
+    if [[ -t 1 ]]; then
+        git log --color=always --pretty=lg "$@"
+    else
+        git log --pretty=lg "$@"
+    fi
 }
+
+# git log of last N commits
+lg1()  { lg -n1 "$@"; }
+lg5()  { lg -n5 "$@"; }
+lg10() { lg -n10 "$@"; }
 
 # nice git show
 sw() {
-    fzf-git-log-show "$@"
+    if [[ -t 1 ]]; then
+        git show --color=always --pretty=sw "$@"
+    else
+        git show --pretty=sw "$@"
+    fi
+}
+
+# cal with more readable output
+cal() {
+    ncal -M -b "$@"
 }
 
 # COMPLETION FUNCTIONS
