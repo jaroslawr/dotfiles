@@ -47,13 +47,13 @@ def emit_test_output(output, bg: Color, fg: Color):
 
 # Tunables
 
-grayscale_h = 200
-grayscale_s = 0.1
+grayscale_h = 220
+grayscale_s = 0.05
 grayscale_count = 40
 
 black_h = grayscale_h
 black_s = grayscale_s
-black_l = 0.2
+black_l = 0.18
 
 white_h = grayscale_h
 white_s = 1.0
