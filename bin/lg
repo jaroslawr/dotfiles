@@ -3,12 +3,6 @@
 # Git log browser using fzf
 #
 
-# Git log options
-GIT_LOG_OPTIONS=()
-GIT_LOG_OPTIONS+=("--color=always")
-GIT_LOG_OPTIONS+=("--date=iso-strict")
-GIT_LOG_OPTIONS+=("--pretty=lg")
-
 # Fzf options
 FZF_OPTIONS=()
 FZF_OPTIONS=("--ansi")
@@ -40,7 +34,7 @@ main() {
 
     # Build up the the full git log argument list
     declare -a git_log_args
-    git_log_args+=("${GIT_LOG_OPTIONS[@]}")
+    git_log_args+=("--color=always")
     git_log_args+=("${supplied_options[@]}")
     if [[ ${#supplied_paths[@]} -gt 0 ]]; then
         git_log_args+=("--")
@@ -48,7 +42,7 @@ main() {
     fi
 
     # Build up a git show command line string to pass to fzf
-    local git_show_cmdline="fz-lg-sw {1}"
+    local git_show_cmdline="git sw --color=always {1}"
     if [[ ${#supplied_paths[@]} -gt 0 ]]; then
         git_show_cmdline+=" -- $(printf "%q " "${supplied_paths[@]}")"
     fi
@@ -60,7 +54,7 @@ main() {
     fzf_args+=("--bind=ctrl-m:execute:(${git_show_cmdline} | less -CRX)")
 
     # Run fzf using the git log as input
-    git log "${git_log_args[@]}" | fzf "${fzf_args[@]}"
+    git lg "${git_log_args[@]}" | fzf "${fzf_args[@]}"
 }
 
 main "$@"

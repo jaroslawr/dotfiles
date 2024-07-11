@@ -414,29 +414,6 @@ rg() {
     fi
 }
 
-# nice git log
-lg() {
-    if [[ -t 1 ]]; then
-        git log --color=always --pretty=lg "$@"
-    else
-        git log --pretty=lg "$@"
-    fi
-}
-
-# git log of last N commits
-lg1()  { lg -n1 "$@"; }
-lg5()  { lg -n5 "$@"; }
-lg10() { lg -n10 "$@"; }
-
-# nice git show
-sw() {
-    if [[ -t 1 ]]; then
-        git show --color=always --pretty=sw "$@"
-    else
-        git show --pretty=sw "$@"
-    fi
-}
-
 # cal with more readable output
 cal() {
     ncal -M -b "$@"

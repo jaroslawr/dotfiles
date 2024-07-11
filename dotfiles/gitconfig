@@ -8,6 +8,13 @@
 [core]
         pager = "less --quit-if-one-screen"
 
+[alias]
+        lg = log --pretty=lg --date=iso-strict
+        lg1 = lg -n1
+        lg5 = lg -n5
+        lg10 = lg -n10
+        sw = show --pretty=sw --date=iso-strict --patch-with-stat
+
 [pretty]
         lg = "format:%C(auto)%h %C(4)%cd %C(7)%<(20,trunc)%ae %Creset%s %C(auto)%D"
         sw = "format:Committed: %C(4)%cd %C(7)%cn <%ce>%Creset\n\
