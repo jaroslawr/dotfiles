@@ -322,6 +322,7 @@ cdpr() {
 # Select adequate venv given current working directory
 # (default or project-based)
 __select_venv() {
+    local force_reload="$1"
     local active_virtual_env="${VIRTUAL_ENV##*/}"
 
     if __is_pwd_in_project; then
@@ -331,36 +332,35 @@ __select_venv() {
         local pwd_relative_to_projects_home=${PWD#"${PROJECTS_ROOT_DIR}/"}
         local current_project=${pwd_relative_to_projects_home%%/*}
 
-        if [[ "${active_virtual_env}" == "${current_project}" ]]; then
-            return 0
-        else
+        if [[ "${force_reload}" || "${active_virtual_env}" != "${current_project}" ]]; then
             local virtualenv
             while IFS= read -r virtualenv; do
                 if [[ "${virtualenv}" == "${current_project}" ]]; then
                     printf "Activating virtualenv: %s\n" "${current_project}"
                     workon "${virtualenv}"
-                    return 0
+                    return
                 fi
             done < <(lsvirtualenv -b)
+        else
+            return
         fi
     fi
     
     if [[ -n "${DEFAULT_VIRTUAL_ENV}" ]]; then
-        if [[ "${active_virtual_env}" != "${DEFAULT_VIRTUAL_ENV}" ]]; then
+        if [[ "${force_reload}" || "${active_virtual_env}" != "${DEFAULT_VIRTUAL_ENV}" ]]; then
             printf "Activating default virtualenv: ${DEFAULT_VIRTUAL_ENV}\n"
             workon "${DEFAULT_VIRTUAL_ENV}"
-            return 0
         fi
-        return 1
     else
         printf "Deactivating virtualenv\n"
         deactivate
-        return 1
     fi
 }
 
 # Select venv based on pwd on bash startup
-__select_venv
+if [ -t 1 ]; then
+    __select_venv 1
+fi
 
 # cd with virtualenv support
 cd() {
