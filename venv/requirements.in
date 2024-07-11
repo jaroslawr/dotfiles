@@ -1,0 +1,11 @@
+numpy
+scipy
+statsmodels
+pandas
+matplotlib
+plotly
+jupyterlab
+ipython
+jedi
+python-lsp-server
+pylsp-mypy

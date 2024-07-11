@@ -26,7 +26,8 @@ if [[ ! -h "${HOME}/bin" ]]; then
     ln -Ts "${PWD}/bin" "${HOME}/bin"
 fi
 
-source setup/setup_gnome_terminal.sh
-source setup/setup_default_browser.sh
-source setup/setup_neovim_helptags.sh
-source setup/setup_systemd_user_services.sh
+./setup/setup_gnome_terminal.sh
+./setup/setup_default_browser.sh
+./setup/setup_neovim_helptags.sh
+./setup/setup_systemd_user_services.sh
+./setup/setup_default_venv.sh
