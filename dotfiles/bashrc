@@ -319,9 +319,12 @@ cdpr() {
 # VIRTUALENV
 #
 
-# Select adequate venv given current working directory
-# (default or project-based)
+# Select adequate venv given current working directory (default or
+# project-based)
 __select_venv() {
+    # Forcing reload is necessary for starting tmux from an existing shell tmux
+    # will inherit environment of calling shell with VIRTUAL_ENV variables
+    # etc., but starting the login shell will overwrite PATH
     local force_reload="$1"
     local active_virtual_env="${VIRTUAL_ENV##*/}"
 
@@ -345,7 +348,7 @@ __select_venv() {
             return
         fi
     fi
-    
+
     if [[ -n "${DEFAULT_VIRTUAL_ENV}" ]]; then
         if [[ "${force_reload}" || "${active_virtual_env}" != "${DEFAULT_VIRTUAL_ENV}" ]]; then
             printf "Activating default virtualenv: ${DEFAULT_VIRTUAL_ENV}\n"
