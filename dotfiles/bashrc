@@ -5,6 +5,9 @@
 export PATH="${HOME}/bin:${HOME}/go/bin:${PATH}"
 export EDITOR=nvim
 
+# Virtualenv (actually only used by bashrc)
+export DEFAULT_VIRTUAL_ENV="home"
+
 # Less
 export LESS="--raw-control-chars --chop-long-lines --no-init"
 
@@ -223,7 +226,8 @@ __ps1_git_status() {
 
 # Virtualenv
 __ps1_virtualenv() {
-    [[ "${VIRTUAL_ENV}" == "" ]] && printf "" || printf "${PS1_COLOR_VENV}venv${PS1_COLOR_RESET} "
+    local virtual_env="${VIRTUAL_ENV##*/}"
+    [[ "${virtual_env}" == "" ]] && printf "" || printf "${PS1_COLOR_VENV}v:${virtual_env}${PS1_COLOR_RESET} "
 }
 
 # Set final prompt
@@ -250,6 +254,13 @@ export PROJECTS_ROOT_DIR=~/Projects
 # Test if current working directory inside a project
 __is_pwd_in_project() {
     [[ "${PWD}" == ${PROJECTS_ROOT_DIR}/* ]]
+}
+
+# Print current project name
+__current_project() {
+    local project_and_path="${PWD#"${PROJECTS_ROOT_DIR}/"}"
+    local project="${project_and_path%%/*}"
+    printf "${project}\n"
 }
 
 # cd to project
@@ -308,8 +319,11 @@ cdpr() {
 # VIRTUALENV
 #
 
-# Activate venv
-__activate_venv_for_current_project() {
+# Select adequate venv given current working directory
+# (default or project-based)
+__select_venv() {
+    local active_virtual_env="${VIRTUAL_ENV##*/}"
+
     if __is_pwd_in_project; then
         # Inside projects directory,
         # activation or change of virtualenv possibly needed
@@ -317,9 +331,7 @@ __activate_venv_for_current_project() {
         local pwd_relative_to_projects_home=${PWD#"${PROJECTS_ROOT_DIR}/"}
         local current_project=${pwd_relative_to_projects_home%%/*}
 
-        local active_virtualenv="${VIRTUAL_ENV##*/}"
-
-        if [[ "${active_virtualenv}" == "${current_project}" ]]; then
+        if [[ "${active_virtual_env}" == "${current_project}" ]]; then
             return 0
         else
             local virtualenv
@@ -332,33 +344,32 @@ __activate_venv_for_current_project() {
             done < <(lsvirtualenv -b)
         fi
     fi
-
-    return 1
-}
-
-# Deactivate venv
-__deactivate_venv() {
-    if [[ -n "${VIRTUAL_ENV}" ]]; then
+    
+    if [[ -n "${DEFAULT_VIRTUAL_ENV}" ]]; then
+        if [[ "${active_virtual_env}" != "${DEFAULT_VIRTUAL_ENV}" ]]; then
+            printf "Activating default virtualenv: ${DEFAULT_VIRTUAL_ENV}\n"
+            workon "${DEFAULT_VIRTUAL_ENV}"
+            return 0
+        fi
+        return 1
+    else
         printf "Deactivating virtualenv\n"
         deactivate
+        return 1
     fi
 }
 
-# Activate venv on bash startup
-__activate_venv_for_current_project
+# Select venv based on pwd on bash startup
+__select_venv
 
 # cd with virtualenv support
 cd() {
-    local in_project_before=false
-    __is_pwd_in_project && in_project_before=true
+    local project_before=$(__current_project)
     command cd "$@"
-    local in_project_after=false
-    __is_pwd_in_project && in_project_after=true
+    local project_after=$(__current_project)
 
-    if ! __activate_venv_for_current_project; then
-        if [ "${in_project_before}" = true ] || [ "${in_project_after}" = true ]; then
-            __deactivate_venv
-        fi
+    if [[ "${project_before}" != "${project_after}" ]]; then
+        __select_venv
     fi
 }
 
