@@ -19,6 +19,7 @@ git submodule update --recursive
 # -S symlinks whole directory
 rcup -d dotfiles \
      -S config/nvim \
+     -S local/share/fonts \
      -S local/share/nvim/site
 
 # Make scripts available
