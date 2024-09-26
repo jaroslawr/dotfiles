@@ -52,7 +52,7 @@ grayscale_s = 0.1
 grayscale_count = 40
 
 black_h = grayscale_h
-black_s = grayscale_s
+black_s = 0.05
 black_l = 0.13
 
 white_h = grayscale_h

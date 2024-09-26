@@ -15,7 +15,7 @@ export COLOR_BRIGHT_MAGENTA="\[$(tput setaf 13)\]"
 export COLOR_BRIGHT_CYAN="\[$(tput setaf 14)\]"
 export COLOR_BRIGHT_WHITE="\[$(tput setaf 15)\]"
 
-export COLOR_BLACK_RGB='#1e2124'
+export COLOR_BLACK_RGB='#1f2123'
 export COLOR_RED_RGB='#ff8f8f'
 export COLOR_GREEN_RGB='#8fffda'
 export COLOR_YELLOW_RGB='#ffda8f'
