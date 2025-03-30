@@ -13,6 +13,7 @@ end
 -- TEXT
 --
 
+vim.api.nvim_set_hl(0, "normal", { bg=color("black") })
 vim.api.nvim_set_hl(0, "Constant", { fg=color("cyan") })
 vim.api.nvim_set_hl(0, "String", { fg=color("magenta") })
 vim.api.nvim_set_hl(0, "Number", { fg=color("red") })
