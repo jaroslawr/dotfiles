@@ -1,8 +1,10 @@
-from pygments.style import Style
+from IPython.utils.PyColorize import Theme, theme_table
 from pygments.token import Comment, Keyword, Name, String, Number, Operator
 
-class Colors(Style):
-    styles = {
+theme_table["mycolors"] = Theme(
+    "mycolors",
+    None,
+    {
             Keyword: 'ansiblue',
             Name.Builtin: 'ansicyan',
             Name.Function: 'ansiyellow',
@@ -10,6 +12,7 @@ class Colors(Style):
             Number: 'ansired',
             Comment: 'ansibrightblack',
     }
+)
 
 # Get jupyter config object
 c = get_config()
@@ -21,5 +24,5 @@ c.TerminalInteractiveShell.confirm_exit = False
 c.TerminalInteractiveShell.autosuggestions_provider = None
 
 # Syntax highlighting color scheme
-c.TerminalInteractiveShell.highlighting_style = Colors
+c.TerminalInteractiveShell.colors = "mycolors"
 
