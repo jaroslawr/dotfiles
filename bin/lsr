@@ -13,6 +13,6 @@ else
 	if [ $# -eq 0 ]; then
 		find . -printf '%P\n'
 	else
-		find "$1" -printf '%P\n'
+		find "$1" -printf '%p\n'
 	fi
 fi
