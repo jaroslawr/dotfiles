@@ -6,5 +6,5 @@
 if in-git-repo; then
 	git grep "$@"
 else
-	grep "$@"
+	grep -R "$@" .
 fi

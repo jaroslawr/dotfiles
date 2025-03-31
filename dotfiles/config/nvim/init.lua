@@ -20,6 +20,7 @@ vim.opt.splitright = true
 
 -- Grep with git grep is possible or with normal grep otherwise
 vim.opt.grepprg = 'maybe-git-grep -n $*'
+vim.opt.grepformat = '%f:%l:%m'
 
 -- APPEARANCE
 --
