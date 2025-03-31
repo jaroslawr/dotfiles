@@ -147,6 +147,15 @@ require('fzf-lua').setup({
   }
 })
 
+function fzf_default ()
+  require'fzf-lua'.fzf_exec(nil, {
+    actions = {
+      ['default'] = require'fzf-lua'.actions.file_edit
+    },
+    previewer = "builtin"
+  })
+end
+
 -- KEY BINDINGS
 --
 
@@ -170,9 +179,8 @@ keymap('n', '<leader>x', ':qall!<cr>', keymap_options)
 keymap('n', '<leader>w', ':w<cr>', keymap_options)
 
 -- leader - fzf
-keymap('n', '<leader>ff', ':FzfLua files<cr>', keymap_options)
+keymap('n', '<leader>ff', ":lua fzf_default()<cr>", keymap_options)
 keymap('n', '<leader>fb', ':FzfLua buffers<cr>', keymap_options)
-keymap('n', '<leader>fl', ":lua require'filelist'.fzf()<cr>", keymap_options)
 
 -- leader - make
 keymap('n', '<leader>m', ':make<cr>', keymap_options)

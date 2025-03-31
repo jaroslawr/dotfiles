@@ -60,6 +60,9 @@ stty -ixon
 # FZF
 #
 
+# Default fzf command
+export FZF_DEFAULT_COMMAND="lsr"
+
 # Default fzf options
 FZF_OPTS=()
 FZF_OPTS+=(--layout=reverse)
