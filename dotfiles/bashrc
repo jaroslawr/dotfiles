@@ -78,25 +78,10 @@ export FZF_DEFAULT_OPTS="${FZF_OPTS[@]}"
 
 # Source of paths for ** completion
 _fzf_compgen_path() {
-    local -a fdopts
-    fdopts+=(--type f)
-
     if [[ $(realpath "$1") == $PWD ]]; then
-        fdfind ${fdopts[@]} .
+        lsr
     else
-        fdfind ${fdopts[@]} . "$1"
-    fi
-}
-
-# Source of directories for ** completion (for cd/pushd/...)
-_fzf_compgen_dir() {
-    local -a fdopts
-    fdopts+=(--type d)
-
-    if [[ $(realpath "$1") == $PWD ]]; then
-        fdfind ${fdopts[@]} .
-    else
-        fdfind ${fdopts[@]} . "$1"
+        lsr "$1"
     fi
 }
 
@@ -109,7 +94,7 @@ source /usr/share/bash-completion/bash_completion
 # FZF completion, makes **<TAB> work
 source /usr/share/doc/fzf/examples/completion.bash
 
-# FZF keybindings: cd with Alt-C, insert paths with Ctrl-T
+# FZF keybindings: cd with Alt-C, insert paths with Ctrl-T, make Ctrl-R use fzf for history search
 source /usr/share/doc/fzf/examples/key-bindings.bash
 
 # Virtualenvwrapper
