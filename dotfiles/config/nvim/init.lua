@@ -182,6 +182,7 @@ keymap('n', '<leader>w', ':w<cr>', keymap_options)
 -- leader - fzf
 keymap('n', '<leader>ff', ":lua fzf_default()<cr>", keymap_options)
 keymap('n', '<leader>fb', ':FzfLua buffers<cr>', keymap_options)
+keymap('n', '<leader>fr', ':FzfLua resume<cr>', keymap_options)
 
 -- leader - make
 keymap('n', '<leader>m', ':make<cr>', keymap_options)
