@@ -18,8 +18,8 @@ vim.opt.swapfile = false
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
--- Grep with ripgrep
-vim.opt.grepprg = 'rg -n $*'
+-- Grep with git grep is possible or with normal grep otherwise
+vim.opt.grepprg = 'maybe-git-grep -n $*'
 
 -- APPEARANCE
 --

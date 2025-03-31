@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Grep using git grep if inside a Git repository and with grep otherwise.
+#
+
+if in-git-repo; then
+	git grep "$@"
+else
+	grep "$@"
+fi

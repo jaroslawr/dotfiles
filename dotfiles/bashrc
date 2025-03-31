@@ -61,7 +61,7 @@ stty -ixon
 #
 
 # Default fzf command
-export FZF_DEFAULT_COMMAND="lsr"
+export FZF_DEFAULT_COMMAND="maybe-git-ls"
 
 # Default fzf options
 FZF_OPTS=()
@@ -79,9 +79,9 @@ export FZF_DEFAULT_OPTS="${FZF_OPTS[@]}"
 # Source of paths for ** completion
 _fzf_compgen_path() {
     if [[ $(realpath "$1") == $PWD ]]; then
-        lsr
+        maybe-git-ls
     else
-        lsr "$1"
+        maybe-git-ls "$1"
     fi
 }
 
