@@ -107,7 +107,7 @@ _fzf_compgen_dir() {
 source /usr/share/bash-completion/bash_completion
 
 # FZF completion, makes **<TAB> work
-source /usr/share/bash-completion/completions/fzf
+source /usr/share/doc/fzf/examples/completion.bash
 
 # FZF keybindings: cd with Alt-C, insert paths with Ctrl-T
 source /usr/share/doc/fzf/examples/key-bindings.bash
