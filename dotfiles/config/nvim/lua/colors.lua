@@ -42,6 +42,7 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", { fg=color("gray_10") })
 vim.api.nvim_set_hl(0, "NonText", { fg=color("yellow") })
 
 
+-- UI
 --
 
 vim.api.nvim_set_hl(0, "LineNr", { fg=color("gray_14") })
@@ -51,7 +52,7 @@ vim.api.nvim_set_hl(0, "CursorLineSign", { bg=color("red") })
 vim.api.nvim_set_hl(0, "Msg", { fg=color("bright_white") })
 vim.api.nvim_set_hl(0, "ErrorMsg", { fg=color("red") })
 vim.api.nvim_set_hl(0, "WarningMsg", { fg=color("red") })
-vim.api.nvim_set_hl(0, "VertSplit", { fg=color("gray_12") })
+vim.api.nvim_set_hl(0, "WinSeparator", { fg=color("gray_12") })
 vim.api.nvim_set_hl(0, "SignColumn", {})
 
 -- UI - status line
