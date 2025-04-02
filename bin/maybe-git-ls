@@ -17,7 +17,7 @@ if in-git-repo; then
 else
 	if [ $# -eq 0 ]; then
 		find . -printf '%P\n'
-	else
+	elif [ $# -eq 1 ]; then
 		find "$1" -printf '%p\n'
 	fi
 fi
