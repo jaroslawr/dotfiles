@@ -13,7 +13,7 @@ function setting() {
 source dotfiles/colors
 
 setting "use-system-font" "false"
-setting "font" "monospace 10"
+setting "font" "monospace 12"
 setting "cell-height-scale" "1.00"
 setting "use-theme-colors" "false"
 setting "background-color" "${COLOR_BLACK_RGB}"
